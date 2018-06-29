@@ -1,0 +1,76 @@
+{
+	"name": "MintyDocs",
+	"namemsg": "mintydocs-extensionname",
+	"version": "0.1",
+	"author": "Yaron Koren",
+	"url": "https://www.mediawiki.org/wiki/Extension:MintyDocs",
+	"descriptionmsg": "mintydocs-desc",
+	"type": "parserhook",
+	"requires": {
+		"MediaWiki": ">= 1.25"
+	},
+	"AvailableRights": [
+		"mintydocs-administer",
+		"mintydocs-edit"
+	],
+	"GroupPermissions": {
+		"sysop": {
+			"mintydocs-administer": true
+		}
+	},
+	"MessagesDirs": {
+		"MintyDocs": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"MintyDocsMagic": "MintyDocs.i18n.magic.php"
+	},
+	"AutoloadClasses": {
+		"MintyDocsHooks": "MintyDocs.hooks.php",
+		"MintyDocsUtils": "includes/MintyDocsUtils.php",
+		"MintyDocsParserFunctions": "includes/MintyDocsParserFunctions.php",
+		"MintyDocsPage": "includes/MintyDocsPage.php",
+		"MintyDocsProduct": "includes/MintyDocsProduct.php",
+		"MintyDocsVersion": "includes/MintyDocsVersion.php",
+		"MintyDocsManual": "includes/MintyDocsManual.php",
+		"MintyDocsTopic": "includes/MintyDocsTopic.php"
+	},
+	"ResourceModules": {
+		"ext.mintydocs.main": {
+			"styles": "MintyDocs.css"
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "",
+		"remoteExtPath": "MintyDocs"
+	},
+	"Hooks": {
+		"ParserFirstCallInit": [
+			"MintyDocsHooks::registerParserFunctions"
+		],
+		"userCan": [
+			"MintyDocsHooks::checkPermissions"
+		],
+		"OutputPageBeforeHTML": [
+			"MintyDocsHooks::addTextToPage"
+		],
+		"SkinBuildSidebar": [
+			"MintyDocsHooks::addTextToSidebar"
+		],
+		"PageContentSaveComplete": [
+			"MintyDocsHooks::setSearchText"
+		],
+		"MagicWordwgVariableIDs": [
+			"MintyDocsHooks::declareVarIDs"
+		],
+		"ParserGetVariableValueSwitch": [
+			"MintyDocsHooks::assignAValue"
+		]
+	},
+	"config": {
+		"MintyDocsProductPages": [],
+		"MintyDocsDisplayFooterElementsInSidebar": false
+	},
+	"manifest_version": 1
+}

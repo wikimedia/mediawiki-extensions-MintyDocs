@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Yaron Koren"
+		]
+	},
+	"mintydocs-extensionname": "{{name}}",
+	"mintydocs-desc": "{{desc|name=Cargo|url=https://www.mediawiki.org/wiki/Extension:Cargo}}",
+	"mintydocs-noparentpage": "An error message. Parameters:\n $1 - a page type",
+	"mintydocs-invalidparentpage": "An error message. Parameters:\n* $1 - a page name\n* $2 - a page type",
+	"mintydocs-product-versionlist": "A header above a list of links for different versions of some product.",
+	"mintydocs-version-desc": "A header for a page about one version of a product. Parameters:\n* $1 - a version number\n* $2 - a product name",
+	"mintydocs-version-manuallist": "A header for a list of instruction manuals.",
+	"mintydocs-manual-desc": "A descriptive header for a page that is an instruction manual. Parameters:\n* $1 - a version number\n* $2 - a product name",
+	"mintydocs-manual-otherversions": "Read this manual for other versions:",
+	"mintydocs-manual-contents": "A header above a table of contents.",
+	"mintydocs-topic-desc": "A header for a page about one topic. Parameters:\n* $1 - a manual name\n*2 - a version number\n* $3 - a product name",
+	"mintydocs-topic-otherversions": "Read this topic for other versions:"
+}

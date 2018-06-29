@@ -1,0 +1,32 @@
+/* CSS file for MintyDocs */
+.MintyDocsVersionList {
+	border: 1px #bbb solid;
+	padding: 10px;
+}
+.MintyDocsManualList {
+	border: 1px #bbb solid;
+	padding: 10px;
+}
+.MintyDocsOtherManualVersions {
+	border: 1px #bbb solid;
+	padding: 10px;
+}
+.MintyDocsManualTOC {
+	border: 1px #bbb solid;
+	padding: 10px;
+}
+.MintyDocsPrevTopicLink {
+	border: 1px #bbb solid;
+	padding: 10px;
+	float: left;
+}
+.MintyDocsNextTopicLink {
+	border: 1px #bbb solid;
+	padding: 10px;
+	float: right;
+}
+.MintyDocsTopicTOC {
+	clear: both;
+	border: 1px #bbb solid;
+	padding: 10px;
+}

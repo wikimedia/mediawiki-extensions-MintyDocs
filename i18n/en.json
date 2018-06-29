@@ -1,0 +1,19 @@
+{
+	"@metadata": {
+		"authors": [
+			"Yaron Koren"
+		]
+	},
+	"mintydocs-extensionname": "MintyDocs",
+	"mintydocs-desc": "A lightweight documentation system",
+	"mintydocs-noparentpage": "Error: Every $1 page must be a subpage.",
+	"mintydocs-invalidparentpage": "Error: The page \"$1\" must be a $2 page.",
+	"mintydocs-product-versionlist": "Click on any of the following to see the documentation for that version:",
+	"mintydocs-version-desc": "This is the documentation for version $1 of $2.",
+	"mintydocs-version-manuallist": "Here are the manuals for this version:",
+	"mintydocs-manual-desc": "This manual is for version $1 of $2.",
+	"mintydocs-manual-otherversions": "Read this manual for other versions:",
+	"mintydocs-manual-contents": "Contents:",
+	"mintydocs-topic-desc": "This topic is part of the manual $1 for version $2 of $3.",
+	"mintydocs-topic-otherversions": "Read this topic for other versions:"
+}
