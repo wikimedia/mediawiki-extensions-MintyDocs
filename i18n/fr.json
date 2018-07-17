@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Wladek92"
+		]
+	},
+	"mintydocs-desc": "Un système allégé de documentation",
+	"mintydocs-noparentpage": "Erreur: chaque page $1 doit être une sous-page.",
+	"mintydocs-invalidparentpage": "Erreur: la page « $1 » doit être une page $2 .",
+	"mintydocs-product-versionlist": "Cliquez sur un élément quelconque ci-après pour voir la documentation de cette version:",
+	"mintydocs-version-desc": "Ceci est la documentation pour la version $1 de $2 .",
+	"mintydocs-version-manuallist": "Voici les manuels pour cette version:",
+	"mintydocs-manual-desc": "Ce manuel concerne la version $1 de $2 .",
+	"mintydocs-manual-otherversions": "Lire ce manuel pour d'autres versions :",
+	"mintydocs-manual-contents": "Sommaire :",
+	"mintydocs-topic-desc": "Ce sujet fait partie du manuel $1 pour la version $2 de $3 .",
+	"mintydocs-topic-otherversions": "Lire ce sujet dans d'autres versions:"
+}

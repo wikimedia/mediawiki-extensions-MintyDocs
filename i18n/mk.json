@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bjankuloski06"
+		]
+	},
+	"mintydocs-desc": "Упростен систем за документација",
+	"mintydocs-noparentpage": "Грешка: Секоја $1-страница мора да е потстраница.",
+	"mintydocs-invalidparentpage": "Грешка: Страницата „$1“ мора да е $2-страница.",
+	"mintydocs-product-versionlist": "Стиснете на некое од наведените за да ја видите документацијата за оваа верзија:",
+	"mintydocs-version-desc": "Ова е документација за верзијата $1 од $2.",
+	"mintydocs-version-manuallist": "Еве ги прирачниците за оваа верзија:",
+	"mintydocs-manual-desc": "Овој прирачник важи за верзијата $1 од $2.",
+	"mintydocs-manual-otherversions": "Прочитајте го прирачников за други верзии:",
+	"mintydocs-manual-contents": "Содржина:",
+	"mintydocs-topic-desc": "Темава е дел од прирачникот $1 за верзијата $2 од $3.",
+	"mintydocs-topic-otherversions": "Прочитајте ја темава за други верзии:"
+}
