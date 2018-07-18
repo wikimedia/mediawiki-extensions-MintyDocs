@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Kly"
+		]
+	},
+	"mintydocs-desc": "輕量級文件系統",
+	"mintydocs-noparentpage": "錯誤：任一$1頁面應為子頁面。",
+	"mintydocs-invalidparentpage": "錯誤：「$1」頁面應為$2頁面。",
+	"mintydocs-product-versionlist": "點擊以下任一來查看對應版本的文件：",
+	"mintydocs-version-desc": "這是$2（版本：$1）的文件。",
+	"mintydocs-version-manuallist": "此為此版本的簡介：",
+	"mintydocs-manual-desc": "這是$2（版本：$1）的簡介。",
+	"mintydocs-manual-otherversions": "讀取此簡介的其它版本：",
+	"mintydocs-manual-contents": "內容：",
+	"mintydocs-topic-desc": "此主題是$3（版本：$2）的簡介$1裡一部份。",
+	"mintydocs-topic-otherversions": "讀取此主題的其它版本："
+}

@@ -1,0 +1,11 @@
+{
+	"@metadata": {
+		"authors": [
+			"Ykhwong"
+		]
+	},
+	"mintydocs-invalidparentpage": "오류: \"$1\" 문서는 $2 문서여야 합니다.",
+	"mintydocs-version-manuallist": "여기에 이 판에 대한 매뉴얼이 있습니다:",
+	"mintydocs-manual-contents": "목차:",
+	"mintydocs-topic-otherversions": "이 주제의 다른 판 읽기:"
+}

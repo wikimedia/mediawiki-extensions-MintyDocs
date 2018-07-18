@@ -1,0 +1,14 @@
+{
+	"@metadata": {
+		"authors": [
+			"আফতাবুজ্জামান"
+		]
+	},
+	"mintydocs-desc": "একটি হালকা ওজনের নথির ব্যবস্থা",
+	"mintydocs-version-desc": "এই $2-এর $1 নং সংস্করণের জন্য নথি।",
+	"mintydocs-version-manuallist": "এই সংস্করণের জন্য নির্দেশনাগুলি এখানে রয়েছে:",
+	"mintydocs-manual-desc": "এই নির্দেশনাটি $2-এর $1 সংস্করণের জন্য।",
+	"mintydocs-manual-otherversions": "অন্য সংস্করণের জন্য এই নির্দেশনা পড়ুন:",
+	"mintydocs-manual-contents": "বিষয়বস্তু:",
+	"mintydocs-topic-otherversions": "অন্যান্য সংস্করণের জন্য এই প্রসঙ্গটি পড়ুন:"
+}
