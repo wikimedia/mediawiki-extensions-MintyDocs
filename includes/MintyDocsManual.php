@@ -74,7 +74,19 @@ class MintyDocsManual extends MintyDocsPage {
 			// "Initialize" the parser, to avoid occasional errors
 			// when the parser's $mOptions field is not set.
 			$wgParser->startExternalParse( $title, new ParserOptions, Parser::OT_HTML );
-			$toc = $wgParser->recursiveTagParse( $pageText );
+			$rawTOC = $wgParser->recursiveTagParse( $pageText );
+			// If the topics list comes from a page, there's a
+			// chance that it's from a dynamic query, which means
+			// that there might be extra newlines, etc. Get rid
+			// of these, to make the output cleaner.
+			$tocLines = explode( "\n", $rawTOC );
+			$toc = '';
+			foreach( $tocLines as $line ) {
+				$line = trim( $line );
+				if ( str_replace( '*', '', $line ) != '' ) {
+					$toc .= "$line\n";
+				}
+			}
 		}
 		$topics = $this->getAllTopics();
 		$this->mOrderedTopics = array();
