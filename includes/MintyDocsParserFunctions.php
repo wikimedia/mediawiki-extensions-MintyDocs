@@ -342,7 +342,18 @@ class MintyDocsParserFunctions {
 			$linkedPageName .= '/' . $topic;
 		}
 
-		return '[[' . $linkedPageName . ']]';
+		$linkText = '[[' . $linkedPageName;
+
+		// Use display name, if this page exists.
+		$linkedTitle = Title::newFromText( $linkedPageName );
+		$mdPage = MintyDocsUtils::pageFactory( $linkedTitle );
+		if ( $mdPage != null ) {
+			$linkText .= '|' . $mdPage->getDisplayName();
+		}
+
+		$linkText .= ']]';
+          
+		return $linkText;
 	}
 
 	static function processParams( $parser, $params ) {
