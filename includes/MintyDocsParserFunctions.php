@@ -344,8 +344,13 @@ class MintyDocsParserFunctions {
 
 		$linkedTitle = Title::newFromText( $linkedPageName );
 
-		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
-		$linkStr = $linkRenderer->makeLink( $linkedTitle );
+		if ( method_exists( 'MediaWikiServices', 'getLinkRenderer' ) ) {
+			// MW 1.28+
+			$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+			$linkStr = $linkRenderer->makeLink( $linkedTitle, $displayName );
+		} else {
+			$linkStr = Linker::link( $linkedTitle, $displayName );
+		}
 
 		return array( $linkStr, 'noparse' => true, 'isHTML' => true );
 	}
