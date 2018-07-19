@@ -312,7 +312,7 @@ class MintyDocsParserFunctions {
 		if ( get_class( $mdPage ) == 'MintyDocsProduct' ) {
 			$curProduct = $mdPage->getActualName();
 		} elseif ( $curProduct != null && $curVersion != null && $curManual != null ) {
-			// NO need to do anything; the values have laready been
+			// No need to do anything; the values have already been
 			// set.
 		} else {
 			list( $curProduct, $curVersion ) = $mdPage->getProductAndVersionStrings();
@@ -342,17 +342,7 @@ class MintyDocsParserFunctions {
 			$linkedPageName .= '/' . $topic;
 		}
 
-		$linkedTitle = Title::newFromText( $linkedPageName );
-
-		if ( method_exists( 'MediaWikiServices', 'getLinkRenderer' ) ) {
-			// MW 1.28+
-			$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
-			$linkStr = $linkRenderer->makeLink( $linkedTitle, $displayName );
-		} else {
-			$linkStr = Linker::link( $linkedTitle, $displayName );
-		}
-
-		return array( $linkStr, 'noparse' => true, 'isHTML' => true );
+		return '[[' . $linkedPageName . ']]';
 	}
 
 	static function processParams( $parser, $params ) {
