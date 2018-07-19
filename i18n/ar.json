@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"ديفيد"
+		]
+	},
+	"mintydocs-desc": "نظام توثيق خفيف الوزن",
+	"mintydocs-noparentpage": "خطأ: يجب أن تكون كل صفحة $1 صفحة فرعية.",
+	"mintydocs-invalidparentpage": "خطأ: يجب أن تكون كل صفحة $1 صفحة $2.",
+	"mintydocs-product-versionlist": "انقر على أي مما يلي لرؤية توثيق هذا الإصدار:",
+	"mintydocs-version-desc": "هذا توثيق الإصدار $1 من $2.",
+	"mintydocs-version-manuallist": "فيما يلي أدلة هذا الإصدار:",
+	"mintydocs-manual-desc": "هذا الدليل للإصدار $1 من $2.",
+	"mintydocs-manual-otherversions": "اقرأ هذا الدليل للإصدارات الأخرى:",
+	"mintydocs-manual-contents": "المحتويات:",
+	"mintydocs-topic-desc": "هذا الموضوع جزء من الدليل $1 للنسخة $2 من $3.",
+	"mintydocs-topic-otherversions": "اقرأ هذا الموضوع للإصدارات الأخرى:"
+}

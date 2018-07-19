@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"StanProg"
+		]
+	},
+	"mintydocs-desc": "Опростена система за документация",
+	"mintydocs-noparentpage": "Грешка: Всяка страница от тип $1 трябва да е подстраница.",
+	"mintydocs-invalidparentpage": "Грешка: Страница „$1“ трябва да бъде от тип $2.",
+	"mintydocs-product-versionlist": "Щракнете върху някое от изброените за да видите документацията конкретната версия:",
+	"mintydocs-version-desc": "Това е документацията на версия $1 на $1.",
+	"mintydocs-version-manuallist": "Ръководствата за тази версия:",
+	"mintydocs-manual-desc": "Ръководството е за версия $1 на $2.",
+	"mintydocs-manual-otherversions": "Прегледайте ръководството за други версии:",
+	"mintydocs-manual-contents": "Съдържание:",
+	"mintydocs-topic-desc": "Тази тема е част от ръководство $1 за версия $2 на $3.",
+	"mintydocs-topic-otherversions": "Прегледайте тази тема за други версии:"
+}

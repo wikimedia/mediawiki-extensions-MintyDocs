@@ -4,8 +4,15 @@
 			"Ykhwong"
 		]
 	},
+	"mintydocs-desc": "가벼운 설명 문서 시스템",
+	"mintydocs-noparentpage": "오류: 모든 $1 문서는 하위 문서여야 합니다.",
 	"mintydocs-invalidparentpage": "오류: \"$1\" 문서는 $2 문서여야 합니다.",
+	"mintydocs-product-versionlist": "해당 버전의 설명 문서를 보려면 다음 중 하나를 클릭하십시오:",
+	"mintydocs-version-desc": "이것은 $2의 $1 버전을 위한 설명 문서입니다.",
 	"mintydocs-version-manuallist": "여기에 이 판에 대한 매뉴얼이 있습니다:",
+	"mintydocs-manual-desc": "이 매뉴얼은 $2의 버전 $1에 대한 것입니다.",
+	"mintydocs-manual-otherversions": "다른 판의 경우 이 매뉴얼을 읽으십시오:",
 	"mintydocs-manual-contents": "목차:",
+	"mintydocs-topic-desc": "이 주제는 $3의 버전 $2의 매뉴얼 $1의 일부입니다.",
 	"mintydocs-topic-otherversions": "이 주제의 다른 판 읽기:"
 }
