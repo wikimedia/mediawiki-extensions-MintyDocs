@@ -1,0 +1,16 @@
+{
+	"@metadata": {
+		"authors": [
+			"Hedda"
+		]
+	},
+	"mintydocs-desc": "Hafif bir dokümantasyon sistemi",
+	"mintydocs-noparentpage": "Hata: Her $1 sayfası bir alt sayfa olmalıdır.",
+	"mintydocs-invalidparentpage": "Hata: \"$1\" sayfası, bir $2 sayfası olmalıdır.",
+	"mintydocs-product-versionlist": "Bu sürümün belgelerini görmek için aşağıdakilerden birine tıklayın:",
+	"mintydocs-version-desc": "Bu, $2 ürününün $1 numaralı sürümünün belgelendirmesidir.",
+	"mintydocs-version-manuallist": "İşte bu sürümün kılavuzları:",
+	"mintydocs-manual-otherversions": "Diğer sürümler için şu kılavuzu okuyunuz:",
+	"mintydocs-manual-contents": "İçerik:",
+	"mintydocs-topic-otherversions": "Diğer sürümler için şu konuyu okuyun:"
+}

@@ -1,11 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Yaron Koren"
+			"Yaron Koren",
+			"Fitoschido"
 		]
 	},
 	"mintydocs-extensionname": "{{name}}",
-	"mintydocs-desc": "{{desc|name=Cargo|url=https://www.mediawiki.org/wiki/Extension:Cargo}}",
+	"mintydocs-desc": "{{desc|name=MintyDocs|url=https://www.mediawiki.org/wiki/Extension:MintyDocs}}",
 	"mintydocs-noparentpage": "An error message. Parameters:\n $1 - a page type",
 	"mintydocs-invalidparentpage": "An error message. Parameters:\n* $1 - a page name\n* $2 - a page type",
 	"mintydocs-product-versionlist": "A header above a list of links for different versions of some product.",

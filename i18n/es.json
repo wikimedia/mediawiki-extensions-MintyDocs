@@ -1,8 +1,16 @@
 {
 	"@metadata": {
 		"authors": [
-			"Astroemi"
+			"Astroemi",
+			"Fitoschido"
 		]
 	},
+	"mintydocs-desc": "Un sistema de documentación ligero",
+	"mintydocs-noparentpage": "Error: todas las páginas del tipo $1 deben ser subpáginas.",
+	"mintydocs-invalidparentpage": "Error: la página «$1» debe ser del tipo $2.",
+	"mintydocs-version-desc": "Esta es la documentación correspondiente a la versión $1 de $2.",
+	"mintydocs-version-manuallist": "Estos son los manuales de esta versión:",
+	"mintydocs-manual-desc": "Este manual corresponde a la versión $1 de $2.",
+	"mintydocs-manual-contents": "Sumario:",
 	"mintydocs-topic-desc": "Este tema es parte del manual $1 para la versión $2 de $3"
 }
