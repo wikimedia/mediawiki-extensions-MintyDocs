@@ -1,0 +1,18 @@
+{
+	"@metadata": {
+		"authors": [
+			"Guycn2"
+		]
+	},
+	"mintydocs-desc": "מערכת תיעוד קלה",
+	"mintydocs-noparentpage": "שגיאה: כל דף מסוג $1 חייב להיות דף משנה.",
+	"mintydocs-invalidparentpage": "שגיאה: הדף \"$1\" חייב להיות מסוג $2.",
+	"mintydocs-product-versionlist": "יש ללחוץ על אחד הקישורים הבאים כדי לצפות בתיעוד של הגרסה הרלוונטית:",
+	"mintydocs-version-desc": "זהו התיעוד לגרסה $1 של $2.",
+	"mintydocs-version-manuallist": "להלן המדריכים עבור גרסה זו:",
+	"mintydocs-manual-desc": "זהו מדריך לגרסה $1 של $2.",
+	"mintydocs-manual-otherversions": "יש לקרוא את המדריך הזה עבור גרסאות אחרות:",
+	"mintydocs-manual-contents": "תוכן עניינים:",
+	"mintydocs-topic-desc": "נושא זה הוא חלק של המדריך \"$1\" עבור גרסה $2 של $3.",
+	"mintydocs-topic-otherversions": "יש לקרוא את הנושא הזה עבור גרסאות אחרות:"
+}
