@@ -5,6 +5,7 @@
 		]
 	},
 	"mintydocs-desc": "가벼운 설명 문서 시스템",
+	"right-mintydocs-edit": "모든 MintyDocs 문서 편집",
 	"mintydocs-noparentpage": "오류: 모든 $1 문서는 하위 문서여야 합니다.",
 	"mintydocs-invalidparentpage": "오류: \"$1\" 문서는 $2 문서여야 합니다.",
 	"mintydocs-product-versionlist": "해당 버전의 설명 문서를 보려면 다음 중 하나를 클릭하십시오:",

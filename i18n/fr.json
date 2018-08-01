@@ -1,10 +1,13 @@
 {
 	"@metadata": {
 		"authors": [
-			"Wladek92"
+			"Wladek92",
+			"Gomoko"
 		]
 	},
 	"mintydocs-desc": "Un système allégé de documentation",
+	"right-mintydocs-administer": "Administrer toutes les pages des produits MintyDocs",
+	"right-mintydocs-edit": "Modifier toutes les pages MintyDocs",
 	"mintydocs-noparentpage": "Erreur: chaque page $1 doit être une sous-page.",
 	"mintydocs-invalidparentpage": "Erreur: la page « $1 » doit être une page $2 .",
 	"mintydocs-product-versionlist": "Cliquez sur un élément quelconque ci-après pour voir la documentation de cette version:",
