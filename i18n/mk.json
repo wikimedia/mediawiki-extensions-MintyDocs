@@ -5,6 +5,8 @@
 		]
 	},
 	"mintydocs-desc": "Упростен систем за документација",
+	"right-mintydocs-administer": "Управување со производни страници на MintyDocs",
+	"right-mintydocs-edit": "Уредување на сите страници на MintyDocs",
 	"mintydocs-noparentpage": "Грешка: Секоја $1-страница мора да е потстраница.",
 	"mintydocs-invalidparentpage": "Грешка: Страницата „$1“ мора да е $2-страница.",
 	"mintydocs-product-versionlist": "Стиснете на некое од наведените за да ја видите документацијата за оваа верзија:",
