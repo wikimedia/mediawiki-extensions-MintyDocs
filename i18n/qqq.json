@@ -2,12 +2,13 @@
 	"@metadata": {
 		"authors": [
 			"Yaron Koren",
-			"Fitoschido"
+			"Fitoschido",
+			"Umherirrender"
 		]
 	},
 	"mintydocs-extensionname": "{{name}}",
 	"mintydocs-desc": "{{desc|name=MintyDocs|url=https://www.mediawiki.org/wiki/Extension:MintyDocs}}",
-	"right-mintydocs-administer": "{{doc-right|mintydocs-edit}}",
+	"right-mintydocs-administer": "{{doc-right|mintydocs-administer}}",
 	"right-mintydocs-edit": "{{doc-right|mintydocs-edit}}",
 	"mintydocs-noparentpage": "An error message. Parameters:\n $1 - a page type",
 	"mintydocs-invalidparentpage": "An error message. Parameters:\n* $1 - a page name\n* $2 - a page type",

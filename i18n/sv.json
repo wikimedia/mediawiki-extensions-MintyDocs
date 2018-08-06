@@ -1,0 +1,17 @@
+{
+	"@metadata": {
+		"authors": [
+			"WikiPhoenix"
+		]
+	},
+	"right-mintydocs-administer": "Administrera alla MintyDocs-produktsidor",
+	"right-mintydocs-edit": "Redigera alla MintyDocs-sidor",
+	"mintydocs-noparentpage": "Fel: Varje sida med typen $1 måste vara en undersida.",
+	"mintydocs-product-versionlist": "Klicka på någon av följande för att se dokumentationen för denna version:",
+	"mintydocs-version-desc": "Detta är dokumentationen för version $1 av $2.",
+	"mintydocs-manual-desc": "Denna manual är för version $1 av $2.",
+	"mintydocs-manual-otherversions": "Läs denna manual för andra versioner:",
+	"mintydocs-manual-contents": "Innehåll:",
+	"mintydocs-topic-desc": "Detta ämne är en del av manualen $1 för version $2 av $3.",
+	"mintydocs-topic-otherversions": "Läs detta ämne för andra versioner:"
+}
