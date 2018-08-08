@@ -4,6 +4,7 @@
 			"Chrumps"
 		]
 	},
+	"right-mintydocs-edit": "Edycja wszystkich stron MintyDocs",
 	"mintydocs-noparentpage": "Błąd: Każda strona $1 musi być podstroną.",
 	"mintydocs-invalidparentpage": "Błąd: Strona „$1” musi być stroną $2.",
 	"mintydocs-version-manuallist": "Oto instrukcje dla tej wersji:",
