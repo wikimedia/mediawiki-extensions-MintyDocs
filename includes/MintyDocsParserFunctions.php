@@ -42,7 +42,7 @@ use MediaWiki\MediaWikiServices;
  * This function defines a topic page.
  *
  * '#mintydocs_link' is called as:
- * {{#mintydocs_link:product=|version=|manual=|topic=}}
+ * {{#mintydocs_link:product=|version=|manual=|topic=|link text=}}
  *
  * This function displays a link to another page in the MintyDocs system.
  */
@@ -259,7 +259,7 @@ class MintyDocsParserFunctions {
 		array_shift( $params ); // We don't need the parser.
 		$processedParams = self::processParams( $parser, $params );
 
-		$product = $version = $manual = $topic = null;
+		$product = $version = $manual = $topic = $linkText = null;
 		foreach( $processedParams as $paramName => $value ) {
 			if ( $paramName == 'product' ) {
 				$product = $value;
@@ -269,6 +269,8 @@ class MintyDocsParserFunctions {
 				$manual = $value;
 			} elseif ( $paramName == 'topic' ) {
 				$topic = $value;
+			} elseif ( $paramName == 'link text' ) {
+				$linkText = $value;
 			}
 		}
 
@@ -342,18 +344,24 @@ class MintyDocsParserFunctions {
 			$linkedPageName .= '/' . $topic;
 		}
 
-		$linkText = '[[' . $linkedPageName;
+		$linkStr = '[[' . $linkedPageName;
 
-		// Use display name, if this page exists.
-		$linkedTitle = Title::newFromText( $linkedPageName );
-		$mdPage = MintyDocsUtils::pageFactory( $linkedTitle );
-		if ( $mdPage != null ) {
-			$linkText .= '|' . $mdPage->getDisplayName();
+		// Use the "link text", if it's defined. Otherwise,
+		// use the display name, if this page exists.
+		// Otherwise, use the page name.
+		if ( $linkText != null ) {
+			$linkStr .= "|$linkText";
+		} else {
+			$linkedTitle = Title::newFromText( $linkedPageName );
+			$mdPage = MintyDocsUtils::pageFactory( $linkedTitle );
+			if ( $mdPage != null ) {
+				$linkStr .= '|' . $mdPage->getDisplayName();
+			}
 		}
 
-		$linkText .= ']]';
-          
-		return $linkText;
+		$linkStr .= ']]';
+
+		return $linkStr;
 	}
 
 	static function processParams( $parser, $params ) {
