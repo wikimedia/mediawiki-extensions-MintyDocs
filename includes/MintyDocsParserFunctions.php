@@ -252,7 +252,7 @@ class MintyDocsParserFunctions {
 	static function renderLink( &$parser ) {
 		$mdPage = MintyDocsUtils::pageFactory( $parser->getTitle() );
 		if ( $mdPage == null ) {
-			return true;
+			return "<div class=\"error\">#mintydocs_link must be called from a MintyDocs-enabled page.</div>";
 		}
 
 		$params = func_get_args();
