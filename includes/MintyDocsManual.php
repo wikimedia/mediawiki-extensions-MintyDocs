@@ -92,12 +92,18 @@ class MintyDocsManual extends MintyDocsPage {
 		$this->mOrderedTopics = array();
 		foreach ( $topics as $i => $topic ) {
 			$topicActualName = $topic->getActualName();
+			// Get level of each topic in the hierarchy - this is
+			// not currently used by anything, but it may become
+			// useful in the future.
+			$matches = array();
+			preg_match( "/(\*+)\s*$topicActualName\s*$/m", $toc, $matches );
+			$numAsterisks = strlen( $matches[1] );
 			$tocBeforeReplace = $toc;
 			$toc = preg_replace( "/(\*+)\s*$topicActualName\s*$/m",
 				'$1' . $topic->getTOCLink(), $toc );
 			if ( $toc != $tocBeforeReplace ) {
 				// Replacement was succesful.
-				$this->mOrderedTopics[] = $topicActualName;
+				$this->mOrderedTopics[] = array( $topicActualName, $numAsterisks );
 				unset( $topics[$i] );
 			}
 		}
@@ -135,14 +141,21 @@ class MintyDocsManual extends MintyDocsPage {
 			$wgOut->addHTML( Html::rawElement( 'div', array( 'class' => 'warningbox' ), $errorMsg ) );
 		}
 	}
-	
+
 	function getTableOfContents( $showErrors ) {
 		if ( $this->mTOC == null ) {
 			$this->generateTableOfContents( $showErrors );
 		}
 		return $this->mTOC;
 	}
-	
+
+	function getOrderedTopics( $showErrors ) {
+		if ( $this->mOrderedTopics == null ) {
+			$this->generateTableOfContents( $showErrors );
+		}
+		return $this->mOrderedTopics;
+	}
+
 	function getPreviousAndNextTopics( $topic, $showErrors ) {
 		if ( $this->mOrderedTopics == null ) {
 			$this->generateTableOfContents( $showErrors );
@@ -151,7 +164,8 @@ class MintyDocsManual extends MintyDocsPage {
 		$prevTopic = null;
 		$nextTopic = null;
 
-		foreach( $this->mOrderedTopics as $i => $curTopicActualName ) {
+		foreach( $this->mOrderedTopics as $i => $curTopic ) {
+			$curTopicActualName = $curTopic[0];
 			if ( $topicActualName == $curTopicActualName ) {
 				// It's wasteful to have to create the MintyDocsTopic objects
 				// again, but there are only two of them, so it seems
@@ -161,7 +175,7 @@ class MintyDocsManual extends MintyDocsPage {
 				if ( $i == 0 ) {
 					$prevTopic = null;
 				} else {
-					$prevTopicActualName = $this->mOrderedTopics[$i - 1];
+					$prevTopicActualName = $this->mOrderedTopics[$i - 1][0];
 					$prevTopicPageName = $manualPageName . '/' . $prevTopicActualName;
 					$prevTopicPage = Title::newFromText( $prevTopicPageName );
 					$prevTopic = new MintyDocsTopic( $prevTopicPage );
@@ -169,7 +183,7 @@ class MintyDocsManual extends MintyDocsPage {
 				if ( $i == count( $this->mOrderedTopics ) - 1 ) {
 					$nextTopic = null;
 				} else {
-					$nextTopicActualName = $this->mOrderedTopics[$i + 1];
+					$nextTopicActualName = $this->mOrderedTopics[$i + 1][0];
 					$nextTopicPageName = $manualPageName . '/' . $nextTopicActualName;
 					$nextTopicPage = Title::newFromText( $nextTopicPageName );
 					$nextTopic = new MintyDocsTopic( $nextTopicPage );
