@@ -5,6 +5,8 @@
 		]
 	},
 	"mintydocs-desc": "نظام توثيق خفيف الوزن",
+	"right-mintydocs-administer": "إدارة جميع صفحات منتج MintyDocs",
+	"right-mintydocs-edit": "تحرير جميع صفحات MintyDocs",
 	"mintydocs-noparentpage": "خطأ: يجب أن تكون كل صفحة $1 صفحة فرعية.",
 	"mintydocs-invalidparentpage": "خطأ: يجب أن تكون كل صفحة $1 صفحة $2.",
 	"mintydocs-product-versionlist": "انقر على أي مما يلي لرؤية توثيق هذا الإصدار:",
