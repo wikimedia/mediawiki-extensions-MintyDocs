@@ -1,10 +1,10 @@
 <?php
 
 class MintyDocsManual extends MintyDocsPage {
-	
-	private $mTOC = null;
-	private $mOrderedTopics = null;
-	
+
+	private $mTOCHTML = null;
+	private $mTOCArray = array();
+
 	static function getPageTypeValue() {
 		return 'Manual';
 	}
@@ -54,20 +54,20 @@ class MintyDocsManual extends MintyDocsPage {
 		// based on whether or not the string starts with a '*' -
 		// hopefully that's a good enough check.
 		if ( $tocOrPageName == null ) {
-			$this->mTOC = null;
+			$this->mTOCHTML = null;
 			return;
 		} elseif ( substr( $tocOrPageName, 0, 1 ) == '*' ) {
-			$toc = $tocOrPageName;
+			$rawTOC = $tocOrPageName;
 		} else {
 			$title = Title::newFromText( $tocOrPageName );
 			if ( $title == null ) {
-				$this->mTOC = null;
+				$this->mTOCHTML = null;
 				return;
 			}
 			$wikiPage = new WikiPage( $title );
 			$content = $wikiPage->getContent();
 			if ( $content == null ) {
-				$this->mTOC = null;
+				$this->mTOCHTML = null;
 				return;
 			}
 			$pageText = $content->getNativeData();
@@ -75,38 +75,55 @@ class MintyDocsManual extends MintyDocsPage {
 			// when the parser's $mOptions field is not set.
 			$wgParser->startExternalParse( $title, new ParserOptions, Parser::OT_HTML );
 			$rawTOC = $wgParser->recursiveTagParse( $pageText );
-			// If the topics list comes from a page, there's a
-			// chance that it's from a dynamic query, which means
-			// that there might be extra newlines, etc. Get rid
-			// of these, to make the output cleaner.
-			$tocLines = explode( "\n", $rawTOC );
-			$toc = '';
-			foreach( $tocLines as $line ) {
-				$line = trim( $line );
-				if ( str_replace( '*', '', $line ) != '' ) {
-					$toc .= "$line\n";
+		}
+
+		// If the topics list comes from a page, there's a
+		// chance that it's from a dynamic query, which means
+		// that there might be extra newlines, etc. Get rid
+		// of these, to make the output cleaner.
+		$rawTOCLines = explode( "\n", $rawTOC );
+		$tocLines = array();
+		foreach( $rawTOCLines as $line ) {
+			$line = trim( $line );
+			if ( str_replace( '*', '', $line ) != '' ) {
+				$tocLines[] = $line;
+			}
+		}
+
+		$topics = $this->getAllTopics();
+		$this->mTOCArray = array();
+		foreach( $tocLines as &$line ) {
+			$matches = array();
+			preg_match( "/(\*+)\s*(.*)\s*$/", $line, $matches );
+			$numAsterisks = strlen( $matches[1] );
+			$lineValue = $matches[2];
+			if ( strpos( $lineValue, '!' ) === 0 ) {
+				$title = Title::newFromText( trim( substr( $lineValue, 1 ) ) );
+				$topic = MintyDocsTopic::newStandalone( $title, $this );
+				if ( $topic != null ) {
+					$this->mTOCArray[] = array( $topic, $numAsterisks );
+				} else {
+					$this->mTOCArray[] = array( $lineValue, $numAsterisks );
+				}
+				continue;
+			}
+
+			$foundMatchingTopic = false;
+			foreach ( $topics as $topic ) {
+				$topicActualName = $topic->getActualName();
+				if ( $lineValue == $topicActualName ) {
+					$foundMatchingTopic = true;
+					$line = str_replace( $lineValue, $topic->getTOCLink(), $line );
+					$this->mTOCArray[] = array( $topic, $numAsterisks );
+					break;
 				}
 			}
-		}
-		$topics = $this->getAllTopics();
-		$this->mOrderedTopics = array();
-		foreach ( $topics as $i => $topic ) {
-			$topicActualName = $topic->getActualName();
-			// Get level of each topic in the hierarchy - this is
-			// not currently used by anything, but it may become
-			// useful in the future.
-			$matches = array();
-			preg_match( "/(\*+)\s*$topicActualName\s*$/m", $toc, $matches );
-			$numAsterisks = strlen( $matches[1] );
-			$tocBeforeReplace = $toc;
-			$toc = preg_replace( "/(\*+)\s*$topicActualName\s*$/m",
-				'$1' . $topic->getTOCLink(), $toc );
-			if ( $toc != $tocBeforeReplace ) {
-				// Replacement was succesful.
-				$this->mOrderedTopics[] = array( $topicActualName, $numAsterisks );
-				unset( $topics[$i] );
+			if ( !$foundMatchingTopic ) {
+				$this->mTOCArray[] = array( $lineValue, $numAsterisks );
 			}
 		}
+
+		$toc = implode( "\n", $tocLines );
 
 		// Handle standalone topics - prepended with a "!".
 		$toc = preg_replace_callback(
@@ -124,7 +141,7 @@ class MintyDocsManual extends MintyDocsPage {
 
 		// doBlockLevels() takes care of just parsing '*' into
 		// bulleted lists, which is all we need.
-		$this->mTOC = $wgParser->doBlockLevels( $toc, true );
+		$this->mTOCHTML = $wgParser->doBlockLevels( $toc, true );
 
 		if ( $showErrors && count( $topics ) > 0 ) {
 			// Display error
@@ -143,50 +160,46 @@ class MintyDocsManual extends MintyDocsPage {
 	}
 
 	function getTableOfContents( $showErrors ) {
-		if ( $this->mTOC == null ) {
+		if ( $this->mTOCHTML == null ) {
 			$this->generateTableOfContents( $showErrors );
 		}
-		return $this->mTOC;
+		return $this->mTOCHTML;
 	}
 
-	function getOrderedTopics( $showErrors ) {
-		if ( $this->mOrderedTopics == null ) {
+	function getTableOfContentsArray( $showErrors ) {
+		if ( $this->mTOCArray == null ) {
 			$this->generateTableOfContents( $showErrors );
 		}
-		return $this->mOrderedTopics;
+		return $this->mTOCArray;
 	}
 
 	function getPreviousAndNextTopics( $topic, $showErrors ) {
-		if ( $this->mOrderedTopics == null ) {
+		if ( $this->mTOCArray == null ) {
 			$this->generateTableOfContents( $showErrors );
 		}
 		$topicActualName = $topic->getActualName();
 		$prevTopic = null;
 		$nextTopic = null;
 
-		foreach( $this->mOrderedTopics as $i => $curTopic ) {
-			$curTopicActualName = $curTopic[0];
+		foreach( $this->mTOCArray as $i => $curTopic ) {
+			if ( is_string( $curTopic[0] ) ) {
+				continue;
+			}
+			$curTopicActualName = $curTopic[0]->getActualName();
 			if ( $topicActualName == $curTopicActualName ) {
-				// It's wasteful to have to create the MintyDocsTopic objects
-				// again, but there are only two of them, so it seems
-				// easier to do it this way than to store lots of unneeded
-				// objects.
-				$manualPageName = $this->mTitle->getText();
-				if ( $i == 0 ) {
-					$prevTopic = null;
-				} else {
-					$prevTopicActualName = $this->mOrderedTopics[$i - 1][0];
-					$prevTopicPageName = $manualPageName . '/' . $prevTopicActualName;
-					$prevTopicPage = Title::newFromText( $prevTopicPageName );
-					$prevTopic = new MintyDocsTopic( $prevTopicPage );
+				$j = $i - 1;
+				while ( $prevTopic == null && $j >= 0 ) {
+					if ( !is_string( $this->mTOCArray[$j][0] ) ) {
+						$prevTopic = $this->mTOCArray[$j][0];
+					}
+					$j--;
 				}
-				if ( $i == count( $this->mOrderedTopics ) - 1 ) {
-					$nextTopic = null;
-				} else {
-					$nextTopicActualName = $this->mOrderedTopics[$i + 1][0];
-					$nextTopicPageName = $manualPageName . '/' . $nextTopicActualName;
-					$nextTopicPage = Title::newFromText( $nextTopicPageName );
-					$nextTopic = new MintyDocsTopic( $nextTopicPage );
+				$j = $i + 1;
+				while ( $nextTopic == null && $j < count( $this->mTOCArray ) ) {
+					if ( !is_string( $this->mTOCArray[$j][0] ) ) {
+						$nextTopic = $this->mTOCArray[$j][0];
+					}
+					$j++;
 				}
 			}
 		}
