@@ -109,12 +109,14 @@ class MintyDocsManual extends MintyDocsPage {
 			}
 
 			$foundMatchingTopic = false;
-			foreach ( $topics as $topic ) {
+			foreach ( $topics as $i => $topic ) {
 				$topicActualName = $topic->getActualName();
 				if ( $lineValue == $topicActualName ) {
 					$foundMatchingTopic = true;
 					$line = str_replace( $lineValue, $topic->getTOCLink(), $line );
 					$this->mTOCArray[] = array( $topic, $numAsterisks );
+					// Unset this so that $topics will hold the list of unmatched topics.
+					unset( $topics[$i] );
 					break;
 				}
 			}
