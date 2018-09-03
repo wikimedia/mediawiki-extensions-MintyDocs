@@ -8,7 +8,7 @@
 	"mintydocs-noparentpage": "Грешка: Всяка страница от тип $1 трябва да е подстраница.",
 	"mintydocs-invalidparentpage": "Грешка: Страница „$1“ трябва да бъде от тип $2.",
 	"mintydocs-product-versionlist": "Щракнете върху някое от изброените за да видите документацията конкретната версия:",
-	"mintydocs-version-desc": "Това е документацията на версия $1 на $1.",
+	"mintydocs-version-desc": "Това е документацията на версия $1 на $2.",
 	"mintydocs-version-manuallist": "Ръководствата за тази версия:",
 	"mintydocs-manual-desc": "Ръководството е за версия $1 на $2.",
 	"mintydocs-manual-otherversions": "Прегледайте ръководството за други версии:",
