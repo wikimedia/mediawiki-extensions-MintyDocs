@@ -49,7 +49,7 @@ class MintyDocsManual extends MintyDocsPage {
 	private function generateTableOfContents( $showErrors ) {
 		global $wgParser;
 
-		$tocOrPageName = $this->getPossiblyInheritedParam( 'MintyDocsTopicsList' );
+		$tocOrPageName = trim( $this->getPossiblyInheritedParam( 'MintyDocsTopicsList' ) );
 		// Decide whether this is a table of contents or a page name
 		// based on whether or not the string starts with a '*' -
 		// hopefully that's a good enough check.
