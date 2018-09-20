@@ -97,13 +97,19 @@ class MintyDocsManual extends MintyDocsPage {
 			preg_match( "/(\*+)\s*(.*)\s*$/", $line, $matches );
 			$numAsterisks = strlen( $matches[1] );
 			$lineValue = $matches[2];
+			if ( strpos( $lineValue, '-' ) === 0 ) {
+				$displayText = trim( substr( $lineValue, 1 ) );
+				$line = str_replace( $lineValue, $displayText, $line );
+				$this->mTOCArray[] = array( $displayText, $numAsterisks );
+				continue;
+			}
 			if ( strpos( $lineValue, '!' ) === 0 ) {
 				$title = Title::newFromText( trim( substr( $lineValue, 1 ) ) );
 				$topic = MintyDocsTopic::newStandalone( $title, $this );
 				if ( $topic != null ) {
 					$this->mTOCArray[] = array( $topic, $numAsterisks );
 				} else {
-					$this->mTOCArray[] = array( $lineValue, $numAsterisks );
+					$this->mTOCArray[] = array( $title, $numAsterisks );
 				}
 				continue;
 			}
@@ -121,7 +127,12 @@ class MintyDocsManual extends MintyDocsPage {
 				}
 			}
 			if ( !$foundMatchingTopic ) {
-				$this->mTOCArray[] = array( $lineValue, $numAsterisks );
+				// Make a link to this page, which is either nonexistent or at least
+				// lacks a #minty_docs topic call.
+				$topicPageName = $this->getTitle()->getText() . '/' . trim( $lineValue );
+				$title = Title::newFromText( $topicPageName );
+				$line = str_replace( $lineValue, Linker::link( $title ), $line );
+				$this->mTOCArray[] = array( $title, $numAsterisks );
 			}
 		}
 

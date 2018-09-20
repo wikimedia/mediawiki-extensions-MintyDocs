@@ -28,7 +28,8 @@ use MediaWiki\MediaWikiServices;
  * "topics list=" holds a bulleted hierarchy of topic names. Names that
  * begin with a "!" are considered "standalone topics" - these are topic
  * pages that are not defined as being part of this manual, and their full
- * page name must be specified.
+ * page name must be specified. Names that begin with a "-" are displayed
+ * as simple strings, not links.
  *
  * "topics list page=" holds the name of a page that in turns holds a
  * bulleted hierarchy. Only one of this parameter and "topics list=" should
