@@ -36,15 +36,15 @@ class MintyDocsProduct extends MintyDocsPage {
 	}
 
 	public function userIsAdmin( $user ) {
-		return MintyDocsUtils::titleHasPagePropValue( $this->mTitle, 'MintyDocsProductAdmin', $user->getName() );
+		return MintyDocsUtils::titlePagePropIncludesValue( $this->mTitle, 'MintyDocsProductAdmins', $user->getName() );
 	}
 
 	public function userIsEditor( $user ) {
-		return MintyDocsUtils::titleHasPagePropValue( $this->mTitle, 'MintyDocsProductEditor', $user->getName() );
+		return MintyDocsUtils::titlePagePropIncludesValue( $this->mTitle, 'MintyDocsProductEditors', $user->getName() );
 	}
 
 	public function userIsPreviewer( $user ) {
-		return MintyDocsUtils::titleHasPagePropValue( $this->mTitle, 'MintyDocsProductPreviewer', $user->getName() );
+		return MintyDocsUtils::titlePagePropIncludesValue( $this->mTitle, 'MintyDocsProductPreviewers', $user->getName() );
 	}
 
 	public function userCanView( $user ) {

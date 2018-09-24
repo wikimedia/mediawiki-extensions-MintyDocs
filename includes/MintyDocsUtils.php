@@ -24,20 +24,15 @@ class MintyDocsUtils {
 		return $row[0];
 	}
 
-	static public function titleHasPagePropValue( $title, $propName, $value ) {
-		$dbr = wfGetDB( DB_SLAVE );
-		$res = $dbr->select( 'page_props',
-			array(
-				'COUNT(*)'
-			),
-			array(
-				'pp_page' => $title->getArticleID(),
-				'pp_propname' => $propName,
-				'pp_value' => $value
-			)
-		);
-		$row = $dbr->fetchRow( $res );
-		return $row[0] > 0 ? true : false;
+	static public function titlePagePropIncludesValue( $title, $propName, $value ) {
+		$fullValue = self::getPagePropForTitle( $title, $propName );
+		$individualValues = explode( ',', $fullValue );
+		foreach ( $individualValues as $individualValue ) {
+			if ( trim( $individualValue ) == $value ) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	static public function getPageType( $title ) {

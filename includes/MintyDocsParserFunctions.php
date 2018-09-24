@@ -75,23 +75,14 @@ class MintyDocsParserFunctions {
 			if ( $paramName == 'display name' ) {
 				$displayTitle = $value;
 			} elseif ( $paramName == 'admins' ) {
-				$usernames = explode( ',', $value );
-				foreach ( $usernames as $username ) {
-					$username = trim( str_replace( '_', ' ', $username ) );
-					$parserOutput->setProperty( 'MintyDocsProductAdmin', $username );
-				}
+				$value = str_replace( '_', ' ', $value );
+				$parserOutput->setProperty( 'MintyDocsProductAdmins', $value );
 			} elseif ( $paramName == 'editors' ) {
-				$usernames = explode( ',', $value );
-				foreach ( $usernames as $username ) {
-					$username = trim( str_replace( '_', ' ', $username ) );
-					$parserOutput->setProperty( 'MintyDocsProductEditor', $username );
-				}
+				$value = str_replace( '_', ' ', $value );
+				$parserOutput->setProperty( 'MintyDocsProductEditors', $value );
 			} elseif ( $paramName == 'previewers' ) {
-				$usernames = explode( ',', $value );
-				foreach ( $usernames as $username ) {
-					$username = trim( str_replace( '_', ' ', $username ) );
-					$parserOutput->setProperty( 'MintyDocsProductPreviewer', $username );
-				}
+				$value = str_replace( '_', ' ', $value );
+				$parserOutput->setProperty( 'MintyDocsProductPreviewers', $value );
 			}
 		}
 
