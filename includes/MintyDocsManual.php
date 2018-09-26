@@ -131,8 +131,8 @@ class MintyDocsManual extends MintyDocsPage {
 				// lacks a #minty_docs topic call.
 				$topicPageName = $this->getTitle()->getText() . '/' . trim( $lineValue );
 				$title = Title::newFromText( $topicPageName );
-				$newURL = Linker::link( $title, null, array( 'data-mdtype' => 'topic' ) );
-				$line = str_replace( $lineValue, $newURL, $line );
+				$link = Linker::link( $title, $lineValue, array( 'data-mdtype' => 'topic' ) );
+				$line = str_replace( $lineValue, $link, $line );
 				$this->mTOCArray[] = array( $title, $numAsterisks );
 			}
 		}
