@@ -196,21 +196,21 @@ class MintyDocsManual extends MintyDocsPage {
 		$nextTopic = null;
 
 		foreach( $this->mTOCArray as $i => $curTopic ) {
-			if ( is_string( $curTopic[0] ) ) {
+			if ( !( $curTopic[0] instanceof MintyDocsTopic ) ) {
 				continue;
 			}
 			$curTopicActualName = $curTopic[0]->getActualName();
 			if ( $topicActualName == $curTopicActualName ) {
 				$j = $i - 1;
 				while ( $prevTopic == null && $j >= 0 ) {
-					if ( !is_string( $this->mTOCArray[$j][0] ) ) {
+					if ( $this->mTOCArray[$j][0] instanceof MintyDocsTopic ) {
 						$prevTopic = $this->mTOCArray[$j][0];
 					}
 					$j--;
 				}
 				$j = $i + 1;
 				while ( $nextTopic == null && $j < count( $this->mTOCArray ) ) {
-					if ( !is_string( $this->mTOCArray[$j][0] ) ) {
+					if ( $this->mTOCArray[$j][0] instanceof MintyDocsTopic ) {
 						$nextTopic = $this->mTOCArray[$j][0];
 					}
 					$j++;
