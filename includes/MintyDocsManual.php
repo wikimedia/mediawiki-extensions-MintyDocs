@@ -129,7 +129,7 @@ class MintyDocsManual extends MintyDocsPage {
 			if ( !$foundMatchingTopic ) {
 				// Make a link to this page, which is either nonexistent or at least
 				// lacks a #minty_docs topic call.
-				$topicPageName = $this->getTitle()->getText() . '/' . trim( $lineValue );
+				$topicPageName = $this->getTitle()->getPrefixedText() . '/' . trim( $lineValue );
 				$title = Title::newFromText( $topicPageName );
 				$link = Linker::link( $title, $lineValue, array( 'data-mdtype' => 'topic' ) );
 				$line = str_replace( $lineValue, $link, $line );

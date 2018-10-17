@@ -55,7 +55,7 @@ class MintyDocsUtils {
 	}
 
 	static function getPageParts( $title ) {
-		$pageName = $title->getText();
+		$pageName = $title->getPrefixedText();
 		$lastSlashPos = strrpos( $pageName, '/' );
 		if ( $lastSlashPos === false ) {
 			return array( null, $pageName );

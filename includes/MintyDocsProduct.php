@@ -20,7 +20,7 @@ class MintyDocsProduct extends MintyDocsPage {
 	 * Not currently used, but could get called in the future.
 	 */
 	function getActualName() {
-		return $this->mTitle->getText();
+		return $this->mTitle->getPrefixedText();
 	}
 
 	function inheritsPageContents() {

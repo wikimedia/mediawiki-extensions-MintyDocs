@@ -151,7 +151,7 @@ class MintyDocsTopic extends MintyDocsPage {
 	}
 
 	function getEquivalentPageNameForVersion( $version ) {
-		$versionPageName = $version->getTitle()->getText();
+		$versionPageName = $version->getTitle()->getPrefixedText();
 		return $versionPageName . '/' . $this->getManual()->getActualName() . '/' . $this->getActualName();
 	}
 

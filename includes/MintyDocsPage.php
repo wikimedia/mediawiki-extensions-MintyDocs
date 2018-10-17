@@ -50,7 +50,7 @@ abstract class MintyDocsPage {
 				'pp_page'
 			),
 			array(
-				'pp_value' => $this->mTitle->getText(),
+				'pp_value' => $this->mTitle->getPrefixedText(),
 				'pp_propname' => 'MintyDocsParentPage'
 			)
 		);
@@ -79,7 +79,7 @@ abstract class MintyDocsPage {
 	 * Should not be called for Product pages.
 	 */
 	public function getProductAndVersionStrings() {
-		$pageName = $this->mTitle->getText();
+		$pageName = $this->mTitle->getPrefixedText();
 		$pageNameParts = explode( '/', $pageName );
 		// The product page name may have some slashes in it.
 		$pageLevel = array_search( get_class( $this ), MintyDocsUtils::$pageClassesInOrder ) + 1;
@@ -182,9 +182,9 @@ abstract class MintyDocsPage {
 	function getSidebarText() {
 		return null;
 	}
-	
+
 	function getActualName() {
-		$pageName = $this->mTitle->getText();
+		$pageName = $this->mTitle->getPrefixedText();
 		$lastSlashPos = strrpos( $pageName, '/' );
 		return substr( $pageName, $lastSlashPos + 1 );
 	}
@@ -194,7 +194,7 @@ abstract class MintyDocsPage {
 	}
 
 	public function getParentPage() {
-		$pageName = $this->mTitle->getText();
+		$pageName = $this->mTitle->getPrefixedText();
 		$lastSlashPos = strrpos( $pageName, '/' );
 		$parentPageName = substr( $pageName, 0, $lastSlashPos );
 		return Title::newFromText( $parentPageName );
