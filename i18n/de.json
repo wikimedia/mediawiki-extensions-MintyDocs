@@ -17,5 +17,7 @@
 	"mintydocs-manual-otherversions": "Dieses Handbuch für andere Versionen lesen:",
 	"mintydocs-manual-contents": "Inhalte:",
 	"mintydocs-topic-desc": "Dieses Thema ist Teil des Handbuchs $1 für die Version $2 von $3.",
-	"mintydocs-topic-otherversions": "Dieses Thema für andere Versionen lesen:"
+	"mintydocs-topic-otherversions": "Dieses Thema für andere Versionen lesen:",
+	"mintydocspublish": "MintyDocs-Inhalt veröffentlichen",
+	"mintydocscreatedraft": "MintyDocs-Entwurfsseite erstellen"
 }
