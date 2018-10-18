@@ -3,8 +3,12 @@
 MintyDocs is a MediaWiki extension that lets you store well-
 structured documentation within the wiki by grouping pages into
 products, product versions, manuals and individual topic pages.
-Its structure is based on that of the PonyDocs extension, although
-it has a simpler approach to defining the structure.
+It also lets you define draft pages, via a new "Draft" namespace,
+which can then be "published" into their corresponding live pages.
+
+The page structure of MintyDocs is based on that of the PonyDocs
+extension, although MintyDocs has a simpler approach to defining
+pages.
 
 For more information on the MintyDocs extension, see its homepage at:
 

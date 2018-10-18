@@ -280,6 +280,14 @@ abstract class MintyDocsPage {
 			return true;
 		}
 
+		// If there's a corresponding draft page, it's non-editable.
+		if ( $this->mTitle->getNamespace() == NS_MAIN ) {
+			$possibleDraftPage = Title::newFromText( $this->mTitle->getText(), MD_NS_DRAFT );
+			if ( $possibleDraftPage->exists() ) {
+				return false;
+			}
+		}
+
 		list( $product, $version ) = $this->getProductAndVersion();
 		$versionStatus = $version->getStatus();
 

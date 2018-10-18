@@ -11,6 +11,31 @@ class MintyDocsHooks {
 		return true;
 	}
 
+	/**
+	 * Register the "draft" namespaces for MintyDocs.
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/CanonicalNamespaces
+	 *
+	 * @param array &$list
+	 *
+	 * @return true
+	 */
+	public static function registerNamespaces( array &$list ) {
+		global $wgNamespacesWithSubpages;
+
+		if ( !defined( 'MD_NS_DRAFT' ) ) {
+			define( 'MD_NS_DRAFT', 620 );
+			define( 'MD_NS_DRAFT_TALK', 621 );
+		}
+
+		$list[MD_NS_DRAFT] = 'Draft';
+		$list[MD_NS_DRAFT_TALK] = 'Draft_talk';
+
+		// Support subpages only for talk pages by default
+		$wgNamespacesWithSubpages[MD_NS_DRAFT_TALK] = true;
+
+		return true;
+	}
+
 	static public function checkPermissions( &$title, &$user, $action, &$result ) {
 		$mdPage = MintyDocsUtils::pageFactory( $title );
 		if ( $mdPage == null ) {

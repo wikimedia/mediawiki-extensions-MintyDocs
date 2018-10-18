@@ -17,5 +17,7 @@
 	"mintydocs-manual-otherversions": "Read this manual for other versions:",
 	"mintydocs-manual-contents": "Contents:",
 	"mintydocs-topic-desc": "This topic is part of the manual $1 for version $2 of $3.",
-	"mintydocs-topic-otherversions": "Read this topic for other versions:"
+	"mintydocs-topic-otherversions": "Read this topic for other versions:",
+	"mintydocspublish": "Publish MintyDocs content",
+	"mintydocscreatedraft": "Create MintyDocs draft page"
 }
