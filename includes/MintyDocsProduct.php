@@ -9,8 +9,14 @@ class MintyDocsProduct extends MintyDocsPage {
 	static function checkPageEligibility( $parentPageName, $thisPageName ) {
 		global $wgMintyDocsProductPages;
 
-		if ( !in_array( $thisPageName, $wgMintyDocsProductPages ) ) {
-			return 'Error: This page must first be registered in LocalSettings.php as a product page.';
+		if ( in_array( $thisPageName, $wgMintyDocsProductPages ) ) {
+			return null;
+		}
+
+		// If it's a draft page, always allow it.
+		$thisPageTitle = Title::newFromText( $thisPageName );
+		if ( $thisPageTitle->getNamespace() == MD_NS_DRAFT ) {
+			return null;
 		}
 
 		return null;

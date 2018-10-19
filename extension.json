@@ -41,6 +41,9 @@
 		"MintyDocsCreateDraft": "specials/MintyDocsCreateDraft.php",
 		"MintyDocsPublishAction": "includes/MintyDocsPublishAction.php"
 	},
+	"JobClasses": {
+		"MDCreatePage": "MintyDocsCreatePageJob"
+	},
 	"ResourceModules": {
 		"ext.mintydocs.main": {
 			"styles": "MintyDocs.css"

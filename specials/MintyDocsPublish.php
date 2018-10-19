@@ -74,7 +74,8 @@ class MintyDocsPublish extends SpecialPage {
 		// display checkbox
 		$text = '<form id="mdPublishForm" action="" method="post">';
 		$mdPage = MintyDocsUtils::pageFactory( $title );
-		if ( $mdPage == null || $mdPage instanceof MintyDocsTopic ) {
+		$isSinglePage = ( $mdPage == null || $mdPage instanceof MintyDocsTopic );
+		if ( $isSinglePage ) {
 			$toTitle = Title::newFromText( $title->getText(), self::$mToNamespace );
 			if ( self::$mToNamespace == MD_NS_DRAFT ) {
 				if ( $toTitle->exists() ) {
@@ -100,7 +101,7 @@ class MintyDocsPublish extends SpecialPage {
 			$text .= '</ul>';
 		}
 
-		if ( self::$mCheckboxNumber == 1 ) {
+		if ( !$isSinglePage && self::$mCheckboxNumber == 1 ) {
 			if ( self::$mFromNamespace == MD_NS_DRAFT ) {
 				$text .= "<p>(Nothing to publish.)</p>\n";
 			} else {
@@ -226,7 +227,7 @@ class MintyDocsPublish extends SpecialPage {
 
 		JobQueueGroup::singleton()->push( $jobs );
 
-		$out->addWikiMsg( 'pf_createclass_success' );
+		$out->addHTML( 'The specified page(s) will be created or modified.' );
 	}
 
 }
