@@ -16,5 +16,7 @@
 	"mintydocs-manual-otherversions": "Прочитајте го прирачников за други верзии:",
 	"mintydocs-manual-contents": "Содржина:",
 	"mintydocs-topic-desc": "Темава е дел од прирачникот $1 за верзијата $2 од $3.",
-	"mintydocs-topic-otherversions": "Прочитајте ја темава за други верзии:"
+	"mintydocs-topic-otherversions": "Прочитајте ја темава за други верзии:",
+	"mintydocspublish": "Објави содржина од MintyDocs",
+	"mintydocscreatedraft": "Направи нацрт-страница во MintyDocs"
 }

@@ -7,5 +7,7 @@
 	"right-mintydocs-edit": "правка всех страниц MintyDocs",
 	"mintydocs-noparentpage": "Ошибка: Каждая $1-страница должна быть подстраницей.",
 	"mintydocs-manual-otherversions": "Прочтите это руководство для других версий:",
-	"mintydocs-manual-contents": "Содержание:"
+	"mintydocs-manual-contents": "Содержание:",
+	"mintydocspublish": "Опубликовать содержимое от MintyDocs",
+	"mintydocscreatedraft": "Создать страницу черновика в MintyDocs"
 }

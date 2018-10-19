@@ -17,5 +17,7 @@
 	"mintydocs-manual-otherversions": "Lire ce manuel pour d'autres versions :",
 	"mintydocs-manual-contents": "Sommaire :",
 	"mintydocs-topic-desc": "Ce sujet fait partie du manuel $1 pour la version $2 de $3 .",
-	"mintydocs-topic-otherversions": "Lire ce sujet dans d'autres versions:"
+	"mintydocs-topic-otherversions": "Lire ce sujet dans d'autres versions:",
+	"mintydocspublish": "Publier le contenu MintyDocs",
+	"mintydocscreatedraft": "Créer une page de brouillon MintyDocs"
 }
