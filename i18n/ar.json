@@ -16,5 +16,7 @@
 	"mintydocs-manual-otherversions": "اقرأ هذا الدليل للإصدارات الأخرى:",
 	"mintydocs-manual-contents": "المحتويات:",
 	"mintydocs-topic-desc": "هذا الموضوع جزء من الدليل $1 للنسخة $2 من $3.",
-	"mintydocs-topic-otherversions": "اقرأ هذا الموضوع للإصدارات الأخرى:"
+	"mintydocs-topic-otherversions": "اقرأ هذا الموضوع للإصدارات الأخرى:",
+	"mintydocspublish": "نشر محتوى MintyDocs",
+	"mintydocscreatedraft": "إنشاء صفحة مسودة MintyDocs"
 }

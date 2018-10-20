@@ -16,5 +16,7 @@
 	"mintydocs-manual-otherversions": "Para outras versões, leia este manual:",
 	"mintydocs-manual-contents": "Conteúdo:",
 	"mintydocs-topic-desc": "Este tópico faz parte do manual $1 para a versão $2 do produto $3.",
-	"mintydocs-topic-otherversions": "Para outras versões, leia este tópico:"
+	"mintydocs-topic-otherversions": "Para outras versões, leia este tópico:",
+	"mintydocspublish": "Publicar conteúdo MintyDocs",
+	"mintydocscreatedraft": "Criar página de rascunho do MintyDocs"
 }
