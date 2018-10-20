@@ -25,7 +25,8 @@
 	},
 	"ExtensionMessagesFiles": {
 		"MintyDocsMagic": "MintyDocs.i18n.magic.php",
-		"MintyDocsNS": "MintyDocsNamespaces.php"
+		"MintyDocsNS": "MintyDocsNamespaces.php",
+		"MintyDocsAlias": "MintyDocs.i18n.alias.php"
 	},
 	"AutoloadClasses": {
 		"MintyDocsHooks": "MintyDocs.hooks.php",
