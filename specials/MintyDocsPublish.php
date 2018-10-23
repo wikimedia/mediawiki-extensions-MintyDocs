@@ -93,6 +93,7 @@ class MintyDocsPublish extends SpecialPage {
 				}
 			}
 			$text .= '<p>' . self::$mSinglePageMessage . '</p>';
+			$text .= Html::hidden( 'page_name_1', $title->getText() );
 		} else {
 			$out->addHTML('<p>Pages for ' . $mdPage->getLink() . ':</p>');
 			$pagesTree = self::makePagesTree( $mdPage );
