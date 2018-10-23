@@ -228,7 +228,23 @@ class MintyDocsPublish extends SpecialPage {
 
 		JobQueueGroup::singleton()->push( $jobs );
 
-		$out->addHTML( 'The specified page(s) will be created or modified.' );
+		if ( count( $jobs ) == 0 ) {
+			$text = 'No pages were specified.';
+		} elseif ( count( $jobs ) == 1 ) {
+			if ( $toTitle->exists() ) {
+				$text = 'The page ' . Linker::link( $toTitle ) . ' will be modified.';
+			} else {
+				$text = 'The page ' . Linker::link( $toTitle ) . ' will be created.';
+			}
+		} else {
+			if ( self::$mFromNamespace == MD_NS_DRAFT ) {
+				$text = 'The specified pages will be created or modified.';
+			} else {
+				$text = 'The specified draft pages will be created.';
+			}
+		}
+
+		$out->addHTML( $text );
 	}
 
 }
