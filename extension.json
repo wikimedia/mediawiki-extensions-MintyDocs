@@ -71,7 +71,8 @@
 			"MintyDocsHooks::checkPermissions"
 		],
 		"OutputPageBeforeHTML": [
-			"MintyDocsHooks::addTextToPage"
+			"MintyDocsHooks::addTextToPage",
+			"MintyDocsHooks::showNoticeForDraftPage"
 		],
 		"SkinBuildSidebar": [
 			"MintyDocsHooks::addTextToSidebar"

@@ -88,6 +88,24 @@ class MintyDocsHooks {
 		return true;
 	}
 
+	static public function showNoticeForDraftPage( &$out, &$text ) {
+		$action = Action::getActionName( $out->getContext() );
+		if ( $action != 'view' ) {
+			return true;
+		}
+		$title = $out->getTitle();
+		if ( $title->getNamespace() !== MD_NS_DRAFT ) {
+			return true;
+		}
+
+		$liveTitle = Title::newFromText( $title->getText(), NS_MAIN );
+		$warningText = '<div class="warningbox">' .
+			'This is a draft page; the live version of this page can be found at ' . Linker::linkKnown( $liveTitle ) . '.' .
+			"</div>\n";
+		$text = $warningText . $text;
+		return true;
+	}
+
 	static public function addTextToSidebar( Skin $skin, &$sidebar ) {
 		global $wgMintyDocsDisplayFooterElementsInSidebar;
 
