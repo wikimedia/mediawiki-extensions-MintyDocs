@@ -14,6 +14,6 @@ if ( !defined( 'MD_NS_DRAFT' ) ) {
 }
 
 $namespaceNames['en'] = array(
-	MD_NS_FORM       => 'Draft',
-	MD_NS_FORM_TALK  => 'Draft_talk',
+	MD_NS_DRAFT      => 'Draft',
+	MD_NS_DRAFT_TALK => 'Draft_talk',
 );
