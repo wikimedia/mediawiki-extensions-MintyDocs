@@ -88,7 +88,7 @@ class MintyDocsPublish extends SpecialPage {
 				$toPage = WikiPage::factory( $toTitle );
 				$toPageText = $toPage->getContent()->getNativeData();
 				if ( $fromPageText == $toPageText ) {
-					$out->addHTML( 'There is no need to publish this page - the live version matches the draft version.' );
+					$out->addHTML( 'There is no need to publish this page - the published version matches the draft version.' );
 					return;
 				}
 			}

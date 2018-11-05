@@ -100,7 +100,7 @@ class MintyDocsHooks {
 
 		$liveTitle = Title::newFromText( $title->getText(), NS_MAIN );
 		$warningText = '<div class="warningbox">' .
-			'This is a draft page; the live version of this page can be found at ' . Linker::linkKnown( $liveTitle ) . '.' .
+			'This is a draft page; the published version of this page can be found at ' . Linker::linkKnown( $liveTitle ) . '.' .
 			"</div>\n";
 		$text = $warningText . $text;
 		return true;
