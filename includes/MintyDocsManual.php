@@ -77,6 +77,10 @@ class MintyDocsManual extends MintyDocsPage {
 			$rawTOC = $wgParser->recursiveTagParse( $pageText );
 		}
 
+		// Get rid of any HTML tags that may have gotten into
+		// the topics list.
+		$rawTOC = strip_tags( $rawTOC );
+
 		// If the topics list comes from a page, there's a
 		// chance that it's from a dynamic query, which means
 		// that there might be extra newlines, etc. Get rid
