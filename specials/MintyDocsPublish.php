@@ -9,6 +9,7 @@ class MintyDocsPublish extends SpecialPage {
 	protected static $mFromNamespace = MD_NS_DRAFT;
 	protected static $mToNamespace = NS_MAIN;
 	protected static $mSinglePageMessage = "Publish this draft page?";
+	protected static $mButtonText = "Publish";
 	private static $mCheckboxNumber = 1;
 
 	/**
@@ -121,7 +122,7 @@ class MintyDocsPublish extends SpecialPage {
 			array(
 				'type' => 'submit',
 				'name' => 'mdPublish',
-				'value' => 'Publish' //wfMessage( 'Pf_createclass_create' )->text()
+				'value' => self::$mButtonText
 			)
 		);
 

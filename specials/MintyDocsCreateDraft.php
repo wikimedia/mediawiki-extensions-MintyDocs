@@ -11,6 +11,7 @@ class MintyDocsCreateDraft extends MintyDocsPublish {
 		self::$mFromNamespace = NS_MAIN;
 		self::$mToNamespace = MD_NS_DRAFT;
 		self::$mSinglePageMessage = "Create a draft page?";
+		self::$mButtonText = "Create draft";
 	}
 
 }
