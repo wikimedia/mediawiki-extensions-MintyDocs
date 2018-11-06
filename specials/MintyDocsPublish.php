@@ -209,6 +209,7 @@ class MintyDocsPublish extends SpecialPage {
 		$jobs = array();
 
 		$submittedValues = $req->getValues();
+		$toTitles = array();
 
 		foreach( $submittedValues as $key => $val ) {
 			if ( substr( $key, 0, 10 ) != 'page_name_' ) {
@@ -220,6 +221,7 @@ class MintyDocsPublish extends SpecialPage {
 			$fromPage = WikiPage::factory( $fromTitle );
 			$fromPageText = $fromPage->getContent()->getNativeData();
 			$toTitle = Title::makeTitleSafe( self::$mToNamespace, $fromPageName );
+			$toTitles[] = $toTitle;
 			$params = array();
 			$params['user_id'] = $user->getId();
 			$params['page_text'] = $fromPageText;
@@ -238,10 +240,17 @@ class MintyDocsPublish extends SpecialPage {
 				$text = 'The page ' . Linker::link( $toTitle ) . ' will be created.';
 			}
 		} else {
+			$titlesStr = '';
+			foreach ( $toTitles as $i => $title ) {
+				if ( $i > 0 ) {
+					$titlesStr .= ', ';
+				}
+				$titlesStr .= Linker::link( $title );
+			}
 			if ( self::$mFromNamespace == MD_NS_DRAFT ) {
-				$text = 'The specified pages will be created or modified.';
+				$text = 'The following pages will be created or modified: ' . $titlesStr . '.';
 			} else {
-				$text = 'The specified draft pages will be created.';
+				$text = 'The following draft pages will be created: ' . $titlesStr . '.';
 			}
 		}
 
