@@ -22,8 +22,8 @@ use MediaWiki\MediaWikiServices;
  * This function defines a version page.
  *
  * '#mintydocs_manual' is called as:
- * {{#mintydocs_manual:display name=|topics list=|topics list page=|
- * pagination|inherit}}
+ * {{#mintydocs_manual:display name=|topics list=|topics list page=
+ * |pagination|inherit|topic default form=|topic alternate forms=}}
  *
  * "topics list=" holds a bulleted hierarchy of topic names. Names that
  * begin with a "!" are considered "standalone topics" - these are topic
@@ -162,6 +162,10 @@ class MintyDocsParserFunctions {
 				$parserOutput->setProperty( 'MintyDocsTopicsList', $value );
 			} elseif ( $paramName == 'pagination' && $value == null ) {
 				$parserOutput->setProperty( 'MintyDocsPagination', true );
+			} elseif ( $paramName == 'topic default form' ) {
+				$parserOutput->setProperty( 'MintyDocsTopicDefaultForm', $value );
+			} elseif ( $paramName == 'topic alternate forms' ) {
+				$parserOutput->setProperty( 'MintyDocsTopicAlternateForms', $value );
 			}
 		}
 

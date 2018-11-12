@@ -94,6 +94,30 @@ class MintyDocsManual extends MintyDocsPage {
 			}
 		}
 
+		$useFormForRedLinkedTopics = false;
+		if ( class_exists( 'PFFormEdit' ) ) {
+			$topicDefaultForm = trim( $this->getPossiblyInheritedParam( 'MintyDocsTopicDefaultForm' ) );
+			$topicAlternateFormsStr = trim( $this->getPossiblyInheritedParam( 'MintyDocsTopicAlternateForms' ) );
+			if ( $topicDefaultForm != null || $topicAlternateFormsStr != null ) {
+				$useFormForRedLinkedTopics = true;
+			}
+		}
+		if ( $useFormForRedLinkedTopics ) {
+			$formEditQuery = array();
+			if ( $topicDefaultForm != null ) {
+				$formEditQuery['form'] = $topicDefaultForm;
+			}
+			if ( $topicAlternateFormsStr != '' ) {
+				$topicAlternateForms = array_map( 'trim', explode( ',', $topicAlternateFormsStr ) );
+				$formEditQuery['alt_form'] = array();
+				foreach ( $topicAlternateForms as $i => $altForm ) {
+					$formEditQuery['alt_form'][] = $altForm;
+				}
+			}
+			$formSpecialPage = SpecialPageFactory::getPage( 'FormEdit' );
+			$formSpecialPageTitle = $formSpecialPage->getPageTitle();
+		}
+
 		$topics = $this->getAllTopics();
 		$this->mTOCArray = array();
 		foreach( $tocLines as &$line ) {
@@ -135,7 +159,15 @@ class MintyDocsManual extends MintyDocsPage {
 				// lacks a #minty_docs topic call.
 				$topicPageName = $this->getTitle()->getPrefixedText() . '/' . trim( $lineValue );
 				$title = Title::newFromText( $topicPageName );
-				$link = Linker::link( $title, $lineValue, array( 'data-mdtype' => 'topic' ) );
+				if ( $useFormForRedLinkedTopics ) {
+					$formEditQuery['target'] = $topicPageName;
+					$url = $formSpecialPageTitle->getLocalURL( $formEditQuery );
+					$linkAttrs = array( 'href' => $url, 'class' => 'new', 'data-mdtype' => 'topic' );
+					$link = Html::rawElement( 'a', $linkAttrs, $lineValue );
+				} else {
+					$link = Linker::link( $title, $lineValue, array( 'data-mdtype' => 'topic' ) );
+				}
+
 				$line = str_replace( $lineValue, $link, $line );
 				$this->mTOCArray[] = array( $title, $numAsterisks );
 			}
