@@ -99,9 +99,12 @@ class MintyDocsHooks {
 		}
 
 		$liveTitle = Title::newFromText( $title->getText(), NS_MAIN );
-		$warningText = '<div class="warningbox">' .
-			'This is a draft page; the published version of this page can be found at ' . Linker::linkKnown( $liveTitle ) . '.' .
-			"</div>\n";
+		if ( $liveTitle->exists() ) {
+			$msg = 'This is a draft page; the published version of this page can be found at ' . Linker::linkKnown( $liveTitle ) . '.';
+		} else {
+			$msg = 'This is a draft page; it has not yet been published.';
+		}
+		$warningText = Html::rawElement( 'div', array( 'class' => 'warningbox' ), $msg );
 		$text = $warningText . $text;
 		return true;
 	}
