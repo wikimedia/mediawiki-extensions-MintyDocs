@@ -7,18 +7,7 @@ class MintyDocsProduct extends MintyDocsPage {
 	}
 
 	static function checkPageEligibility( $parentPageName, $thisPageName ) {
-		global $wgMintyDocsProductPages;
-
-		if ( in_array( $thisPageName, $wgMintyDocsProductPages ) ) {
-			return null;
-		}
-
-		// If it's a draft page, always allow it.
-		$thisPageTitle = Title::newFromText( $thisPageName );
-		if ( $thisPageTitle->getNamespace() == MD_NS_DRAFT ) {
-			return null;
-		}
-
+		// A product page can be created anywhere.
 		return null;
 	}
 

@@ -92,7 +92,6 @@
 		]
 	},
 	"config": {
-		"MintyDocsProductPages": [],
 		"MintyDocsDisplayFooterElementsInSidebar": false
 	},
 	"manifest_version": 1
