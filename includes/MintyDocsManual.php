@@ -118,6 +118,8 @@ class MintyDocsManual extends MintyDocsPage {
 			$formSpecialPageTitle = $formSpecialPage->getPageTitle();
 		}
 
+		$manualHasDraftPage = $this->hasDraftPage();
+
 		$topics = $this->getAllTopics();
 		$this->mTOCArray = array();
 		foreach( $tocLines as &$line ) {
@@ -155,10 +157,21 @@ class MintyDocsManual extends MintyDocsPage {
 				}
 			}
 			if ( !$foundMatchingTopic ) {
-				// Make a link to this page, which is either nonexistent or at least
-				// lacks a #minty_docs topic call.
+				// Make a link to this page, which is either
+				// nonexistent or at least lacks a #minty_docs
+				// topic call.
 				$topicPageName = $this->getTitle()->getPrefixedText() . '/' . trim( $lineValue );
 				$title = Title::newFromText( $topicPageName );
+				if ( $manualHasDraftPage ) {
+					// If it's a non-draft page, and it has
+					// a draft page, then just don't
+					// display red-linked topics at all -
+					// they presumably exist as drafts but
+					// haven't been published yet.
+					$line = null;
+					continue;
+				}
+
 				if ( $useFormForRedLinkedTopics ) {
 					$formEditQuery['target'] = $topicPageName;
 					$url = $formSpecialPageTitle->getLocalURL( $formEditQuery );

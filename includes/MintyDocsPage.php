@@ -275,17 +275,24 @@ abstract class MintyDocsPage {
 		return true;
 	}
 
+	public function hasDraftPage() {
+		if ( $this->mTitle->getNamespace() == NS_MAIN ) {
+			$possibleDraftPage = Title::newFromText( $this->mTitle->getText(), MD_NS_DRAFT );
+			if ( $possibleDraftPage->exists() ) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	public function userCanEdit( $user ) {
 		if ( $this->mIsInvalid ) {
 			return true;
 		}
 
 		// If there's a corresponding draft page, it's non-editable.
-		if ( $this->mTitle->getNamespace() == NS_MAIN ) {
-			$possibleDraftPage = Title::newFromText( $this->mTitle->getText(), MD_NS_DRAFT );
-			if ( $possibleDraftPage->exists() ) {
-				return false;
-			}
+		if ( $this->hasDraftPage() ) {
+			return false;
 		}
 
 		list( $product, $version ) = $this->getProductAndVersion();
