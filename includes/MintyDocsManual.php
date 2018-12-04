@@ -122,7 +122,7 @@ class MintyDocsManual extends MintyDocsPage {
 
 		$topics = $this->getAllTopics();
 		$this->mTOCArray = array();
-		foreach( $tocLines as &$line ) {
+		foreach( $tocLines as $lineNum => &$line ) {
 			$matches = array();
 			preg_match( "/(\*+)\s*(.*)\s*$/", $line, $matches );
 			$numAsterisks = strlen( $matches[1] );
@@ -168,7 +168,7 @@ class MintyDocsManual extends MintyDocsPage {
 					// display red-linked topics at all -
 					// they presumably exist as drafts but
 					// haven't been published yet.
-					$line = null;
+					unset( $tocLines[$lineNum] );
 					continue;
 				}
 
