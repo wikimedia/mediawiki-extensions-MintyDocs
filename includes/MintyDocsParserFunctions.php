@@ -304,15 +304,22 @@ class MintyDocsParserFunctions {
 			$curProduct = $wgRequest->getVal( 'product' );
 			$curVersion = $wgRequest->getVal( 'version' );
 			$curManual = $wgRequest->getVal( 'manual' );
+		} else {
+			$curProduct = $curVersion = $curManual = null;
 		}
 
 		// Get this page's own product, and possibly version and manual.
 		if ( get_class( $mdPage ) == 'MintyDocsProduct' ) {
 			$curProduct = $mdPage->getActualName();
+		} elseif ( get_class( $mdPage ) == 'MintyDocsVersion' ) {
+			list( $curProduct, $curVersion ) = $mdPage->getProductAndVersionStrings();
 		} elseif ( $curProduct != null && $curVersion != null && $curManual != null ) {
 			// No need to do anything; the values have already been
 			// set.
-		} else {
+		} elseif ( get_class( $mdPage ) == 'MintyDocsManual' ) {
+			list( $curProduct, $curVersion ) = $mdPage->getProductAndVersionStrings();
+			$curManual = $mdPage->getActualName();
+		} else { // MintyDocsTopic
 			list( $curProduct, $curVersion ) = $mdPage->getProductAndVersionStrings();
 			$curManual = $mdPage->getManual()->getActualName();
 		}
