@@ -249,7 +249,15 @@ abstract class MintyDocsPage {
 		if ( $versionStatus == MintyDocsVersion::RELEASED_STATUS ) {
 			// Everyone can view this.
 			return true;
-		} elseif ( $versionStatus == MintyDocsVersion::UNRELEASED_STATUS ) {
+		} elseif ( $versionStatus == MintyDocsVersion::CLOSED_STATUS ) {
+			if ( $user->isAllowed( 'mintydocs-administer' ) ) {
+				return true;
+			}
+			if ( $product->userIsAdmin( $user ) ) {
+				return true;
+			}
+			return false;
+		} else { // UNRELEASED_STATUS - the default
 			if ( $user->isAllowed( 'mintydocs-administer' ) ||
 				$user->isAllowed( 'mintydocs-edit' ) ||
 				$user->isAllowed( 'mintydocs-preview' ) ) {
@@ -258,14 +266,6 @@ abstract class MintyDocsPage {
 			if ( $product->userIsAdmin( $user ) ||
 				$product->userIsEditor( $user ) ||
 				$product->userIsPreviewer( $user ) ) {
-				return true;
-			}
-			return false;
-		} elseif ( $versionStatus == MintyDocsVersion::CLOSED_STATUS ) {
-			if ( $user->isAllowed( 'mintydocs-administer' ) ) {
-				return true;
-			}
-			if ( $product->userIsAdmin( $user ) ) {
 				return true;
 			}
 			return false;
@@ -301,21 +301,21 @@ abstract class MintyDocsPage {
 		if ( $versionStatus == MintyDocsVersion::RELEASED_STATUS ) {
 			// Everyone can edit this, as far as MintyDocs is concerned.
 			return true;
-		} elseif ( $versionStatus == MintyDocsVersion::UNRELEASED_STATUS ) {
+		} elseif ( $versionStatus == MintyDocsVersion::CLOSED_STATUS ) {
+			if ( $user->isAllowed( 'mintydocs-administer' ) ) {
+				return true;
+			}
+			if ( $product->userIsAdmin( $user ) ) {
+				return true;
+			}
+			return false;
+		} else { // UNRELEASED_STATUS - the default
 			if ( $user->isAllowed( 'mintydocs-administer' ) ||
 				$user->isAllowed( 'mintydocs-edit' ) ) {
 				return true;
 			}
 			if ( $product->userIsAdmin( $user ) ||
 				$product->userIsEditor( $user ) ) {
-				return true;
-			}
-			return false;
-		} elseif ( $versionStatus == MintyDocsVersion::CLOSED_STATUS ) {
-			if ( $user->isAllowed( 'mintydocs-administer' ) ) {
-				return true;
-			}
-			if ( $product->userIsAdmin( $user ) ) {
 				return true;
 			}
 			return false;
