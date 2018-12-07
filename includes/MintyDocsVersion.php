@@ -2,21 +2,21 @@
 
 class MintyDocsVersion extends MintyDocsPage {
 
-	const RELEASED_STATUS = 'Released';
-	const UNRELEASED_STATUS = 'Unreleased';
-	const CLOSED_STATUS = 'Closed';
-	
+	const RELEASED_STATUS = 'released';
+	const UNRELEASED_STATUS = 'unreleased';
+	const CLOSED_STATUS = 'closed';
+
 	static function getPageTypeValue() {
 		return 'Version';
 	}
-	
+
 	function getDisplayName() {
 		// No special display name for versions.
 		return $this->getActualName();
 	}
-	
+
 	function getStatus() {
-		return $this->getPageProp( 'MintyDocsStatus' );
+		return strtolower( $this->getPageProp( 'MintyDocsStatus' ) );
 	}
 
 	/**
@@ -53,7 +53,7 @@ class MintyDocsVersion extends MintyDocsPage {
 			}
 		}
 		$manualsListText .= "</ul>\n";
-		
+
 		if ( count( $manualsAndTheirRealNames ) > 0 ) {
 			// Display error
 			// @TODO - this is hardcoded for now, but change this
@@ -63,7 +63,7 @@ class MintyDocsVersion extends MintyDocsPage {
 			//$errorMsg = wfMessage( 'mintydocs-version-extramanuals', implode( ', ', array_keys( $manualsAndTheirRealNames ) ) );
 			$text .= Html::rawElement( 'div', array( 'class' => 'warningbox' ), $errorMsg );
 		}
-		
+
 		$text .= Html::rawElement( 'div', array( 'class' => 'MintyDocsManualList' ), $manualsListText );
 
 		return $text;
