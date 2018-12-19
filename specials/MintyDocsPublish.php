@@ -97,6 +97,7 @@ class MintyDocsPublish extends SpecialPage {
 			$text .= Html::hidden( 'page_name_1', $title->getText() );
 		} else {
 			$out->addHTML('<p>Pages for ' . $mdPage->getLink() . ':</p>');
+			$text .= self::displayPageParents( $mdPage );
 			$pagesTree = self::makePagesTree( $mdPage );
 			$text .= '<ul>';
 			$text .= self::displayCheckboxesForTree( $pagesTree['node'], $pagesTree['tree'] );
@@ -128,6 +129,25 @@ class MintyDocsPublish extends SpecialPage {
 
 		$text .= '</form>';
 		$out->addHTML( $text );
+	}
+
+	static function displayPageParents( $mdPage ) {
+		if ( $mdPage instanceof MintyDocsProduct ) {
+			return '';
+		}
+
+		$parentPage = $mdPage->getParentPage();
+		if ( $parentPage == null ) {
+			return '';
+		}
+		$parentMDPage = MintyDocsUtils::pageFactory( $parentPage );
+		if ( $parentMDPage == null ) {
+			return '';
+		}
+
+		return self::displayPageParents( $parentMDPage ) .
+			'<p class="parentPage"><em>' . $parentMDPage->getPageTypeValue() . '</em>: ' .
+			self::displayPageName( $parentMDPage ) . '</p>';
 	}
 
 	static function makePagesTree( $mdPage ) {
