@@ -1,8 +1,23 @@
 {
 	"@metadata": {
 		"authors": [
-			"Vlad5250"
+			"Vlad5250",
+			"Piramidion"
 		]
 	},
-	"right-mintydocs-edit": "редагування всіх сторінок MintyDocs"
+	"mintydocs-desc": "Полегшена система документації",
+	"right-mintydocs-administer": "адміністрування усіх сторінок продуктів MintyDocs",
+	"right-mintydocs-edit": "редагування всіх сторінок MintyDocs",
+	"mintydocs-noparentpage": "Помилка: кожна сторінка типу $1 має бути підсторінкою.",
+	"mintydocs-invalidparentpage": "Помилка: сторінка «$1» має бути сторінкою типу $2.",
+	"mintydocs-product-versionlist": "Клацніть будь-що з переліченого, щоб переглянути документацію для тієї версії:",
+	"mintydocs-version-desc": "Це — документація $2 для версії $1.",
+	"mintydocs-version-manuallist": "Ось інструкції для цієї версії:",
+	"mintydocs-manual-desc": "Ця інструкція призначена для версії $1 продукту $2.",
+	"mintydocs-manual-otherversions": "Читати цю інструкцію для інших версій:",
+	"mintydocs-manual-contents": "Зміст:",
+	"mintydocs-topic-desc": "Ця тема є частиною інструкції $1 для версії $2 продукту $3.",
+	"mintydocs-topic-otherversions": "Читати цю тему для інших версій:",
+	"mintydocspublish": "Опублікувати вміст MintyDocs",
+	"mintydocscreatedraft": "Створити чернетку MintyDocs"
 }
