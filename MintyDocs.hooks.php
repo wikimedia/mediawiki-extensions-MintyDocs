@@ -41,22 +41,14 @@ class MintyDocsHooks {
 		if ( $mdPage == null ) {
 			return true;
 		}
+		// If we are setting the edit or view permission, return false to
+		// avoid our permission value getting overriden by something else.
 		if ( $action == 'edit' || $action == 'formedit' ) {
-			if ( !$mdPage->userCanEdit( $user ) ) {
-				// For some reason this also needs to return
-				// false... $result will get overridden
-				// otherwise?
-				$result = false;
-				return false;
-			}
+			$result = $mdPage->userCanEdit( $user );
+			return false;
 		} elseif ( $action == 'read' ) {
-			if ( !$mdPage->userCanView( $user ) ) {
-				// For some reason this also needs to return
-				// false... $result will get overridden
-				// otherwise?
-				$result = false;
-				return false;
-			}
+			$result = $mdPage->userCanView( $user );
+			return false;
 		}
 		return true;
 	}
