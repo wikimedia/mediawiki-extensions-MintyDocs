@@ -246,6 +246,26 @@ class MintyDocsPublish extends SpecialPage {
 			$params['user_id'] = $user->getId();
 			$params['page_text'] = $fromPageText;
 			$params['edit_summary'] = $editSummary;
+
+			// If this is a MintyDocs page with a parent page, send
+			// the name of the parent page in the other namespace
+			// to the job, so the job can check whether that page
+			// exists, and cancel the save if not - we don't want to
+			// create an invalid MD page.
+			// The most likely scenario for that to happen (though
+			// not the only one) is that a whole set of pages are
+			// being created, and for some reason the saving of
+			// child pages occurs right before the saving of the
+			// parent.
+			$fromMDPage = MintyDocsUtils::pageFactory( $fromTitle );
+			if ( $fromMDPage && ( ! $fromMDPage instanceof MintyDocsProduct ) ) {
+				$fromParentTitle = $fromMDPage->getParentPage();
+				$fromParentPageName = $fromParentTitle->getText();
+				$toParentTitle = Title::makeTitleSafe( self::$mToNamespace, $fromParentPageName );
+				$toParentPageName = $toParentTitle->getText();
+				$params['parent_page'] = $toParentPageName;
+			}
+
 			$jobs[] = new MintyDocsCreatePageJob( $toTitle, $params );
 		}
 

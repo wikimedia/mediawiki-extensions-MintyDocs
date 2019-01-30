@@ -27,6 +27,18 @@ class MintyDocsCreatePageJob extends Job {
 			return false;
 		}
 
+		// If a page is supposed to have a parent but doesn't, we
+		// don't want to save it, because that would lead to an
+		// invalid page.
+		if ( array_key_exists( 'parent_page', $this->params ) ) {
+			$parent_page = $this->params['parent_page'];
+			$parent_title = Title::newFromText( $parent_page );
+			if ( ! $parent_title->exists() ) {
+				$this->error = "MDCreatePage: Parent page is missing; canceling save.";
+				return false;
+			}
+		}
+
 		$page_text = $this->params['page_text'];
 		// Change global $wgUser variable to the one
 		// specified by the job only for the extent of this
