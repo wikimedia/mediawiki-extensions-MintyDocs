@@ -246,7 +246,17 @@ class MintyDocsParserFunctions {
 	}
 
 	static function renderLink( &$parser ) {
-		$mdPage = MintyDocsUtils::pageFactory( $parser->getTitle() );
+		$curTitle = $parser->getTitle();
+		if ( $curTitle->isSpecial( 'FormEdit' ) ) {
+			// If we're in Special:FormEit, then this is probably
+			// being called by a WYSIWYG editor like VisualEditor.
+			// If so, get out the actual page name from the URL,
+			// and pretend we're on that page, so this will
+			// display correctly.
+			$pageNameParts = explode( '/', $curTitle->getText(), 3 );
+			$curTitle = Title::newFromText( $pageNameParts[2] );
+		}
+		$mdPage = MintyDocsUtils::pageFactory( $curTitle );
 		if ( $mdPage == null ) {
 			return "<div class=\"error\">#mintydocs_link must be called from a MintyDocs-enabled page.</div>";
 		}
