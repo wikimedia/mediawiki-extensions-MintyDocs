@@ -43,7 +43,7 @@ use MediaWiki\MediaWikiServices;
  * This function defines a topic page.
  *
  * '#mintydocs_link' is called as:
- * {{#mintydocs_link:product=|version=|manual=|topic=|link text=}}
+ * {{#mintydocs_link:product=|version=|manual=|topic=|standalone|link text=}}
  *
  * This function displays a link to another page in the MintyDocs system.
  */
@@ -266,6 +266,7 @@ class MintyDocsParserFunctions {
 		$processedParams = self::processParams( $parser, $params );
 
 		$product = $version = $manual = $topic = $linkText = null;
+		$standalone = false;
 		foreach( $processedParams as $paramName => $value ) {
 			if ( $paramName == 'product' ) {
 				$product = $value;
@@ -275,9 +276,17 @@ class MintyDocsParserFunctions {
 				$manual = $value;
 			} elseif ( $paramName == 'topic' ) {
 				$topic = $value;
+			} elseif ( $paramName == 'standalone' ) {
+				$standalone = true;
 			} elseif ( $paramName == 'link text' ) {
 				$linkText = $value;
 			}
+		}
+
+		// Handle links to standalone topics right away.
+		if ( $topic != null && $standalone ) {
+			$linkedPageName = self::possibleNamespacePrefix( $curTitle ) . $topic;
+			return self::getLinkWikitext( $linkedPageName, $linkText );
 		}
 
 		if ( $topic != null ) {
@@ -303,10 +312,10 @@ class MintyDocsParserFunctions {
 				return "<div class=\"error\">A 'version' value must be specified in this case.</div>";
 			}
 		}
-		// If it's a topic, there's a chance that it's "standalone",
-		// meaning that it gets its data from the query string.
-		// Unfortunately, we need to disable the cache in order to see
-		// the query string, so we have to do that regardless of
+		// If the current page is a topic, there's a chance that it's
+		// "standalone", meaning that it gets its data from the query
+		// string. Unfortunately, we need to disable the cache in order
+		// to see the query string, so we have to do that regardless of
 		// whether it's standalone or not.
 		if ( get_class( $mdPage ) == 'MintyDocsTopic' ) {
 			$parser->disableCache();
@@ -357,24 +366,7 @@ class MintyDocsParserFunctions {
 			$linkedPageName .= '/' . $topic;
 		}
 
-		$linkStr = '[[' . $linkedPageName;
-
-		// Use the "link text", if it's defined. Otherwise,
-		// use the display name, if this page exists.
-		// Otherwise, use the page name.
-		if ( $linkText != null ) {
-			$linkStr .= "|$linkText";
-		} else {
-			$linkedTitle = Title::newFromText( $linkedPageName );
-			$mdPage = MintyDocsUtils::pageFactory( $linkedTitle );
-			if ( $mdPage != null ) {
-				$linkStr .= '|' . $mdPage->getDisplayName();
-			}
-		}
-
-		$linkStr .= ']]';
-
-		return $linkStr;
+		return self::getLinkWikitext( $linkedPageName, $linkText );
 	}
 
 	static function processParams( $parser, $params ) {
@@ -411,6 +403,27 @@ class MintyDocsParserFunctions {
 		}
 		global $wgContLang;
 		return $wgContLang->getNsText( MD_NS_DRAFT ) . ':';
+	}
+
+	static function getLinkWikitext( $pageName, $linkText ) {
+		$str = '[[' . $pageName;
+
+		// Use the "link text", if it's defined. Otherwise,
+		// use the display name, if this page exists.
+		// Otherwise, use the page name.
+		if ( $linkText != null ) {
+			$str .= "|$linkText";
+		} else {
+			$title = Title::newFromText( $pageName );
+			$mdPage = MintyDocsUtils::pageFactory( $title );
+			if ( $mdPage != null ) {
+				$str .= '|' . $mdPage->getDisplayName();
+			}
+		}
+
+		$str .= ']]';
+
+		return $str;
 	}
 
 }
