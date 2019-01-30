@@ -335,7 +335,7 @@ class MintyDocsParserFunctions {
 		}
 
 		if ( $product != null ) {
-			$linkedPageName = $product;
+			$linkedPageName = self::possibleNamespacePrefix( $curTitle ) . $product;
 		} else {
 			$linkedPageName = $curProduct;
 		}
@@ -402,4 +402,15 @@ class MintyDocsParserFunctions {
 
 		return $processedParams;
 	}
+
+	public static function possibleNamespacePrefix( $title ) {
+		// If we're in the Draft namespace, add on the Draft:
+		// prefix to whatever page name was specified.
+		if ( $title->getNamespace() != MD_NS_DRAFT ) {
+			return '';
+		}
+		global $wgContLang;
+		return $wgContLang->getNsText( MD_NS_DRAFT ) . ':';
+	}
+
 }
