@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"ديفيد"
+			"ديفيد",
+			"Meno25"
 		]
 	},
+	"mintydocs-extensionname": "مينتي دوكس",
 	"mintydocs-desc": "نظام توثيق خفيف الوزن",
 	"right-mintydocs-administer": "إدارة جميع صفحات منتج MintyDocs",
 	"right-mintydocs-edit": "تحرير جميع صفحات MintyDocs",
