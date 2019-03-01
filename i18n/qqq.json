@@ -21,5 +21,6 @@
 	"mintydocs-topic-desc": "A header for a page about one topic. Parameters:\n* $1 - a manual name\n*2 - a version number\n* $3 - a product name",
 	"mintydocs-topic-otherversions": "Read this topic for other versions:",
 	"mintydocspublish": "{{doc-special|MintyDocsPublish}}",
-	"mintydocscreatedraft": "{{doc-special|MintyDocsCreateDraft}}"
+	"mintydocscreatedraft": "{{doc-special|MintyDocsCreateDraft}}",
+	"mintydocsdelete": "{{doc-special|MintyDocsDelete}}"
 }

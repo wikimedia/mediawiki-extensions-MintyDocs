@@ -19,5 +19,6 @@
 	"mintydocs-topic-desc": "This topic is part of the manual $1 for version $2 of $3.",
 	"mintydocs-topic-otherversions": "Read this topic for other versions:",
 	"mintydocspublish": "Publish MintyDocs content",
-	"mintydocscreatedraft": "Create MintyDocs draft page"
+	"mintydocscreatedraft": "Create MintyDocs draft page",
+	"mintydocsdelete": "Delete MintyDocs content"
 }
