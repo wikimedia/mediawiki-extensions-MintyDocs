@@ -18,5 +18,6 @@
 	"mintydocs-topic-desc": "此主題是$3（版本：$2）的簡介$1裡一部份。",
 	"mintydocs-topic-otherversions": "讀取此主題的其它版本：",
 	"mintydocspublish": "發佈 MintyDocs 內容",
-	"mintydocscreatedraft": "建立 MintyDocs 草稿頁面"
+	"mintydocscreatedraft": "建立 MintyDocs 草稿頁面",
+	"mintydocsdelete": "刪除 MintyDocs 內容"
 }

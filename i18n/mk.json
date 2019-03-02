@@ -18,5 +18,6 @@
 	"mintydocs-topic-desc": "Темава е дел од прирачникот $1 за верзијата $2 од $3.",
 	"mintydocs-topic-otherversions": "Прочитајте ја темава за други верзии:",
 	"mintydocspublish": "Објави содржина од MintyDocs",
-	"mintydocscreatedraft": "Направи нацрт-страница во MintyDocs"
+	"mintydocscreatedraft": "Направи нацрт-страница во MintyDocs",
+	"mintydocsdelete": "Избриши содржина од MintyDocs"
 }

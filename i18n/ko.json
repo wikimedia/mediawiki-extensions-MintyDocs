@@ -17,5 +17,6 @@
 	"mintydocs-topic-desc": "이 주제는 $3의 버전 $2의 매뉴얼 $1의 일부입니다.",
 	"mintydocs-topic-otherversions": "이 주제의 다른 판 읽기:",
 	"mintydocspublish": "MintyDocs 내용 게시",
-	"mintydocscreatedraft": "MintyDocs 초안 문서 만들기"
+	"mintydocscreatedraft": "MintyDocs 초안 문서 만들기",
+	"mintydocsdelete": "MintyDocs 내용 삭제"
 }
