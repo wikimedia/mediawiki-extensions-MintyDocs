@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"StanProg"
+			"StanProg",
+			"Vlad5250"
 		]
 	},
 	"mintydocs-desc": "Опростена система за документация",
@@ -14,5 +15,6 @@
 	"mintydocs-manual-otherversions": "Прегледайте ръководството за други версии:",
 	"mintydocs-manual-contents": "Съдържание:",
 	"mintydocs-topic-desc": "Тази тема е част от ръководство $1 за версия $2 на $3.",
-	"mintydocs-topic-otherversions": "Прегледайте тази тема за други версии:"
+	"mintydocs-topic-otherversions": "Прегледайте тази тема за други версии:",
+	"mintydocsdelete": "Изтриване на съдържание от MintyDocs"
 }
