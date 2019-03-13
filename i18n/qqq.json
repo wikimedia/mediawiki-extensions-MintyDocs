@@ -22,5 +22,6 @@
 	"mintydocs-topic-otherversions": "Read this topic for other versions:",
 	"mintydocspublish": "{{doc-special|MintyDocsPublish}}",
 	"mintydocscreatedraft": "{{doc-special|MintyDocsCreateDraft}}",
+	"mintydocscopy": "{{doc-special|MintyDocsCopy}}",
 	"mintydocsdelete": "{{doc-special|MintyDocsDelete}}"
 }

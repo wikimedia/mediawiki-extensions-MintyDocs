@@ -6,8 +6,9 @@
 
 class MintyDocsPublish extends SpecialPage {
 
-	protected static $mFromNamespace = MD_NS_DRAFT;
-	protected static $mToNamespace = NS_MAIN;
+	protected static $mNoActionNeededMessage = "Nothing to publish.";
+	protected static $mEditSummary = 'Published';
+	protected static $mSuccessMessage = 'The following pages will be created or modified: ';
 	protected static $mSinglePageMessage = "Publish this draft page?";
 	protected static $mButtonText = "Publish";
 	private static $mCheckboxNumber = 1;
@@ -20,6 +21,14 @@ class MintyDocsPublish extends SpecialPage {
 			$pageName = 'MintyDocsPublish';
 		}
 		parent::__construct( $pageName );
+	}
+
+	function generateSourceTitle( $sourcePageName ) {
+		return Title::newFromText( $sourcePageName, MD_NS_DRAFT );
+	}
+
+	function generateTargetTitle( $targetPageName ) {
+		return Title::newFromText( $targetPageName, NS_MAIN );
 	}
 
 	function execute( $query ) {
@@ -47,10 +56,19 @@ class MintyDocsPublish extends SpecialPage {
 			return;
 		}
 
-
-		if ( $query == null ) {
-			$out->addHTML('Page name must be set.');
+		try {
+			$title = $this->getTitleFromQuery( $query );
+		} catch ( Exception $e ) {
+			$out->addHTML( $e->getMessage() );
 			return;
+		}
+
+		$this->displayMainForm( $title );
+	}
+
+	function getTitleFromQuery( $query ) {
+		if ( $query == null ) {
+			throw new MWException( 'Page name must be set.' );
 		}
 
 		// Generate Title
@@ -60,64 +78,57 @@ class MintyDocsPublish extends SpecialPage {
 			$title = Title::newFromText( $query );
 		}
 
-		// Error if this is not in the Draft namespace
-		if ( $title->getNamespace() != self::$mFromNamespace ) {
-			$out->addHTML('Must be a Draft page!');
-			return;
-		}
+		// Class-specific validation.
+		$this->validateTitle( $title );
 
-		// Error if page does not exist
+		// Error if page does not exist.
 		if ( !$title->exists() ) {
-			$out->addHTML('Page does not exist!');
-			return;
+			throw new MWException( 'Page does not exist!' );
 		}
 
-		// display checkbox
+		return $title;
+	}
+
+	function validateTitle( $title ) {
+		if ( $title->getNamespace() != MD_NS_DRAFT ) {
+			throw new MWException( 'Must be a Draft page!' );
+		}
+	}
+
+	function displayMainForm( $title ) {
+		$out = $this->getOutput();
+
+		// Display checkboxes.
 		$text = '<form id="mdPublishForm" action="" method="post">';
 		$mdPage = MintyDocsUtils::pageFactory( $title );
 		$isSinglePage = ( $mdPage == null || $mdPage instanceof MintyDocsTopic );
 		if ( $isSinglePage ) {
-			$toTitle = Title::newFromText( $title->getText(), self::$mToNamespace );
-			if ( self::$mToNamespace == MD_NS_DRAFT ) {
-				if ( $toTitle->exists() ) {
-					$out->addHTML( 'A draft cannot be created for this page - it already exists.' );
-					return;
-				}
-			} elseif ( $toTitle->exists() ) {
-				$fromPage = WikiPage::factory( $title );
-				$fromPageText = $fromPage->getContent()->getNativeData();
-				$toPage = WikiPage::factory( $toTitle );
-				$toPageText = $toPage->getContent()->getNativeData();
-				if ( $fromPageText == $toPageText ) {
-					$out->addHTML( 'There is no need to publish this page - the published version matches the draft version.' );
-					return;
-				}
+			$toTitle = $this->generateTargetTitle( $title->getText() );
+			$error = $this->validateSinglePageAction( $title, $toTitle );
+			if ( $error != null ) {
+				$out->addHTML( $error );
 			}
 			$text .= '<p>' . self::$mSinglePageMessage . '</p>';
 			$text .= Html::hidden( 'page_name_1', $title->getText() );
 		} else {
 			$text .= '<p>Pages for ' . $mdPage->getLink() . ':</p>';
-			$text .= self::displayPageParents( $mdPage );
-			$pagesTree = self::makePagesTree( $mdPage );
+			$text .= $this->displayPageParents( $mdPage );
+			$pagesTree = $this->makePagesTree( $mdPage );
 			$text .= '<ul>';
-			$text .= self::displayCheckboxesForTree( $pagesTree['node'], $pagesTree['tree'] );
+			$text .= $this->displayCheckboxesForTree( $pagesTree['node'], $pagesTree['tree'] );
 			$text .= '</ul>';
 		}
 
 		if ( !$isSinglePage && self::$mCheckboxNumber == 1 ) {
-			if ( self::$mFromNamespace == MD_NS_DRAFT ) {
-				$text .= "<p>(Nothing to publish.)</p>\n";
-			} else {
-				$text .= "<p>(No drafts need creating.)</p>\n";
-			}
+			$text = '<p>(' . self::$mNoActionNeededMessage . ")</p>\n";
 			$out->addHTML( $text );
 			return;
 		}
 
 		$mdp = $this->getTitle();
-		$text .= Html::hidden( 'title', PFUtils::titleURLString( $mdp ) );
+		$text .= Html::hidden( 'title', PFUtils::titleURLString( $mdp ) ) . "\n";
 
-		$text .= "\t" . Html::hidden( 'csrf', $this->getUser()->getEditToken( $this->getName() ) ) . "\n";
+		$text .= Html::hidden( 'csrf', $this->getUser()->getEditToken( $this->getName() ) ) . "\n";
 
 		$text .= Html::element( 'input',
 			array(
@@ -131,7 +142,21 @@ class MintyDocsPublish extends SpecialPage {
 		$out->addHTML( $text );
 	}
 
-	static function displayPageParents( $mdPage ) {
+	function validateSinglePageAction( $fromTitle, $toTitle ) {
+		if ( ! $toTitle->exists() ) {
+			return null;
+		}
+		$fromPage = WikiPage::factory( $fromTitle );
+		$fromPageText = $fromPage->getContent()->getNativeData();
+		$toPage = WikiPage::factory( $toTitle );
+		$toPageText = $toPage->getContent()->getNativeData();
+		if ( $fromPageText == $toPageText ) {
+			return 'There is no need to publish this page - the published version matches the draft version.';
+		}
+		return null;
+	}
+
+	function displayPageParents( $mdPage ) {
 		if ( $mdPage instanceof MintyDocsProduct ) {
 			return '';
 		}
@@ -145,9 +170,9 @@ class MintyDocsPublish extends SpecialPage {
 			return '';
 		}
 
-		return self::displayPageParents( $parentMDPage ) .
+		return $this->displayPageParents( $parentMDPage ) .
 			'<p class="parentPage"><em>' . $parentMDPage->getPageTypeValue() . '</em>: ' .
-			self::displayPageName( $parentMDPage ) . '</p>';
+			$this->displayPageName( $parentMDPage ) . '</p>';
 	}
 
 	static function makePagesTree( $mdPage ) {
@@ -175,36 +200,37 @@ class MintyDocsPublish extends SpecialPage {
 		}
 	}
 
-	static function displayCheckboxesForTree( $node, $tree ) {
+	function displayCheckboxesForTree( $node, $tree ) {
 		$text = '';
 		if ( $node != null ) {
-			$text .= "\n<li>" . self::displayPageName( $node ) . '</li>';
+			$text .= "\n<li>" . $this->displayPageName( $node ) . '</li>';
 		}
 		if ( count( $tree ) > 0 ) {
 			$text .= '<ul>';
 			foreach ( $tree as $node ) {
 				$innerNode = $node['node'];
 				$innerTree = $node['tree'];
-				$text .= self::displayCheckboxesForTree( $innerNode, $innerTree );
+				$text .= $this->displayCheckboxesForTree( $innerNode, $innerTree );
 			}
 			$text .= '</ul>';
 		}
 		return $text;
 	}
 
-	static function displayPageName( $mdPage ) {
+	function displayPageName( $mdPage ) {
 		$fromTitle = $mdPage->getTitle();
 		$fromPageName = $fromTitle->getText();
-		$fromPage = WikiPage::factory( $fromTitle );
-		$fromPageText = $fromPage->getContent()->getNativeData();
-		$toTitle = Title::newFromText( $fromTitle->getText(), self::$mToNamespace );
+		$toTitle = $this->generateTargetTitle( $fromPageName );
 		if ( !$toTitle->exists() ) {
-			return Html::check( 'page_name_' . self::$mCheckboxNumber++, true, array( 'value' => $fromPageName ) ) . '<strong>' . $mdPage->getLink() . '</strong>';
+			return Html::check( 'page_name_' . self::$mCheckboxNumber++, true, array( 'value' => $fromPageName ) ) .
+			'<strong>' . $mdPage->getLink() . '</strong>';
 		}
-		// Different rules for creating draft vs. publishing.
-		if ( $toTitle->exists() && self::$mToNamespace == MD_NS_DRAFT ) {
+		if ( !$this->overwritingIsAllowed() && $toTitle->exists() ) {
 			return $mdPage->getLink() . ' (already exists)';
 		}
+
+		$fromPage = WikiPage::factory( $fromTitle );
+		$fromPageText = $fromPage->getContent()->getNativeData();
 		$toPage = WikiPage::factory( $toTitle );
 		$toPageText = $toPage->getContent()->getNativeData();
 		// If the text of the two pages is the same, no point
@@ -215,16 +241,14 @@ class MintyDocsPublish extends SpecialPage {
 		return Html::check( 'page_name_' . self::$mCheckboxNumber++, true, array( 'value' => $fromPageName ) ) . $mdPage->getLink();
 	}
 
+	function overwritingIsAllowed() {
+		return true;
+	}
+
 	function publishAll() {
 		$req = $this->getRequest();
 		$user = $this->getUser();
 		$out = $this->getOutput();
-
-		if ( self::$mFromNamespace == MD_NS_DRAFT ) {
-			$editSummary = 'Published';
-		} else {
-			$editSummary = 'Created draft';
-		}
 
 		$jobs = array();
 
@@ -237,15 +261,15 @@ class MintyDocsPublish extends SpecialPage {
 			}
 
 			$fromPageName = $val;
-			$fromTitle = Title::makeTitleSafe( self::$mFromNamespace, $fromPageName );
+			$fromTitle = $this->generateSourceTitle( $fromPageName );
 			$fromPage = WikiPage::factory( $fromTitle );
 			$fromPageText = $fromPage->getContent()->getNativeData();
-			$toTitle = Title::makeTitleSafe( self::$mToNamespace, $fromPageName );
+			$toTitle = $this->generateTargetTitle( $fromPageName );
 			$toTitles[] = $toTitle;
 			$params = array();
 			$params['user_id'] = $user->getId();
 			$params['page_text'] = $fromPageText;
-			$params['edit_summary'] = $editSummary;
+			$params['edit_summary'] = self::$mEditSummary;
 
 			// If this is a MintyDocs page with a parent page, send
 			// the name of the parent page in the other namespace
@@ -261,7 +285,7 @@ class MintyDocsPublish extends SpecialPage {
 			if ( $fromMDPage && ( ! $fromMDPage instanceof MintyDocsProduct ) ) {
 				$fromParentTitle = $fromMDPage->getParentPage();
 				$fromParentPageName = $fromParentTitle->getText();
-				$toParentTitle = Title::makeTitleSafe( self::$mToNamespace, $fromParentPageName );
+				$toParentTitle = self::generateTargetTitle( $fromParentPageName );
 				$toParentPageName = $toParentTitle->getText();
 				$params['parent_page'] = $toParentPageName;
 			}
@@ -287,11 +311,7 @@ class MintyDocsPublish extends SpecialPage {
 				}
 				$titlesStr .= Linker::link( $title );
 			}
-			if ( self::$mFromNamespace == MD_NS_DRAFT ) {
-				$text = 'The following pages will be created or modified: ' . $titlesStr . '.';
-			} else {
-				$text = 'The following draft pages will be created: ' . $titlesStr . '.';
-			}
+			$text = self::$mSuccessMessage . $titlesStr . '.';
 		}
 
 		$out->addHTML( $text );

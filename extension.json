@@ -41,6 +41,7 @@
 		"MintyDocsDeletePageJob": "includes/MintyDocsDeletePageJob.php",
 		"MintyDocsPublish": "specials/MintyDocsPublish.php",
 		"MintyDocsCreateDraft": "specials/MintyDocsCreateDraft.php",
+		"MintyDocsCopy": "specials/MintyDocsCopy.php",
 		"MintyDocsDelete": "specials/MintyDocsDelete.php",
 		"MintyDocsPublishAction": "includes/MintyDocsPublishAction.php"
 	},
@@ -60,6 +61,7 @@
 	"SpecialPages": {
 		"MintyDocsPublish": "MintyDocsPublish",
 		"MintyDocsCreateDraft": "MintyDocsCreateDraft",
+		"MintyDocsCopy": "MintyDocsCopy",
 		"MintyDocsDelete": "MintyDocsDelete"
 	},
 	"Actions": {
