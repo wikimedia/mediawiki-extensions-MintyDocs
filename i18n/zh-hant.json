@@ -9,7 +9,7 @@
 	"right-mintydocs-edit": "編輯所有 MintyDocs 頁面",
 	"mintydocs-noparentpage": "錯誤：任一$1頁面應為子頁面。",
 	"mintydocs-invalidparentpage": "錯誤：「$1」頁面應為$2頁面。",
-	"mintydocs-product-versionlist": "點擊以下任一來查看對應版本的文件：",
+	"mintydocs-product-versionlist": "點擊以下任一項來查看對應版本的文件：",
 	"mintydocs-version-desc": "這是$2（版本：$1）的文件。",
 	"mintydocs-version-manuallist": "此為此版本的簡介：",
 	"mintydocs-manual-desc": "這是$2（版本：$1）的簡介。",
@@ -19,5 +19,6 @@
 	"mintydocs-topic-otherversions": "讀取此主題的其它版本：",
 	"mintydocspublish": "發佈 MintyDocs 內容",
 	"mintydocscreatedraft": "建立 MintyDocs 草稿頁面",
+	"mintydocscopy": "複製 MintyDocs 內容",
 	"mintydocsdelete": "刪除 MintyDocs 內容"
 }
