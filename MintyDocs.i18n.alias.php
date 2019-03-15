@@ -7,4 +7,5 @@ $specialPageAliases['en'] = [
 	'MintyDocsCreateDraft' => [ 'MintyDocsCreateDraft' ],
 	'MintyDocsPublish' => [ 'MintyDocsPublish' ],
 	'MintyDocsDelete' => [ 'MintyDocsDelete' ],
+	'MintyDocsCopy' => [ 'MintyDocsCopy' ],
 ];
