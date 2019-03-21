@@ -52,6 +52,9 @@
 	"ResourceModules": {
 		"ext.mintydocs.main": {
 			"styles": "MintyDocs.css"
+		},
+		"ext.mintydocs.publish": {
+			"scripts": "libs/MD_publish.js"
 		}
 	},
 	"ResourceFileModulePaths": {

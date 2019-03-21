@@ -97,6 +97,7 @@ class MintyDocsPublish extends SpecialPage {
 
 	function displayMainForm( $title ) {
 		$out = $this->getOutput();
+		$out->addModules( 'ext.mintydocs.publish' );
 
 		// Display checkboxes.
 		$text = '<form id="mdPublishForm" action="" method="post">';
@@ -117,6 +118,7 @@ class MintyDocsPublish extends SpecialPage {
 			$text .= '<ul>';
 			$text .= $this->displayCheckboxesForTree( $pagesTree['node'], $pagesTree['tree'] );
 			$text .= '</ul>';
+			$text .= $this->displayToggleLinks();
 		}
 
 		if ( !$isSinglePage && self::$mCheckboxNumber == 1 ) {
@@ -217,12 +219,24 @@ class MintyDocsPublish extends SpecialPage {
 		return $text;
 	}
 
+	function displayToggleLinks() {
+		$text =<<<END
+<p class="selectAndDeselect">
+<a id="selectall">Select all</a>
+&middot;
+<a id="deselectall">Deselect all</a>
+</p>
+
+END;
+		return $text;
+	}
+
 	function displayPageName( $mdPage ) {
 		$fromTitle = $mdPage->getTitle();
 		$fromPageName = $fromTitle->getText();
 		$toTitle = $this->generateTargetTitle( $fromPageName );
 		if ( !$toTitle->exists() ) {
-			return Html::check( 'page_name_' . self::$mCheckboxNumber++, true, array( 'value' => $fromPageName ) ) .
+			return Html::check( 'page_name_' . self::$mCheckboxNumber++, true, array( 'value' => $fromPageName, 'class' => 'mdCheckbox' ) ) .
 			'<strong>' . $mdPage->getLink() . '</strong>';
 		}
 		if ( !$this->overwritingIsAllowed() && $toTitle->exists() ) {
