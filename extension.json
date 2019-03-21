@@ -5,6 +5,7 @@
 	"author": "Yaron Koren",
 	"url": "https://www.mediawiki.org/wiki/Extension:MintyDocs",
 	"descriptionmsg": "mintydocs-desc",
+	"license-name": "GPL-2.0-or-later",
 	"type": "parserhook",
 	"namespaces": [
 		{
