@@ -97,12 +97,18 @@ class MintyDocsPublish extends SpecialPage {
 
 	function displayMainForm( $title ) {
 		$out = $this->getOutput();
+		$req = $this->getRequest();
+
 		$out->addModules( 'ext.mintydocs.publish' );
 
 		// Display checkboxes.
 		$text = '<form id="mdPublishForm" action="" method="post">';
-		$mdPage = MintyDocsUtils::pageFactory( $title );
-		$isSinglePage = ( $mdPage == null || $mdPage instanceof MintyDocsTopic );
+		if ( $req->getCheck( 'single' ) ) {
+			$isSinglePage = true;
+		} else {
+			$mdPage = MintyDocsUtils::pageFactory( $title );
+			$isSinglePage = ( $mdPage == null || $mdPage instanceof MintyDocsTopic );
+		}
 		if ( $isSinglePage ) {
 			$toTitle = $this->generateTargetTitle( $title->getText() );
 			$error = $this->validateSinglePageAction( $title, $toTitle );
