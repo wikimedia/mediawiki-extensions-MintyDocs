@@ -30,10 +30,21 @@ class MintyDocsManual extends MintyDocsPage {
 			$text .= Html::rawElement( 'div', array( 'class' => 'MintyDocsOtherManualVersions' ), $otherVersionsText );
 		}
 
-		$contentsText = wfMessage( 'mintydocs-manual-contents' )->text() . "\n" . $this->getTableOfContents( true );
-		$text .= Html::rawElement( 'div', array( 'class' => 'MintyDocsManualTOC' ), $contentsText );
+		// We have to call this before it's actually needed (for the
+		// sidebar), so that the error messages, if any, will be
+		// generated early enough to be displayed.
+		$this->generateTableOfContents( true );
 
 		return $text;
+	}
+
+	function getSidebarText() {
+		if ( $this->mIsInvalid ) {
+			return null;
+		}
+
+		$toc = $this->getTableOfContents( true );
+		return array( $this->getDisplayName(), $toc );
 	}
 
 	function getAllTopics() {
@@ -201,6 +212,12 @@ class MintyDocsManual extends MintyDocsPage {
 			},
 			$toc
 		);
+
+		// Add a link to this manual as the first item in the TOC.
+		// @TODO - the display name should be a #mintydocs_manual
+		// param or otherwise configurable.
+		$linkToManual = Linker::link( $this->mTitle, 'About' );
+		$toc = "*$linkToManual\n" . $toc;
 
 		// doBlockLevels() takes care of just parsing '*' into
 		// bulleted lists, which is all we need.
