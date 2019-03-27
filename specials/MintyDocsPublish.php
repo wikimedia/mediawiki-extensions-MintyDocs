@@ -114,6 +114,7 @@ class MintyDocsPublish extends SpecialPage {
 			$error = $this->validateSinglePageAction( $title, $toTitle );
 			if ( $error != null ) {
 				$out->addHTML( $error );
+				return;
 			}
 			$text .= '<p>' . self::$mSinglePageMessage . '</p>';
 			$text .= Html::hidden( 'page_name_1', $title->getText() );
