@@ -5,7 +5,9 @@
 		]
 	},
 	"mintydocs-desc": "Um sistema de documentação simples",
+	"action-mintydocs-administer": "administrar todas as páginas de produtos MintyDocs",
 	"right-mintydocs-administer": "Administrar todas as páginas de produto MintyDocs",
+	"action-mintydocs-edit": "editar todas as páginas MintyDocs",
 	"right-mintydocs-edit": "Editar todas as páginas MintyDocs",
 	"mintydocs-noparentpage": "Erro: todas as páginas do tipo $1 têm de ser subpáginas.",
 	"mintydocs-invalidparentpage": "Erro: a página \"$1\" tem de ser do tipo $2.",

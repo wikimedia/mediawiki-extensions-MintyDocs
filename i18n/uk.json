@@ -6,7 +6,9 @@
 		]
 	},
 	"mintydocs-desc": "Полегшена система документації",
+	"action-mintydocs-administer": "адміністрування сторінок продукту MintyDocs",
 	"right-mintydocs-administer": "адміністрування усіх сторінок продуктів MintyDocs",
+	"action-mintydocs-edit": "редагування всіх сторінок MintyDocs",
 	"right-mintydocs-edit": "редагування всіх сторінок MintyDocs",
 	"mintydocs-noparentpage": "Помилка: кожна сторінка типу $1 має бути підсторінкою.",
 	"mintydocs-invalidparentpage": "Помилка: сторінка «$1» має бути сторінкою типу $2.",
