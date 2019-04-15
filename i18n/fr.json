@@ -6,7 +6,9 @@
 		]
 	},
 	"mintydocs-desc": "Un système allégé de documentation",
+	"action-mintydocs-administer": "gérer toutes les pages de produit MintyDocs",
 	"right-mintydocs-administer": "Administrer toutes les pages des produits MintyDocs",
+	"action-mintydocs-edit": "modifier toutes les pages de MintyDocs",
 	"right-mintydocs-edit": "Modifier toutes les pages MintyDocs",
 	"mintydocs-noparentpage": "Erreur: chaque page $1 doit être une sous-page.",
 	"mintydocs-invalidparentpage": "Erreur: la page « $1 » doit être une page $2 .",

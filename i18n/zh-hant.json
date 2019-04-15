@@ -5,7 +5,9 @@
 		]
 	},
 	"mintydocs-desc": "輕量級文件系統",
+	"action-mintydocs-administer": "管理所有 MintyDocs 成果頁面",
 	"right-mintydocs-administer": "管理所有 MintyDocs 成果頁面",
+	"action-mintydocs-edit": "編輯所有 MintyDocs 頁面",
 	"right-mintydocs-edit": "編輯所有 MintyDocs 頁面",
 	"mintydocs-noparentpage": "錯誤：任一$1頁面應為子頁面。",
 	"mintydocs-invalidparentpage": "錯誤：「$1」頁面應為$2頁面。",
