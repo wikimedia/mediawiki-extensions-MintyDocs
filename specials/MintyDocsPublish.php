@@ -184,7 +184,7 @@ class MintyDocsPublish extends SpecialPage {
 			$this->displayPageName( $parentMDPage ) . '</p>';
 	}
 
-	static function makePagesTree( $mdPage ) {
+	static function makePagesTree( $mdPage, $numTopicIndents = 0 ) {
 		$pagesTree = array( 'node' => $mdPage, 'tree' => array() );
 		if ( $mdPage instanceof MintyDocsProduct ) {
 			$versions = $mdPage->getVersions();
@@ -199,12 +199,19 @@ class MintyDocsPublish extends SpecialPage {
 			}
 			return $pagesTree;
 		} elseif ( $mdPage instanceof MintyDocsManual ) {
-			$topics = $mdPage->getAllTopics();
-			foreach ( $topics as $topic ) {
-				$pagesTree['tree'][] = self::makePagesTree( $topic );
+			$toc = $mdPage->getTableOfContentsArray( false );
+			foreach ( $toc as $i => $element ) {
+				list( $topic, $curLevel ) = $element;
+				if ( $topic instanceof MintyDocsTopic ) {
+					$pagesTree['tree'][] = self::makePagesTree( $topic, $curLevel - 1 );
+				}
 			}
 			return $pagesTree;
 		} elseif ( $mdPage instanceof MintyDocsTopic ) {
+			if ( $numTopicIndents > 0 ) {
+				$pagesTree['node'] = null;
+				$pagesTree['tree'][] = self::makePagesTree( $mdPage, $numTopicIndents - 1 );
+			}
 			return $pagesTree;
 		}
 	}
