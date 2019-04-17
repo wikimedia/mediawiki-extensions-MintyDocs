@@ -7,6 +7,7 @@
 	"mintydocs-extensionname": "MintyDocs",
 	"mintydocs-desc": "Ein leichtgewichtiges Dokumentationssystem",
 	"right-mintydocs-administer": "Alle MintyDocs-Produktseiten verwalten",
+	"action-mintydocs-edit": "alle MintyDocs-Seiten zu bearbeiten",
 	"right-mintydocs-edit": "Alle MintyDocs-Seiten bearbeiten",
 	"mintydocs-noparentpage": "Fehler: Jede $1-Seite muss eine Unterseite sein.",
 	"mintydocs-invalidparentpage": "Fehler: Die Seite „$1“ muss eine $2-Seite sein.",
