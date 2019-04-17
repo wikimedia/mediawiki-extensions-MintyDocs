@@ -120,12 +120,12 @@ class MintyDocsPublish extends SpecialPage {
 			$text .= Html::hidden( 'page_name_1', $title->getText() );
 		} else {
 			$text .= '<p>Pages for ' . $mdPage->getLink() . ':</p>';
+			$text .= $this->displayToggleLinks();
 			$text .= $this->displayPageParents( $mdPage );
 			$pagesTree = $this->makePagesTree( $mdPage );
 			$text .= '<ul>';
 			$text .= $this->displayCheckboxesForTree( $pagesTree['node'], $pagesTree['tree'] );
 			$text .= '</ul>';
-			$text .= $this->displayToggleLinks();
 		}
 
 		if ( !$isSinglePage && self::$mCheckboxNumber == 1 ) {
