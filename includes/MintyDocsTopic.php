@@ -69,15 +69,21 @@ class MintyDocsTopic extends MintyDocsPage {
 	}
 
 	function getHeader() {
+		global $wgMintyDocsShowBreadcrumbs;
+
 		if ( $this->mIsInvalid ) {
 			return;
 		}
 
+		$text = '';
+
 		$manual = $this->getManual();
 		list( $product, $version ) = $manual->getProductAndVersion();
 
-		$topicDescText = wfMessage( 'mintydocs-topic-desc', $manual->getLink(), $version->getLink(), $product->getLink() )->text();
-		$text = Html::rawElement( 'div', array( 'class' => 'MintyDocsTopicDesc' ), $topicDescText );
+		if ( $wgMintyDocsShowBreadcrumbs ) {
+			$topicDescText = wfMessage( 'mintydocs-topic-desc', $manual->getLink(), $version->getLink(), $product->getLink() )->text();
+			$text .= Html::rawElement( 'div', array( 'class' => 'MintyDocsTopicDesc' ), $topicDescText );
+		}
 
 		$equivsInOtherVersions = $this->getEquivalentsInOtherVersions( $product, $version->getActualName() );
 		if ( count( $equivsInOtherVersions ) > 0 ) {

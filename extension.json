@@ -101,7 +101,8 @@
 		]
 	},
 	"config": {
-		"MintyDocsDisplayFooterElementsInSidebar": false
+		"MintyDocsDisplayFooterElementsInSidebar": false,
+		"MintyDocsShowBreadcrumbs": true
 	},
 	"manifest_version": 1
 }

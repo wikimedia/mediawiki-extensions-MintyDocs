@@ -32,9 +32,15 @@ class MintyDocsVersion extends MintyDocsPage {
 	}
 
 	function getHeader() {
+		global $wgMintyDocsShowBreadcrumbs;
+
+		$text = '';
+
 		$product = new MintyDocsProduct( $this->getParentPage() );
-		$versionDescText = wfMessage( 'mintydocs-version-desc', $this->getDisplayName(), $product->getLink() )->text();
-		$text = Html::rawElement( 'div', array( 'class' => 'MintyDocsVersionDesc' ), $versionDescText );
+		if ( $wgMintyDocsShowBreadcrumbs ) {
+			$versionDescText = wfMessage( 'mintydocs-version-desc', $this->getDisplayName(), $product->getLink() )->text();
+			$text .= Html::rawElement( 'div', array( 'class' => 'MintyDocsVersionDesc' ), $versionDescText );
+		}
 
 		$manualsListText = wfMessage( 'mintydocs-version-manuallist' ) . "\n";
 		$manualsListText .= "<ul>\n";

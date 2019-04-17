@@ -15,9 +15,15 @@ class MintyDocsManual extends MintyDocsPage {
 	}
 
 	function getHeader() {
+		global $wgMintyDocsShowBreadcrumbs;
+
+		$text = '';
+
 		list( $product, $version ) = $this->getProductAndVersion();
-		$manualDescText = wfMessage( 'mintydocs-manual-desc', $version->getLink(), $product->getLink() )->text();
-		$text = Html::rawElement( 'div', array( 'class' => 'MintyDocsManualDesc' ), $manualDescText );
+		if ( $wgMintyDocsShowBreadcrumbs ) {
+			$manualDescText = wfMessage( 'mintydocs-manual-desc', $version->getLink(), $product->getLink() )->text();
+			$text .= Html::rawElement( 'div', array( 'class' => 'MintyDocsManualDesc' ), $manualDescText );
+		}
 
 		$equivsInOtherVersions = $this->getEquivalentsInOtherVersions( $product, $version->getActualName() );
 		if ( count( $equivsInOtherVersions ) > 0 ) {
