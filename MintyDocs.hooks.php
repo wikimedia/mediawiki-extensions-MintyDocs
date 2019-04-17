@@ -92,7 +92,17 @@ class MintyDocsHooks {
 
 		$liveTitle = Title::newFromText( $title->getText(), NS_MAIN );
 		if ( $liveTitle->exists() ) {
-			$msg = 'This is a draft page; the published version of this page can be found at ' . Linker::linkKnown( $liveTitle ) . '.';
+			$req = $out->getContext()->getRequest();
+			$query = array();
+			// Pass on the "context" stored in the query string.
+			$queryStringParams = array( 'product', 'version', 'manual', 'version' );
+				foreach ( $queryStringParams as $param ) {
+				if ( $req->getCheck( $param ) ) {
+					$query[$param] = $req->getVal( $param );
+				}
+			}
+			$linkToPublished = Linker::linkKnown( $liveTitle, $html = null, $attribs = array(), $query );
+			$msg = "This is a draft page; the published version of this page can be found at $linkToPublished.";
 		} else {
 			$msg = 'This is a draft page; it has not yet been published.';
 		}
