@@ -6,6 +6,7 @@
 	},
 	"mintydocs-extensionname": "MintyDocs",
 	"mintydocs-desc": "Ein leichtgewichtiges Dokumentationssystem",
+	"action-mintydocs-administer": "alle MintyDocs-Produktseiten zu verwalten",
 	"right-mintydocs-administer": "Alle MintyDocs-Produktseiten verwalten",
 	"action-mintydocs-edit": "alle MintyDocs-Seiten zu bearbeiten",
 	"right-mintydocs-edit": "Alle MintyDocs-Seiten bearbeiten",
