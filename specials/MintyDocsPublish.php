@@ -266,7 +266,7 @@ END;
 		if ( $fromPageText == $toPageText ) {
 			return $mdPage->getLink() . ' (no change)';
 		}
-		return Html::check( 'page_name_' . self::$mCheckboxNumber++, true, array( 'value' => $fromPageName ) ) . $mdPage->getLink();
+		return Html::check( 'page_name_' . self::$mCheckboxNumber++, true, array( 'value' => $fromPageName, 'class' => 'mdCheckbox' ) ) . $mdPage->getLink();
 	}
 
 	function overwritingIsAllowed() {
