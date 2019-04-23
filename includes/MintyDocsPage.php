@@ -244,6 +244,19 @@ abstract class MintyDocsPage {
 		}
 
 		list( $product, $version ) = $this->getProductAndVersion();
+
+		// If this is a draft page, only people with some kind of
+		// MintyDocs permission can view it.
+		if ( $this->mTitle->getNamespace() == MD_NS_DRAFT ) {
+			if ( ! $user->isAllowed( 'mintydocs-administer' ) &&
+			! $user->isAllowed( 'mintydocs-edit' ) &&
+			! $user->isAllowed( 'mintydocs-preview' ) &&
+			! $product->userIsAdmin( $user ) &&
+			! $product->userIsEditor( $user ) &&
+			! $product->userIsPreviewer( $user ) ) {
+				return false;
+			}
+		}
 		$versionStatus = $version->getStatus();
 
 		if ( $versionStatus == MintyDocsVersion::RELEASED_STATUS ) {
