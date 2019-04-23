@@ -80,7 +80,7 @@ class MintyDocsDelete extends SpecialPage {
 			array(
 				'type' => 'submit',
 				'name' => 'mdDelete',
-				'value' => 'Delete'
+				'value' => wfMessage( 'delete' )
 			)
 		);
 

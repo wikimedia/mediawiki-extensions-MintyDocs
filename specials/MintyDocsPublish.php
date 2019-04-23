@@ -83,7 +83,7 @@ class MintyDocsPublish extends SpecialPage {
 
 		// Error if page does not exist.
 		if ( !$title->exists() ) {
-			throw new MWException( 'Page does not exist!' );
+			throw new MWException( wfMessage( "pagelang-nonexistent-page", '[[' . $title->getFullText() . ']]' ) );
 		}
 
 		return $title;
