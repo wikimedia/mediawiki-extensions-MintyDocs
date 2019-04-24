@@ -21,7 +21,12 @@
 	"mintydocs-topic-desc": "Dieses Thema ist Teil des Handbuchs $1 für die Version $2 von $3.",
 	"mintydocs-topic-otherversions": "Dieses Thema für andere Versionen lesen:",
 	"mintydocspublish": "MintyDocs-Inhalt veröffentlichen",
+	"mintydocs-publish-button": "Veröffentlichen",
 	"mintydocscreatedraft": "MintyDocs-Entwurfsseite erstellen",
+	"mintydocs-createdraft-button": "Entwurf erstellen",
+	"mintydocs-createdraft-success": "Die folgenden Entwurfsseiten werden erstellt: $1.",
 	"mintydocscopy": "MintyDocs-Inhalt kopieren",
+	"mintydocs-copy-button": "Kopieren",
+	"mintydocs-copy-success": "Die folgenden Seiten werden kopiert: $1.",
 	"mintydocsdelete": "MintyDocs-Inhalt löschen"
 }
