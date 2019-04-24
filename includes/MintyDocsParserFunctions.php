@@ -286,7 +286,7 @@ class MintyDocsParserFunctions {
 		// Handle links to standalone topics right away.
 		if ( $topic != null && $standalone ) {
 			$linkedPageName = self::possibleNamespacePrefix( $curTitle ) . $topic;
-			return self::getLinkWikitext( $linkedPageName, $linkText );
+			return self::getLinkHTML( $linkedPageName, $linkText );
 		}
 
 		if ( $topic != null ) {
@@ -366,7 +366,18 @@ class MintyDocsParserFunctions {
 			$linkedPageName .= '/' . $topic;
 		}
 
-		return self::getLinkWikitext( $linkedPageName, $linkText );
+		$query = array();
+		if ( $product != null && $product != $curProduct ) {
+			$query['product'] = $curProduct;
+		}
+		if ( $version != null && $version != $curVersion ) {
+			$query['version'] = $curVersion;
+		}
+		if ( $manual != null && $manual != $curManual ) {
+			$query['manual'] = $curManual;
+		}
+
+		return self::getLinkHTML( $linkedPageName, $linkText, $query );
 	}
 
 	static function processParams( $parser, $params ) {
@@ -405,25 +416,16 @@ class MintyDocsParserFunctions {
 		return $wgContLang->getNsText( MD_NS_DRAFT ) . ':';
 	}
 
-	static function getLinkWikitext( $pageName, $linkText ) {
-		$str = '[[' . $pageName;
-
-		// Use the "link text", if it's defined. Otherwise,
-		// use the display name, if this page exists.
-		// Otherwise, use the page name.
-		if ( $linkText != null ) {
-			$str .= "|$linkText";
-		} else {
-			$title = Title::newFromText( $pageName );
+	static function getLinkHTML( $pageName, $linkText, $query = array() ) {
+		$title = Title::newFromText( $pageName );
+		if ( $linkText == null ) {
 			$mdPage = MintyDocsUtils::pageFactory( $title );
 			if ( $mdPage != null ) {
-				$str .= '|' . $mdPage->getDisplayName();
+				$linkText = $mdPage->getDisplayName();
 			}
 		}
-
-		$str .= ']]';
-
-		return $str;
+		$str = Linker::link( $title, $linkText, $customAttribs = array(), $query );
+		return array( $str, 'noparse' => true, 'isHTML' => true );
 	}
 
 }
