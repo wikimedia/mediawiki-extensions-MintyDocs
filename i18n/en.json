@@ -21,7 +21,13 @@
 	"mintydocs-topic-desc": "This topic is part of the manual $1 for version $2 of $3.",
 	"mintydocs-topic-otherversions": "Read this topic for other versions:",
 	"mintydocspublish": "Publish MintyDocs content",
+	"mintydocs-publish-button": "Publish",
+	"mintydocs-publish-success": "The following pages will be created or modified: $1.",
 	"mintydocscreatedraft": "Create MintyDocs draft page",
+	"mintydocs-createdraft-button": "Create draft",
+	"mintydocs-createdraft-success": "The following draft pages will be created: $1.",
 	"mintydocscopy": "Copy MintyDocs content",
+	"mintydocs-copy-button": "Copy",
+	"mintydocs-copy-success": "The following pages will be copied: $1.",
 	"mintydocsdelete": "Delete MintyDocs content"
 }

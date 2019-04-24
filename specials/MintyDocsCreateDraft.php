@@ -10,9 +10,9 @@ class MintyDocsCreateDraft extends MintyDocsPublish {
 
 		self::$mNoActionNeededMessage = "No drafts need creating.";
 		self::$mEditSummary = 'Created draft';
-		self::$mSuccessMessage = 'The following draft pages will be created: ';
+		self::$mSuccessMsg = "mintydocs-createdraft-success";
 		self::$mSinglePageMessage = "Create a draft page?";
-		self::$mButtonText = "Create draft";
+		self::$mButtonMsg = "mintydocs-createdraft-button";
 	}
 
 	function generateSourceTitle( $sourcePageName ) {

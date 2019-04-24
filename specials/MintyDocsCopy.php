@@ -10,9 +10,9 @@ class MintyDocsCopy extends MintyDocsPublish {
 
 		self::$mNoActionNeededMessage = "None of the pages in this manual need to be copied.";
 		self::$mEditSummary = 'Copied manual';
-		self::$mSuccessMessage = 'The following pages will be copied: ';
+		self::$mSuccessMsg = "mintydocs-copy-success";
 		self::$mSinglePageMessage = "Copy this page?";
-		self::$mButtonText = "Copy";
+		self::$mButtonMsg = "mintydocs-copy-button";
 	}
 
 	function execute( $query ) {

@@ -8,9 +8,9 @@ class MintyDocsPublish extends SpecialPage {
 
 	protected static $mNoActionNeededMessage = "Nothing to publish.";
 	protected static $mEditSummary = 'Published';
-	protected static $mSuccessMessage = 'The following pages will be created or modified: ';
+	protected static $mSuccessMsg = "mintydocs-publish-success";
 	protected static $mSinglePageMessage = "Publish this draft page?";
-	protected static $mButtonText = "Publish";
+	protected static $mButtonMsg = "mintydocs-publish-button";
 	private static $mCheckboxNumber = 1;
 
 	/**
@@ -143,7 +143,7 @@ class MintyDocsPublish extends SpecialPage {
 			array(
 				'type' => 'submit',
 				'name' => 'mdPublish',
-				'value' => self::$mButtonText
+				'value' => $this->msg( self::$mButtonMsg )->parse()
 			)
 		);
 
@@ -339,7 +339,7 @@ END;
 				}
 				$titlesStr .= Linker::link( $title );
 			}
-			$text = self::$mSuccessMessage . $titlesStr . '.';
+			$text = $this->msg( self::$mSuccessMsg, $titlesStr )->text();
 		}
 
 		$out->addHTML( $text );

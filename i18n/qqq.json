@@ -23,7 +23,13 @@
 	"mintydocs-topic-desc": "A header for a page about one topic. Parameters:\n* $1 - a manual name\n*2 - a version number\n* $3 - a product name",
 	"mintydocs-topic-otherversions": "Read this topic for other versions:",
 	"mintydocspublish": "{{doc-special|MintyDocsPublish}}",
+	"mintydocs-publish-button": "Text of a button that will \"publish\" some pages, i.e. copy them from the \"Draft\" namespace to the main namespace.",
+	"mintydocs-publish-success": "Message displayed after one or more pages have been \"published\". Parameters:\n* $1 - a list of wiki pages",
 	"mintydocscreatedraft": "{{doc-special|MintyDocsCreateDraft}}",
+	"mintydocs-createdraft-button": "Text of a button that will copy some pages from the main namespace to the \"Draft\" namespace.",
+	"mintydocs-createdraft-success": "Message displayed after one or more pages in the \"Draft\" namespace have been created. Parameters:\n* $1 - a list of wiki pages",
 	"mintydocscopy": "{{doc-special|MintyDocsCopy}}",
+	"mintydocs-copy-button": "Text of a button to copy some pages from one location to another.",
+	"mintydocs-copy-success": "Message displayed after one or more pages have been copied elsewhere. Parameters:\n* $1 - a list of wiki pages",
 	"mintydocsdelete": "{{doc-special|MintyDocsDelete}}"
 }
