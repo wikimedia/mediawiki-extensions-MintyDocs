@@ -85,7 +85,7 @@ class MintyDocsTopic extends MintyDocsPage {
 
 		$text = '';
 
-		$manual = $this->getManual();
+		$manual = $this->getRealOrContextManual();
 		list( $product, $version ) = $manual->getProductAndVersion();
 
 		if ( $wgMintyDocsShowBreadcrumbs ) {
@@ -145,7 +145,7 @@ class MintyDocsTopic extends MintyDocsPage {
 			return null;
 		}
 
-		$manual = $this->getManual();
+		$manual = $this->getRealOrContextManual();
 
 		$header = '<p>' . $manual->getDisplayName() . '</p>';
 		$toc = $manual->getTableOfContents( false );
@@ -157,7 +157,7 @@ class MintyDocsTopic extends MintyDocsPage {
 			return null;
 		}
 
-		$manual = $this->getManual();
+		$manual = $this->getRealOrContextManual();
 		$toc = $manual->getTableOfContents( false );
 		return array( $manual->getDisplayName(), $toc );
 	}
@@ -168,6 +168,37 @@ class MintyDocsTopic extends MintyDocsPage {
 
 	function getManual() {
 		return $this->mManual;
+	}
+
+	function getRealOrContextManual() {
+		global $wgRequest;
+
+		$contextProduct = $wgRequest->getVal( 'contextProduct' );
+		$contextVersion = $wgRequest->getVal( 'contextVersion' );
+		$contextManual = $wgRequest->getVal( 'contextManual' );
+		if ( $contextProduct == null && $contextVersion == null && $contextManual == null ) {
+			return $this->getManual();
+		}
+
+		$manualName = $this->getManual()->getTitle()->getPrefixedText();
+		list( $productName, $versionString, $manualName ) = explode( '/', $manualName, 3 );
+		if ( $contextProduct !== null ) {
+			$fullManualName = $contextProduct;
+		} else {
+			$fullManualName = $productName;
+		}
+		if ( $contextVersion !== null ) {
+			$fullManualName .= '/' . $contextVersion;
+		} else {
+			$fullManualName .= '/' . $versionString;
+		}
+		if ( $contextManual !== null ) {
+			$fullManualName .= '/' . $contextManual;
+		} else {
+			$fullManualName .= '/' . $manualName;
+		}
+		$manualTitle = Title::newFromText( $fullManualName );
+		return new MintyDocsManual( $manualTitle );
 	}
 
 	function getEquivalentPageNameForVersion( $version ) {
