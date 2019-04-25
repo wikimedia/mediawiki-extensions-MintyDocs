@@ -246,6 +246,12 @@ class MintyDocsParserFunctions {
 	}
 
 	static function renderLink( &$parser ) {
+		global $wgRequest;
+
+		// We need to see the query string for a few things, and
+		// unfortunately we need to disable the cache in order
+		// to see it.
+		$parser->disableCache();
 		$curTitle = $parser->getTitle();
 		if ( $curTitle->isSpecial( 'FormEdit' ) ) {
 			// If we're in Special:FormEit, then this is probably
@@ -286,7 +292,17 @@ class MintyDocsParserFunctions {
 		// Handle links to standalone topics right away.
 		if ( $topic != null && $standalone ) {
 			$linkedPageName = self::possibleNamespacePrefix( $curTitle ) . $topic;
-			return self::getLinkHTML( $linkedPageName, $linkText );
+			$query = array();
+			if ( $wgRequest->getCheck( 'contextProduct' ) ) {
+				$query['contextProduct'] = $wgRequest->getVal( 'contextProduct' );
+			}
+			if ( $wgRequest->getCheck( 'contextVersion' ) ) {
+				$query['contextVersion'] = $wgRequest->getVal( 'contextVersion ');
+			}
+			if ( $wgRequest->getCheck( 'contextManual' ) ) {
+				$query['contextManual'] = $wgRequest->getVal( 'contextManual ');
+			}
+			return self::getLinkHTML( $linkedPageName, $linkText, $query );
 		}
 
 		if ( $topic != null ) {
@@ -312,14 +328,8 @@ class MintyDocsParserFunctions {
 				return "<div class=\"error\">A 'version' value must be specified in this case.</div>";
 			}
 		}
-		// If the current page is a topic, there's a chance that it's
-		// "standalone", meaning that it gets its data from the query
-		// string. Unfortunately, we need to disable the cache in order
-		// to see the query string, so we have to do that regardless of
-		// whether it's standalone or not.
+
 		if ( get_class( $mdPage ) == 'MintyDocsTopic' ) {
-			$parser->disableCache();
-			global $wgRequest;
 			$curProduct = $wgRequest->getVal( 'product' );
 			$curVersion = $wgRequest->getVal( 'version' );
 			$curManual = $wgRequest->getVal( 'manual' );
@@ -344,37 +354,47 @@ class MintyDocsParserFunctions {
 		}
 
 		if ( $product != null ) {
-			$linkedPageName = self::possibleNamespacePrefix( $curTitle ) . $product;
+			$linkedProduct = self::possibleNamespacePrefix( $curTitle ) . $product;
 		} else {
-			$linkedPageName = $curProduct;
+			$linkedProduct = $curProduct;
 		}
+		$linkedPageName = $linkedProduct;
 		if ( $linkedPageType == 'version' || $linkedPageType == 'manual' || $linkedPageType == 'topic' ) {
-			if ( $version != null ) {
-				$linkedPageName .= '/' . $version;
-			} else {
-				$linkedPageName .= '/' . $curVersion;
-			}
+			$linkedVersion = ( $version != null ) ? $version : $curVersion;
+			$linkedPageName .= '/' . $linkedVersion;
 		}
 		if ( $linkedPageType == 'manual' || $linkedPageType == 'topic' ) {
-			if ( $manual != null ) {
-				$linkedPageName .= '/' . $manual;
-			} else {
-				$linkedPageName .= '/' . $curManual;
-			}
+			$linkedManual = ( $manual != null ) ? $manual : $curManual;
+			$linkedPageName .= '/' . $linkedManual;
 		}
 		if ( $linkedPageType == 'topic' ) {
 			$linkedPageName .= '/' . $topic;
 		}
 
 		$query = array();
-		if ( $product != null && $product != $curProduct ) {
-			$query['product'] = $curProduct;
+		if ( $wgRequest->getCheck( 'contextProduct' ) ) {
+			$contextProduct = $wgRequest->getVal( 'contextProduct' );
+		} else {
+			$contextProduct = $curProduct;
 		}
-		if ( $version != null && $version != $curVersion ) {
-			$query['version'] = $curVersion;
+		if ( $linkedProduct != null && $linkedProduct != $contextProduct ) {
+			$query['contextProduct'] = $contextProduct;
 		}
-		if ( $manual != null && $manual != $curManual ) {
-			$query['manual'] = $curManual;
+		if ( $wgRequest->getCheck( 'contextVersion' ) ) {
+			$contextVersion = $wgRequest->getVal( 'contextVersion' );
+		} else {
+			$contextVersion = $curVersion;
+		}
+		if ( $linkedVersion != null && $linkedVersion != $contextVersion ) {
+			$query['contextVersion'] = $contextVersion;
+		}
+		if ( $wgRequest->getCheck( 'contextManual' ) ) {
+			$contextManual = $wgRequest->getVal( 'contextManual' );
+		} else {
+			$contextManual = $curManual;
+		}
+		if ( $linkedManual != null && $linkedManual != $contextManual ) {
+			$query['contextManual'] = $contextManual;
 		}
 
 		return self::getLinkHTML( $linkedPageName, $linkText, $query );
@@ -416,7 +436,7 @@ class MintyDocsParserFunctions {
 		return $wgContLang->getNsText( MD_NS_DRAFT ) . ':';
 	}
 
-	static function getLinkHTML( $pageName, $linkText, $query = array() ) {
+	static function getLinkHTML( $pageName, $linkText, $query ) {
 		$title = Title::newFromText( $pageName );
 		if ( $linkText == null ) {
 			$mdPage = MintyDocsUtils::pageFactory( $title );

@@ -95,7 +95,7 @@ class MintyDocsHooks {
 			$req = $out->getContext()->getRequest();
 			$query = array();
 			// Pass on the "context" stored in the query string.
-			$queryStringParams = array( 'product', 'version', 'manual', 'version' );
+			$queryStringParams = array( 'contextProduct', 'contextVersion', 'contextManual' );
 				foreach ( $queryStringParams as $param ) {
 				if ( $req->getCheck( $param ) ) {
 					$query[$param] = $req->getVal( $param );
