@@ -3,6 +3,7 @@
 class MintyDocsTopic extends MintyDocsPage {
 	private $mManual = null;
 	private $mIsStandalone = false;
+	private $mIsBorrowed = false;
 
 	public function __construct( $title ) {
 		global $wgRequest;
@@ -68,6 +69,13 @@ class MintyDocsTopic extends MintyDocsPage {
 		return $topic;
 	}
 
+	static function newBorrowed( $title, $manual ) {
+		$topic = self::newStandalone( $title, $manual );
+		$topic->mIsStandalone = false;
+		$topic->mIsBorrowed = true;
+		return $topic;
+	}
+
 	function getHeader() {
 		global $wgMintyDocsShowBreadcrumbs;
 
@@ -122,6 +130,12 @@ class MintyDocsTopic extends MintyDocsPage {
 			$query['product'] = $product->getActualName();
 			$query['version'] = $version->getActualName();
 			$query['manual'] = $manual->getActualName();
+		} elseif ( $this->mIsBorrowed ) {
+			$manual = $this->getManual();
+			list( $product, $version ) = $manual->getProductAndVersion();
+			$query['contextProduct'] = $product->getActualName();
+			$query['contextVersion'] = $version->getActualName();
+			$query['contextManual'] = $manual->getActualName();
 		}
 		return Linker::link( $this->mTitle, $displayName, array(), $query );
 	}

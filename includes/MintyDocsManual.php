@@ -150,9 +150,15 @@ class MintyDocsManual extends MintyDocsPage {
 				$this->mTOCArray[] = array( $displayText, $numAsterisks );
 				continue;
 			}
-			if ( strpos( $lineValue, '!' ) === 0 ) {
-				$title = Title::newFromText( trim( substr( $lineValue, 1 ) ) );
-				$topic = MintyDocsTopic::newStandalone( $title, $this );
+			$isStandalone = ( strpos( $lineValue, '!' ) === 0 );
+			$isBorrowed = ( strpos( $lineValue, '+' ) === 0 );
+			if ( $isStandalone || $isBorrowed ) {
+				$title = Title::newFromText( trim( substr( $lineValue, 1 ) ), $this->getTitle()->getNamespace() );
+				if ( $isStandalone ) {
+					$topic = MintyDocsTopic::newStandalone( $title, $this );
+				} else { // $isBorrowed
+					$topic = MintyDocsTopic::newBorrowed( $title, $this );
+				}
 				if ( $topic != null ) {
 					$this->mTOCArray[] = array( $topic, $numAsterisks );
 				} else {
@@ -209,12 +215,26 @@ class MintyDocsManual extends MintyDocsPage {
 		$toc = preg_replace_callback(
 			"/(\*+)\s*!\s*(.*)\s*$/m",
 			function( $matches ) {
-				$standaloneTopicTitle = Title::newFromText( $matches[2] );
+				$standaloneTopicTitle = Title::newFromText( $matches[2], $this->getTitle()->getNamespace() );
 				$standaloneTopic = MintyDocsTopic::newStandalone( $standaloneTopicTitle, $this );
 				if ( $standaloneTopic == null ) {
 					return $matches[1] . $matches[2];
 				}
-				return $matches[1] . $standaloneTopic->getTocLink();
+				return $matches[1] . $standaloneTopic->getTOCLink();
+			},
+			$toc
+		);
+
+		// Same with "borrowed" topics, with "+".
+		$toc = preg_replace_callback(
+			"/(\*+)\s*\+\s*(.*)\s*$/m",
+			function( $matches ) {
+				$borrowedTopicTitle = Title::newFromText( $matches[2], $this->getTitle()->getNamespace() );
+				$borrowedTopic = MintyDocsTopic::newBorrowed( $borrowedTopicTitle, $this );
+				if ( $borrowedTopic == null ) {
+					return $matches[1] . $matches[2];
+				}
+				return $matches[1] . $borrowedTopic->getTOCLink();
 			},
 			$toc
 		);
