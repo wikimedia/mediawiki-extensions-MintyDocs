@@ -21,7 +21,13 @@
 	"mintydocs-topic-desc": "Ce sujet fait partie du manuel $1 pour la version $2 de $3 .",
 	"mintydocs-topic-otherversions": "Lire ce sujet dans d'autres versions:",
 	"mintydocspublish": "Publier le contenu MintyDocs",
+	"mintydocs-publish-button": "Publier",
+	"mintydocs-publish-success": "Les pages suivantes seront créées ou modifiées : $1.",
 	"mintydocscreatedraft": "Créer une page de brouillon MintyDocs",
+	"mintydocs-createdraft-button": "Créer le brouillon",
+	"mintydocs-createdraft-success": "Les pages de brouillon suivantes seront créées : $1.",
 	"mintydocscopy": "Copier le contenu de MintyDocs",
+	"mintydocs-copy-button": "Copier",
+	"mintydocs-copy-success": "Les pages suivantes seront copiées : $1.",
 	"mintydocsdelete": "Supprimer le contenu de MintyDocs"
 }

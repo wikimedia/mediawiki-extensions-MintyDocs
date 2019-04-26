@@ -20,7 +20,13 @@
 	"mintydocs-topic-desc": "Темава е дел од прирачникот $1 за верзијата $2 од $3.",
 	"mintydocs-topic-otherversions": "Прочитајте ја темава за други верзии:",
 	"mintydocspublish": "Објави содржина од MintyDocs",
+	"mintydocs-publish-button": "Објави",
+	"mintydocs-publish-success": "Ќе се создадат или изменат следниве страници: $1.",
 	"mintydocscreatedraft": "Направи нацрт-страница во MintyDocs",
+	"mintydocs-createdraft-button": "Создај нацрт",
+	"mintydocs-createdraft-success": "Ќе се создадат следниве нацрт-страници: $1.",
 	"mintydocscopy": "Прекопирај ја содржината на MintyDocs",
+	"mintydocs-copy-button": "Копирај",
+	"mintydocs-copy-success": "Ќе се прекопираат следниве страници: $1.",
 	"mintydocsdelete": "Избриши содржина од MintyDocs"
 }

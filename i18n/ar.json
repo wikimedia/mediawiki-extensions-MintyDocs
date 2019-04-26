@@ -22,7 +22,13 @@
 	"mintydocs-topic-desc": "هذا الموضوع جزء من الدليل $1 للنسخة $2 من $3.",
 	"mintydocs-topic-otherversions": "اقرأ هذا الموضوع للإصدارات الأخرى:",
 	"mintydocspublish": "نشر محتوى MintyDocs",
+	"mintydocs-publish-button": "نشر",
+	"mintydocs-publish-success": "سيتم إنشاء أو تعديل الصفحات التالية: $1.",
 	"mintydocscreatedraft": "إنشاء صفحة مسودة MintyDocs",
+	"mintydocs-createdraft-button": "إنشاء مسودة",
+	"mintydocs-createdraft-success": "سيتم إنشاء صفحات المسودات التالية: $1.",
 	"mintydocscopy": "نسخ محتوى MintyDocs",
+	"mintydocs-copy-button": "نسخ",
+	"mintydocs-copy-success": "سيتم نسخ الصفحات التالية: $1.",
 	"mintydocsdelete": "حذف محتوى MintyDocs"
 }

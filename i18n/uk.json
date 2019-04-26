@@ -21,7 +21,10 @@
 	"mintydocs-topic-desc": "Ця тема є частиною інструкції $1 для версії $2 продукту $3.",
 	"mintydocs-topic-otherversions": "Читати цю тему для інших версій:",
 	"mintydocspublish": "Опублікувати вміст MintyDocs",
+	"mintydocs-publish-button": "Опублікувати",
+	"mintydocs-publish-success": "Буде створено або змінено такі сторінки: $1.",
 	"mintydocscreatedraft": "Створити чернетку MintyDocs",
 	"mintydocscopy": "Копіювати вміст MintyDocs",
+	"mintydocs-copy-button": "Копіювати",
 	"mintydocsdelete": "Видалити вміст MintyDocs"
 }

@@ -22,6 +22,7 @@
 	"mintydocs-topic-otherversions": "Dieses Thema für andere Versionen lesen:",
 	"mintydocspublish": "MintyDocs-Inhalt veröffentlichen",
 	"mintydocs-publish-button": "Veröffentlichen",
+	"mintydocs-publish-success": "Die folgenden Seiten werden erstellt oder verändert: $1.",
 	"mintydocscreatedraft": "MintyDocs-Entwurfsseite erstellen",
 	"mintydocs-createdraft-button": "Entwurf erstellen",
 	"mintydocs-createdraft-success": "Die folgenden Entwurfsseiten werden erstellt: $1.",

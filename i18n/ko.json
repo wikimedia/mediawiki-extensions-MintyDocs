@@ -17,6 +17,12 @@
 	"mintydocs-topic-desc": "이 주제는 $3의 버전 $2의 매뉴얼 $1의 일부입니다.",
 	"mintydocs-topic-otherversions": "이 주제의 다른 판 읽기:",
 	"mintydocspublish": "MintyDocs 내용 게시",
+	"mintydocs-publish-button": "게시",
+	"mintydocs-publish-success": "다음의 문서가 만들어지거나 수정됩니다: $1.",
 	"mintydocscreatedraft": "MintyDocs 초안 문서 만들기",
+	"mintydocs-createdraft-button": "초안 만들기",
+	"mintydocs-createdraft-success": "다음의 초안 문서들이 만들어집니다: $1.",
+	"mintydocs-copy-button": "복사",
+	"mintydocs-copy-success": "다음의 문서들이 복사됩니다: $1.",
 	"mintydocsdelete": "MintyDocs 내용 삭제"
 }

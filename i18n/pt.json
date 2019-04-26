@@ -20,7 +20,13 @@
 	"mintydocs-topic-desc": "Este tópico faz parte do manual $1 para a versão $2 do produto $3.",
 	"mintydocs-topic-otherversions": "Para outras versões, leia este tópico:",
 	"mintydocspublish": "Publicar conteúdo MintyDocs",
+	"mintydocs-publish-button": "Publicar",
+	"mintydocs-publish-success": "Irão ser criadas ou modificadas as seguintes páginas: $1.",
 	"mintydocscreatedraft": "Criar página de rascunho MintyDocs",
+	"mintydocs-createdraft-button": "Criar rascunho",
+	"mintydocs-createdraft-success": "Irão ser criadas as seguintes páginas de rascunho: $1",
 	"mintydocscopy": "Copiar conteúdo MintyDocs",
+	"mintydocs-copy-button": "Copiar",
+	"mintydocs-copy-success": "Irão ser copiadas as seguintes páginas: $1",
 	"mintydocsdelete": "Eliminar conteúdo MintyDocs"
 }

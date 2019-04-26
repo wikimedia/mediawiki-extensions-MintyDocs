@@ -10,5 +10,7 @@
 	"mintydocs-manual-desc": "এই নির্দেশনাটি $2-এর $1 সংস্করণের জন্য।",
 	"mintydocs-manual-otherversions": "অন্য সংস্করণের জন্য এই নির্দেশনা পড়ুন:",
 	"mintydocs-manual-contents": "বিষয়বস্তু:",
-	"mintydocs-topic-otherversions": "অন্যান্য সংস্করণের জন্য এই প্রসঙ্গটি পড়ুন:"
+	"mintydocs-topic-otherversions": "অন্যান্য সংস্করণের জন্য এই প্রসঙ্গটি পড়ুন:",
+	"mintydocs-publish-button": "প্রকাশ করুন",
+	"mintydocs-copy-button": "অনুলিপি"
 }
