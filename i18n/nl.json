@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mainframe98"
+			"Mainframe98",
+			"Elroy"
 		]
 	},
-	"mintydocs-manual-contents": "Inhoud"
+	"mintydocs-manual-contents": "Inhoud",
+	"mintydocs-publish-button": "Plaatsen",
+	"mintydocs-copy-button": "Kopiëren"
 }

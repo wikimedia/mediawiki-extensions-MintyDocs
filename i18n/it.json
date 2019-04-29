@@ -1,0 +1,13 @@
+{
+	"@metadata": {
+		"authors": [
+			"Senpremì"
+		]
+	},
+	"mintydocs-publish-button": "Pubblica",
+	"mintydocs-publish-success": "Le seguenti pagine saranno create o modificate: $1.",
+	"mintydocs-createdraft-button": "Crea bozza",
+	"mintydocs-createdraft-success": "Le seguenti bozze saranno create: $1.",
+	"mintydocs-copy-button": "Copia",
+	"mintydocs-copy-success": "Le seguenti pagine saranno copiate: $1."
+}

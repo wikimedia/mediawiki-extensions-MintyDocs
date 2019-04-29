@@ -3,7 +3,8 @@
 		"authors": [
 			"Yaron Koren",
 			"Fitoschido",
-			"Umherirrender"
+			"Umherirrender",
+			"Robby"
 		]
 	},
 	"mintydocs-extensionname": "{{name}}",
@@ -29,7 +30,7 @@
 	"mintydocs-createdraft-button": "Text of a button that will copy some pages from the main namespace to the \"Draft\" namespace.",
 	"mintydocs-createdraft-success": "Message displayed after one or more pages in the \"Draft\" namespace have been created. Parameters:\n* $1 - a list of wiki pages",
 	"mintydocscopy": "{{doc-special|MintyDocsCopy}}",
-	"mintydocs-copy-button": "Text of a button to copy some pages from one location to another.",
+	"mintydocs-copy-button": "Text of a button to copy some pages from one location to another.\n{{Identical|Copy}}",
 	"mintydocs-copy-success": "Message displayed after one or more pages have been copied elsewhere. Parameters:\n* $1 - a list of wiki pages",
 	"mintydocsdelete": "{{doc-special|MintyDocsDelete}}"
 }
