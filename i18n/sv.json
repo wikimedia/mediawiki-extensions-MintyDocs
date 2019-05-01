@@ -13,5 +13,11 @@
 	"mintydocs-manual-otherversions": "Läs denna manual för andra versioner:",
 	"mintydocs-manual-contents": "Innehåll:",
 	"mintydocs-topic-desc": "Detta ämne är en del av manualen $1 för version $2 av $3.",
-	"mintydocs-topic-otherversions": "Läs detta ämne för andra versioner:"
+	"mintydocs-topic-otherversions": "Läs detta ämne för andra versioner:",
+	"mintydocs-publish-button": "Publicera",
+	"mintydocs-publish-success": "Följande sidor kommer att skapas eller ändras: $1.",
+	"mintydocs-createdraft-button": "Skapa skiss",
+	"mintydocs-createdraft-success": "Följande skissidor kommer att skapas: $1.",
+	"mintydocs-copy-button": "Kopiera",
+	"mintydocs-copy-success": "Följande sidor kommer att kopieras: $1."
 }

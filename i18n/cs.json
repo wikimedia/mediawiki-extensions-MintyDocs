@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Patriccck"
+			"Patriccck",
+			"Ján Kepler"
 		]
 	},
-	"mintydocscreatedraft": "Vytvořit MintyDocs koncept"
+	"mintydocscreatedraft": "Vytvořit MintyDocs koncept",
+	"mintydocs-copy-button": "Kopírovat"
 }
