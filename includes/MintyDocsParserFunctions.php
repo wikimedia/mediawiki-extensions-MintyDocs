@@ -362,10 +362,14 @@ class MintyDocsParserFunctions {
 		if ( $linkedPageType == 'version' || $linkedPageType == 'manual' || $linkedPageType == 'topic' ) {
 			$linkedVersion = ( $version != null ) ? $version : $curVersion;
 			$linkedPageName .= '/' . $linkedVersion;
+		} else {
+			$linkedVersion = null;
 		}
 		if ( $linkedPageType == 'manual' || $linkedPageType == 'topic' ) {
 			$linkedManual = ( $manual != null ) ? $manual : $curManual;
 			$linkedPageName .= '/' . $linkedManual;
+		} else {
+			$linkedManual = null;
 		}
 		if ( $linkedPageType == 'topic' ) {
 			$linkedPageName .= '/' . $topic;
