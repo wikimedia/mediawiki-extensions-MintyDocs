@@ -272,6 +272,7 @@ class MintyDocsParserFunctions {
 		$processedParams = self::processParams( $parser, $params );
 
 		$product = $version = $manual = $topic = $linkText = null;
+		$contextProduct = $contextVersion = $contextManual = null;
 		$standalone = false;
 		foreach( $processedParams as $paramName => $value ) {
 			if ( $paramName == 'product' ) {
@@ -286,6 +287,12 @@ class MintyDocsParserFunctions {
 				$standalone = true;
 			} elseif ( $paramName == 'link text' ) {
 				$linkText = $value;
+			} elseif ( $paramName == 'context product' ) {
+				$contextProduct = $value;
+			} elseif ( $paramName == 'context version' ) {
+				$contextVersion = $value;
+			} elseif ( $paramName == 'context manual' ) {
+				$contextManual = $value;
 			}
 		}
 
@@ -293,13 +300,19 @@ class MintyDocsParserFunctions {
 		if ( $topic != null && $standalone ) {
 			$linkedPageName = self::possibleNamespacePrefix( $curTitle ) . $topic;
 			$query = array();
-			if ( $wgRequest->getCheck( 'contextProduct' ) ) {
+			if ( $contextProduct != null ) {
+				$query['contextProduct'] = $contextProduct;
+			} elseif ( $wgRequest->getCheck( 'contextProduct' ) ) {
 				$query['contextProduct'] = $wgRequest->getVal( 'contextProduct' );
 			}
-			if ( $wgRequest->getCheck( 'contextVersion' ) ) {
+			if ( $contextVersion != null ) {
+				$query['contextVersion'] = $contextVersion;
+			} elseif ( $wgRequest->getCheck( 'contextVersion' ) ) {
 				$query['contextVersion'] = $wgRequest->getVal( 'contextVersion ');
 			}
-			if ( $wgRequest->getCheck( 'contextManual' ) ) {
+			if ( $contextManual != null ) {
+				$query['contextManual'] = $contextManual;
+			} elseif ( $wgRequest->getCheck( 'contextManual' ) ) {
 				$query['contextManual'] = $wgRequest->getVal( 'contextManual ');
 			}
 			return self::getLinkHTML( $linkedPageName, $linkText, $query );
@@ -376,7 +389,9 @@ class MintyDocsParserFunctions {
 		}
 
 		$query = array();
-		if ( $wgRequest->getCheck( 'contextProduct' ) ) {
+		if ( $contextProduct != null ) {
+			// Do nothing.
+		} elseif ( $wgRequest->getCheck( 'contextProduct' ) ) {
 			$contextProduct = $wgRequest->getVal( 'contextProduct' );
 		} else {
 			$contextProduct = $curProduct;
@@ -384,7 +399,9 @@ class MintyDocsParserFunctions {
 		if ( $linkedProduct != null && $linkedProduct != $contextProduct ) {
 			$query['contextProduct'] = $contextProduct;
 		}
-		if ( $wgRequest->getCheck( 'contextVersion' ) ) {
+		if ( $contextVersion != null ) {
+			// Do nothing.
+		} elseif ( $wgRequest->getCheck( 'contextVersion' ) ) {
 			$contextVersion = $wgRequest->getVal( 'contextVersion' );
 		} else {
 			$contextVersion = $curVersion;
@@ -392,7 +409,9 @@ class MintyDocsParserFunctions {
 		if ( $linkedVersion != null && $linkedVersion != $contextVersion ) {
 			$query['contextVersion'] = $contextVersion;
 		}
-		if ( $wgRequest->getCheck( 'contextManual' ) ) {
+		if ( $contextManual != null ) {
+			// Do nothing.
+		} elseif ( $wgRequest->getCheck( 'contextManual' ) ) {
 			$contextManual = $wgRequest->getVal( 'contextManual' );
 		} else {
 			$contextManual = $curManual;
