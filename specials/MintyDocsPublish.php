@@ -202,12 +202,12 @@ class MintyDocsPublish extends SpecialPage {
 			$toc = $mdPage->getTableOfContentsArray( false );
 			foreach ( $toc as $i => $element ) {
 				list( $topic, $curLevel ) = $element;
-				if ( $topic instanceof MintyDocsTopic ) {
+				if ( $topic instanceof MintyDocsTopic || is_string( $topic ) ) {
 					$pagesTree['tree'][] = self::makePagesTree( $topic, $curLevel - 1 );
 				}
 			}
 			return $pagesTree;
-		} elseif ( $mdPage instanceof MintyDocsTopic ) {
+		} elseif ( $mdPage instanceof MintyDocsTopic || is_string( $mdPage ) ) {
 			if ( $numTopicIndents > 0 ) {
 				$pagesTree['node'] = null;
 				$pagesTree['tree'][] = self::makePagesTree( $mdPage, $numTopicIndents - 1 );
@@ -218,7 +218,9 @@ class MintyDocsPublish extends SpecialPage {
 
 	function displayCheckboxesForTree( $node, $tree ) {
 		$text = '';
-		if ( $node != null ) {
+		if ( is_string( $node ) ) {
+			$text .= "\n<li><em>" . $node . '</em></li>';
+		} elseif ( $node != null ) {
 			$text .= "\n<li>" . $this->displayPageName( $node ) . '</li>';
 		}
 		if ( count( $tree ) > 0 ) {
