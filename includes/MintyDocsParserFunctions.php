@@ -274,6 +274,7 @@ class MintyDocsParserFunctions {
 		$product = $version = $manual = $topic = $linkText = null;
 		$contextProduct = $contextVersion = $contextManual = null;
 		$standalone = false;
+		$outputWikitext = true;
 		foreach( $processedParams as $paramName => $value ) {
 			if ( $paramName == 'product' ) {
 				$product = $value;
@@ -293,6 +294,8 @@ class MintyDocsParserFunctions {
 				$contextVersion = $value;
 			} elseif ( $paramName == 'context manual' ) {
 				$contextManual = $value;
+			} elseif ( $paramName == 'html' ) {
+				$outputWikitext = false;
 			}
 		}
 
@@ -315,7 +318,7 @@ class MintyDocsParserFunctions {
 			} elseif ( $wgRequest->getCheck( 'contextManual' ) ) {
 				$query['contextManual'] = $wgRequest->getVal( 'contextManual ');
 			}
-			return self::getLinkHTML( $linkedPageName, $linkText, $query );
+			return self::getLinkWikitextOrHTML( $outputWikitext, $linkedPageName, $linkText, $query );
 		}
 
 		if ( $topic != null ) {
@@ -420,7 +423,7 @@ class MintyDocsParserFunctions {
 			$query['contextManual'] = $contextManual;
 		}
 
-		return self::getLinkHTML( $linkedPageName, $linkText, $query );
+		return self::getLinkWikitextOrHTML( $outputWikitext, $linkedPageName, $linkText, $query );
 	}
 
 	static function processParams( $parser, $params ) {
@@ -459,7 +462,7 @@ class MintyDocsParserFunctions {
 		return $wgContLang->getNsText( MD_NS_DRAFT ) . ':';
 	}
 
-	static function getLinkHTML( $pageName, $linkText, $query ) {
+	static function getLinkWikitextOrHTML( $outputWikitext, $pageName, $linkText, $query ) {
 		$title = Title::newFromText( $pageName );
 		if ( $linkText == null ) {
 			$mdPage = MintyDocsUtils::pageFactory( $title );
@@ -467,8 +470,19 @@ class MintyDocsParserFunctions {
 				$linkText = $mdPage->getDisplayName();
 			}
 		}
-		$str = Linker::link( $title, $linkText, $customAttribs = array(), $query );
-		return array( $str, 'noparse' => true, 'isHTML' => true );
+		if ( $outputWikitext ) {
+			if ( $query == null ) {
+				return "[[$pageName|$linkText]]";
+			} else {
+				// If there's a query string, we have to make
+				// it an external link, unfortunately.
+				$url = $title->getFullURL( $query );
+				return "[$url $linkText]";
+			}
+		} else {
+			$str = Linker::link( $title, $linkText, $customAttribs = array(), $query );
+			return array( $str, 'noparse' => true, 'isHTML' => true );
+		}
 	}
 
 }
