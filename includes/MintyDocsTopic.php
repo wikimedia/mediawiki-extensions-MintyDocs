@@ -183,7 +183,7 @@ class MintyDocsTopic extends MintyDocsPage {
 		$manualName = $this->getManual()->getTitle()->getPrefixedText();
 		list( $productName, $versionString, $manualName ) = explode( '/', $manualName, 3 );
 		if ( $contextProduct !== null ) {
-			$fullManualName = $contextProduct;
+			$fullManualName = MintyDocsParserFunctions::possibleNamespacePrefix( $curTitle ) . $contextProduct;
 		} else {
 			$fullManualName = $productName;
 		}
