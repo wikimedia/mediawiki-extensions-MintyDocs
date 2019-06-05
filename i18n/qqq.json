@@ -32,5 +32,9 @@
 	"mintydocscopy": "{{doc-special|MintyDocsCopy}}",
 	"mintydocs-copy-button": "Text of a button to copy some pages from one location to another.\n{{Identical|Copy}}",
 	"mintydocs-copy-success": "Message displayed after one or more pages have been copied elsewhere. Parameters:\n* $1 - a list of wiki pages",
-	"mintydocsdelete": "{{doc-special|MintyDocsDelete}}"
+	"mintydocsdelete": "{{doc-special|MintyDocsDelete}}",
+	"apihelp-mintydocspublish-description": "{{doc-apihelp-description|mintydocspublish}}",
+	"apihelp-mintydocspublish-summary": "{{doc-apihelp-summary|mintydocspublish}}",
+	"apihelp-mintydocspublish-param-title": "{{doc-apihelp-param|mintydocspublish|title}}",
+	"apihelp-mintydocspublish-example-title": "{{doc-apihelp-example|mintydocspublish|title}}"
 }

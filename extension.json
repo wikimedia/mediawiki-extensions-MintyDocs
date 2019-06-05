@@ -43,11 +43,15 @@
 		"MintyDocsCreateDraft": "specials/MintyDocsCreateDraft.php",
 		"MintyDocsCopy": "specials/MintyDocsCopy.php",
 		"MintyDocsDelete": "specials/MintyDocsDelete.php",
-		"MintyDocsPublishAction": "includes/MintyDocsPublishAction.php"
+		"MintyDocsPublishAction": "includes/MintyDocsPublishAction.php",
+		"MintyDocsPublishAPI": "includes/MintyDocsPublishAPI.php"
 	},
 	"JobClasses": {
 		"MDCreatePage": "MintyDocsCreatePageJob",
 		"MDDeletePage": "MintyDocsDeletePageJob"
+	},
+	"APIModules": {
+		"mintydocspublish": "MintyDocsPublishAPI"
 	},
 	"ResourceModules": {
 		"ext.mintydocs.main": {

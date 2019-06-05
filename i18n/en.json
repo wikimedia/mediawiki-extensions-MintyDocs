@@ -29,5 +29,9 @@
 	"mintydocscopy": "Copy MintyDocs content",
 	"mintydocs-copy-button": "Copy",
 	"mintydocs-copy-success": "The following pages will be copied: $1.",
-	"mintydocsdelete": "Delete MintyDocs content"
+	"mintydocsdelete": "Delete MintyDocs content",
+	"apihelp-mintydocspublish-description": "Publishes a MintyDocs page.",
+	"apihelp-mintydocspublish-summary": "Publishes a MintyDocs page by copying it from the draft namespace to the main namespace.",
+	"apihelp-mintydocspublish-param-title": "The name of the page to publish",
+	"apihelp-mintydocspublish-example-title": "Copy the contents of the page Draft:ABC123 to the page ABC123"
 }
