@@ -57,7 +57,7 @@ class MintyDocsParserFunctions {
 		list( $parentPageName, $thisPageName ) = MintyDocsUtils::getPageParts( $parser->getTitle() );
 		$returnMsg = MintyDocsProduct::checkPageEligibility( $parentPageName, $thisPageName );
 		if ( $returnMsg != null ) {
-			return $returnMsg;
+			return Html::rawElement( 'div', array( 'class' => 'error' ), $returnMsg );
 		}
 
 		$displayTitle = null;
@@ -96,7 +96,7 @@ class MintyDocsParserFunctions {
 		list( $parentPageName, $thisPageName ) = MintyDocsUtils::getPageParts( $parser->getTitle() );
 		$returnMsg = MintyDocsVersion::checkPageEligibility( $parentPageName, $thisPageName );
 		if ( $returnMsg != null ) {
-			return $returnMsg;
+			return Html::rawElement( 'div', array( 'class' => 'error' ), $returnMsg );
 		}
 
 		$params = func_get_args();
@@ -125,7 +125,7 @@ class MintyDocsParserFunctions {
 		list( $parentPageName, $thisPageName ) = MintyDocsUtils::getPageParts( $parser->getTitle() );
 		$returnMsg = MintyDocsManual::checkPageEligibility( $parentPageName, $thisPageName );
 		if ( $returnMsg != null ) {
-			return $returnMsg;
+			return Html::rawElement( 'div', array( 'class' => 'error' ), $returnMsg );
 		}
 
 		$displayTitle = null;
