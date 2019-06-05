@@ -16,17 +16,6 @@ class MintyDocsCreatePageJob extends Job {
 	 * @return bool success
 	 */
 	function run() {
-		if ( is_null( $this->title ) ) {
-			$this->error = "MDCreatePage: Invalid title";
-			return false;
-		}
-
-		$wikiPage = new WikiPage( $this->title );
-		if ( !$wikiPage ) {
-			$this->error = 'MDCreatePage: Wiki page not found "' . $this->title->getPrefixedDBkey() . '"';
-			return false;
-		}
-
 		// If a page is supposed to have a parent but doesn't, we
 		// don't want to save it, because that would lead to an
 		// invalid page.
@@ -39,31 +28,19 @@ class MintyDocsCreatePageJob extends Job {
 			}
 		}
 
-		$page_text = $this->params['page_text'];
-		// Change global $wgUser variable to the one
-		// specified by the job only for the extent of this
-		// replacement.
-		global $wgUser;
-		$actual_user = $wgUser;
-		$wgUser = User::newFromId( $this->params['user_id'] );
-		$edit_summary = '';
+		$pageText = $this->params['page_text'];
+		$editSummary = '';
 		if ( array_key_exists( 'edit_summary', $this->params ) ) {
-			$edit_summary = $this->params['edit_summary'];
+			$editSummary = $this->params['edit_summary'];
+		}
+		$userID = $this->params['user_id'];
+		try {
+			MintyDocsUtils::createOrModifyPage( $this->title, $pageText, $editSummary, $userID );
+		} catch ( MWException $e ) {
+			$this->error = 'MDCreatePage: ' . $e->getMessage();
+			return false;
 		}
 
-		// It's strange that doEditContent() doesn't
-		// automatically attach the 'bot' flag when the user
-		// is a bot...
-		if ( $wgUser->isAllowed( 'bot' ) ) {
-			$flags = EDIT_FORCE_BOT;
-		} else {
-			$flags = 0;
-		}
-
-		$new_content = new WikitextContent( $page_text );
-		$wikiPage->doEditContent( $new_content, $edit_summary, $flags );
-
-		$wgUser = $actual_user;
 		return true;
 	}
 }

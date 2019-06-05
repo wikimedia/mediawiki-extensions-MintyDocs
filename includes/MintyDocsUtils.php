@@ -89,4 +89,40 @@ class MintyDocsUtils {
 		return true;
 	}
 
+	public static function createOrModifyPage( $title, $pageText, $editSummary, $userID = null ) {
+		global $wgUser;
+
+		if ( is_null( $title ) ) {
+			throw new MWException( "Invalid title" );
+		}
+
+		$wikiPage = new WikiPage( $title );
+		if ( !$wikiPage ) {
+			throw new MWException( 'Wiki page not found "' . $title->getPrefixedDBkey() . '"' );
+		}
+
+		if ( $userID != null ) {
+			// Change global $wgUser variable to the one
+			// specified only for the extent of this edit.
+			$actual_user = $wgUser;
+			$wgUser = User::newFromId( $userID );
+		}
+
+		// It's strange that doEditContent() doesn't
+		// automatically attach the 'bot' flag when the user
+		// is a bot...
+		if ( $wgUser->isAllowed( 'bot' ) ) {
+			$flags = EDIT_FORCE_BOT;
+		} else {
+			$flags = 0;
+		}
+
+		$newContent = new WikitextContent( $pageText );
+		$wikiPage->doEditContent( $newContent, $editSummary, $flags );
+
+		if ( $userID != null ) {
+			$wgUser = $actual_user;
+		}
+	}
+
 }
