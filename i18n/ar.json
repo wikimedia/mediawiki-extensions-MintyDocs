@@ -30,5 +30,9 @@
 	"mintydocscopy": "نسخ محتوى MintyDocs",
 	"mintydocs-copy-button": "نسخ",
 	"mintydocs-copy-success": "سيتم نسخ الصفحات التالية: $1.",
-	"mintydocsdelete": "حذف محتوى MintyDocs"
+	"mintydocsdelete": "حذف محتوى MintyDocs",
+	"apihelp-mintydocspublish-description": "تنشر صفحة MintyDocs.",
+	"apihelp-mintydocspublish-summary": "ينشر صفحة MintyDocs بنسخها من نطاق المسودة إلى النطاق الرئيسي.",
+	"apihelp-mintydocspublish-param-title": "اسم الصفحة للنشر",
+	"apihelp-mintydocspublish-example-title": "انسخ محتويات الصفحة مسودة:ABC123 إلى الصفحة ABC123"
 }

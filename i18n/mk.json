@@ -28,5 +28,9 @@
 	"mintydocscopy": "Прекопирај ја содржината на MintyDocs",
 	"mintydocs-copy-button": "Копирај",
 	"mintydocs-copy-success": "Ќе се прекопираат следниве страници: $1.",
-	"mintydocsdelete": "Избриши содржина од MintyDocs"
+	"mintydocsdelete": "Избриши содржина од MintyDocs",
+	"apihelp-mintydocspublish-description": "Објавува страница во MintyDocs.",
+	"apihelp-mintydocspublish-summary": "Објавува страница во MintyDocs, прекопирајќи ја од нацртниот во главниот именски простор.",
+	"apihelp-mintydocspublish-param-title": "Назив на страницата за објавување",
+	"apihelp-mintydocspublish-example-title": "Прекопирај ја содржината на страницата Draft:ABC123 во страницата ABC123"
 }

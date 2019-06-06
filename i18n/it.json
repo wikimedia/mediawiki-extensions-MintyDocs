@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Senpremì"
+			"Senpremì",
+			"Beta16"
 		]
 	},
 	"mintydocs-publish-button": "Pubblica",
@@ -9,5 +10,6 @@
 	"mintydocs-createdraft-button": "Crea bozza",
 	"mintydocs-createdraft-success": "Le seguenti bozze saranno create: $1.",
 	"mintydocs-copy-button": "Copia",
-	"mintydocs-copy-success": "Le seguenti pagine saranno copiate: $1."
+	"mintydocs-copy-success": "Le seguenti pagine saranno copiate: $1.",
+	"apihelp-mintydocspublish-param-title": "Il nome della pagina da pubblicare"
 }
