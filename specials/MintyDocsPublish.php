@@ -134,7 +134,7 @@ class MintyDocsPublish extends SpecialPage {
 			return;
 		}
 
-		$mdp = $this->getTitle();
+		$mdp = $this->getPageTitle();
 		$text .= Html::hidden( 'title', PFUtils::titleURLString( $mdp ) ) . "\n";
 
 		$text .= Html::hidden( 'csrf', $this->getUser()->getEditToken( $this->getName() ) ) . "\n";
