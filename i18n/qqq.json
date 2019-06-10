@@ -36,5 +36,5 @@
 	"apihelp-mintydocspublish-description": "{{doc-apihelp-description|mintydocspublish}}",
 	"apihelp-mintydocspublish-summary": "{{doc-apihelp-summary|mintydocspublish}}",
 	"apihelp-mintydocspublish-param-title": "{{doc-apihelp-param|mintydocspublish|title}}",
-	"apihelp-mintydocspublish-example-title": "{{doc-apihelp-example|mintydocspublish|title}}"
+	"apihelp-mintydocspublish-example-title": "{{doc-apihelp-example|mintydocspublish}}"
 }
