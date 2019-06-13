@@ -28,5 +28,9 @@
 	"mintydocscopy": "複製 MintyDocs 內容",
 	"mintydocs-copy-button": "複製",
 	"mintydocs-copy-success": "將會複製以下頁面：$1。",
-	"mintydocsdelete": "刪除 MintyDocs 內容"
+	"mintydocsdelete": "刪除 MintyDocs 內容",
+	"apihelp-mintydocspublish-description": "發佈 MintyDocs 頁面。",
+	"apihelp-mintydocspublish-summary": "透過從草稿命名空間複製至主命名空間，來發佈一個 MintyDocs 頁面。",
+	"apihelp-mintydocspublish-param-title": "要發佈的頁面名稱。",
+	"apihelp-mintydocspublish-example-title": "複製頁面 Draft:ABC123 的內容至頁面 ABC123 裡"
 }
