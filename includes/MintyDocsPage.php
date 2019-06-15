@@ -44,7 +44,7 @@ abstract class MintyDocsPage {
 	function getChildrenPages() {
 		$childrenPages = array();
 
-		$dbr = wfGetDB( DB_SLAVE );
+		$dbr = wfGetDB( DB_REPLICA );
 		$res = $dbr->select( 'page_props',
 			array(
 				'pp_page'

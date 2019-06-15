@@ -6,6 +6,7 @@
 	"url": "https://www.mediawiki.org/wiki/Extension:MintyDocs",
 	"descriptionmsg": "mintydocs-desc",
 	"type": "parserhook",
+	"callback": "MintyDocsHooks::registerExtension",
 	"requires": {
 		"MediaWiki": ">= 1.25"
 	},

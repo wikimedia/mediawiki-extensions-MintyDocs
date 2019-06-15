@@ -2,6 +2,13 @@
 
 class MintyDocsHooks {
 
+	public static function registerExtension() {
+		// Backward compatibility for MW < 1.28.
+		if ( !defined( 'DB_REPLICA' ) ) {
+			define( 'DB_REPLICA', DB_SLAVE );
+		}
+	}
+
 	public static function registerParserFunctions( &$parser ) {
 		$parser->setFunctionHook( 'mintydocs_product', array( 'MintyDocsParserFunctions', 'renderProduct' ) );
 		$parser->setFunctionHook( 'mintydocs_version', array( 'MintyDocsParserFunctions', 'renderVersion' ) );
