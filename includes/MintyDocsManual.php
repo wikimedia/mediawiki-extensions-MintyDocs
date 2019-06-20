@@ -139,17 +139,21 @@ class MintyDocsManual extends MintyDocsPage {
 
 		$topics = $this->getAllTopics();
 		$this->mTOCArray = array();
+		$unlinkedLineTracker = array();
 		foreach( $tocLines as $lineNum => &$line ) {
 			$matches = array();
 			preg_match( "/(\*+)\s*(.*)\s*$/", $line, $matches );
 			$numAsterisks = strlen( $matches[1] );
 			$lineValue = $matches[2];
+			// Handle unlinked lines.
 			if ( strpos( $lineValue, '-' ) === 0 ) {
 				$displayText = trim( substr( $lineValue, 1 ) );
 				$line = str_replace( $lineValue, $displayText, $line );
 				$this->mTOCArray[] = array( $displayText, $numAsterisks );
+				$unlinkedLineTracker[$lineNum] = array( $numAsterisks, true );
 				continue;
 			}
+			$unlinkedLineTracker[] = array( $numAsterisks, false );
 			$isStandalone = ( strpos( $lineValue, '!' ) === 0 );
 			$isBorrowed = ( strpos( $lineValue, '+' ) === 0 );
 			if ( $isStandalone || $isBorrowed ) {
@@ -181,8 +185,8 @@ class MintyDocsManual extends MintyDocsPage {
 			}
 			if ( !$foundMatchingTopic ) {
 				// Make a link to this page, which is either
-				// nonexistent or at least lacks a #minty_docs
-				// topic call.
+				// nonexistent or at least lacks a #minty_docs_topic
+				// call.
 				$topicPageName = $this->getTitle()->getPrefixedText() . '/' . trim( $lineValue );
 				$title = Title::newFromText( $topicPageName );
 				if ( $manualHasDraftPage ) {
@@ -192,6 +196,7 @@ class MintyDocsManual extends MintyDocsPage {
 					// they presumably exist as drafts but
 					// haven't been published yet.
 					unset( $tocLines[$lineNum] );
+					unset( $unlinkedLineTracker[$lineNum] );
 					continue;
 				}
 
@@ -207,6 +212,40 @@ class MintyDocsManual extends MintyDocsPage {
 				$line = str_replace( $lineValue, $link, $line );
 				$this->mTOCArray[] = array( $title, $numAsterisks );
 			}
+		}
+
+		// Now, use $unlinkedLineTracker to "hide" (remove from the
+		// display) any unlinked lines that have no children, or at
+		// least no displayed children.
+		// We do this mostly so that a TOC "header" above topics that
+		// have not yet been published to the main namespace also does
+		// not get displayed in the main namespace.
+		// First we call array_values() on both arrays to get rid of
+		// any empty lines from the previous run-through.
+		$tocLines = array_values( $tocLines );
+		$unlinkedLineTracker = array_values( $unlinkedLineTracker );
+		$unlinkedLinesToHide = array();
+		for ( $lineNum = count( $unlinkedLineTracker ) - 1; $lineNum >= 0; $lineNum-- ) {
+			list( $numAsterisks, $isUnlinked ) = $unlinkedLineTracker[$lineNum];
+			if ( !$isUnlinked ) {
+				continue;
+			}
+			$nextLineNum = $lineNum + 1;
+			while ( in_array( $nextLineNum, $unlinkedLinesToHide ) ) {
+				$nextLineNum++;
+			}
+			if ( $nextLineNum >= count( $unlinkedLineTracker ) ) {
+				$unlinkedLinesToHide[] = $lineNum;
+				continue;
+			}
+			list( $nextLineIsUnlinked, $nextLineNumAsterisks ) = $unlinkedLineTracker[$nextLineNum];
+			if ( $nextLineNumAsterisks <= $numAsterisks ) {
+				$unlinkedLinesToHide[] = $lineNum;
+			}
+		}
+
+		foreach ( $unlinkedLinesToHide as $lineNum ) {
+			unset( $tocLines[$lineNum] );
 		}
 
 		$toc = implode( "\n", $tocLines );
