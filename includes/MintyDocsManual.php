@@ -238,7 +238,7 @@ class MintyDocsManual extends MintyDocsPage {
 				$unlinkedLinesToHide[] = $lineNum;
 				continue;
 			}
-			list( $nextLineIsUnlinked, $nextLineNumAsterisks ) = $unlinkedLineTracker[$nextLineNum];
+			list( $nextLineNumAsterisks, $nextLineIsUnlinked ) = $unlinkedLineTracker[$nextLineNum];
 			if ( $nextLineNumAsterisks <= $numAsterisks ) {
 				$unlinkedLinesToHide[] = $lineNum;
 			}
