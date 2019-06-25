@@ -90,7 +90,8 @@ class MintyDocsDelete extends SpecialPage {
 
 	static function displayTree( $node, $tree ) {
 		$text = '';
-		if ( $node != null ) {
+		// Skip blank nodes, or nodes that are just text.
+		if ( $node instanceof MintyDocsPage ) {
 			$text .= "\n<li>" . $node->getLink() . '</li>';
 		}
 		if ( count( $tree ) > 0 ) {
