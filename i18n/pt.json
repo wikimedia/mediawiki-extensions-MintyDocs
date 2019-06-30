@@ -28,5 +28,9 @@
 	"mintydocscopy": "Copiar conteúdo MintyDocs",
 	"mintydocs-copy-button": "Copiar",
 	"mintydocs-copy-success": "Irão ser copiadas as seguintes páginas: $1",
-	"mintydocsdelete": "Eliminar conteúdo MintyDocs"
+	"mintydocsdelete": "Eliminar conteúdo MintyDocs",
+	"apihelp-mintydocspublish-description": "Publica uma página MintyDocs.",
+	"apihelp-mintydocspublish-summary": "Publica uma página MintyDocs, copiando-a do espaço nominal de rascunho para o espaço nominal principal.",
+	"apihelp-mintydocspublish-param-title": "O nome da página a publicar",
+	"apihelp-mintydocspublish-example-title": "Copiar o conteúdo da página de rascunho Draft:ABC123 para a página ABC123"
 }
