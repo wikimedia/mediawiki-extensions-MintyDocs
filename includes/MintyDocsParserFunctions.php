@@ -271,7 +271,7 @@ class MintyDocsParserFunctions {
 		array_shift( $params ); // We don't need the parser.
 		$processedParams = self::processParams( $parser, $params );
 
-		$product = $version = $manual = $topic = $linkText = null;
+		$product = $version = $manual = $topic = $linkText = $fragment = null;
 		$contextProduct = $contextVersion = $contextManual = null;
 		$standalone = false;
 		$outputWikitext = true;
@@ -288,6 +288,8 @@ class MintyDocsParserFunctions {
 				$standalone = true;
 			} elseif ( $paramName == 'link text' ) {
 				$linkText = $value;
+			} elseif ( $paramName == 'fragment' ) {
+				$fragment = $value;
 			} elseif ( $paramName == 'context product' ) {
 				$contextProduct = $value;
 			} elseif ( $paramName == 'context version' ) {
@@ -318,7 +320,7 @@ class MintyDocsParserFunctions {
 			} elseif ( $wgRequest->getCheck( 'contextManual' ) ) {
 				$query['contextManual'] = $wgRequest->getVal( 'contextManual ');
 			}
-			return self::getLinkWikitextOrHTML( $outputWikitext, $linkedPageName, $linkText, $query );
+			return self::getLinkWikitextOrHTML( $outputWikitext, $linkedPageName, $linkText, $fragment, $query );
 		}
 
 		if ( $topic != null ) {
@@ -423,7 +425,7 @@ class MintyDocsParserFunctions {
 			$query['contextManual'] = $contextManual;
 		}
 
-		return self::getLinkWikitextOrHTML( $outputWikitext, $linkedPageName, $linkText, $query );
+		return self::getLinkWikitextOrHTML( $outputWikitext, $linkedPageName, $linkText, $fragment, $query );
 	}
 
 	static function processParams( $parser, $params ) {
@@ -462,8 +464,13 @@ class MintyDocsParserFunctions {
 		return $wgContLang->getNsText( MD_NS_DRAFT ) . ':';
 	}
 
-	static function getLinkWikitextOrHTML( $outputWikitext, $pageName, $linkText, $query ) {
+	static function getLinkWikitextOrHTML( $outputWikitext, $pageName, $linkText, $fragment, $query ) {
 		$title = Title::newFromText( $pageName );
+		if ( $fragment !== null ) {
+			// Not the most efficient code.
+			$title = Title::makeTitle( $title->getNamespace(), $title->getText(), $fragment );
+		}
+
 		if ( $linkText == null ) {
 			$mdPage = MintyDocsUtils::pageFactory( $title );
 			if ( $mdPage != null ) {
@@ -472,6 +479,9 @@ class MintyDocsParserFunctions {
 		}
 		if ( $outputWikitext ) {
 			if ( $query == null ) {
+				if ( $fragment !== null ) {
+					$pageName .= '#' . $fragment;
+				}
 				return "[[$pageName|$linkText]]";
 			} else {
 				// If there's a query string, we have to make
