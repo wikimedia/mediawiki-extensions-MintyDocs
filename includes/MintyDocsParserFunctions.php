@@ -67,6 +67,13 @@ class MintyDocsParserFunctions {
 		$processedParams = self::processParams( $parser, $params );
 
 		$parserOutput = $parser->getOutput();
+		// Make sure that no type has already been set for this page.
+		$previousType = $parserOutput->getProperty( 'MintyDocsPageType' );
+		if ( $previousType != null ) {
+			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
+			return Html::rawElement( 'div', array( 'class' => 'error' ), $returnMsg );
+		}
+
 		$parserOutput->addModules( 'ext.mintydocs.main' );
 
 		$parserOutput->setProperty( 'MintyDocsPageType', 'Product' );
@@ -104,6 +111,13 @@ class MintyDocsParserFunctions {
 		$processedParams = self::processParams( $parser, $params );
 
 		$parserOutput = $parser->getOutput();
+		// Make sure that no type has already been set for this page.
+		$previousType = $parserOutput->getProperty( 'MintyDocsPageType' );
+		if ( $previousType != null ) {
+			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
+			return Html::rawElement( 'div', array( 'class' => 'error' ), $returnMsg );
+		}
+
 		$parserOutput->addModules( 'ext.mintydocs.main' );
 
 		$parserOutput->setProperty( 'MintyDocsPageType', 'Version' );
@@ -136,6 +150,13 @@ class MintyDocsParserFunctions {
 		$processedParams = self::processParams( $parser, $params );
 
 		$parserOutput = $parser->getOutput();
+		// Make sure that no type has already been set for this page.
+		$previousType = $parserOutput->getProperty( 'MintyDocsPageType' );
+		if ( $previousType != null ) {
+			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
+			return Html::rawElement( 'div', array( 'class' => 'error' ), $returnMsg );
+		}
+
 		$parserOutput->addModules( 'ext.mintydocs.main' );
 
 		$parserOutput->setProperty( 'MintyDocsPageType', 'Manual' );
@@ -202,6 +223,13 @@ class MintyDocsParserFunctions {
 		$processedParams = self::processParams( $parser, $params );
 
 		$parserOutput = $parser->getOutput();
+		// Make sure that no type has already been set for this page.
+		$previousType = $parserOutput->getProperty( 'MintyDocsPageType' );
+		if ( $previousType != null ) {
+			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
+			return Html::rawElement( 'div', array( 'class' => 'error' ), $returnMsg );
+		}
+
 		$parserOutput->addModules( 'ext.mintydocs.main' );
 
 		$parserOutput->setProperty( 'MintyDocsPageType', 'Topic' );
