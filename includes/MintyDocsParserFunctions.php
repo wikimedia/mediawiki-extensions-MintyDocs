@@ -422,32 +422,20 @@ class MintyDocsParserFunctions {
 		}
 
 		$query = array();
-		if ( $contextProduct != null ) {
-			// Do nothing.
-		} elseif ( $wgRequest->getCheck( 'contextProduct' ) ) {
+		if ( $contextProduct == null && $wgRequest->getCheck( 'contextProduct' ) ) {
 			$contextProduct = $wgRequest->getVal( 'contextProduct' );
-		} else {
-			$contextProduct = $curProduct;
 		}
 		if ( $linkedProduct != null && $linkedProduct != $contextProduct ) {
 			$query['contextProduct'] = $contextProduct;
 		}
-		if ( $contextVersion != null ) {
-			// Do nothing.
-		} elseif ( $wgRequest->getCheck( 'contextVersion' ) ) {
+		if ( $contextVersion == null && $wgRequest->getCheck( 'contextVersion' ) ) {
 			$contextVersion = $wgRequest->getVal( 'contextVersion' );
-		} else {
-			$contextVersion = $curVersion;
 		}
 		if ( $linkedVersion != null && $linkedVersion != $contextVersion ) {
 			$query['contextVersion'] = $contextVersion;
 		}
-		if ( $contextManual != null ) {
-			// Do nothing.
-		} elseif ( $wgRequest->getCheck( 'contextManual' ) ) {
+		if ( $contextManual == null && $wgRequest->getCheck( 'contextManual' ) ) {
 			$contextManual = $wgRequest->getVal( 'contextManual' );
-		} else {
-			$contextManual = $curManual;
 		}
 		if ( $linkedManual != null && $linkedManual != $contextManual ) {
 			$query['contextManual'] = $contextManual;
