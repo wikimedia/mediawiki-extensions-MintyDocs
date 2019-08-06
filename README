@@ -19,6 +19,9 @@ https://www.mediawiki.org/wiki/Extension:MintyDocs
 The MintyDocs extension was created by Yaron Koren. Its overall
 concept of four page types is based on the PonyDocs extension.
 
+MintyDocs includes the jsTree JavaScript library (https://www.jstree.com/),
+which is distributed under the MIT license.
+
 == Contact ==
 
 Comments, questions and suggestions can be submitted on the MintyDocs

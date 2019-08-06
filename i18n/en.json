@@ -30,6 +30,7 @@
 	"mintydocs-copy-button": "Copy",
 	"mintydocs-copy-success": "The following pages will be copied: $1.",
 	"mintydocsdelete": "Delete MintyDocs content",
+	"mintydocs-tocinput-changetype": "Change type",
 	"apihelp-mintydocspublish-description": "Publishes a MintyDocs page.",
 	"apihelp-mintydocspublish-summary": "Publishes a MintyDocs page by copying it from the draft namespace to the main namespace.",
 	"apihelp-mintydocspublish-param-title": "The name of the page to publish",

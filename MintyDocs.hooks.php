@@ -171,6 +171,14 @@ class MintyDocsHooks {
 		return true;
 	}
 
+	static function setGlobalJSVariables( &$vars ) {
+		global $wgScriptPath;
+
+		$vars['wgMintyDocsScriptPath'] = $wgScriptPath . '/extensions/MintyDocs';
+
+		return true;
+	}
+
 	/**
 	 * Register wiki markup words associated with MAG_NIFTYVAR as a variable
 	 *
@@ -231,6 +239,10 @@ class MintyDocsHooks {
 				break;
 		}
 		return true;
+	}
+
+	public static function registerPageFormsInputs( &$formPrinter ) {
+		$formPrinter->registerInputType( 'MintyDocsTOCInput' );
 	}
 
 }
