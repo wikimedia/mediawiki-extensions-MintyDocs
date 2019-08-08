@@ -26,5 +26,6 @@
 	"mintydocscreatedraft": "Створити чернетку MintyDocs",
 	"mintydocscopy": "Копіювати вміст MintyDocs",
 	"mintydocs-copy-button": "Копіювати",
-	"mintydocsdelete": "Видалити вміст MintyDocs"
+	"mintydocsdelete": "Видалити вміст MintyDocs",
+	"mintydocs-tocinput-changetype": "Змінити тип"
 }
