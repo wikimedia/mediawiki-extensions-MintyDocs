@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Bjankuloski06"
+			"Bjankuloski06",
+			"Vlad5250"
 		]
 	},
 	"mintydocs-desc": "Упростен систем за документација",
@@ -29,6 +30,7 @@
 	"mintydocs-copy-button": "Копирај",
 	"mintydocs-copy-success": "Ќе се прекопираат следниве страници: $1.",
 	"mintydocsdelete": "Избриши содржина од MintyDocs",
+	"mintydocs-tocinput-changetype": "Измени тип",
 	"apihelp-mintydocspublish-description": "Објавува страница во MintyDocs.",
 	"apihelp-mintydocspublish-summary": "Објавува страница во MintyDocs, прекопирајќи ја од нацртниот во главниот именски простор.",
 	"apihelp-mintydocspublish-param-title": "Назив на страницата за објавување",
