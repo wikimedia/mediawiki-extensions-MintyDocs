@@ -76,7 +76,7 @@
 			],
 			"messages": [
 				"create",
-				"rcfilters-savedqueries-rename",
+				"mintydocs-tocinput-rename",
 				"mintydocs-tocinput-changetype",
 				"delete",
 				"edit"

@@ -33,6 +33,7 @@
 	"mintydocs-copy-button": "Text of a button to copy some pages from one location to another.\n{{Identical|Copy}}",
 	"mintydocs-copy-success": "Message displayed after one or more pages have been copied elsewhere. Parameters:\n* $1 - a list of wiki pages",
 	"mintydocsdelete": "{{doc-special|MintyDocsDelete}}",
+	"mintydocs-tocinput-rename": "Text of a dropdown menu choice",
 	"mintydocs-tocinput-changetype": "Text of a dropdown menu choice",
 	"apihelp-mintydocspublish-description": "{{doc-apihelp-description|mintydocspublish}}",
 	"apihelp-mintydocspublish-summary": "{{doc-apihelp-summary|mintydocspublish}}",

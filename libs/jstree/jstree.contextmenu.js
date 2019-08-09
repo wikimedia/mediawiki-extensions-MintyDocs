@@ -82,7 +82,7 @@
 					"separator_before"	: false,
 					"separator_after"	: false,
 					"_disabled"			: false, //(this.check("rename_node", data.reference, this.get_parent(data.reference), "")),
-					"label"				: mw.msg( 'rcfilters-savedqueries-rename' ),//"Rename",
+					"label"				: 'mintydocs-tocinput-rename', //"Rename",
 					/*!
 					"shortcut"			: 113,
 					"shortcut_label"	: 'F2',
