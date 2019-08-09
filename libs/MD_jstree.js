@@ -13,7 +13,7 @@
 				'force_text' : true,
 				"themes" : { "stripes" : true },
 				"strings": {
-					'New node' : 'New row'
+					'New node' : 'New entry'
 				},
 				'data' : treeData
 			},
