@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"ديفيد",
-			"Meno25"
+			"Meno25",
+			"HitomiAkane"
 		]
 	},
 	"mintydocs-extensionname": "مينتي دوكس",
@@ -31,6 +32,7 @@
 	"mintydocs-copy-button": "نسخ",
 	"mintydocs-copy-success": "سيتم نسخ الصفحات التالية: $1.",
 	"mintydocsdelete": "حذف محتوى MintyDocs",
+	"mintydocs-tocinput-rename": "أعد التسمية",
 	"mintydocs-tocinput-changetype": "تغيير النوع",
 	"apihelp-mintydocspublish-description": "تنشر صفحة MintyDocs.",
 	"apihelp-mintydocspublish-summary": "ينشر صفحة MintyDocs بنسخها من نطاق المسودة إلى النطاق الرئيسي.",

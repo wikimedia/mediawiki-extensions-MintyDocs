@@ -29,6 +29,7 @@
 	"mintydocs-copy-button": "Copiar",
 	"mintydocs-copy-success": "As páginas seguintes serão copiadas: $1",
 	"mintydocsdelete": "Excluir conteúdo MintyDocs",
+	"mintydocs-tocinput-rename": "Renomear",
 	"mintydocs-tocinput-changetype": "Mudar tipo",
 	"apihelp-mintydocspublish-description": "Publica uma página MintyDocs.",
 	"apihelp-mintydocspublish-summary": "Publica uma página MintyDocs copiando-a do espaço nominal de rascunho para o espaço nominal principal.",

@@ -30,6 +30,7 @@
 	"mintydocs-copy-button": "Copier",
 	"mintydocs-copy-success": "Les pages suivantes seront copiées : $1.",
 	"mintydocsdelete": "Supprimer le contenu de MintyDocs",
+	"mintydocs-tocinput-rename": "Renommer",
 	"mintydocs-tocinput-changetype": "Modifier le type",
 	"apihelp-mintydocspublish-description": "Publie une page MintyDocs.",
 	"apihelp-mintydocspublish-summary": "Publie une page MintyDocs en la copiant depuis l’espace de noms brouillon vers l’espace de noms principal.",
