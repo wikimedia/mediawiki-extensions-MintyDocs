@@ -14,5 +14,6 @@
 	"mintydocs-version-manuallist": "Estos son los manuales de esta versión:",
 	"mintydocs-manual-desc": "Este manual corresponde a la versión $1 de $2.",
 	"mintydocs-manual-contents": "Sumario:",
-	"mintydocs-topic-desc": "Este tema es parte del manual $1 para la versión $2 de $3"
+	"mintydocs-topic-desc": "Este tema es parte del manual $1 para la versión $2 de $3",
+	"mintydocs-tocinput-rename": "Cambiar nombre"
 }

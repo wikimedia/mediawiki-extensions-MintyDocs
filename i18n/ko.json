@@ -25,6 +25,7 @@
 	"mintydocs-copy-button": "복사",
 	"mintydocs-copy-success": "다음의 문서들이 복사됩니다: $1.",
 	"mintydocsdelete": "MintyDocs 내용 삭제",
+	"mintydocs-tocinput-rename": "이름 바꾸기",
 	"apihelp-mintydocspublish-description": "MintyDocs 페이지를 게시합니다.",
 	"apihelp-mintydocspublish-param-title": "게시할 문서의 이름",
 	"apihelp-mintydocspublish-example-title": "초안:ABC123 문서의 내용을 ABC123 문서로 복사"

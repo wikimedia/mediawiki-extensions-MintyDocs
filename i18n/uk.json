@@ -27,5 +27,6 @@
 	"mintydocscopy": "Копіювати вміст MintyDocs",
 	"mintydocs-copy-button": "Копіювати",
 	"mintydocsdelete": "Видалити вміст MintyDocs",
+	"mintydocs-tocinput-rename": "Перейменувати",
 	"mintydocs-tocinput-changetype": "Змінити тип"
 }
