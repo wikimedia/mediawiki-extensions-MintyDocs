@@ -2,10 +2,12 @@
 	"@metadata": {
 		"authors": [
 			"夢蝶葬花",
-			"A Chinese Wikipedian"
+			"A Chinese Wikipedian",
+			"Looong"
 		]
 	},
 	"mintydocs-invalidparentpage": "出错了：“$1”页面应该是“$2”页面才对。",
 	"mintydocs-product-versionlist": "点击下面的任何一个来查看该版本的文档：",
-	"mintydocs-manual-contents": "内容："
+	"mintydocs-manual-contents": "内容：",
+	"mintydocs-tocinput-rename": "重命名"
 }
