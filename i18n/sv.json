@@ -19,5 +19,6 @@
 	"mintydocs-createdraft-button": "Skapa skiss",
 	"mintydocs-createdraft-success": "Följande skissidor kommer att skapas: $1.",
 	"mintydocs-copy-button": "Kopiera",
-	"mintydocs-copy-success": "Följande sidor kommer att kopieras: $1."
+	"mintydocs-copy-success": "Följande sidor kommer att kopieras: $1.",
+	"mintydocs-tocinput-rename": "Byt namn"
 }
