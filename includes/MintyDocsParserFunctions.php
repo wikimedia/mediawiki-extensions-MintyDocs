@@ -43,7 +43,8 @@ use MediaWiki\MediaWikiServices;
  * This function defines a topic page.
  *
  * '#mintydocs_link' is called as:
- * {{#mintydocs_link:product=|version=|manual=|topic=|standalone|link text=}}
+ * {{#mintydocs_link:product=|version=|manual=|topic=|standalone|link text=
+ * |fragment=|context product=|context version=|context manual=|html}}
  *
  * This function displays a link to another page in the MintyDocs system.
  */
@@ -425,19 +426,19 @@ class MintyDocsParserFunctions {
 		if ( $contextProduct == null && $wgRequest->getCheck( 'contextProduct' ) ) {
 			$contextProduct = $wgRequest->getVal( 'contextProduct' );
 		}
-		if ( $linkedProduct != null && $linkedProduct != $contextProduct ) {
+		if ( $contextProduct != null && $$linkedProduct != null && $linkedProduct != $contextProduct ) {
 			$query['contextProduct'] = $contextProduct;
 		}
 		if ( $contextVersion == null && $wgRequest->getCheck( 'contextVersion' ) ) {
 			$contextVersion = $wgRequest->getVal( 'contextVersion' );
 		}
-		if ( $linkedVersion != null && $linkedVersion != $contextVersion ) {
+		if ( $contextVersion != null && $$linkedVersion != null && $linkedVersion != $contextVersion ) {
 			$query['contextVersion'] = $contextVersion;
 		}
 		if ( $contextManual == null && $wgRequest->getCheck( 'contextManual' ) ) {
 			$contextManual = $wgRequest->getVal( 'contextManual' );
 		}
-		if ( $linkedManual != null && $linkedManual != $contextManual ) {
+		if ( $contextManual != null && $linkedManual != null && $linkedManual != $contextManual ) {
 			$query['contextManual'] = $contextManual;
 		}
 
@@ -494,7 +495,7 @@ class MintyDocsParserFunctions {
 			}
 		}
 		if ( $outputWikitext ) {
-			if ( $query == null ) {
+			if ( empty( $query ) ) {
 				if ( $fragment !== null ) {
 					$pageName .= '#' . $fragment;
 				}
