@@ -1,11 +1,25 @@
 {
 	"name": "MintyDocs",
 	"namemsg": "mintydocs-extensionname",
-	"version": "0.5",
+	"version": "0.6-alpha",
 	"author": "Yaron Koren",
 	"url": "https://www.mediawiki.org/wiki/Extension:MintyDocs",
 	"descriptionmsg": "mintydocs-desc",
 	"type": "parserhook",
+	"namespaces": [
+		{
+			"id": 620,
+			"constant": "MD_NS_DRAFT",
+			"name": "Draft",
+			"conditional": true
+		},
+		{
+			"id": 621,
+			"constant": "MD_NS_DRAFT_TALK",
+			"name": "Draft_talk",
+			"conditional": true
+		}
+	],
 	"callback": "MintyDocsHooks::registerExtension",
 	"requires": {
 		"MediaWiki": ">= 1.25"
