@@ -280,7 +280,7 @@ class MintyDocsParserFunctions {
 		// We need to see the query string for a few things, and
 		// unfortunately we need to disable the cache in order
 		// to see it.
-		$parser->disableCache();
+		$parser->getOutput()->updateCacheExpiry( 0 );
 		$curTitle = $parser->getTitle();
 		if ( $curTitle->isSpecial( 'FormEdit' ) ) {
 			// If we're in Special:FormEit, then this is probably
