@@ -1,0 +1,38 @@
+{
+	"@metadata": {
+		"authors": [
+			"Jon Harald Søby"
+		]
+	},
+	"mintydocs-desc": "Et lettvekts dokumentasjonssystem",
+	"action-mintydocs-administer": "administrere alle MintyDocs-produktsider",
+	"right-mintydocs-administer": "Administrere alle MintyDocs-produktsider",
+	"action-mintydocs-edit": "redigere alle MintyDocs-sider",
+	"right-mintydocs-edit": "Redigere alle MintyDocs-sider",
+	"mintydocs-noparentpage": "Feil: Hver $1-side må være en underside.",
+	"mintydocs-invalidparentpage": "Feil: Siden «$1» må være en $2-side.",
+	"mintydocs-product-versionlist": "Trykk på en av de følgende for å se dokumentasjonen for den versjonen:",
+	"mintydocs-version-desc": "Dette er dokumentasjonen for {{GRAMMAR:genitive|$2}} versjon $1.",
+	"mintydocs-version-manuallist": "Her er manualene for denne versjonen:",
+	"mintydocs-manual-desc": "Denne manualen er for {{GRAMMAR:genitive|$2}} versjon $1.",
+	"mintydocs-manual-otherversions": "Les denne manualen for andre versjoner:",
+	"mintydocs-manual-contents": "Innhold:",
+	"mintydocs-topic-desc": "Dette emnet er del av manual $1 for {{GENDER:genitive|$3}} versjon $2.",
+	"mintydocs-topic-otherversions": "Les dette emnet for andre versjoner:",
+	"mintydocspublish": "Publiser MintyDocs-innhold",
+	"mintydocs-publish-button": "Publiser",
+	"mintydocs-publish-success": "Følgende sider vil bli opprettet eller endret: $1.",
+	"mintydocscreatedraft": "Opprett MintyDocs-kladdeside",
+	"mintydocs-createdraft-button": "Opprett kladd",
+	"mintydocs-createdraft-success": "Følgende kladdesider vil opprettes: $1.",
+	"mintydocscopy": "Kopier MintyDocs-innhold",
+	"mintydocs-copy-button": "Kopier",
+	"mintydocs-copy-success": "Følgende sider blir kopiert: $1.",
+	"mintydocsdelete": "Slett MintyDocs-innhold",
+	"mintydocs-tocinput-rename": "Gi nytt navn",
+	"mintydocs-tocinput-changetype": "Endre type",
+	"apihelp-mintydocspublish-description": "Publiserer en MintyDocs-side.",
+	"apihelp-mintydocspublish-summary": "Publiserer en MintyDocs-side ved å kopiere den fra kladdenavnerommet til hovednavnerommet.",
+	"apihelp-mintydocspublish-param-title": "Navnet på siden som skal publiseres",
+	"apihelp-mintydocspublish-example-title": "Kopier innholdet fra siden Draft:ABC123 til siden ABC123"
+}
