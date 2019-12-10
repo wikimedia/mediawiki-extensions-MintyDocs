@@ -5,7 +5,27 @@
 			"Elroy"
 		]
 	},
+	"mintydocs-desc": "Een lichtgewicht documentatiesysteem",
+	"action-mintydocs-administer": "alle MintyDocs productpagina's te beheren",
+	"right-mintydocs-administer": "Alle MintyDocs productpagina's beheren",
+	"action-mintydocs-edit": "alle MintyDocs pagina's te bewerken",
+	"right-mintydocs-edit": "Alle MintyDocs pagina's bewerken",
+	"mintydocs-version-desc": "Dit is de documentatie voor versie $1 van $2.",
+	"mintydocs-manual-desc": "Deze handleiding is voor versie $1 van $2.",
+	"mintydocs-manual-otherversions": "Lees deze handleiding voor andere versies:",
 	"mintydocs-manual-contents": "Inhoud",
+	"mintydocs-topic-desc": "Dit onderwerp is deel van de handleiding $1 voor versie $2 van $3.",
+	"mintydocs-topic-otherversions": "Lees dit onderwerp voor andere versies:",
+	"mintydocspublish": "MintyDocs inhoud publiceren",
 	"mintydocs-publish-button": "Plaatsen",
-	"mintydocs-copy-button": "Kopiëren"
+	"mintydocs-publish-success": "De volgende pagina's zullen worden aangemaakt of aangepast: $1.",
+	"mintydocs-copy-button": "Kopiëren",
+	"mintydocs-copy-success": "De volgende pagina's zullen worden gekopiëerd: $1.",
+	"mintydocsdelete": "MintyDocs inhoud verwijderen",
+	"mintydocs-tocinput-rename": "Hernoemen",
+	"mintydocs-tocinput-changetype": "Type wijzigen",
+	"apihelp-mintydocspublish-description": "Publiceert een MintyDocs pagina.",
+	"apihelp-mintydocspublish-summary": "Publiceert een MintyDocs pagina door deze van de draft naamruimte naar de hoofdnaamruimte te kopiëren.",
+	"apihelp-mintydocspublish-param-title": "De naam van de te publiceren pagina",
+	"apihelp-mintydocspublish-example-title": "Kopieer de inhoud van de pagina Draft:ABC123 naar de pagina ABC123"
 }
