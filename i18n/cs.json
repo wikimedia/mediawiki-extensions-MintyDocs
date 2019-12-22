@@ -2,9 +2,39 @@
 	"@metadata": {
 		"authors": [
 			"Patriccck",
-			"Ján Kepler"
+			"Ján Kepler",
+			"Jaroslav Cerny"
 		]
 	},
+	"mintydocs-desc": "Jednoduchý dokumentační systém",
+	"action-mintydocs-administer": "správa všech produktových stránek MintyDocs",
+	"right-mintydocs-administer": "Správa všech produktových stránek MintyDocs",
+	"action-mintydocs-edit": "úprava všech stránek MintyDocs",
+	"right-mintydocs-edit": "Úprava všech stránek MintyDocs",
+	"mintydocs-noparentpage": "Chyba: Každá $1 stránka musí být dílčí stránkou.",
+	"mintydocs-invalidparentpage": "Chyba: Stránka \"$1\" musí být stránkou typu $2.",
+	"mintydocs-product-versionlist": "Kliknutím na některou z následujících verzí zobrazíte dokumentaci k ní:",
+	"mintydocs-version-desc": "Toto je dokumentace pro verzi $1 produktu $2.",
+	"mintydocs-version-manuallist": "Zde jsou manuály pro tuto verzi:",
+	"mintydocs-manual-desc": "Tento manuál je pro verzi $1 produktu $2.",
+	"mintydocs-manual-otherversions": "Přečtěte si tento manuál pro jiné verze:",
+	"mintydocs-manual-contents": "Obsah:",
+	"mintydocs-topic-desc": "Toto heslo je částí manuálu $1 pro verzi $2 produktu $3.",
+	"mintydocs-topic-otherversions": "Přečtěte si toto heslo pro jiné verze:",
+	"mintydocspublish": "Zveřejnit obsah MintyDocs",
+	"mintydocs-publish-button": "Zveřejnit",
+	"mintydocs-publish-success": "Budou vytvořeny nebo změněny následující stránky: $1.",
 	"mintydocscreatedraft": "Vytvořit MintyDocs koncept",
-	"mintydocs-copy-button": "Kopírovat"
+	"mintydocs-createdraft-button": "Vytvořit koncept",
+	"mintydocs-createdraft-success": "Budou vytvořeny následující stránky konceptů: $1.",
+	"mintydocscopy": "Kopírovat obsah MintyDocs",
+	"mintydocs-copy-button": "Kopírovat",
+	"mintydocs-copy-success": "Budou zkopírovány následující stránky: $1.",
+	"mintydocsdelete": "Odstranit obsah MintyDocs",
+	"mintydocs-tocinput-rename": "Přejmenovat",
+	"mintydocs-tocinput-changetype": "Změnit typ",
+	"apihelp-mintydocspublish-description": "Zveřejní stránku MintyDocs.",
+	"apihelp-mintydocspublish-summary": "Zveřejní stránku MintyDocs tak, že jí zkopíruje ze jmenného prostoru konceptů do hlavního jmenného prostoru.",
+	"apihelp-mintydocspublish-param-title": "Název zveřejněné stránky",
+	"apihelp-mintydocspublish-example-title": "Zkopírovat obsah stránky Draft:ABC123 do stránky ABC123"
 }
