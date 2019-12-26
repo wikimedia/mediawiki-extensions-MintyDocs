@@ -1,16 +1,39 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hedda"
+			"Hedda",
+			"BaRaN6161 TURK"
 		]
 	},
 	"mintydocs-desc": "Hafif bir dokümantasyon sistemi",
+	"action-mintydocs-administer": "tüm MintyDocs ürün sayfalarını yönet",
+	"right-mintydocs-administer": "Tüm MintyDocs ürün sayfalarını yönet",
+	"action-mintydocs-edit": "tüm MintyDocs sayfalarını düzenle",
+	"right-mintydocs-edit": "Tüm MintyDocs sayfalarını düzenle",
 	"mintydocs-noparentpage": "Hata: Her $1 sayfası bir alt sayfa olmalıdır.",
 	"mintydocs-invalidparentpage": "Hata: \"$1\" sayfası, bir $2 sayfası olmalıdır.",
 	"mintydocs-product-versionlist": "Bu sürümün belgelerini görmek için aşağıdakilerden birine tıklayın:",
 	"mintydocs-version-desc": "Bu, $2 ürününün $1 numaralı sürümünün belgelendirmesidir.",
 	"mintydocs-version-manuallist": "İşte bu sürümün kılavuzları:",
+	"mintydocs-manual-desc": "Bu kılavuz $1 $2 sürümü için.",
 	"mintydocs-manual-otherversions": "Diğer sürümler için şu kılavuzu okuyunuz:",
 	"mintydocs-manual-contents": "İçerik:",
-	"mintydocs-topic-otherversions": "Diğer sürümler için şu konuyu okuyun:"
+	"mintydocs-topic-desc": "Bu konu, $3 $2 sürümü için manüel $1 kılavuzunun bir parçasıdır.",
+	"mintydocs-topic-otherversions": "Diğer sürümler için şu konuyu okuyun:",
+	"mintydocspublish": "MintyDocs içeriğini yayınla",
+	"mintydocs-publish-button": "Yayınla",
+	"mintydocs-publish-success": "Aşağıdaki sayfalar oluşturulacak veya değiştirilecek: $1.",
+	"mintydocscreatedraft": "MintyDocs taslak sayfası oluştur",
+	"mintydocs-createdraft-button": "Taslak oluştur",
+	"mintydocs-createdraft-success": "Şu taslak sayfalar oluşturulacak: $1.",
+	"mintydocscopy": "MintyDocs içeriğini kopyala",
+	"mintydocs-copy-button": "Kopyala",
+	"mintydocs-copy-success": "Aşağıdaki sayfalar kopyalanacak: $1.",
+	"mintydocsdelete": "MintyDocs içeriğini sil",
+	"mintydocs-tocinput-rename": "Yeniden adlandır",
+	"mintydocs-tocinput-changetype": "Değişiklik türü",
+	"apihelp-mintydocspublish-description": "MintyDocs sayfası yayınlar.",
+	"apihelp-mintydocspublish-summary": "Taslak ad alanından ana ad alanına kopyalayarak bir MintyDocs sayfası yayınlar.",
+	"apihelp-mintydocspublish-param-title": "Yayınlanacak sayfanın adı",
+	"apihelp-mintydocspublish-example-title": "Sayfanın içindekiler Taslak:ABC123'ü ABC123 sayfasına kopyalayın"
 }
