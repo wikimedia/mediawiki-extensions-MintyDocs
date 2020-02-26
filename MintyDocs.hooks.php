@@ -3,6 +3,11 @@
 class MintyDocsHooks {
 
 	public static function registerExtension() {
+		if ( !defined( 'MD_NS_DRAFT' ) ) {
+			define( 'MD_NS_DRAFT', 620 );
+			define( 'MD_NS_DRAFT_TALK', 621 );
+		}
+
 		// Backward compatibility for MW < 1.28.
 		if ( !defined( 'DB_REPLICA' ) ) {
 			define( 'DB_REPLICA', DB_SLAVE );
@@ -28,11 +33,6 @@ class MintyDocsHooks {
 	 */
 	public static function registerNamespaces( array &$list ) {
 		global $wgNamespacesWithSubpages;
-
-		if ( !defined( 'MD_NS_DRAFT' ) ) {
-			define( 'MD_NS_DRAFT', 620 );
-			define( 'MD_NS_DRAFT_TALK', 621 );
-		}
 
 		$list[MD_NS_DRAFT] = 'Draft';
 		$list[MD_NS_DRAFT_TALK] = 'Draft_talk';
