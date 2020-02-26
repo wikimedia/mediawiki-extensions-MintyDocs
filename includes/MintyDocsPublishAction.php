@@ -1,4 +1,7 @@
 <?php
+
+use MediaWiki\MediaWikiServices;
+
 /**
  * Handles the 'recreatedata' action.
  *
@@ -36,10 +39,24 @@ class MintyDocsPublishAction extends Action {
 	 */
 	static function displayTab( $obj, &$links ) {
 		$title = $obj->getTitle();
-		if ( !$title || !$title->exists() || $title->getNamespace() !== MD_NS_DRAFT ||
-			!$title->userCan( 'mintydocs-administer' ) ) {
+		// Draft pages only.
+		if ( !$title || !$title->exists() || $title->getNamespace() !== MD_NS_DRAFT ) {
 			return true;
 		}
+
+		$user = $obj->getUser();
+		if ( method_exists( 'MediaWiki\Permissions\PermissionManager', 'userCan' ) ) {
+			// MW 1.33+
+			$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
+			if ( !$permissionManager->userCan( 'mintydocs-administer', $user, $title ) ) {
+				return true;
+			}
+		} else {
+			if ( !$title->userCan( 'mintydocs-administer', $user ) ) {
+				return true;
+			}
+		}
+
 		$request = $obj->getRequest();
 
 		$mdPublishTab = array(

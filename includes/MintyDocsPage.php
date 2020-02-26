@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 abstract class MintyDocsPage {
 
 	protected $mTitle = null;
@@ -8,7 +10,7 @@ abstract class MintyDocsPage {
 	/**
 	 * See if the specified page can set to this type.
 	 */
-	public static function checkPageEligibility( $parentPageName, $thisPageName ) {		
+	public static function checkPageEligibility( $parentPageName, $thisPageName ) {
 		// Check if it has a parent page.
 		if ( $parentPageName == null ) {
 			// @TODO - add i18n for page type.
@@ -245,12 +247,19 @@ abstract class MintyDocsPage {
 
 		list( $product, $version ) = $this->getProductAndVersion();
 
+		if ( method_exists( 'MediaWiki\Permissions\PermissionManager', 'userHasRight' ) ) {
+			// MW 1.34+
+			$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
+		} else {
+			$permissionManager = null;
+		}
+
 		// If this is a draft page, only people with some kind of
 		// MintyDocs permission can view it.
 		if ( $this->mTitle->getNamespace() == MD_NS_DRAFT ) {
-			if ( ! $user->isAllowed( 'mintydocs-administer' ) &&
-			! $user->isAllowed( 'mintydocs-edit' ) &&
-			! $user->isAllowed( 'mintydocs-preview' ) &&
+			if ( ! MintyDocsUtils::userIsAllowed( $user, 'mintydocs-administer', $permissionManager ) &&
+			! MintyDocsUtils::userIsAllowed( $user, 'mintydocs-edit', $permissionManager ) &&
+			! MintyDocsUtils::userIsAllowed( $user, 'mintydocs-preview', $permissionManager ) &&
 			! $product->userIsAdmin( $user ) &&
 			! $product->userIsEditor( $user ) &&
 			! $product->userIsPreviewer( $user ) ) {
@@ -263,7 +272,7 @@ abstract class MintyDocsPage {
 			// Everyone can view this.
 			return true;
 		} elseif ( $versionStatus == MintyDocsVersion::CLOSED_STATUS ) {
-			if ( $user->isAllowed( 'mintydocs-administer' ) ) {
+			if ( MintyDocsUtils::userIsAllowed( $user, 'mintydocs-administer', $permissionManager ) ) {
 				return true;
 			}
 			if ( $product->userIsAdmin( $user ) ) {
@@ -271,9 +280,9 @@ abstract class MintyDocsPage {
 			}
 			return false;
 		} else { // UNRELEASED_STATUS - the default
-			if ( $user->isAllowed( 'mintydocs-administer' ) ||
-				$user->isAllowed( 'mintydocs-edit' ) ||
-				$user->isAllowed( 'mintydocs-preview' ) ) {
+			if ( MintyDocsUtils::userIsAllowed( $user, 'mintydocs-administer', $permissionManager ) ||
+				MintyDocsUtils::userIsAllowed( $user, 'mintydocs-edit', $permissionManager ) ||
+				MintyDocsUtils::userIsAllowed( $user, 'mintydocs-preview', $permissionManager ) ) {
 				return true;
 			}
 			if ( $product->userIsAdmin( $user ) ||
@@ -309,13 +318,21 @@ abstract class MintyDocsPage {
 		}
 
 		list( $product, $version ) = $this->getProductAndVersion();
+
+		if ( method_exists( 'MediaWiki\Permissions\PermissionManager', 'userHasRight' ) ) {
+			// MW 1.34+
+			$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
+		} else {
+			$permissionManager = null;
+		}
+
 		$versionStatus = $version->getStatus();
 
 		if ( $versionStatus == MintyDocsVersion::RELEASED_STATUS ) {
 			// Everyone can edit this, as far as MintyDocs is concerned.
 			return true;
 		} elseif ( $versionStatus == MintyDocsVersion::CLOSED_STATUS ) {
-			if ( $user->isAllowed( 'mintydocs-administer' ) ) {
+			if ( MintyDocsUtils::userIsAllowed( $user, 'mintydocs-administer', $permissionManager ) ) {
 				return true;
 			}
 			if ( $product->userIsAdmin( $user ) ) {
@@ -323,8 +340,8 @@ abstract class MintyDocsPage {
 			}
 			return false;
 		} else { // UNRELEASED_STATUS - the default
-			if ( $user->isAllowed( 'mintydocs-administer' ) ||
-				$user->isAllowed( 'mintydocs-edit' ) ) {
+			if ( MintyDocsUtils::userIsAllowed( $user, 'mintydocs-administer', $permissionManager ) ||
+				MintyDocsUtils::userIsAllowed( $user, 'mintydocs-edit', $permissionManager ) ) {
 				return true;
 			}
 			if ( $product->userIsAdmin( $user ) ||
