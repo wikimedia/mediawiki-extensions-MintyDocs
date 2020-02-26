@@ -188,6 +188,9 @@ abstract class MintyDocsPage {
 	function getActualName() {
 		$pageName = $this->mTitle->getPrefixedText();
 		$lastSlashPos = strrpos( $pageName, '/' );
+		if ( $lastSlashPos === false ) {
+			return $pageName;
+		}
 		return substr( $pageName, $lastSlashPos + 1 );
 	}
 
@@ -198,6 +201,9 @@ abstract class MintyDocsPage {
 	public function getParentPage() {
 		$pageName = $this->mTitle->getPrefixedText();
 		$lastSlashPos = strrpos( $pageName, '/' );
+		if ( $lastSlashPos === false ) {
+			return null;
+		}
 		$parentPageName = substr( $pageName, 0, $lastSlashPos );
 		return Title::newFromText( $parentPageName );
 	}
