@@ -72,7 +72,7 @@ class MintyDocsDelete extends SpecialPage {
 		$text .= '</ul>';
 
 		$mdp = $this->getPageTitle();
-		$text .= Html::hidden( 'title', PFUtils::titleURLString( $mdp ) );
+		$text .= Html::hidden( 'title', MintyDocsUtils::titleURLString( $mdp ) );
 
 		$text .= "\t" . Html::hidden( 'csrf', $this->getUser()->getEditToken( $this->getName() ) ) . "\n";
 

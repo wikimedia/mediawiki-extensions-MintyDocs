@@ -147,4 +147,40 @@ class MintyDocsUtils {
 		}
 	}
 
+	/**
+	 * Get a content language (old $wgContLang) object. For MW < 1.32,
+	 * return the global.  For all others, use MediaWikiServices.
+	 *
+	 * @return Language
+	 */
+	public static function getContLang() {
+		if ( method_exists( "MediaWiki\\MediaWikiServices", "getContentLanguage" ) ) {
+			return MediaWikiServices::getInstance()->getContentLanguage();
+		} else {
+			global $wgContLang;
+			return $wgContLang;
+		}
+	}
+
+	/**
+	 * Creates the name of the page that appears in the URL;
+	 * this method is necessary because Title::getPartialURL(), for
+	 * some reason, doesn't include the namespace.
+	 * Based on PFUtils::titleURLString() from Page Forms.
+	 *
+	 * @param Title $title
+	 * @return string
+	 */
+	public static function titleURLString( $title ) {
+		$namespace = $title->getNsText();
+		if ( $namespace !== '' ) {
+			$namespace .= ':';
+		}
+		if ( MWNamespace::isCapitalized( $title->getNamespace() ) ) {
+			return $namespace . self::getContLang()->ucfirst( $title->getPartialURL() );
+		} else {
+			return $namespace . $title->getPartialURL();
+		}
+	}
+
 }
