@@ -93,7 +93,11 @@ class MintyDocsManual extends MintyDocsPage {
 			$pageText = $content->getNativeData();
 			// "Initialize" the parser, to avoid occasional errors
 			// when the parser's $mOptions field is not set.
-			$parser->startExternalParse( $title, new ParserOptions, Parser::OT_HTML );
+			$parser->startExternalParse(
+				$title,
+				ParserOptions::newFromAnon(),
+				Parser::OT_HTML
+			);
 			$rawTOC = $parser->recursiveTagParse( $pageText );
 		}
 
