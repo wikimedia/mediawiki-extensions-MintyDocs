@@ -112,40 +112,20 @@
 		"mdpublish": "MintyDocsPublishAction"
 	},
 	"Hooks": {
-		"ParserFirstCallInit": [
-			"MintyDocsHooks::registerParserFunctions"
-		],
-		"CanonicalNamespaces": [
-			"MintyDocsHooks::registerNamespaces"
-		],
-		"userCan": [
-			"MintyDocsHooks::checkPermissions"
-		],
+		"ParserFirstCallInit": "MintyDocsHooks::registerParserFunctions",
+		"CanonicalNamespaces": "MintyDocsHooks::registerNamespaces",
+		"userCan": "MintyDocsHooks::checkPermissions",
 		"OutputPageBeforeHTML": [
 			"MintyDocsHooks::addTextToPage",
 			"MintyDocsHooks::showNoticeForDraftPage"
 		],
-		"SkinBuildSidebar": [
-			"MintyDocsHooks::addTextToSidebar"
-		],
-		"PageContentSaveComplete": [
-			"MintyDocsHooks::setSearchText"
-		],
-		"MakeGlobalVariablesScript": [
-			"MintyDocsHooks::setGlobalJSVariables"
-		],
-		"MagicWordwgVariableIDs": [
-			"MintyDocsHooks::declareVarIDs"
-		],
-		"ParserGetVariableValueSwitch": [
-			"MintyDocsHooks::assignAValue"
-		],
-		"SkinTemplateNavigation": [
-			"MintyDocsPublishAction::displayTab"
-		],
-		"PageForms::FormPrinterSetup": [
-			"MintyDocsHooks::registerPageFormsInputs"
-		]
+		"SkinBuildSidebar": "MintyDocsHooks::addTextToSidebar",
+		"PageContentSaveComplete": "MintyDocsHooks::setSearchText",
+		"MakeGlobalVariablesScript": "MintyDocsHooks::setGlobalJSVariables",
+		"MagicWordwgVariableIDs": "MintyDocsHooks::declareVarIDs",
+		"ParserGetVariableValueSwitch": "MintyDocsHooks::assignAValue",
+		"SkinTemplateNavigation": "MintyDocsPublishAction::displayTab",
+		"PageForms::FormPrinterSetup": "MintyDocsHooks::registerPageFormsInputs"
 	},
 	"config": {
 		"MintyDocsDisplayFooterElementsInSidebar": false,
