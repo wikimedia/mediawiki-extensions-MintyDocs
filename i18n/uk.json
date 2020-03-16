@@ -24,9 +24,16 @@
 	"mintydocs-publish-button": "Опублікувати",
 	"mintydocs-publish-success": "Буде створено або змінено такі сторінки: $1.",
 	"mintydocscreatedraft": "Створити чернетку MintyDocs",
+	"mintydocs-createdraft-button": "Створити чернетку",
+	"mintydocs-createdraft-success": "Буде створено такі сторінки-чернетки: $1.",
 	"mintydocscopy": "Копіювати вміст MintyDocs",
 	"mintydocs-copy-button": "Копіювати",
+	"mintydocs-copy-success": "Буде скопійовано такі сторінки: $1.",
 	"mintydocsdelete": "Видалити вміст MintyDocs",
 	"mintydocs-tocinput-rename": "Перейменувати",
-	"mintydocs-tocinput-changetype": "Змінити тип"
+	"mintydocs-tocinput-changetype": "Змінити тип",
+	"apihelp-mintydocspublish-description": "Публікує сторінку MintyDocs.",
+	"apihelp-mintydocspublish-summary": "Публікує сторінку MintyDocs шляхом копіювання її із простору назв чернеток до основного простору назв.",
+	"apihelp-mintydocspublish-param-title": "Назва сторінки, яку слід опублікувати",
+	"apihelp-mintydocspublish-example-title": "Скопіювати вміст сторінки Draft:ABC123 до сторінки ABC123"
 }
