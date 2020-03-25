@@ -35,7 +35,11 @@ class MintyDocsDeletePageJob extends Job {
 		}
 
 		$error = '';
-		$wikiPage->doDeleteArticle( $deletionReason, false, null, null, $error, $user );
+		if ( version_compare( MW_VERSION, '1.35', '<' ) ) {
+			$wikiPage->doDeleteArticle( $deletionReason, false, null, null, $error, $user );
+		} else {
+			$wikiPage->doDeleteArticleReal( $deletionReason, $user, false, null, $error );
+		}
 		if ( $error != '' ) {
 			$this->error = 'MDDeletePage: ' . $error;
 			return false;
