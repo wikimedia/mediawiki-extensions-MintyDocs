@@ -202,6 +202,16 @@ class MintyDocsTopic extends MintyDocsPage {
 		$manualTitle = Title::newFromText( $fullManualName );
 		return new MintyDocsManual( $manualTitle );
 	}
+  
+	function getProductAndVersionStrings() {
+		// If it's standalone, don't get these from the URL, whether
+		// or not that's even possible to do.
+		if ( $this->mIsStandalone ) {
+			return array( '', '' );
+		} else {
+			return parent::getProductAndVersionStrings();
+		}
+	}
 
 	function getEquivalentPageNameForVersion( $version ) {
 		$versionPageName = $version->getTitle()->getPrefixedText();
