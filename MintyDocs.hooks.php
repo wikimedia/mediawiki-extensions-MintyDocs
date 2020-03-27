@@ -197,12 +197,12 @@ class MintyDocsHooks {
 	 * Assign a value to our variable
 	 *
 	 * @param Parser $parser
-	 * @param array $cache
+	 * @param array &$cache
 	 * @param string $magicWordId
-	 * @param string $ret
+	 * @param string &$ret
 	 * @return boolean
 	 */
-	public static function assignAValue( &$parser, &$cache, &$magicWordId, &$ret ) {
+	public static function assignAValue( $parser, &$cache, $magicWordId, &$ret ) {
 		$handledIDs = array( 'MAG_MINTYDOCSPRODUCT', 'MAG_MINTYDOCSVERSION', 'MAG_MINTYDOCSMANUAL' );
 		if ( !in_array( $magicWordId, $handledIDs ) ) {
 			return true;
@@ -219,21 +219,21 @@ class MintyDocsHooks {
 					return true;
 				}
 				list( $product, $version ) = $mdPage->getProductAndVersion();
-				$ret = $product->getDisplayName();
+				$ret = $cache[$magicWordId] = $product->getDisplayName();
 				break;
 			case 'MAG_MINTYDOCSVERSION':
 				if ( $className == 'MintyDocsProduct' || $className == 'MintyDocsVersion' ) {
 					return true;
 				}
 				list( $productName, $versionString ) = $mdPage->getProductAndVersionStrings();
-				$ret = $versionString;
+				$ret = $cache[$magicWordId] = $versionString;
 				break;
 			case 'MAG_MINTYDOCSMANUAL':
 				if ( $className == 'MintyDocsProduct' || $className == 'MintyDocsVersion' || $className == 'MintyDocsManual' ) {
 					return true;
 				}
 				$manual = $mdPage->getManual();
-				$ret = $manual->getDisplayName();
+				$ret = $cache[$magicWordId] = $manual->getDisplayName();
 				break;
 			default:
 				break;
