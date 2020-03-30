@@ -66,7 +66,7 @@ class MintyDocsManual extends MintyDocsPage {
 	}
 
 	private function generateTableOfContents( $showErrors ) {
-		global $wgParser;
+		$parser = MediaWikiServices::getInstance()->getParser();
 
 		$tocOrPageName = trim( $this->getPossiblyInheritedParam( 'MintyDocsTopicsList' ) );
 		// Decide whether this is a table of contents or a page name
@@ -92,8 +92,8 @@ class MintyDocsManual extends MintyDocsPage {
 			$pageText = $content->getNativeData();
 			// "Initialize" the parser, to avoid occasional errors
 			// when the parser's $mOptions field is not set.
-			$wgParser->startExternalParse( $title, new ParserOptions, Parser::OT_HTML );
-			$rawTOC = $wgParser->recursiveTagParse( $pageText );
+			$parser->startExternalParse( $title, new ParserOptions, Parser::OT_HTML );
+			$rawTOC = $parser->recursiveTagParse( $pageText );
 		}
 
 		// Get rid of any HTML tags that may have gotten into
@@ -296,7 +296,7 @@ class MintyDocsManual extends MintyDocsPage {
 
 		// doBlockLevels() takes care of just parsing '*' into
 		// bulleted lists, which is all we need.
-		$this->mTOCHTML = $wgParser->doBlockLevels( $toc, true );
+		$this->mTOCHTML = $parser->doBlockLevels( $toc, true );
 
 		if ( $showErrors && count( $topics ) > 0 ) {
 			// Display error

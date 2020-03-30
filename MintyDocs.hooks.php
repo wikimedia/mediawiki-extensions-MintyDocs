@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 class MintyDocsHooks {
 
 	public static function registerExtension() {
@@ -76,8 +78,7 @@ class MintyDocsHooks {
 		if ( $inheritedPage !== null ) {
 			$revision = Revision::newFromTitle( $inheritedPage->getTitle() );
 			$inheritedPageText = $revision->getContent()->getNativeData();
-			global $wgParser;
-			$text .= $wgParser->parse( $inheritedPageText, $title, new ParserOptions() )->getText();
+			$text .= MediaWikiServices::getInstance()->getParser()->parse( $inheritedPageText, $title, new ParserOptions() )->getText();
 		}
 		$text = $mdPage->getHeader() . $text;
 
