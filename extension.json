@@ -45,7 +45,7 @@
 		"MintyDocsAlias": "MintyDocs.i18n.alias.php"
 	},
 	"AutoloadClasses": {
-		"MintyDocsHooks": "MintyDocs.hooks.php",
+		"MintyDocsHooks": "includes/MintyDocsHooks.php",
 		"MintyDocsUtils": "includes/MintyDocsUtils.php",
 		"MintyDocsParserFunctions": "includes/MintyDocsParserFunctions.php",
 		"MintyDocsPage": "includes/MintyDocsPage.php",
