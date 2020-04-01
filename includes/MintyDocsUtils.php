@@ -134,9 +134,9 @@ class MintyDocsUtils {
 	}
 
 	/**
-	 * @param $user User
-	 * @param $action Action
-	 * $param $permissionManager PermissionManager
+	 * @param User $user
+	 * @param Action $action
+	 * @param PermissionManager $permissionManager
 	 * @return bool
 	 */
 	public static function userIsAllowed( $user, $action, $permissionManager ) {
