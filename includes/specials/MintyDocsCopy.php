@@ -3,8 +3,8 @@
 class MintyDocsCopy extends MintyDocsPublish {
 
 	/**
-	* Constructor
-	*/
+	 * Constructor
+	 */
 	function __construct() {
 		parent::__construct( 'MintyDocsCopy' );
 
@@ -68,9 +68,9 @@ class MintyDocsCopy extends MintyDocsPublish {
 		$productPage = Title::newFromText( $productStr );
 		$product = new MintyDocsProduct( $productPage );
 		$versions = $product->getChildrenPages();
-		$versionStrings = array();
+		$versionStrings = [];
 		foreach ( $versions as $versionTitle ) {
-			list ( $curProductStr, $curVersionStr ) = explode( '/', $versionTitle->getText() );
+			list( $curProductStr, $curVersionStr ) = explode( '/', $versionTitle->getText() );
 			if ( $curVersionStr !== $versionStr ) {
 				$versionStrings[] = $curVersionStr;
 			}
@@ -87,9 +87,9 @@ class MintyDocsCopy extends MintyDocsPublish {
 
 		$text = Html::hidden( 'csrf', $this->getUser()->getEditToken( $this->getName() ) ) . "\n";
 		$text .= "Select version to copy pages to: ";
-		$text .= Html::rawElement( 'select', array( 'name' => 'target_version' ), $optionsHtml ) . "\n";
+		$text .= Html::rawElement( 'select', [ 'name' => 'target_version' ], $optionsHtml ) . "\n";
 		$text .= '<p>' . Html::input( 'mdSetVersion', 'Continue', 'submit' ) . "</p>\n";
-		$text = Html::rawElement( 'form', array( 'method' => 'post' ), $text );
+		$text = Html::rawElement( 'form', [ 'method' => 'post' ], $text );
 
 		$out->addHtml( $text );
 	}
@@ -117,7 +117,7 @@ class MintyDocsCopy extends MintyDocsPublish {
 
 	function validateTitle( $title ) {
 		$mdPage = MintyDocsUtils::pageFactory( $title );
-		if ( ! $mdPage instanceof MintyDocsManual ) {
+		if ( !$mdPage instanceof MintyDocsManual ) {
 			throw new MWException( 'Page must be a MintyDocs manual.' );
 		}
 	}

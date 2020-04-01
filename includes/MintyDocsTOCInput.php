@@ -10,20 +10,20 @@ class MintyDocsTOCInput extends PFFormInput {
 	}
 
 	public function getResourceModuleNames() {
-		return array( 'ext.mintydocs.jstree' );
+		return [ 'ext.mintydocs.jstree' ];
 	}
 
 	public static function getOtherPropTypesHandled() {
-		return array( '_txt' );
+		return [ '_txt' ];
 	}
 
 	public static function getOtherCargoTypesHandled() {
-		return array( 'Text' );
+		return [ 'Text' ];
 	}
 
 	public static function getHTML( $cur_value, $input_name, $is_mandatory, $is_disabled, array $other_args ) {
 		$nodeNum = 1;
-		$treeData = array();
+		$treeData = [];
 		$lines = explode( "\n", $cur_value );
 		foreach ( $lines as $line ) {
 			preg_match( "/^(\*+)/", $line, $matches );
@@ -51,42 +51,42 @@ class MintyDocsTOCInput extends PFFormInput {
 				$parentID = $lastIDForLevel[$levelNum - 1];
 			}
 			$curID = 'node' . $nodeNum++;
-			$treeData[] = array( 'id' => $curID, 'parent' => $parentID, 'text' => $line, 'type' => $nodeType );
+			$treeData[] = [ 'id' => $curID, 'parent' => $parentID, 'text' => $line, 'type' => $nodeType ];
 			$lastIDForLevel[$levelNum] = $curID;
 		}
 
-		$mainDiv = Html::element( 'div', array(
+		$mainDiv = Html::element( 'div', [
 			'class' => 'MintyDocsTOC',
 			'data-input-name' => $input_name,
 			'data-tree-layout' => json_encode( $treeData ),
 			'style' => 'margin-top:1em; min-height:200px;'
-		) );
-		$button = Html::element( 'button', array( 'type' => 'button' ), 'Add entry' );
+		] );
+		$button = Html::element( 'button', [ 'type' => 'button' ], 'Add entry' );
 		return Html::rawElement( 'div', null, $mainDiv . "\n" . $button );
 	}
 
 	public static function getParameters() {
-		$params = array();
-		$params[] = array(
+		$params = [];
+		$params[] = [
 			'name' => 'mandatory',
 			'type' => 'boolean',
 			'description' => wfMessage( 'pf_forminputs_mandatory' )->text()
-		);
-		$params[] = array(
+		];
+		$params[] = [
 			'name' => 'restricted',
 			'type' => 'boolean',
 			'description' => wfMessage( 'pf_forminputs_restricted' )->text()
-		);
-		$params[] = array(
+		];
+		$params[] = [
 			'name' => 'class',
 			'type' => 'string',
 			'description' => wfMessage( 'pf_forminputs_class' )->text()
-		);
-		$params[] = array(
+		];
+		$params[] = [
 			'name' => 'default',
 			'type' => 'string',
 			'description' => wfMessage( 'pf_forminputs_default' )->text()
-		);
+		];
 		return $params;
 	}
 

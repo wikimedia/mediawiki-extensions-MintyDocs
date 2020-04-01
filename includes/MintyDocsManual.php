@@ -5,7 +5,7 @@ use MediaWiki\MediaWikiServices;
 class MintyDocsManual extends MintyDocsPage {
 
 	private $mTOCHTML = null;
-	private $mTOCArray = array();
+	private $mTOCArray = [];
 
 	static function getPageTypeValue() {
 		return 'Manual';
@@ -24,7 +24,7 @@ class MintyDocsManual extends MintyDocsPage {
 		list( $product, $version ) = $this->getProductAndVersion();
 		if ( $wgMintyDocsShowBreadcrumbs ) {
 			$manualDescText = wfMessage( 'mintydocs-manual-desc', $version->getLink(), $product->getLink() )->text();
-			$text .= Html::rawElement( 'div', array( 'class' => 'MintyDocsManualDesc' ), $manualDescText );
+			$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsManualDesc' ], $manualDescText );
 		}
 
 		$equivsInOtherVersions = $this->getEquivalentsInOtherVersions( $product, $version->getActualName() );
@@ -35,7 +35,7 @@ class MintyDocsManual extends MintyDocsPage {
 				$otherVersionsText .= "<li>" . Linker::link( $manualPage, $versionName ) . "</li>\n";
 			}
 			$otherVersionsText .= "</ul>\n";
-			$text .= Html::rawElement( 'div', array( 'class' => 'MintyDocsOtherManualVersions' ), $otherVersionsText );
+			$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsOtherManualVersions' ], $otherVersionsText );
 		}
 
 		// We have to call this before it's actually needed (for the
@@ -52,12 +52,12 @@ class MintyDocsManual extends MintyDocsPage {
 		}
 
 		$toc = $this->getTableOfContents( true );
-		return array( $this->getDisplayName(), $toc );
+		return [ $this->getDisplayName(), $toc ];
 	}
 
 	function getAllTopics() {
 		$topicPages = $this->getChildrenPages();
-		$topics = array();
+		$topics = [];
 		foreach ( $topicPages as $topicPage ) {
 			$topics[] = new MintyDocsTopic( $topicPage );
 		}
@@ -65,6 +65,7 @@ class MintyDocsManual extends MintyDocsPage {
 		return $topics;
 	}
 
+	// phpcs:ignore MediaWiki.Commenting.FunctionComment.MissingDocumentationPrivate
 	private function generateTableOfContents( $showErrors ) {
 		$parser = MediaWikiServices::getInstance()->getParser();
 
@@ -105,8 +106,8 @@ class MintyDocsManual extends MintyDocsPage {
 		// that there might be extra newlines, etc. Get rid
 		// of these, to make the output cleaner.
 		$rawTOCLines = explode( "\n", $rawTOC );
-		$tocLines = array();
-		foreach( $rawTOCLines as $line ) {
+		$tocLines = [];
+		foreach ( $rawTOCLines as $line ) {
 			$line = trim( $line );
 			if ( str_replace( '*', '', $line ) != '' ) {
 				$tocLines[] = $line;
@@ -122,13 +123,13 @@ class MintyDocsManual extends MintyDocsPage {
 			}
 		}
 		if ( $useFormForRedLinkedTopics ) {
-			$formEditQuery = array();
+			$formEditQuery = [];
 			if ( $topicDefaultForm != null ) {
 				$formEditQuery['form'] = $topicDefaultForm;
 			}
 			if ( $topicAlternateFormsStr != '' ) {
 				$topicAlternateForms = array_map( 'trim', explode( ',', $topicAlternateFormsStr ) );
-				$formEditQuery['alt_form'] = array();
+				$formEditQuery['alt_form'] = [];
 				foreach ( $topicAlternateForms as $i => $altForm ) {
 					$formEditQuery['alt_form'][] = $altForm;
 				}
@@ -148,10 +149,10 @@ class MintyDocsManual extends MintyDocsPage {
 		$manualHasDraftPage = $this->hasDraftPage();
 
 		$topics = $this->getAllTopics();
-		$this->mTOCArray = array();
-		$unlinkedLineTracker = array();
-		foreach( $tocLines as $lineNum => &$line ) {
-			$matches = array();
+		$this->mTOCArray = [];
+		$unlinkedLineTracker = [];
+		foreach ( $tocLines as $lineNum => &$line ) {
+			$matches = [];
 			preg_match( "/(\*+)\s*(.*)\s*$/", $line, $matches );
 			$numAsterisks = strlen( $matches[1] );
 			$lineValue = $matches[2];
@@ -159,11 +160,11 @@ class MintyDocsManual extends MintyDocsPage {
 			if ( strpos( $lineValue, '-' ) === 0 ) {
 				$displayText = trim( substr( $lineValue, 1 ) );
 				$line = str_replace( $lineValue, $displayText, $line );
-				$this->mTOCArray[] = array( $displayText, $numAsterisks );
-				$unlinkedLineTracker[$lineNum] = array( $numAsterisks, true );
+				$this->mTOCArray[] = [ $displayText, $numAsterisks ];
+				$unlinkedLineTracker[$lineNum] = [ $numAsterisks, true ];
 				continue;
 			}
-			$unlinkedLineTracker[] = array( $numAsterisks, false );
+			$unlinkedLineTracker[] = [ $numAsterisks, false ];
 			$isStandalone = ( strpos( $lineValue, '!' ) === 0 );
 			$isBorrowed = ( strpos( $lineValue, '+' ) === 0 );
 			if ( $isStandalone || $isBorrowed ) {
@@ -174,9 +175,9 @@ class MintyDocsManual extends MintyDocsPage {
 					$topic = MintyDocsTopic::newBorrowed( $title, $this );
 				}
 				if ( $topic != null ) {
-					$this->mTOCArray[] = array( $topic, $numAsterisks );
+					$this->mTOCArray[] = [ $topic, $numAsterisks ];
 				} else {
-					$this->mTOCArray[] = array( $title, $numAsterisks );
+					$this->mTOCArray[] = [ $title, $numAsterisks ];
 				}
 				continue;
 			}
@@ -187,7 +188,7 @@ class MintyDocsManual extends MintyDocsPage {
 				if ( $lineValue == $topicActualName ) {
 					$foundMatchingTopic = true;
 					$line = str_replace( $lineValue, $topic->getTOCLink(), $line );
-					$this->mTOCArray[] = array( $topic, $numAsterisks );
+					$this->mTOCArray[] = [ $topic, $numAsterisks ];
 					// Unset this so that $topics will hold the list of unmatched topics.
 					unset( $topics[$i] );
 					break;
@@ -213,14 +214,14 @@ class MintyDocsManual extends MintyDocsPage {
 				if ( $useFormForRedLinkedTopics ) {
 					$formEditQuery['target'] = $topicPageName;
 					$url = $formSpecialPageTitle->getLocalURL( $formEditQuery );
-					$linkAttrs = array( 'href' => $url, 'class' => 'new', 'data-mdtype' => 'topic' );
+					$linkAttrs = [ 'href' => $url, 'class' => 'new', 'data-mdtype' => 'topic' ];
 					$link = Html::rawElement( 'a', $linkAttrs, $lineValue );
 				} else {
-					$link = Linker::link( $title, $lineValue, array( 'data-mdtype' => 'topic' ) );
+					$link = Linker::link( $title, $lineValue, [ 'data-mdtype' => 'topic' ] );
 				}
 
 				$line = str_replace( $lineValue, $link, $line );
-				$this->mTOCArray[] = array( $title, $numAsterisks );
+				$this->mTOCArray[] = [ $title, $numAsterisks ];
 			}
 		}
 
@@ -234,7 +235,7 @@ class MintyDocsManual extends MintyDocsPage {
 		// any empty lines from the previous run-through.
 		$tocLines = array_values( $tocLines );
 		$unlinkedLineTracker = array_values( $unlinkedLineTracker );
-		$unlinkedLinesToHide = array();
+		$unlinkedLinesToHide = [];
 		for ( $lineNum = count( $unlinkedLineTracker ) - 1; $lineNum >= 0; $lineNum-- ) {
 			list( $numAsterisks, $isUnlinked ) = $unlinkedLineTracker[$lineNum];
 			if ( !$isUnlinked ) {
@@ -263,7 +264,7 @@ class MintyDocsManual extends MintyDocsPage {
 		// Handle standalone topics - prepended with a "!".
 		$toc = preg_replace_callback(
 			"/(\*+)\s*!\s*(.*)\s*$/m",
-			function( $matches ) {
+			function ( $matches ) {
 				$standaloneTopicTitle = Title::newFromText( $matches[2], $this->getTitle()->getNamespace() );
 				$standaloneTopic = MintyDocsTopic::newStandalone( $standaloneTopicTitle, $this );
 				if ( $standaloneTopic == null ) {
@@ -277,7 +278,7 @@ class MintyDocsManual extends MintyDocsPage {
 		// Same with "borrowed" topics, with "+".
 		$toc = preg_replace_callback(
 			"/(\*+)\s*\+\s*(.*)\s*$/m",
-			function( $matches ) {
+			function ( $matches ) {
 				$borrowedTopicTitle = Title::newFromText( $matches[2], $this->getTitle()->getNamespace() );
 				$borrowedTopic = MintyDocsTopic::newBorrowed( $borrowedTopicTitle, $this );
 				if ( $borrowedTopic == null ) {
@@ -301,7 +302,7 @@ class MintyDocsManual extends MintyDocsPage {
 		if ( $showErrors && count( $topics ) > 0 ) {
 			// Display error
 			global $wgOut;
-			$topicLinks = array();
+			$topicLinks = [];
 			foreach ( $topics as $topic ) {
 				$topicLinks[] = $topic->getTOCLink();
 			}
@@ -310,7 +311,7 @@ class MintyDocsManual extends MintyDocsPage {
 			//$errorMsg = wfMessage( 'mintydocs-manual-extratopics', implode( ', ', $topicLinks ) )->text();
 			$errorMsg = "The following topics are defined for this manual but are not included in the list of topics: " .
 				 implode( ', ', $topicLinks );
-			$wgOut->addHTML( Html::rawElement( 'div', array( 'class' => 'warningbox' ), $errorMsg ) );
+			$wgOut->addHTML( Html::rawElement( 'div', [ 'class' => 'warningbox' ], $errorMsg ) );
 		}
 	}
 
@@ -336,7 +337,7 @@ class MintyDocsManual extends MintyDocsPage {
 		$prevTopic = null;
 		$nextTopic = null;
 
-		foreach( $this->mTOCArray as $i => $curTopic ) {
+		foreach ( $this->mTOCArray as $i => $curTopic ) {
 			if ( !( $curTopic[0] instanceof MintyDocsTopic ) ) {
 				continue;
 			}
@@ -358,7 +359,7 @@ class MintyDocsManual extends MintyDocsPage {
 				}
 			}
 		}
-		return array( $prevTopic, $nextTopic );
+		return [ $prevTopic, $nextTopic ];
 	}
 
 	function getEquivalentPageNameForVersion( $version ) {

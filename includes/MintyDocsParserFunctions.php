@@ -1,7 +1,5 @@
 <?php
 
-use MediaWiki\MediaWikiServices;
-
 /**
  * Parser functions for MintyDocs.
  *
@@ -58,7 +56,7 @@ class MintyDocsParserFunctions {
 		list( $parentPageName, $thisPageName ) = MintyDocsUtils::getPageParts( $parser->getTitle() );
 		$returnMsg = MintyDocsProduct::checkPageEligibility( $parentPageName, $thisPageName );
 		if ( $returnMsg != null ) {
-			return Html::rawElement( 'div', array( 'class' => 'error' ), $returnMsg );
+			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
 		}
 
 		$displayTitle = null;
@@ -72,7 +70,7 @@ class MintyDocsParserFunctions {
 		$previousType = $parserOutput->getProperty( 'MintyDocsPageType' );
 		if ( $previousType != null ) {
 			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
-			return Html::rawElement( 'div', array( 'class' => 'error' ), $returnMsg );
+			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
 		}
 
 		$parserOutput->addModules( 'ext.mintydocs.main' );
@@ -104,7 +102,7 @@ class MintyDocsParserFunctions {
 		list( $parentPageName, $thisPageName ) = MintyDocsUtils::getPageParts( $parser->getTitle() );
 		$returnMsg = MintyDocsVersion::checkPageEligibility( $parentPageName, $thisPageName );
 		if ( $returnMsg != null ) {
-			return Html::rawElement( 'div', array( 'class' => 'error' ), $returnMsg );
+			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
 		}
 
 		$params = func_get_args();
@@ -116,7 +114,7 @@ class MintyDocsParserFunctions {
 		$previousType = $parserOutput->getProperty( 'MintyDocsPageType' );
 		if ( $previousType != null ) {
 			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
-			return Html::rawElement( 'div', array( 'class' => 'error' ), $returnMsg );
+			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
 		}
 
 		$parserOutput->addModules( 'ext.mintydocs.main' );
@@ -124,7 +122,7 @@ class MintyDocsParserFunctions {
 		$parserOutput->setProperty( 'MintyDocsPageType', 'Version' );
 		$parserOutput->setProperty( 'MintyDocsParentPage', $parentPageName );
 
-		foreach( $processedParams as $paramName => $value ) {
+		foreach ( $processedParams as $paramName => $value ) {
 			if ( $paramName == 'inherit' && $value == null ) {
 				$parserOutput->setProperty( 'MintyDocsInherit', true );
 			} elseif ( $paramName == 'status' ) {
@@ -140,7 +138,7 @@ class MintyDocsParserFunctions {
 		list( $parentPageName, $thisPageName ) = MintyDocsUtils::getPageParts( $parser->getTitle() );
 		$returnMsg = MintyDocsManual::checkPageEligibility( $parentPageName, $thisPageName );
 		if ( $returnMsg != null ) {
-			return Html::rawElement( 'div', array( 'class' => 'error' ), $returnMsg );
+			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
 		}
 
 		$displayTitle = null;
@@ -155,7 +153,7 @@ class MintyDocsParserFunctions {
 		$previousType = $parserOutput->getProperty( 'MintyDocsPageType' );
 		if ( $previousType != null ) {
 			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
-			return Html::rawElement( 'div', array( 'class' => 'error' ), $returnMsg );
+			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
 		}
 
 		$parserOutput->addModules( 'ext.mintydocs.main' );
@@ -163,7 +161,7 @@ class MintyDocsParserFunctions {
 		$parserOutput->setProperty( 'MintyDocsPageType', 'Manual' );
 		$parserOutput->setProperty( 'MintyDocsParentPage', $parentPageName );
 
-		foreach( $processedParams as $paramName => $value ) {
+		foreach ( $processedParams as $paramName => $value ) {
 			if ( $paramName == 'display name' ) {
 				$parserOutput->setProperty( 'MintyDocsDisplayName', $value );
 				$displayTitle = $value;
@@ -206,7 +204,7 @@ class MintyDocsParserFunctions {
 	}
 
 	static function renderTopic( &$parser ) {
-		//if ($parser->getTitle() == null ) return;
+		// if ($parser->getTitle() == null ) return;
 		list( $parentPageName, $thisPageName ) = MintyDocsUtils::getPageParts( $parser->getTitle() );
 		$returnMsg = MintyDocsTopic::checkPageEligibility( $parentPageName, $thisPageName );
 		if ( $returnMsg != null ) {
@@ -228,7 +226,7 @@ class MintyDocsParserFunctions {
 		$previousType = $parserOutput->getProperty( 'MintyDocsPageType' );
 		if ( $previousType != null ) {
 			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
-			return Html::rawElement( 'div', array( 'class' => 'error' ), $returnMsg );
+			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
 		}
 
 		$parserOutput->addModules( 'ext.mintydocs.main' );
@@ -236,7 +234,7 @@ class MintyDocsParserFunctions {
 		$parserOutput->setProperty( 'MintyDocsPageType', 'Topic' );
 		$parserOutput->setProperty( 'MintyDocsParentPage', $parentPageName );
 
-		foreach( $processedParams as $paramName => $value ) {
+		foreach ( $processedParams as $paramName => $value ) {
 			if ( $paramName == 'display name' ) {
 				$parserOutput->setProperty( 'MintyDocsDisplayName', $value );
 				$displayTitle = $value;
@@ -304,7 +302,7 @@ class MintyDocsParserFunctions {
 		$contextProduct = $contextVersion = $contextManual = null;
 		$standalone = false;
 		$outputWikitext = true;
-		foreach( $processedParams as $paramName => $value ) {
+		foreach ( $processedParams as $paramName => $value ) {
 			if ( $paramName == 'product' ) {
 				$product = $value;
 			} elseif ( $paramName == 'version' ) {
@@ -333,7 +331,7 @@ class MintyDocsParserFunctions {
 		// Handle links to standalone topics right away.
 		if ( $topic != null && $standalone ) {
 			$linkedPageName = self::possibleNamespacePrefix( $curTitle ) . $topic;
-			$query = array();
+			$query = [];
 			if ( $contextProduct != null ) {
 				$query['contextProduct'] = $contextProduct;
 			} elseif ( $wgRequest->getCheck( 'contextProduct' ) ) {
@@ -342,12 +340,12 @@ class MintyDocsParserFunctions {
 			if ( $contextVersion != null ) {
 				$query['contextVersion'] = $contextVersion;
 			} elseif ( $wgRequest->getCheck( 'contextVersion' ) ) {
-				$query['contextVersion'] = $wgRequest->getVal( 'contextVersion ');
+				$query['contextVersion'] = $wgRequest->getVal( 'contextVersion ' );
 			}
 			if ( $contextManual != null ) {
 				$query['contextManual'] = $contextManual;
 			} elseif ( $wgRequest->getCheck( 'contextManual' ) ) {
-				$query['contextManual'] = $wgRequest->getVal( 'contextManual ');
+				$query['contextManual'] = $wgRequest->getVal( 'contextManual ' );
 			}
 			return self::getLinkWikitextOrHTML( $outputWikitext, $linkedPageName, $linkText, $fragment, $query );
 		}
@@ -422,7 +420,7 @@ class MintyDocsParserFunctions {
 			$linkedPageName .= '/' . $topic;
 		}
 
-		$query = array();
+		$query = [];
 		if ( $contextProduct == null && $wgRequest->getCheck( 'contextProduct' ) ) {
 			$contextProduct = $wgRequest->getVal( 'contextProduct' );
 		}
@@ -446,7 +444,7 @@ class MintyDocsParserFunctions {
 	}
 
 	static function processParams( $parser, $params ) {
-		$processedParams = array();
+		$processedParams = [];
 
 		// Assign params.
 		foreach ( $params as $i => $param ) {
@@ -507,8 +505,8 @@ class MintyDocsParserFunctions {
 				return "[$url $linkText]";
 			}
 		} else {
-			$str = Linker::link( $title, $linkText, $customAttribs = array(), $query );
-			return array( $str, 'noparse' => true, 'isHTML' => true );
+			$str = Linker::link( $title, $linkText, $customAttribs = [], $query );
+			return [ $str, 'noparse' => true, 'isHTML' => true ];
 		}
 	}
 

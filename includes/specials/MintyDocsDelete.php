@@ -77,11 +77,11 @@ class MintyDocsDelete extends SpecialPage {
 		$text .= "\t" . Html::hidden( 'csrf', $this->getUser()->getEditToken( $this->getName() ) ) . "\n";
 
 		$text .= Html::element( 'input',
-			array(
+			[
 				'type' => 'submit',
 				'name' => 'mdDelete',
 				'value' => wfMessage( 'delete' )
-			)
+			]
 		);
 
 		$text .= '</form>';
@@ -112,12 +112,12 @@ class MintyDocsDelete extends SpecialPage {
 
 		$mdPage = MintyDocsUtils::pageFactory( $title );
 
-		$jobs = array();
+		$jobs = [];
 
-		$params = array(
+		$params = [
 			'user_id' => $user->getId(),
 			'deletion_reason' => 'Delete manual'
-		);
+		];
 
 		$jobs[] = new MintyDocsDeletePageJob( $title, $params );
 		// If this special page ever supports deleting anything other

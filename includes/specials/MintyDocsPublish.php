@@ -140,11 +140,11 @@ class MintyDocsPublish extends SpecialPage {
 		$text .= Html::hidden( 'csrf', $this->getUser()->getEditToken( $this->getName() ) ) . "\n";
 
 		$text .= Html::element( 'input',
-			array(
+			[
 				'type' => 'submit',
 				'name' => 'mdPublish',
 				'value' => $this->msg( self::$mButtonMsg )->parse()
-			)
+			]
 		);
 
 		$text .= '</form>';
@@ -152,7 +152,7 @@ class MintyDocsPublish extends SpecialPage {
 	}
 
 	function validateSinglePageAction( $fromTitle, $toTitle ) {
-		if ( ! $toTitle->exists() ) {
+		if ( !$toTitle->exists() ) {
 			return null;
 		}
 		$fromPage = WikiPage::factory( $fromTitle );
@@ -185,7 +185,7 @@ class MintyDocsPublish extends SpecialPage {
 	}
 
 	static function makePagesTree( $mdPage, $numTopicIndents = 0 ) {
-		$pagesTree = array( 'node' => $mdPage, 'tree' => array() );
+		$pagesTree = [ 'node' => $mdPage, 'tree' => [] ];
 		if ( $mdPage instanceof MintyDocsProduct ) {
 			$versions = $mdPage->getVersions();
 			foreach ( $versions as $versionNum => $version ) {
@@ -236,7 +236,7 @@ class MintyDocsPublish extends SpecialPage {
 	}
 
 	function displayToggleLinks() {
-		$text =<<<END
+		$text = <<<END
 <p class="selectAndDeselect">
 <a id="selectall">Select all</a>
 &middot;
@@ -252,7 +252,7 @@ END;
 		$fromPageName = $fromTitle->getText();
 		$toTitle = $this->generateTargetTitle( $fromPageName );
 		if ( !$toTitle->exists() ) {
-			return Html::check( 'page_name_' . self::$mCheckboxNumber++, true, array( 'value' => $fromPageName, 'class' => 'mdCheckbox' ) ) .
+			return Html::check( 'page_name_' . self::$mCheckboxNumber++, true, [ 'value' => $fromPageName, 'class' => 'mdCheckbox' ] ) .
 			'<strong>' . $mdPage->getLink() . '</strong>';
 		}
 		if ( !$this->overwritingIsAllowed() && $toTitle->exists() ) {
@@ -268,7 +268,7 @@ END;
 		if ( $fromPageText == $toPageText ) {
 			return $mdPage->getLink() . ' (no change)';
 		}
-		return Html::check( 'page_name_' . self::$mCheckboxNumber++, true, array( 'value' => $fromPageName, 'class' => 'mdCheckbox' ) ) . $mdPage->getLink();
+		return Html::check( 'page_name_' . self::$mCheckboxNumber++, true, [ 'value' => $fromPageName, 'class' => 'mdCheckbox' ] ) . $mdPage->getLink();
 	}
 
 	function overwritingIsAllowed() {
@@ -280,12 +280,12 @@ END;
 		$user = $this->getUser();
 		$out = $this->getOutput();
 
-		$jobs = array();
+		$jobs = [];
 
 		$submittedValues = $req->getValues();
-		$toTitles = array();
+		$toTitles = [];
 
-		foreach( $submittedValues as $key => $val ) {
+		foreach ( $submittedValues as $key => $val ) {
 			if ( substr( $key, 0, 10 ) != 'page_name_' ) {
 				continue;
 			}
@@ -296,7 +296,7 @@ END;
 			$fromPageText = $fromPage->getContent()->getNativeData();
 			$toTitle = $this->generateTargetTitle( $fromPageName );
 			$toTitles[] = $toTitle;
-			$params = array();
+			$params = [];
 			$params['user_id'] = $user->getId();
 			$params['page_text'] = $fromPageText;
 			$params['edit_summary'] = self::$mEditSummary;
@@ -312,7 +312,7 @@ END;
 			// child pages occurs right before the saving of the
 			// parent.
 			$fromMDPage = MintyDocsUtils::pageFactory( $fromTitle );
-			if ( $fromMDPage && ( ! $fromMDPage instanceof MintyDocsProduct ) ) {
+			if ( $fromMDPage && ( !$fromMDPage instanceof MintyDocsProduct ) ) {
 				$fromParentTitle = $fromMDPage->getParentPage();
 				$fromParentPageName = $fromParentTitle->getText();
 				$toParentTitle = self::generateTargetTitle( $fromParentPageName );

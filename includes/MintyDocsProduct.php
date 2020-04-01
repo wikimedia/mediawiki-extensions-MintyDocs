@@ -74,11 +74,11 @@ class MintyDocsProduct extends MintyDocsPage {
 		$versionListText .= "<ul>\n";
 
 		$versionsAndTheirPages = $this->getVersions();
-		foreach( $versionsAndTheirPages as $versionString => $version ) {
+		foreach ( $versionsAndTheirPages as $versionString => $version ) {
 			$versionListText .= '<li>' . Linker::link( $version->getTitle(), $versionString ) . "</li>\n";
 		}
 		$versionListText .= "</ul>\n";
-		$versionListText = Html::rawElement( 'div', array( 'class' => 'MintyDocsVersionList' ), $versionListText );
+		$versionListText = Html::rawElement( 'div', [ 'class' => 'MintyDocsVersionList' ], $versionListText );
 
 		return $versionListText;
 	}
@@ -88,9 +88,9 @@ class MintyDocsProduct extends MintyDocsPage {
 	 */
 	function getVersions() {
 		$versionPages = $this->getChildrenPages();
-		$versionsAndTheirPages = array();
+		$versionsAndTheirPages = [];
 		// Store these values, so function doesn't have to be called unnecessarily.
-		$userCanViewVersionStatus = array();
+		$userCanViewVersionStatus = [];
 		foreach ( $versionPages as $versionPage ) {
 			$mdVersionPage = new MintyDocsVersion( $versionPage );
 			$status = $mdVersionPage->getStatus();
@@ -115,7 +115,7 @@ class MintyDocsProduct extends MintyDocsPage {
 	 * before the specified one, and starting with the most recent one.
 	 */
 	public function getVersionsBefore( $curVersionString ) {
-		$versionsAndTheirPagesBeforeThisOne = array();
+		$versionsAndTheirPagesBeforeThisOne = [];
 		$versionsAndTheirPages = $this->getVersions();
 		$versionStrings = array_keys( $versionsAndTheirPages );
 		// Go in reverse order.

@@ -24,7 +24,7 @@ class MintyDocsPublishAPI extends ApiBase {
 		$pageName = $params['title'];
 
 		// We need to do this to get MD_NS_DRAFT defined.
-		$dummyArray = array();
+		$dummyArray = [];
 		MintyDocsHooks::registerNamespaces( $dummyArray );
 
 		$fromTitle = Title::newFromText( $pageName, MD_NS_DRAFT );
@@ -81,9 +81,9 @@ class MintyDocsPublishAPI extends ApiBase {
 	 * @return array or false
 	 */
 	function getAllowedParams() {
-		return array(
+		return [
 			'title' => null
-		);
+		];
 	}
 
 	/**
@@ -92,9 +92,9 @@ class MintyDocsPublishAPI extends ApiBase {
 	 * @return string[]
 	 */
 	protected function getExamplesMessages() {
-		return array(
+		return [
 			'action=mintydocspublish&title=ABC123' => 'apihelp-mintydocspublish-example-title'
-		);
+		];
 	}
 
 }

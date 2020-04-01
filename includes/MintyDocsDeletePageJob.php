@@ -17,7 +17,7 @@ class MintyDocsDeletePageJob extends Job {
 	 * @return bool success
 	 */
 	function run() {
-		if ( is_null( $this->title ) ) {
+		if ( $this->title === null ) {
 			$this->error = "MDDeletePage: Invalid title";
 			return false;
 		}

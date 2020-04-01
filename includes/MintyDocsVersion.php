@@ -39,7 +39,7 @@ class MintyDocsVersion extends MintyDocsPage {
 		$product = new MintyDocsProduct( $this->getParentPage() );
 		if ( $wgMintyDocsShowBreadcrumbs ) {
 			$versionDescText = wfMessage( 'mintydocs-version-desc', $this->getDisplayName(), $product->getLink() )->text();
-			$text .= Html::rawElement( 'div', array( 'class' => 'MintyDocsVersionDesc' ), $versionDescText );
+			$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsVersionDesc' ], $versionDescText );
 		}
 
 		$manualsListText = wfMessage( 'mintydocs-version-manuallist' ) . "\n";
@@ -66,11 +66,11 @@ class MintyDocsVersion extends MintyDocsPage {
 			// to an i18n message if it works out as a feature.
 			$errorMsg = "The following manuals are defined for this version but are not included in the list of manuals: " .
 				implode( ', ', array_keys( $manualsAndTheirRealNames ) );
-			//$errorMsg = wfMessage( 'mintydocs-version-extramanuals', implode( ', ', array_keys( $manualsAndTheirRealNames ) ) );
-			$text .= Html::rawElement( 'div', array( 'class' => 'warningbox' ), $errorMsg );
+			// $errorMsg = wfMessage( 'mintydocs-version-extramanuals', implode( ', ', array_keys( $manualsAndTheirRealNames ) ) );
+			$text .= Html::rawElement( 'div', [ 'class' => 'warningbox' ], $errorMsg );
 		}
 
-		$text .= Html::rawElement( 'div', array( 'class' => 'MintyDocsManualList' ), $manualsListText );
+		$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsManualList' ], $manualsListText );
 
 		return $text;
 	}
@@ -81,7 +81,7 @@ class MintyDocsVersion extends MintyDocsPage {
 
 	function getAllManuals() {
 		$manualPages = $this->getChildrenPages();
-		$manualsAndTheirRealNames = array();
+		$manualsAndTheirRealNames = [];
 		foreach ( $manualPages as $manualPage ) {
 			$mdManualPage = new MintyDocsManual( $manualPage );
 			$actualName = $mdManualPage->getActualName();
@@ -93,7 +93,7 @@ class MintyDocsVersion extends MintyDocsPage {
 
 	public function getProductAndVersion() {
 		$product = new MintyDocsProduct( $this->getParentPage() );
-		return array( $product, $this );
+		return [ $product, $this ];
 	}
 
 }

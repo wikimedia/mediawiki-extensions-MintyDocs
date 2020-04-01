@@ -27,7 +27,7 @@ abstract class MintyDocsPage {
 			// @TODO - add i18n for page type.
 			return wfMessage( "mintydocs-invalidparentpage", $parentPageName, $parentPageType )->parse();
 		}
-		
+
 		return null;
 	}
 
@@ -44,19 +44,20 @@ abstract class MintyDocsPage {
 	}
 
 	function getChildrenPages() {
-		$childrenPages = array();
+		$childrenPages = [];
 
 		$dbr = wfGetDB( DB_REPLICA );
 		$res = $dbr->select( 'page_props',
-			array(
+			[
 				'pp_page'
-			),
-			array(
+			],
+			[
 				'pp_value' => $this->mTitle->getPrefixedText(),
 				'pp_propname' => 'MintyDocsParentPage'
-			)
+			]
 		);
 
+		// phpcs:ignore MediaWiki.ControlStructures.AssignmentInControlStructures.AssignmentInControlStructures
 		while ( $row = $dbr->fetchRow( $res ) ) {
 			$childrenPages[] = Title::newFromID( $row[0] );
 		}
@@ -91,7 +92,7 @@ abstract class MintyDocsPage {
 
 		$versionString = $pageNameParts[$numProductNameParts];
 
-		return array( $productName, $versionString );
+		return [ $productName, $versionString ];
 	}
 
 	public function getProductAndVersion() {
@@ -100,7 +101,7 @@ abstract class MintyDocsPage {
 		$product = new MintyDocsProduct( $productPage );
 		$versionPage = Title::newFromText( $productName . '/' . $versionString );
 		$version = new MintyDocsVersion( $versionPage );
-		return array( $product, $version );
+		return [ $product, $version ];
 	}
 
 	public function getEquivalentPagesForPreviousVersions() {
@@ -108,7 +109,7 @@ abstract class MintyDocsPage {
 		$productPage = Title::newFromText( $productName );
 		$product = new MintyDocsProduct( $productPage );
 
-		$equivalentPages = array();
+		$equivalentPages = [];
 		$versionsAndTheirPages = $product->getVersionsBefore( $versionString );
 		foreach ( $versionsAndTheirPages as $curVersionString => $curVersion ) {
 			$curEquivalentPage = $this->getEquivalentPageForVersion( $curVersion );
@@ -216,7 +217,7 @@ abstract class MintyDocsPage {
 	 * Used only for Manual and Topic.
 	 */
 	function getEquivalentsInOtherVersions( $product, $thisVersionString ) {
-		$equivalents = array();
+		$equivalents = [];
 		$versionsAndTheirPages = $product->getVersions();
 		foreach ( $versionsAndTheirPages as $versionString => $version ) {
 			if ( $versionString == $thisVersionString ) {
@@ -263,12 +264,12 @@ abstract class MintyDocsPage {
 		// If this is a draft page, only people with some kind of
 		// MintyDocs permission can view it.
 		if ( $this->mTitle->getNamespace() == MD_NS_DRAFT ) {
-			if ( ! MintyDocsUtils::userIsAllowed( $user, 'mintydocs-administer', $permissionManager ) &&
-			! MintyDocsUtils::userIsAllowed( $user, 'mintydocs-edit', $permissionManager ) &&
-			! MintyDocsUtils::userIsAllowed( $user, 'mintydocs-preview', $permissionManager ) &&
-			! $product->userIsAdmin( $user ) &&
-			! $product->userIsEditor( $user ) &&
-			! $product->userIsPreviewer( $user ) ) {
+			if ( !MintyDocsUtils::userIsAllowed( $user, 'mintydocs-administer', $permissionManager ) &&
+			!MintyDocsUtils::userIsAllowed( $user, 'mintydocs-edit', $permissionManager ) &&
+			!MintyDocsUtils::userIsAllowed( $user, 'mintydocs-preview', $permissionManager ) &&
+			!$product->userIsAdmin( $user ) &&
+			!$product->userIsEditor( $user ) &&
+			!$product->userIsPreviewer( $user ) ) {
 				return false;
 			}
 		}

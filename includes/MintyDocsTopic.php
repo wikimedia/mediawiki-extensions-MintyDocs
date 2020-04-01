@@ -90,7 +90,7 @@ class MintyDocsTopic extends MintyDocsPage {
 
 		if ( $wgMintyDocsShowBreadcrumbs ) {
 			$topicDescText = wfMessage( 'mintydocs-topic-desc', $manual->getLink(), $version->getLink(), $product->getLink() )->text();
-			$text .= Html::rawElement( 'div', array( 'class' => 'MintyDocsTopicDesc' ), $topicDescText );
+			$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsTopicDesc' ], $topicDescText );
 		}
 
 		$equivsInOtherVersions = $this->getEquivalentsInOtherVersions( $product, $version->getActualName() );
@@ -101,16 +101,16 @@ class MintyDocsTopic extends MintyDocsPage {
 				$otherVersionsText .= "<li>" . Linker::link( $topicPage, $versionName ) . "</li>\n";
 			}
 			$otherVersionsText .= "</ul>\n";
-			$text .= Html::rawElement( 'div', array( 'class' => 'MintyDocsOtherManualVersions' ), $otherVersionsText );
+			$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsOtherManualVersions' ], $otherVersionsText );
 		}
 
 		if ( $manual->hasPagination() ) {
 			list( $prevTopic, $nextTopic ) = $manual->getPreviousAndNextTopics( $this, false );
 			if ( $prevTopic ) {
-				$text .= Html::rawElement( 'div', array( 'class' => 'MintyDocsPrevTopicLink' ), '&larr;<br />' . $prevTopic->getLink() );
+				$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsPrevTopicLink' ], '&larr;<br />' . $prevTopic->getLink() );
 			}
 			if ( $nextTopic ) {
-				$text .= Html::rawElement( 'div', array( 'class' => 'MintyDocsNextTopicLink' ), '&rarr;<br />' . $nextTopic->getLink() );
+				$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsNextTopicLink' ], '&rarr;<br />' . $nextTopic->getLink() );
 			}
 		}
 
@@ -123,7 +123,7 @@ class MintyDocsTopic extends MintyDocsPage {
 		if ( $displayName == null ) {
 			$displayName = $this->getDisplayName();
 		}
-		$query = array();
+		$query = [];
 		if ( $this->mIsStandalone ) {
 			$manual = $this->getManual();
 			list( $product, $version ) = $manual->getProductAndVersion();
@@ -139,7 +139,7 @@ class MintyDocsTopic extends MintyDocsPage {
 			$query['contextVersion'] = $version->getActualName();
 			$query['contextManual'] = $manual->getActualName();
 		}
-		return Linker::link( $this->mTitle, $displayName, array(), $query );
+		return Linker::link( $this->mTitle, $displayName, [], $query );
 	}
 
 	function getFooter() {
@@ -151,7 +151,7 @@ class MintyDocsTopic extends MintyDocsPage {
 
 		$header = '<p>' . $manual->getDisplayName() . '</p>';
 		$toc = $manual->getTableOfContents( false );
-		return Html::rawElement( 'div', array( 'class' => 'MintyDocsTopicTOC' ), $header . $toc );
+		return Html::rawElement( 'div', [ 'class' => 'MintyDocsTopicTOC' ], $header . $toc );
 	}
 
 	function getSidebarText() {
@@ -161,11 +161,11 @@ class MintyDocsTopic extends MintyDocsPage {
 
 		$manual = $this->getRealOrContextManual();
 		$toc = $manual->getTableOfContents( false );
-		return array( $manual->getDisplayName(), $toc );
+		return [ $manual->getDisplayName(), $toc ];
 	}
 
 	function getChildrenPages() {
-		return array();
+		return [];
 	}
 
 	function getManual() {
@@ -202,12 +202,12 @@ class MintyDocsTopic extends MintyDocsPage {
 		$manualTitle = Title::newFromText( $fullManualName );
 		return new MintyDocsManual( $manualTitle );
 	}
-  
+
 	function getProductAndVersionStrings() {
 		// If it's standalone, don't get these from the URL, whether
 		// or not that's even possible to do.
 		if ( $this->mIsStandalone ) {
-			return array( '', '' );
+			return [ '', '' ];
 		} else {
 			return parent::getProductAndVersionStrings();
 		}

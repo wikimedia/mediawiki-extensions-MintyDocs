@@ -9,19 +9,14 @@ class MintyDocsHooks {
 			define( 'MD_NS_DRAFT', 620 );
 			define( 'MD_NS_DRAFT_TALK', 621 );
 		}
-
-		// Backward compatibility for MW < 1.28.
-		if ( !defined( 'DB_REPLICA' ) ) {
-			define( 'DB_REPLICA', DB_SLAVE );
-		}
 	}
 
 	public static function registerParserFunctions( &$parser ) {
-		$parser->setFunctionHook( 'mintydocs_product', array( 'MintyDocsParserFunctions', 'renderProduct' ) );
-		$parser->setFunctionHook( 'mintydocs_version', array( 'MintyDocsParserFunctions', 'renderVersion' ) );
-		$parser->setFunctionHook( 'mintydocs_manual', array( 'MintyDocsParserFunctions', 'renderManual' ) );
-		$parser->setFunctionHook( 'mintydocs_topic', array( 'MintyDocsParserFunctions', 'renderTopic' ) );
-		$parser->setFunctionHook( 'mintydocs_link', array( 'MintyDocsParserFunctions', 'renderLink' ) );
+		$parser->setFunctionHook( 'mintydocs_product', [ 'MintyDocsParserFunctions', 'renderProduct' ] );
+		$parser->setFunctionHook( 'mintydocs_version', [ 'MintyDocsParserFunctions', 'renderVersion' ] );
+		$parser->setFunctionHook( 'mintydocs_manual', [ 'MintyDocsParserFunctions', 'renderManual' ] );
+		$parser->setFunctionHook( 'mintydocs_topic', [ 'MintyDocsParserFunctions', 'renderTopic' ] );
+		$parser->setFunctionHook( 'mintydocs_link', [ 'MintyDocsParserFunctions', 'renderLink' ] );
 		return true;
 	}
 
@@ -45,7 +40,7 @@ class MintyDocsHooks {
 		return true;
 	}
 
-	static public function checkPermissions( &$title, &$user, $action, &$result ) {
+	public static function checkPermissions( &$title, &$user, $action, &$result ) {
 		$mdPage = MintyDocsUtils::pageFactory( $title );
 		if ( $mdPage == null ) {
 			return true;
@@ -62,7 +57,7 @@ class MintyDocsHooks {
 		return true;
 	}
 
-	static public function addTextToPage( &$out, &$text ) {
+	public static function addTextToPage( &$out, &$text ) {
 		global $wgMintyDocsDisplayFooterElementsInSidebar;
 
 		$action = Action::getActionName( $out->getContext() );
@@ -82,13 +77,13 @@ class MintyDocsHooks {
 		}
 		$text = $mdPage->getHeader() . $text;
 
-		if ( ! $wgMintyDocsDisplayFooterElementsInSidebar ) {
+		if ( !$wgMintyDocsDisplayFooterElementsInSidebar ) {
 			$text .= $mdPage->getFooter();
 		}
 		return true;
 	}
 
-	static public function showNoticeForDraftPage( &$out, &$text ) {
+	public static function showNoticeForDraftPage( &$out, &$text ) {
 		$action = Action::getActionName( $out->getContext() );
 		if ( $action != 'view' ) {
 			return true;
@@ -101,28 +96,28 @@ class MintyDocsHooks {
 		$liveTitle = Title::newFromText( $title->getText(), NS_MAIN );
 		if ( $liveTitle->exists() ) {
 			$req = $out->getContext()->getRequest();
-			$query = array();
+			$query = [];
 			// Pass on the "context" stored in the query string.
-			$queryStringParams = array( 'contextProduct', 'contextVersion', 'contextManual' );
+			$queryStringParams = [ 'contextProduct', 'contextVersion', 'contextManual' ];
 				foreach ( $queryStringParams as $param ) {
 				if ( $req->getCheck( $param ) ) {
 					$query[$param] = $req->getVal( $param );
 				}
-			}
-			$linkToPublished = Linker::linkKnown( $liveTitle, $html = null, $attribs = array(), $query );
+			 }
+			$linkToPublished = Linker::linkKnown( $liveTitle, $html = null, $attribs = [], $query );
 			$msg = "This is a draft page; the published version of this page can be found at $linkToPublished.";
 		} else {
 			$msg = 'This is a draft page; it has not yet been published.';
 		}
-		$warningText = Html::rawElement( 'div', array( 'class' => 'warningbox' ), $msg );
+		$warningText = Html::rawElement( 'div', [ 'class' => 'warningbox' ], $msg );
 		$text = $warningText . $text;
 		return true;
 	}
 
-	static public function addTextToSidebar( Skin $skin, &$sidebar ) {
+	public static function addTextToSidebar( Skin $skin, &$sidebar ) {
 		global $wgMintyDocsDisplayFooterElementsInSidebar;
 
-		if ( ! $wgMintyDocsDisplayFooterElementsInSidebar ) {
+		if ( !$wgMintyDocsDisplayFooterElementsInSidebar ) {
 			return true;
 		}
 
@@ -145,11 +140,10 @@ class MintyDocsHooks {
 	 * Based on function of the same name in ApprovedRevs.hook.php, from
 	 * the Approved Revs extension.
 	 */
-	static public function setSearchText( $article, $user, $content,
+	public static function setSearchText( $article, $user, $content,
 		$summary, $isMinor, $isWatch, $section, $flags, $revision,
 		$status, $baseRevId, $undidRevId = 0 ) {
-
-		if ( is_null( $revision ) ) {
+		if ( $revision === null ) {
 			return true;
 		}
 
@@ -183,8 +177,8 @@ class MintyDocsHooks {
 	/**
 	 * Register wiki markup words associated with MAG_NIFTYVAR as a variable
 	 *
-	 * @param array $customVariableIDs
-	 * @return boolean
+	 * @param array &$customVariableIDs
+	 * @return bool
 	 */
 	public static function declareVarIDs( &$customVariableIDs ) {
 		$customVariableIDs[] = 'MAG_MINTYDOCSPRODUCT';
@@ -201,10 +195,10 @@ class MintyDocsHooks {
 	 * @param array &$cache
 	 * @param string $magicWordId
 	 * @param string &$ret
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function assignAValue( $parser, &$cache, $magicWordId, &$ret ) {
-		$handledIDs = array( 'MAG_MINTYDOCSPRODUCT', 'MAG_MINTYDOCSVERSION', 'MAG_MINTYDOCSMANUAL' );
+		$handledIDs = [ 'MAG_MINTYDOCSPRODUCT', 'MAG_MINTYDOCSVERSION', 'MAG_MINTYDOCSMANUAL' ];
 		if ( !in_array( $magicWordId, $handledIDs ) ) {
 			return true;
 		}

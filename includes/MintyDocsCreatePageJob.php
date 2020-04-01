@@ -22,7 +22,7 @@ class MintyDocsCreatePageJob extends Job {
 		if ( array_key_exists( 'parent_page', $this->params ) ) {
 			$parent_page = $this->params['parent_page'];
 			$parent_title = Title::newFromText( $parent_page );
-			if ( ! $parent_title->exists() ) {
+			if ( !$parent_title->exists() ) {
 				$this->error = "MDCreatePage: Parent page is missing; canceling save.";
 				return false;
 			}

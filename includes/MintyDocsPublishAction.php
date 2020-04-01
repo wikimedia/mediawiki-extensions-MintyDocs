@@ -59,11 +59,11 @@ class MintyDocsPublishAction extends Action {
 
 		$request = $obj->getRequest();
 
-		$mdPublishTab = array(
+		$mdPublishTab = [
 			'class' => ( $request->getVal( 'action' ) == 'mdpublish' ) ? 'selected' : '',
 			'text' => wfMessage( 'mintydocs-publish-button' ),
 			'href' => $title->getLocalURL( 'action=mdpublish' )
-		);
+		];
 
 		$links['views']['mdpublish'] = $mdPublishTab;
 

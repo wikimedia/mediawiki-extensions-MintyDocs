@@ -4,18 +4,18 @@ use MediaWiki\MediaWikiServices;
 
 class MintyDocsUtils {
 
-	static public $pageClassesInOrder = array( 'MintyDocsProduct', 'MintyDocsVersion', 'MintyDocsManual', 'MintyDocsTopic' );
+	public static $pageClassesInOrder = [ 'MintyDocsProduct', 'MintyDocsVersion', 'MintyDocsManual', 'MintyDocsTopic' ];
 
-	static public function getPagePropForTitle( $title, $propName ) {
+	public static function getPagePropForTitle( $title, $propName ) {
 		$dbr = wfGetDB( DB_REPLICA );
 		$res = $dbr->select( 'page_props',
-			array(
+			[
 				'pp_value'
-			),
-			array(
+			],
+			[
 				'pp_page' => $title->getArticleID(),
 				'pp_propname' => $propName
-			)
+			]
 		);
 		// First row of the result set.
 		$row = $dbr->fetchRow( $res );
@@ -26,7 +26,7 @@ class MintyDocsUtils {
 		return $row[0];
 	}
 
-	static public function titlePagePropIncludesValue( $title, $propName, $value ) {
+	public static function titlePagePropIncludesValue( $title, $propName, $value ) {
 		$fullValue = self::getPagePropForTitle( $title, $propName );
 		$individualValues = explode( ',', $fullValue );
 		foreach ( $individualValues as $individualValue ) {
@@ -37,11 +37,11 @@ class MintyDocsUtils {
 		return false;
 	}
 
-	static public function getPageType( $title ) {
+	public static function getPageType( $title ) {
 		return self::getPagePropForTitle( $title, 'MintyDocsPageType' );
 	}
 
-	static public function pageFactory( $title ) {
+	public static function pageFactory( $title ) {
 		$pageType = self::getPageType( $title );
 		if ( $pageType == 'Product' ) {
 			return new MintyDocsProduct( $title );
@@ -60,11 +60,11 @@ class MintyDocsUtils {
 		$pageName = $title->getPrefixedText();
 		$lastSlashPos = strrpos( $pageName, '/' );
 		if ( $lastSlashPos === false ) {
-			return array( null, $pageName );
+			return [ null, $pageName ];
 		}
 		$parentPageName = substr( $pageName, 0, $lastSlashPos );
 		$thisPageName = substr( $pageName, $lastSlashPos + 1 );
-		return array( $parentPageName, $thisPageName );
+		return [ $parentPageName, $thisPageName ];
 	}
 
 	/**
@@ -94,7 +94,7 @@ class MintyDocsUtils {
 	public static function createOrModifyPage( $title, $pageText, $editSummary, $userID = null ) {
 		global $wgUser;
 
-		if ( is_null( $title ) ) {
+		if ( $title === null ) {
 			throw new MWException( "Invalid title" );
 		}
 
@@ -137,7 +137,7 @@ class MintyDocsUtils {
 	 * @param $user User
 	 * @param $action Action
 	 * $param $permissionManager PermissionManager
-	 * @return boolean
+	 * @return bool
 	 */
 	public static function userIsAllowed( $user, $action, $permissionManager ) {
 		if ( $permissionManager != null ) {
