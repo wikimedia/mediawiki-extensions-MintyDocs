@@ -7,6 +7,11 @@
  */
 class MintyDocsCreatePageJob extends Job {
 
+	/**
+	 * @param Title $title
+	 * @param array $params
+	 * @param int $id
+	 */
 	function __construct( $title, $params = '', $id = 0 ) {
 		parent::__construct( 'MDCreatePage', $title, $params, $id );
 	}
