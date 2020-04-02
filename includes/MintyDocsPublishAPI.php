@@ -55,6 +55,9 @@ class MintyDocsPublishAPI extends ApiBase {
 		$result->addValue( [ 'mintydocspublish' ], 'status', 'success' );
 	}
 
+	/**
+	 * @param string $text
+	 */
 	function mintyDocsDie( $text ) {
 		if ( method_exists( $this, 'dieWithError' ) ) {
 			// MW 1.29+
