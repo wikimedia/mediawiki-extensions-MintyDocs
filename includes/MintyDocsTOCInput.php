@@ -5,22 +5,43 @@
  */
 
 class MintyDocsTOCInput extends PFFormInput {
+
+	/**
+	 * @return string
+	 */
 	public static function getName() {
 		return 'mintydocs toc';
 	}
 
+	/**
+	 * @return null|string|array
+	 */
 	public function getResourceModuleNames() {
 		return [ 'ext.mintydocs.jstree' ];
 	}
 
+	/**
+	 * @return string[]
+	 */
 	public static function getOtherPropTypesHandled() {
 		return [ '_txt' ];
 	}
 
+	/**
+	 * @return array
+	 */
 	public static function getOtherCargoTypesHandled() {
 		return [ 'Text' ];
 	}
 
+	/**
+	 * @param string $cur_value
+	 * @param string $input_name
+	 * @param bool $is_mandatory
+	 * @param bool $is_disabled
+	 * @param array $other_args
+	 * @return string
+	 */
 	public static function getHTML( $cur_value, $input_name, $is_mandatory, $is_disabled, array $other_args ) {
 		$nodeNum = 1;
 		$treeData = [];
@@ -65,6 +86,9 @@ class MintyDocsTOCInput extends PFFormInput {
 		return Html::rawElement( 'div', null, $mainDiv . "\n" . $button );
 	}
 
+	/**
+	 * @return array[]
+	 */
 	public static function getParameters() {
 		$params = [];
 		$params[] = [
