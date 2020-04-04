@@ -51,6 +51,9 @@ class MintyDocsParserFunctions {
 
 	/**
 	 * #mintydocs_product
+	 *
+	 * @param Parser &$parser
+	 * @return string|void
 	 */
 	static function renderProduct( &$parser ) {
 		list( $parentPageName, $thisPageName ) = MintyDocsUtils::getPageParts( $parser->getTitle() );
@@ -98,6 +101,10 @@ class MintyDocsParserFunctions {
 		$parserOutput->setDisplayTitle( $displayTitle );
 	}
 
+	/**
+	 * @param Parser &$parser
+	 * @return string|void
+	 */
 	static function renderVersion( &$parser ) {
 		list( $parentPageName, $thisPageName ) = MintyDocsUtils::getPageParts( $parser->getTitle() );
 		$returnMsg = MintyDocsVersion::checkPageEligibility( $parentPageName, $thisPageName );
@@ -134,6 +141,10 @@ class MintyDocsParserFunctions {
 		}
 	}
 
+	/**
+	 * @param Parser &$parser
+	 * @return string|void
+	 */
 	static function renderManual( &$parser ) {
 		list( $parentPageName, $thisPageName ) = MintyDocsUtils::getPageParts( $parser->getTitle() );
 		$returnMsg = MintyDocsManual::checkPageEligibility( $parentPageName, $thisPageName );
@@ -203,6 +214,10 @@ class MintyDocsParserFunctions {
 		$parserOutput->setDisplayTitle( $displayTitle );
 	}
 
+	/**
+	 * @param Parser &$parser
+	 * @return string|void
+	 */
 	static function renderTopic( &$parser ) {
 		// if ($parser->getTitle() == null ) return;
 		list( $parentPageName, $thisPageName ) = MintyDocsUtils::getPageParts( $parser->getTitle() );
@@ -272,6 +287,10 @@ class MintyDocsParserFunctions {
 		$parserOutput->setProperty( 'MintyDocsTOCName', $tocDisplayTitle );
 	}
 
+	/**
+	 * @param Parser &$parser
+	 * @return string
+	 */
 	static function renderLink( &$parser ) {
 		global $wgRequest;
 
@@ -443,6 +462,11 @@ class MintyDocsParserFunctions {
 		return self::getLinkWikitextOrHTML( $outputWikitext, $linkedPageName, $linkText, $fragment, $query );
 	}
 
+	/**
+	 * @param Parser $parser
+	 * @param string[] $params
+	 * @return array
+	 */
 	static function processParams( $parser, $params ) {
 		$processedParams = [];
 
@@ -469,6 +493,10 @@ class MintyDocsParserFunctions {
 		return $processedParams;
 	}
 
+	/**
+	 * @param Title $title
+	 * @return string
+	 */
 	public static function possibleNamespacePrefix( $title ) {
 		// If we're in the Draft namespace, add on the Draft:
 		// prefix to whatever page name was specified.
@@ -479,6 +507,14 @@ class MintyDocsParserFunctions {
 		return $wgContLang->getNsText( MD_NS_DRAFT ) . ':';
 	}
 
+	/**
+	 * @param string $outputWikitext
+	 * @param string $pageName
+	 * @param string $linkText
+	 * @param string $fragment
+	 * @param array $query
+	 * @return string|array
+	 */
 	static function getLinkWikitextOrHTML( $outputWikitext, $pageName, $linkText, $fragment, $query ) {
 		$title = Title::newFromText( $pageName );
 		if ( $fragment !== null ) {
