@@ -1,9 +1,9 @@
 {
 	"@metadata": {
 		"authors": [
-			"夢蝶葬花",
 			"A Chinese Wikipedian",
-			"Looong"
+			"Looong",
+			"夢蝶葬花"
 		]
 	},
 	"mintydocs-invalidparentpage": "出错了：“$1”页面应该是“$2”页面才对。",
