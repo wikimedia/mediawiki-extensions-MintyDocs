@@ -2,6 +2,8 @@
 
 class MintyDocsCopy extends MintyDocsPublish {
 
+	private $mParentTitle;
+
 	/**
 	 * Constructor
 	 */
@@ -38,17 +40,18 @@ class MintyDocsCopy extends MintyDocsPublish {
 			}
 		}
 
-		$this->targetVersion = $req->getVal( 'target_version' );
-
-		if ( $publish ) {
-			$this->publishAll();
-			return;
-		}
-
 		try {
 			$title = $this->getTitleFromQuery( $query );
 		} catch ( Exception $e ) {
 			$out->addHTML( $e->getMessage() );
+			return;
+		}
+		$this->mParentTitle = $title;
+
+		$this->targetVersion = $req->getVal( 'target_version' );
+
+		if ( $publish ) {
+			$this->publishAll();
 			return;
 		}
 
@@ -102,13 +105,13 @@ class MintyDocsCopy extends MintyDocsPublish {
 	}
 
 	function generateSourceTitle( $sourcePageName ) {
-		return Title::newFromText( $sourcePageName, NS_MAIN );
+		return Title::newFromText( $sourcePageName, $this->mParentTitle->getNamespace() );
 	}
 
 	function generateTargetTitle( $targetPageName ) {
 		list( $product, $version, $manualAndTopic ) = explode( '/', $targetPageName, 3 );
 		$targetPageName = "$product/" . $this->targetVersion . "/$manualAndTopic";
-		return Title::newFromText( $targetPageName, NS_MAIN );
+		return Title::newFromText( $targetPageName, $this->mParentTitle->getNamespace() );
 	}
 
 	function overwritingIsAllowed() {
