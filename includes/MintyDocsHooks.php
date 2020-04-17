@@ -11,13 +11,15 @@ class MintyDocsHooks {
 		}
 	}
 
+	/**
+	 * @param Parser &$parser
+	 */
 	public static function registerParserFunctions( &$parser ) {
 		$parser->setFunctionHook( 'mintydocs_product', [ 'MintyDocsParserFunctions', 'renderProduct' ] );
 		$parser->setFunctionHook( 'mintydocs_version', [ 'MintyDocsParserFunctions', 'renderVersion' ] );
 		$parser->setFunctionHook( 'mintydocs_manual', [ 'MintyDocsParserFunctions', 'renderManual' ] );
 		$parser->setFunctionHook( 'mintydocs_topic', [ 'MintyDocsParserFunctions', 'renderTopic' ] );
 		$parser->setFunctionHook( 'mintydocs_link', [ 'MintyDocsParserFunctions', 'renderLink' ] );
-		return true;
 	}
 
 	/**
@@ -40,6 +42,13 @@ class MintyDocsHooks {
 		return true;
 	}
 
+	/**
+	 * @param Title &$title
+	 * @param User &$user
+	 * @param string $action
+	 * @param string &$result
+	 * @return string|null
+	 */
 	public static function checkPermissions( &$title, &$user, $action, &$result ) {
 		$mdPage = MintyDocsUtils::pageFactory( $title );
 		if ( $mdPage == null ) {
@@ -57,6 +66,11 @@ class MintyDocsHooks {
 		return true;
 	}
 
+	/**
+	 * @param OutputPage &$out
+	 * @param string &$text
+	 * @return bool
+	 */
 	public static function addTextToPage( &$out, &$text ) {
 		global $wgMintyDocsDisplayFooterElementsInSidebar;
 
@@ -83,6 +97,11 @@ class MintyDocsHooks {
 		return true;
 	}
 
+	/**
+	 * @param OutputPage &$out
+	 * @param string &$text
+	 * @return bool
+	 */
 	public static function showNoticeForDraftPage( &$out, &$text ) {
 		$action = Action::getActionName( $out->getContext() );
 		if ( $action != 'view' ) {
@@ -114,6 +133,11 @@ class MintyDocsHooks {
 		return true;
 	}
 
+	/**
+	 * @param Skin $skin
+	 * @param array[] &$sidebar
+	 * @return bool
+	 */
 	public static function addTextToSidebar( Skin $skin, &$sidebar ) {
 		global $wgMintyDocsDisplayFooterElementsInSidebar;
 
@@ -139,6 +163,20 @@ class MintyDocsHooks {
 	/**
 	 * Based on function of the same name in ApprovedRevs.hook.php, from
 	 * the Approved Revs extension.
+	 *
+	 * @param WikiPage $article
+	 * @param User $user
+	 * @param Content $content
+	 * @param string $summary
+	 * @param bool $isMinor
+	 * @param bool $isWatch
+	 * @param string $section
+	 * @param int $flags
+	 * @param Revision $revision
+	 * @param Status $status
+	 * @param int|false $baseRevId
+	 * @param int $undidRevId
+	 * @return true
 	 */
 	public static function setSearchText( $article, $user, $content,
 		$summary, $isMinor, $isWatch, $section, $flags, $revision,
@@ -166,6 +204,10 @@ class MintyDocsHooks {
 		return true;
 	}
 
+	/**
+	 * @param array &$vars
+	 * @return bool
+	 */
 	static function setGlobalJSVariables( &$vars ) {
 		global $wgScriptPath;
 
@@ -236,8 +278,10 @@ class MintyDocsHooks {
 		return true;
 	}
 
+	/**
+	 * @param PFFormPrinter &$formPrinter
+	 */
 	public static function registerPageFormsInputs( &$formPrinter ) {
 		$formPrinter->registerInputType( 'MintyDocsTOCInput' );
 	}
-
 }
