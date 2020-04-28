@@ -278,6 +278,24 @@ class MintyDocsHooks {
 		return true;
 	}
 
+	public static function makeDraftsNonSearchable( &$searchableNamespaces ) {
+		global $wgUser;
+
+		// Allow for searching of the Draft and Draft_talk
+		// namespaces only by MD administrators and editors.
+		if (
+			$wgUser->isAllowed( 'mintydocs-administer' ) ||
+			$wgUser->isAllowed( 'mintydocs-edit' )
+		) {
+			return true;
+		}
+
+		unset( $searchableNamespaces[MD_NS_DRAFT] );
+		unset( $searchableNamespaces[MD_NS_DRAFT_TALK] );
+
+		return true;
+	}
+
 	/**
 	 * @param PFFormPrinter &$formPrinter
 	 */

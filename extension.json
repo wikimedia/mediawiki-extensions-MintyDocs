@@ -125,6 +125,7 @@
 		"MagicWordwgVariableIDs": "MintyDocsHooks::declareVarIDs",
 		"ParserGetVariableValueSwitch": "MintyDocsHooks::assignAValue",
 		"SkinTemplateNavigation": "MintyDocsPublishAction::displayTab",
+		"SearchableNamespaces": "MintyDocsHooks::makeDraftsNonSearchable",
 		"PageForms::FormPrinterSetup": "MintyDocsHooks::registerPageFormsInputs"
 	},
 	"config": {
