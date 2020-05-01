@@ -1,7 +1,7 @@
 {
 	"name": "MintyDocs",
 	"namemsg": "mintydocs-extensionname",
-	"version": "0.6",
+	"version": "0.7",
 	"author": "Yaron Koren",
 	"url": "https://www.mediawiki.org/wiki/Extension:MintyDocs",
 	"descriptionmsg": "mintydocs-desc",
