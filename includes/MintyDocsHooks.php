@@ -5,10 +5,19 @@ use MediaWiki\MediaWikiServices;
 class MintyDocsHooks {
 
 	public static function registerExtension() {
+		global $wgNamespaceRobotPolicies;
+
 		if ( !defined( 'MD_NS_DRAFT' ) ) {
 			define( 'MD_NS_DRAFT', 620 );
 			define( 'MD_NS_DRAFT_TALK', 621 );
 		}
+
+		// Search engines should not index draft content.
+		// Should MD_NS_DRAFT_TALK be included here also? It seems
+		// strange to have discussions about draft pages show up in
+		// search engines, but then again, if other talk pages get
+		// indexed, there's no reason not to index these as well.
+		$wgNamespaceRobotPolicies[MD_NS_DRAFT] = 'noindex';
 	}
 
 	/**
