@@ -15,7 +15,8 @@ class MintyDocsPublishAPI extends ApiBase {
 	 * getResult().
 	 */
 	function execute() {
-		if ( !$this->getUser()->isAllowed( 'mintydocs-administer' ) ) {
+		$user = $this->getUser();
+		if ( !$user->isAllowed( 'mintydocs-administer' ) ) {
 			$this->mintyDocsDie( [ 'apierror-permissiondenied', $this->msg( "action-mintydocs-administer" ) ] );
 		}
 
@@ -46,7 +47,7 @@ class MintyDocsPublishAPI extends ApiBase {
 		$editSummary = 'Published';
 
 		try {
-			MintyDocsUtils::createOrModifyPage( $toTitle, $fromPageText, $editSummary );
+			MintyDocsUtils::createOrModifyPage( $toTitle, $fromPageText, $editSummary, $user );
 		} catch ( MWException $e ) {
 			$this->mintyDocsDie( $e->getMessage() );
 		}

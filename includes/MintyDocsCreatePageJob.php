@@ -39,8 +39,9 @@ class MintyDocsCreatePageJob extends Job {
 			$editSummary = $this->params['edit_summary'];
 		}
 		$userID = $this->params['user_id'];
+		$user = User::newFromID( $userID );
 		try {
-			MintyDocsUtils::createOrModifyPage( $this->title, $pageText, $editSummary, $userID );
+			MintyDocsUtils::createOrModifyPage( $this->title, $pageText, $editSummary, $user );
 		} catch ( MWException $e ) {
 			$this->error = 'MDCreatePage: ' . $e->getMessage();
 			return false;

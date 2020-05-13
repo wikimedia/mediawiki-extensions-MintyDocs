@@ -91,9 +91,7 @@ class MintyDocsUtils {
 		return true;
 	}
 
-	public static function createOrModifyPage( $title, $pageText, $editSummary, $userID = null ) {
-		global $wgUser;
-
+	public static function createOrModifyPage( $title, $pageText, $editSummary, $user ) {
 		if ( $title === null ) {
 			throw new MWException( "Invalid title" );
 		}
@@ -101,13 +99,6 @@ class MintyDocsUtils {
 		$wikiPage = new WikiPage( $title );
 		if ( !$wikiPage ) {
 			throw new MWException( 'Wiki page not found "' . $title->getPrefixedDBkey() . '"' );
-		}
-
-		if ( $userID != null ) {
-			// Change global $wgUser variable to the one
-			// specified only for the extent of this edit.
-			$actual_user = $wgUser;
-			$wgUser = User::newFromId( $userID );
 		}
 
 		// It's strange that doEditContent() doesn't
@@ -119,17 +110,21 @@ class MintyDocsUtils {
 		} else {
 			$permissionManager = null;
 		}
-		if ( self::userIsAllowed( $wgUser, 'bot', $permissionManager ) ) {
+		if ( self::userIsAllowed( $user, 'bot', $permissionManager ) ) {
 			$flags = EDIT_FORCE_BOT;
 		} else {
 			$flags = 0;
 		}
 
 		$newContent = new WikitextContent( $pageText );
-		$wikiPage->doEditContent( $newContent, $editSummary, $flags );
 
-		if ( $userID != null ) {
-			$wgUser = $actual_user;
+		if ( class_exists( 'PageUpdater' ) ) {
+			// MW 1.32+
+			$updater = $wikiPage->newPageUpdater( $user );
+			$updater->setContent( SlotRecord::MAIN, $newContent );
+			$updater->saveRevision( CommentStoreComment::newUnsavedComment( $editSummary ), $flags );
+		} else {
+			$wikiPage->doEditContent( $newContent, $editSummary, $flags, $originalRevId = false, $user );
 		}
 	}
 
