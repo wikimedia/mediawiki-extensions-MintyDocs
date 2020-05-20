@@ -139,13 +139,7 @@ class MintyDocsPublish extends SpecialPage {
 
 		$text .= Html::hidden( 'csrf', $this->getUser()->getEditToken( $this->getName() ) ) . "\n";
 
-		$text .= Html::element( 'input',
-			[
-				'type' => 'submit',
-				'name' => 'mdPublish',
-				'value' => $this->msg( self::$mButtonMsg )->parse()
-			]
-		);
+		$text .= Html::input( 'mdPublish', $this->msg( self::$mButtonMsg )->parse(), 'submit' );
 
 		$text .= '</form>';
 		$out->addHTML( $text );

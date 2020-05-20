@@ -76,13 +76,7 @@ class MintyDocsDelete extends SpecialPage {
 
 		$text .= "\t" . Html::hidden( 'csrf', $this->getUser()->getEditToken( $this->getName() ) ) . "\n";
 
-		$text .= Html::element( 'input',
-			[
-				'type' => 'submit',
-				'name' => 'mdDelete',
-				'value' => wfMessage( 'delete' )
-			]
-		);
+		$text .= Html::input( 'mdDelete', $this->msg( 'delete' )->parse(), 'submit' );
 
 		$text .= '</form>';
 		$out->addHTML( $text );
