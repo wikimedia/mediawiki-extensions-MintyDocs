@@ -17,7 +17,7 @@ class MintyDocsPublishAPI extends ApiBase {
 	function execute() {
 		$user = $this->getUser();
 		if ( !$user->isAllowed( 'mintydocs-administer' ) ) {
-			$this->mintyDocsDie( [ 'apierror-permissiondenied', $this->msg( "action-mintydocs-administer" ) ] );
+			$this->dieWithError( [ 'apierror-permissiondenied', $this->msg( "action-mintydocs-administer" ) ] );
 		}
 
 		$params = $this->extractRequestParams();
@@ -30,13 +30,13 @@ class MintyDocsPublishAPI extends ApiBase {
 
 		$fromTitle = Title::newFromText( $pageName, MD_NS_DRAFT );
 		if ( !$fromTitle || $fromTitle->isExternal() ) {
-			$this->mintyDocsDie( [ 'apierror-invalidtitle', wfEscapeWikiText( $pageName ) ] );
+			$this->dieWithError( [ 'apierror-invalidtitle', wfEscapeWikiText( $pageName ) ] );
 		}
 		if ( !$fromTitle->canExist() ) {
-			$this->mintyDocsDie( 'apierror-pagecannotexist' );
+			$this->dieWithError( 'apierror-pagecannotexist' );
 		}
 		if ( !$fromTitle->exists() ) {
-			$this->mintyDocsDie( 'apierror-missingtitle' );
+			$this->dieWithError( 'apierror-missingtitle' );
 		}
 
 		$fromPage = WikiPage::factory( $fromTitle );
@@ -49,23 +49,11 @@ class MintyDocsPublishAPI extends ApiBase {
 		try {
 			MintyDocsUtils::createOrModifyPage( $toTitle, $fromPageText, $editSummary, $user );
 		} catch ( MWException $e ) {
-			$this->mintyDocsDie( $e->getMessage() );
+			$this->dieWithError( $e->getMessage() );
 		}
 
 		$result = $this->getResult();
 		$result->addValue( [ 'mintydocspublish' ], 'status', 'success' );
-	}
-
-	/**
-	 * @param string $text
-	 */
-	function mintyDocsDie( $text ) {
-		if ( method_exists( $this, 'dieWithError' ) ) {
-			// MW 1.29+
-			$this->dieWithError( $text );
-		} else {
-			$this->dieUsage( $text );
-		}
 	}
 
 	/**
