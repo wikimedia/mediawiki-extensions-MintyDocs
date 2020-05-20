@@ -63,19 +63,14 @@ class MintyDocsDelete extends SpecialPage {
 			return;
 		}
 
-		// display checkbox
 		$text = '<form id="mdDeleteForm" action="" method="post">';
 		$out->addHTML( '<p>The following pages will be deleted:</p>' );
 		$pagesTree = MintyDocsPublish::makePagesTree( $mdPage );
-		$text .= '<ul>';
-		$text .= self::displayTree( $pagesTree['node'], $pagesTree['tree'] );
-		$text .= '</ul>';
+		$text .= Html::rawElement( 'ul', null, self::displayTree( $pagesTree['node'], $pagesTree['tree'] ) );
 
-		$mdp = $this->getPageTitle();
-		$text .= Html::hidden( 'title', MintyDocsUtils::titleURLString( $mdp ) );
-
-		$text .= "\t" . Html::hidden( 'csrf', $this->getUser()->getEditToken( $this->getName() ) ) . "\n";
-
+		$titleString = MintyDocsUtils::titleURLString( $this->getPageTitle() );
+		$text .= Html::hidden( 'title', $titleString ) . "\n";
+		$text .= Html::hidden( 'csrf', $this->getUser()->getEditToken( $this->getName() ) ) . "\n";
 		$text .= Html::input( 'mdDelete', $this->msg( 'delete' )->parse(), 'submit' );
 
 		$text .= '</form>';

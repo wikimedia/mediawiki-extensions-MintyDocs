@@ -83,7 +83,7 @@ class MintyDocsPublish extends SpecialPage {
 
 		// Error if page does not exist.
 		if ( !$title->exists() ) {
-			throw new MWException( wfMessage( "pagelang-nonexistent-page", '[[' . $title->getFullText() . ']]' ) );
+			throw new MWException( $this->msg( "pagelang-nonexistent-page", '[[' . $title->getFullText() . ']]' ) );
 		}
 
 		return $title;
@@ -125,9 +125,11 @@ class MintyDocsPublish extends SpecialPage {
 				$this->displayPageParents( $mdPage )
 			);
 			$pagesTree = $this->makePagesTree( $mdPage );
-			$text .= '<ul>';
-			$text .= $this->displayCheckboxesForTree( $pagesTree['node'], $pagesTree['tree'] );
-			$text .= '</ul>';
+			$text .= Html::rawElement(
+				'ul',
+				null,
+				$this->displayCheckboxesForTree( $pagesTree['node'], $pagesTree['tree'] )
+			);
 		}
 
 		if ( !$isSinglePage && self::$mCheckboxNumber == 1 ) {
@@ -136,11 +138,9 @@ class MintyDocsPublish extends SpecialPage {
 			return;
 		}
 
-		$mdp = $this->getPageTitle();
-		$text .= Html::hidden( 'title', MintyDocsUtils::titleURLString( $mdp ) ) . "\n";
-
+		$titleString = MintyDocsUtils::titleURLString( $this->getPageTitle() );
+		$text .= Html::hidden( 'title', $titleString ) . "\n";
 		$text .= Html::hidden( 'csrf', $this->getUser()->getEditToken( $this->getName() ) ) . "\n";
-
 		$text .= Html::input( 'mdPublish', $this->msg( self::$mButtonMsg )->parse(), 'submit' );
 
 		$text .= '</form>';
