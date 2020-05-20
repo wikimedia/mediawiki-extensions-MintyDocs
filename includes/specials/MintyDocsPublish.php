@@ -99,8 +99,6 @@ class MintyDocsPublish extends SpecialPage {
 		$out = $this->getOutput();
 		$req = $this->getRequest();
 
-		$out->addModules( 'ext.mintydocs.publish' );
-
 		// Display checkboxes.
 		$text = '<form id="mdPublishForm" action="" method="post">';
 		if ( $req->getCheck( 'single' ) ) {
@@ -119,9 +117,13 @@ class MintyDocsPublish extends SpecialPage {
 			$text .= '<p>' . self::$mSinglePageMessage . '</p>';
 			$text .= Html::hidden( 'page_name_1', $title->getText() );
 		} else {
-			$text .= '<p>Pages for ' . $mdPage->getLink() . ':</p>';
-			$text .= $this->displayToggleLinks();
-			$text .= $this->displayPageParents( $mdPage );
+			$text .= '<h3>Pages for ' . $mdPage->getLink() . ':</h3>';
+			$text .= ( new ListToggle( $this->getOutput() ) )->getHTML();
+			$text .= Html::rawElement(
+				'ul',
+				[ 'style' => 'margin: 15px 0; list-style: none;' ],
+				$this->displayPageParents( $mdPage )
+			);
 			$pagesTree = $this->makePagesTree( $mdPage );
 			$text .= '<ul>';
 			$text .= $this->displayCheckboxesForTree( $pagesTree['node'], $pagesTree['tree'] );
@@ -173,9 +175,11 @@ class MintyDocsPublish extends SpecialPage {
 			return '';
 		}
 
+		// We use the <li> tag so that MediaWiki's toggle JS will
+		// work on these checkboxes.
 		return $this->displayPageParents( $parentMDPage ) .
-			'<p class="parentPage"><em>' . $parentMDPage->getPageTypeValue() . '</em>: ' .
-			$this->displayPageName( $parentMDPage ) . '</p>';
+			'<li class="parentPage"><em>' . $parentMDPage->getPageTypeValue() . '</em>: ' .
+			$this->displayPageName( $parentMDPage ) . '</li>';
 	}
 
 	static function makePagesTree( $mdPage, $numTopicIndents = 0 ) {
@@ -226,18 +230,6 @@ class MintyDocsPublish extends SpecialPage {
 			}
 			$text .= '</ul>';
 		}
-		return $text;
-	}
-
-	function displayToggleLinks() {
-		$text = <<<END
-<p class="selectAndDeselect">
-<a id="selectall">Select all</a>
-&middot;
-<a id="deselectall">Deselect all</a>
-</p>
-
-END;
 		return $text;
 	}
 
