@@ -11,9 +11,9 @@ class MintyDocsCopy extends MintyDocsPublish {
 		parent::__construct( 'MintyDocsCopy' );
 
 		self::$mNoActionNeededMessage = "None of the pages in this manual need to be copied.";
-		self::$mEditSummary = 'Copied manual';
+		self::$mEditSummaryMsg = "mintydocs-copy-editsummary";
 		self::$mSuccessMsg = "mintydocs-copy-success";
-		self::$mSinglePageMessage = "Copy this page?";
+		self::$mSinglePageMsg = "mintydocs-copy-singlepage";
 		self::$mButtonMsg = "mintydocs-copy-button";
 	}
 
@@ -91,7 +91,7 @@ class MintyDocsCopy extends MintyDocsPublish {
 		$text = Html::hidden( 'csrf', $this->getUser()->getEditToken( $this->getName() ) ) . "\n";
 		$text .= "Select version to copy pages to: ";
 		$text .= Html::rawElement( 'select', [ 'name' => 'target_version' ], $optionsHtml ) . "\n";
-		$text .= '<p>' . Html::input( 'mdSetVersion', 'Continue', 'submit' ) . "</p>\n";
+		$text .= '<p>' . Html::input( 'mdSetVersion', $this->msg( 'apisandbox-continue' )->text(), 'submit' ) . "</p>\n";
 		$text = Html::rawElement( 'form', [ 'method' => 'post' ], $text );
 
 		$out->addHtml( $text );

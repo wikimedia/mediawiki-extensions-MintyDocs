@@ -9,9 +9,9 @@ class MintyDocsCreateDraft extends MintyDocsPublish {
 		parent::__construct( 'MintyDocsCreateDraft' );
 
 		self::$mNoActionNeededMessage = "No drafts need creating.";
-		self::$mEditSummary = 'Created draft';
+		self::$mEditSummaryMsg = "mintydocs-createdraft-editsummary";
 		self::$mSuccessMsg = "mintydocs-createdraft-success";
-		self::$mSinglePageMessage = "Create a draft page?";
+		self::$mSinglePageMsg = "mintydocs-createdraft-singlepage";
 		self::$mButtonMsg = "mintydocs-createdraft-button";
 	}
 

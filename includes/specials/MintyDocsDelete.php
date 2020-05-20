@@ -105,7 +105,7 @@ class MintyDocsDelete extends SpecialPage {
 
 		$params = [
 			'user_id' => $user->getId(),
-			'deletion_reason' => 'Delete manual'
+			'deletion_reason' => $this->msg( 'mintydocs-delete-deletionreason' )->inContentLanguage()->text()
 		];
 
 		$jobs[] = new MintyDocsDeletePageJob( $title, $params );
@@ -118,7 +118,7 @@ class MintyDocsDelete extends SpecialPage {
 
 		JobQueueGroup::singleton()->push( $jobs );
 
-		$text = 'The pages will be deleted.';
+		$text = $this->msg( 'mintydocs-delete-success' )->parse();
 
 		$out->addHTML( $text );
 	}

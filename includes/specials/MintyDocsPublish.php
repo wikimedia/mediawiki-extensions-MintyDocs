@@ -7,9 +7,9 @@
 class MintyDocsPublish extends SpecialPage {
 
 	protected static $mNoActionNeededMessage = "Nothing to publish.";
-	protected static $mEditSummary = 'Published';
+	protected static $mEditSummaryMsg = "mintydocs-publish-editsummary";
 	protected static $mSuccessMsg = "mintydocs-publish-success";
-	protected static $mSinglePageMessage = "Publish this draft page?";
+	protected static $mSinglePageMsg = "mintydocs-publish-singlepage";
 	protected static $mButtonMsg = "mintydocs-publish-button";
 	private static $mCheckboxNumber = 1;
 
@@ -114,7 +114,7 @@ class MintyDocsPublish extends SpecialPage {
 				$out->addHTML( $error );
 				return;
 			}
-			$text .= '<p>' . self::$mSinglePageMessage . '</p>';
+			$text .= Html::element( 'p', null, $this->msg( self::$mSinglePageMsg )->text() );
 			$text .= Html::hidden( 'page_name_1', $title->getText() );
 		} else {
 			$text .= '<h3>Pages for ' . $mdPage->getLink() . ':</h3>';
@@ -285,7 +285,7 @@ class MintyDocsPublish extends SpecialPage {
 			$params = [];
 			$params['user_id'] = $user->getId();
 			$params['page_text'] = $fromPageText;
-			$params['edit_summary'] = self::$mEditSummary;
+			$params['edit_summary'] = $this->msg( self::$mEditSummaryMsg )->inContentLanguage()->text();
 
 			// If this is a MintyDocs page with a parent page, send
 			// the name of the parent page in the other namespace
