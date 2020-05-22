@@ -16,8 +16,11 @@
 	"mintydocs-topic-desc": "Dëse Sujet ass en Deel vum Handbuch $1 fir d'Versioun $2 vu(n) $3",
 	"mintydocs-topic-otherversions": "Liest dëse Sujet fir aner Versiounen:",
 	"mintydocs-publish-button": "Verëffentlechen",
+	"mintydocs-publish-editsummary": "Verëffentlecht",
 	"mintydocs-createdraft-button": "Brouillon uleeën",
 	"mintydocs-copy-button": "Kopéieren",
+	"mintydocs-copy-singlepage": "Dës Säit kopéieren?",
+	"mintydocs-delete-success": "D'Säite gi geläscht.",
 	"mintydocs-tocinput-rename": "Ëmbenennen",
 	"mintydocs-tocinput-changetype": "Typ änneren"
 }

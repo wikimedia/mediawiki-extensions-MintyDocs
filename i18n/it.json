@@ -7,9 +7,13 @@
 	},
 	"mintydocs-publish-button": "Pubblica",
 	"mintydocs-publish-success": "Le seguenti pagine saranno create o modificate: $1.",
+	"mintydocs-publish-editsummary": "Pubblicato",
 	"mintydocs-createdraft-button": "Crea bozza",
 	"mintydocs-createdraft-success": "Le seguenti bozze saranno create: $1.",
+	"mintydocs-createdraft-editsummary": "Bozza creata",
 	"mintydocs-copy-button": "Copia",
+	"mintydocs-copy-singlepage": "Copiare questa pagina?",
 	"mintydocs-copy-success": "Le seguenti pagine saranno copiate: $1.",
+	"mintydocs-delete-success": "Le pagine saranno cancellate.",
 	"apihelp-mintydocspublish-param-title": "Il nome della pagina da pubblicare"
 }

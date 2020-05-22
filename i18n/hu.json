@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Csega"
+		]
+	},
+	"mintydocs-publish-singlepage": "Közzétegyük ezt a piszkozatot?",
+	"mintydocs-publish-editsummary": "Közzétéve",
+	"mintydocs-delete-success": "Az oldalak törlésre kerülnek."
+}
