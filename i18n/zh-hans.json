@@ -3,12 +3,15 @@
 		"authors": [
 			"A Chinese Wikipedian",
 			"Looong",
+			"列维劳德",
 			"夢蝶葬花"
 		]
 	},
 	"mintydocs-invalidparentpage": "出错了：“$1”页面应该是“$2”页面才对。",
 	"mintydocs-product-versionlist": "点击下面的任何一个来查看该版本的文档：",
 	"mintydocs-manual-contents": "内容：",
+	"mintydocs-publish-editsummary": "已发布",
+	"mintydocs-createdraft-editsummary": "草稿已创建",
 	"mintydocs-tocinput-rename": "重命名",
 	"mintydocs-tocinput-changetype": "改变类型"
 }
