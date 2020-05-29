@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Diman Russkov",
 			"Vlad5250"
 		]
 	},
@@ -9,5 +10,6 @@
 	"mintydocs-manual-otherversions": "Прочтите это руководство для других версий:",
 	"mintydocs-manual-contents": "Содержание:",
 	"mintydocspublish": "Опубликовать содержимое от MintyDocs",
-	"mintydocscreatedraft": "Создать страницу черновика в MintyDocs"
+	"mintydocscreatedraft": "Создать страницу черновика в MintyDocs",
+	"mintydocs-copy-singlepage": "Копировать эту страницу?"
 }
