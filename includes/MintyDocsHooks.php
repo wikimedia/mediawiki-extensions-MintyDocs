@@ -127,11 +127,11 @@ class MintyDocsHooks {
 			$query = [];
 			// Pass on the "context" stored in the query string.
 			$queryStringParams = [ 'contextProduct', 'contextVersion', 'contextManual' ];
-				foreach ( $queryStringParams as $param ) {
+			foreach ( $queryStringParams as $param ) {
 				if ( $req->getCheck( $param ) ) {
 					$query[$param] = $req->getVal( $param );
 				}
-			 }
+			}
 			$linkToPublished = Linker::linkKnown( $liveTitle, $html = null, $attribs = [], $query );
 			$msg = "This is a draft page; the published version of this page can be found at $linkToPublished.";
 		} else {
