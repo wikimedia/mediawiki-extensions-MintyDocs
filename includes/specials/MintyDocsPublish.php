@@ -179,7 +179,7 @@ class MintyDocsPublish extends SpecialPage {
 		// work on these checkboxes.
 		return $this->displayPageParents( $parentMDPage ) .
 			'<li class="parentPage"><em>' . $parentMDPage->getPageTypeValue() . '</em>: ' .
-			$this->displayPageName( $parentMDPage ) . '</li>';
+			$this->displayLine( $parentMDPage ) . '</li>';
 	}
 
 	static function makePagesTree( $mdPage, $numTopicIndents = 0 ) {
@@ -219,7 +219,7 @@ class MintyDocsPublish extends SpecialPage {
 		if ( is_string( $node ) ) {
 			$text .= "\n<li><em>" . $node . '</em></li>';
 		} elseif ( $node != null ) {
-			$text .= "\n<li>" . $this->displayPageName( $node ) . '</li>';
+			$text .= "\n<li>" . $this->displayLine( $node ) . '</li>';
 		}
 		if ( count( $tree ) > 0 ) {
 			$text .= '<ul>';
@@ -233,13 +233,26 @@ class MintyDocsPublish extends SpecialPage {
 		return $text;
 	}
 
-	function displayPageName( $mdPage ) {
+	function displayLine( $mdPage ) {
+		// See if the parent page of this one (if there is such a thing)
+		// exists in the new location - if not, we can't publish this
+		// page.
+		$cannotBePublished = false;
+		if ( get_class( $this ) == 'MintyDocsPublish' ) {
+			$parentTitle = $mdPage->getParentPage();
+			if ( $parentTitle !== null ) {
+				$toParentTitle = $this->generateTargetTitle( $parentTitle->getText() );
+				if ( !$toParentTitle->exists() ) {
+					$cannotBePublished = true;
+				}
+			}
+		}
+
 		$fromTitle = $mdPage->getTitle();
 		$fromPageName = $fromTitle->getText();
 		$toTitle = $this->generateTargetTitle( $fromPageName );
 		if ( !$toTitle->exists() ) {
-			return Html::check( 'page_name_' . self::$mCheckboxNumber++, true, [ 'value' => $fromPageName, 'class' => 'mdCheckbox' ] ) .
-			'<strong>' . $mdPage->getLink() . '</strong>';
+			return $this->displayLineWithCheckbox( $mdPage, $fromPageName, false, $cannotBePublished );
 		}
 		if ( !$this->overwritingIsAllowed() && $toTitle->exists() ) {
 			return $mdPage->getLink() . ' (already exists)';
@@ -254,7 +267,27 @@ class MintyDocsPublish extends SpecialPage {
 		if ( $fromPageText == $toPageText ) {
 			return $mdPage->getLink() . ' (no change)';
 		}
-		return Html::check( 'page_name_' . self::$mCheckboxNumber++, true, [ 'value' => $fromPageName, 'class' => 'mdCheckbox' ] ) . $mdPage->getLink();
+		return $this->displayLineWithCheckbox( $mdPage, $fromPageName, true, $cannotBePublished );
+	}
+
+	function displayLineWithCheckbox( $mdPage, $fromPageName, $toPageExists, $cannotBePublished ) {
+		$checkboxAttrs = [
+			'value' => $fromPageName,
+			'class' => 'mdCheckbox'
+		];
+		if ( $cannotBePublished ) {
+			$checkboxAttrs['disabled'] = true;
+		}
+		$str = Html::check( 'page_name_' . self::$mCheckboxNumber++, true, $checkboxAttrs );
+		if ( $toPageExists ) {
+			$str .= $mdPage->getLink();
+		} else {
+			$str .= '<strong>' . $mdPage->getLink() . '</strong>';
+		}
+		if ( $cannotBePublished ) {
+			$str .= ' (cannot be published because its parent page has not been published)';
+		}
+		return $str;
 	}
 
 	function overwritingIsAllowed() {
@@ -301,7 +334,7 @@ class MintyDocsPublish extends SpecialPage {
 			if ( $fromMDPage && ( !$fromMDPage instanceof MintyDocsProduct ) ) {
 				$fromParentTitle = $fromMDPage->getParentPage();
 				$fromParentPageName = $fromParentTitle->getText();
-				$toParentTitle = self::generateTargetTitle( $fromParentPageName );
+				$toParentTitle = $this->generateTargetTitle( $fromParentPageName );
 				$toParentPageName = $toParentTitle->getText();
 				$params['parent_page'] = $toParentPageName;
 			}
