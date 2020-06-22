@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Piramidion",
-			"Vlad5250"
+			"Vlad5250",
+			"Ата"
 		]
 	},
 	"mintydocs-desc": "Полегшена система документації",
@@ -22,14 +23,22 @@
 	"mintydocs-topic-otherversions": "Читати цю тему для інших версій:",
 	"mintydocspublish": "Опублікувати вміст MintyDocs",
 	"mintydocs-publish-button": "Опублікувати",
+	"mintydocs-publish-singlepage": "Опублікувати цю чернетку?",
 	"mintydocs-publish-success": "Буде створено або змінено такі сторінки: $1.",
+	"mintydocs-publish-editsummary": "Опубліковано",
 	"mintydocscreatedraft": "Створити чернетку MintyDocs",
 	"mintydocs-createdraft-button": "Створити чернетку",
+	"mintydocs-createdraft-singlepage": "Створити чернетку?",
 	"mintydocs-createdraft-success": "Буде створено такі сторінки-чернетки: $1.",
+	"mintydocs-createdraft-editsummary": "Створено чернетку",
 	"mintydocscopy": "Копіювати вміст MintyDocs",
 	"mintydocs-copy-button": "Копіювати",
+	"mintydocs-copy-singlepage": "Копіювати цю сторінку?",
 	"mintydocs-copy-success": "Буде скопійовано такі сторінки: $1.",
+	"mintydocs-copy-editsummary": "Скопійовано посібник",
 	"mintydocsdelete": "Видалити вміст MintyDocs",
+	"mintydocs-delete-success": "Сторінки буде вилучено.",
+	"mintydocs-delete-deletionreason": "Вилучити посібник",
 	"mintydocs-tocinput-rename": "Перейменувати",
 	"mintydocs-tocinput-changetype": "Змінити тип",
 	"apihelp-mintydocspublish-description": "Публікує сторінку MintyDocs.",
