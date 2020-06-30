@@ -48,12 +48,10 @@ class MintyDocsProduct extends MintyDocsPage {
 	}
 
 	public function userCanEdit( $user ) {
-		// If there's a corresponding draft page, it's non-editable.
-		if ( $this->mTitle->getNamespace() == NS_MAIN ) {
-			$possibleDraftPage = Title::newFromText( $this->mTitle->getText(), MD_NS_DRAFT );
-			if ( $possibleDraftPage->exists() ) {
-				return false;
-			}
+		// If there's a corresponding draft page, it's non-editable,
+		// unless the user has special permission.
+		if ( $this->hasDraftPage() && !$user->isAllowed( 'mintydocs-editlive' ) ) {
+			return false;
 		}
 
 		// In order to prevent users from adding themselves to

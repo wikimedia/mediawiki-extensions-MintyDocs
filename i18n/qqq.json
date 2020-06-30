@@ -13,6 +13,8 @@
 	"right-mintydocs-administer": "{{doc-right|mintydocs-administer}}",
 	"action-mintydocs-edit": "{{doc-action|mintydocs-edit}}",
 	"right-mintydocs-edit": "{{doc-right|mintydocs-edit}}",
+	"action-mintydocs-editlive": "{{doc-action|mintydocs-editlive}}",
+	"right-mintydocs-editlive": "{{doc-right|mintydocs-editlive}}",
 	"mintydocs-noparentpage": "An error message. Parameters:\n $1 - a page type",
 	"mintydocs-invalidparentpage": "An error message. Parameters:\n* $1 - a page name\n* $2 - a page type",
 	"mintydocs-product-versionlist": "A header above a list of links for different versions of some product.",

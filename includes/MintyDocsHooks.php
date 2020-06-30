@@ -143,6 +143,26 @@ class MintyDocsHooks {
 	}
 
 	/**
+	 * Only users with special permission can edit "live" pages that have
+	 * an equivalent page in the draft namespace. If this is what's
+	 * happening, display a warning at the top to remind the user that
+	 * they are doing something thiat is not ideal.
+	 */
+	public static function addLivePageEditWarning( EditPage $editPage, OutputPage $output ) {
+		$title = $editPage->getTitle();
+		$mdPage = MintyDocsUtils::pageFactory( $title );
+		if ( $mdPage == null || !$mdPage->hasDraftPage() ) {
+			return true;
+		}
+		$draftTitle = Title::newFromText( $title->getText(), MD_NS_DRAFT );
+		$draftLink = Linker::linkKnown( $draftTitle, 'draft page' );
+		$msg = "Warning: this page has a corresponding $draftLink. It is generally better to edit the draft page, and then publish it, rather than to edit this page directly.";
+		$editPage->editFormPageTop .= Html::rawElement( 'div', [ 'class' => 'warningbox' ], $msg );
+
+		return true;
+	}
+
+	/**
 	 * @param Skin $skin
 	 * @param array[] &$sidebar
 	 * @return bool

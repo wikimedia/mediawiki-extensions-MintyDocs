@@ -319,8 +319,9 @@ abstract class MintyDocsPage {
 			return true;
 		}
 
-		// If there's a corresponding draft page, it's non-editable.
-		if ( $this->hasDraftPage() ) {
+		// If there's a corresponding draft page, it's non-editable,
+		// unless the user has special permission.
+		if ( $this->hasDraftPage() && !$user->isAllowed( 'mintydocs-editlive' ) ) {
 			return false;
 		}
 

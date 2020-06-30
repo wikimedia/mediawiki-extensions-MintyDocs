@@ -27,7 +27,8 @@
 	},
 	"AvailableRights": [
 		"mintydocs-administer",
-		"mintydocs-edit"
+		"mintydocs-edit",
+		"mintydocs-editlive"
 	],
 	"GroupPermissions": {
 		"sysop": {
@@ -116,6 +117,7 @@
 			"MintyDocsHooks::addTextToPage",
 			"MintyDocsHooks::showNoticeForDraftPage"
 		],
+		"EditPage::showEditForm:initial": "MintyDocsHooks::addLivePageEditWarning",
 		"SkinBuildSidebar": "MintyDocsHooks::addTextToSidebar",
 		"PageContentSaveComplete": "MintyDocsHooks::setSearchText",
 		"MakeGlobalVariablesScript": "MintyDocsHooks::setGlobalJSVariables",
