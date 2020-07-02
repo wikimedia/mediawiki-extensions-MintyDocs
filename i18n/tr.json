@@ -10,6 +10,8 @@
 	"right-mintydocs-administer": "Tüm MintyDocs ürün sayfalarını yönet",
 	"action-mintydocs-edit": "tüm MintyDocs sayfalarını düzenle",
 	"right-mintydocs-edit": "Tüm MintyDocs sayfalarını düzenle",
+	"right-mintydocs-editlive": "İlgili taslak sayfaya sahip MintyDocs sayfalarını düzenle",
+	"action-mintydocs-editlive": "ilgili taslak sayfaya sahip MintyDocs sayfalarını düzenle",
 	"mintydocs-noparentpage": "Hata: Her $1 sayfası bir alt sayfa olmalıdır.",
 	"mintydocs-invalidparentpage": "Hata: \"$1\" sayfası, bir $2 sayfası olmalıdır.",
 	"mintydocs-product-versionlist": "Bu sürümün belgelerini görmek için aşağıdakilerden birine tıklayın:",

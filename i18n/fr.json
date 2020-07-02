@@ -10,6 +10,8 @@
 	"right-mintydocs-administer": "Administrer toutes les pages des produits MintyDocs",
 	"action-mintydocs-edit": "modifier toutes les pages de MintyDocs",
 	"right-mintydocs-edit": "Modifier toutes les pages MintyDocs",
+	"right-mintydocs-editlive": "Modifier les pages de MintyDocs qui ont une page de brouillon correspondante",
+	"action-mintydocs-editlive": "modifier les pages de MintyDocs qui ont une page de brouillon correspondante",
 	"mintydocs-noparentpage": "Erreur: chaque page $1 doit être une sous-page.",
 	"mintydocs-invalidparentpage": "Erreur: la page « $1 » doit être une page $2 .",
 	"mintydocs-product-versionlist": "Cliquez sur un élément quelconque ci-après pour voir la documentation de cette version:",
