@@ -119,7 +119,6 @@
 		],
 		"EditPage::showEditForm:initial": "MintyDocsHooks::addLivePageEditWarning",
 		"SkinBuildSidebar": "MintyDocsHooks::addTextToSidebar",
-		"PageContentSaveComplete": "MintyDocsHooks::setSearchText",
 		"MakeGlobalVariablesScript": "MintyDocsHooks::setGlobalJSVariables",
 		"MagicWordwgVariableIDs": "MintyDocsHooks::declareVarIDs",
 		"ParserGetVariableValueSwitch": "MintyDocsHooks::assignAValue",

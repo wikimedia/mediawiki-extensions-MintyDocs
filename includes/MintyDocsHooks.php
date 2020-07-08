@@ -5,7 +5,7 @@ use MediaWiki\MediaWikiServices;
 class MintyDocsHooks {
 
 	public static function registerExtension() {
-		global $wgNamespaceRobotPolicies;
+		global $wgNamespaceRobotPolicies, $wgHooks;
 
 		if ( !defined( 'MD_NS_DRAFT' ) ) {
 			define( 'MD_NS_DRAFT', 620 );
@@ -18,6 +18,13 @@ class MintyDocsHooks {
 		// search engines, but then again, if other talk pages get
 		// indexed, there's no reason not to index these as well.
 		$wgNamespaceRobotPolicies[MD_NS_DRAFT] = 'noindex';
+
+		if ( class_exists( 'MediaWiki\HookContainer\HookContainer' ) ) {
+			// MW 1.35+
+			$wgHooks['PageSaveComplete'][] = 'MintyDocsHooks::setSearchText';
+		} else {
+			$wgHooks['PageContentSaveComplete'][] = 'MintyDocsHooks::setSearchTextOld';
+		}
 	}
 
 	/**
@@ -94,8 +101,14 @@ class MintyDocsHooks {
 		}
 		$inheritedPage = $mdPage->getInheritedPage();
 		if ( $inheritedPage !== null ) {
-			$revision = Revision::newFromTitle( $inheritedPage->getTitle() );
-			$inheritedPageText = $revision->getContent()->getNativeData();
+			$wikiPage = WikiPage::factory( $inheritedPage->getTitle() );
+			if ( class_exists( 'MediaWiki\Revision\RevisionRecord' ) ) {
+				// MW 1.32+
+				$rawAccess = MediaWiki\Revision\RevisionRecord::RAW;
+			} else {
+				$rawAccess = Revision::RAW;
+			}
+			$inheritedPageText = $wikiPage->getContent( $rawAccess )->getNativeData();
 			$text .= MediaWikiServices::getInstance()->getParser()->parse( $inheritedPageText, $title, new ParserOptions() )->getText();
 		}
 		$text = $mdPage->getHeader() . $text;
@@ -190,6 +203,7 @@ class MintyDocsHooks {
 	}
 
 	/**
+	 * Called by the PageContentSaveComplete hook; used for MW < 1.35.
 	 * Based on function of the same name in ApprovedRevs.hook.php, from
 	 * the Approved Revs extension.
 	 *
@@ -207,7 +221,7 @@ class MintyDocsHooks {
 	 * @param int $undidRevId
 	 * @return true
 	 */
-	public static function setSearchText( $article, $user, $content,
+	public static function setSearchTextOld( $article, $user, $content,
 		$summary, $isMinor, $isWatch, $section, $flags, $revision,
 		$status, $baseRevId, $undidRevId = 0 ) {
 		if ( $revision === null ) {
@@ -215,6 +229,38 @@ class MintyDocsHooks {
 		}
 
 		$title = $article->getTitle();
+		$mdPage = MintyDocsUtils::pageFactory( $title );
+
+		if ( $mdPage == null ) {
+			return true;
+		}
+
+		if ( !$mdPage->inheritsPageContents() ) {
+			return true;
+		}
+
+		// @TODO - does the template call need to be added/removed/etc.?
+		//$newSearchText = $mdPage->getPageContents();
+
+		//DeferredUpdates::addUpdate( new SearchUpdate( $title->getArticleID(), $title->getText(), $newSearchText ) );
+
+		return true;
+	}
+
+	/**
+	 * Called by the PageSaveComplete hook; used for MW >= 1.35.
+	 *
+	 * @return true
+	 */
+	public static function setSearchText( WikiPage $wikiPage, User $user,
+		string $summary, int $flags,
+		MediaWiki\Revision\RevisionStoreRecord $revisionRecord,
+		MediaWiki\Storage\EditResult $editResult ) {
+		if ( $revisionRecord === null ) {
+			return true;
+		}
+
+		$title = $wikiPage->getTitle();
 		$mdPage = MintyDocsUtils::pageFactory( $title );
 
 		if ( $mdPage == null ) {
