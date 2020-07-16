@@ -1,6 +1,7 @@
 {
 	"@metadata": {
 		"authors": [
+			"Base",
 			"Piramidion",
 			"Vlad5250",
 			"Ата"
@@ -11,6 +12,8 @@
 	"right-mintydocs-administer": "Адміністрування усіх сторінок продуктів MintyDocs",
 	"action-mintydocs-edit": "редагування всіх сторінок MintyDocs",
 	"right-mintydocs-edit": "Редагування всіх сторінок MintyDocs",
+	"right-mintydocs-editlive": "Редагувати сторінки MintyDocs, що мають пов'язану чернетку",
+	"action-mintydocs-editlive": "редагувати сторінки MintyDocs, що мають пов'язану чернетку",
 	"mintydocs-noparentpage": "Помилка: кожна сторінка типу $1 має бути підсторінкою.",
 	"mintydocs-invalidparentpage": "Помилка: сторінка «$1» має бути сторінкою типу $2.",
 	"mintydocs-product-versionlist": "Клацніть будь-що з переліченого, щоб переглянути документацію для тієї версії:",
