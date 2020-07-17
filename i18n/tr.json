@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"BaRaN6161 TURK",
-			"Hedda"
+			"Hedda",
+			"Rapsar"
 		]
 	},
 	"mintydocs-desc": "Hafif bir dokümantasyon sistemi",
@@ -22,8 +23,8 @@
 	"mintydocs-manual-contents": "İçerik:",
 	"mintydocs-topic-desc": "Bu konu, $3 $2 sürümü için manüel $1 kılavuzunun bir parçasıdır.",
 	"mintydocs-topic-otherversions": "Diğer sürümler için şu konuyu okuyun:",
-	"mintydocspublish": "MintyDocs içeriğini yayınla",
-	"mintydocs-publish-button": "Yayınla",
+	"mintydocspublish": "MintyDocs içeriğini yayımla",
+	"mintydocs-publish-button": "Yayımla",
 	"mintydocs-publish-singlepage": "Bu taslak sayfa yayınlansın mı?",
 	"mintydocs-publish-success": "Aşağıdaki sayfalar oluşturulacak veya değiştirilecek: $1.",
 	"mintydocs-publish-editsummary": "Yayınlandı",
