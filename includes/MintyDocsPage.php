@@ -248,18 +248,27 @@ abstract class MintyDocsPage {
 	}
 
 	public function userCanView( $user ) {
-		if ( $this->mIsInvalid ) {
-			return true;
-		}
-
-		list( $product, $version ) = $this->getProductAndVersion();
-
 		if ( method_exists( 'MediaWiki\Permissions\PermissionManager', 'userHasRight' ) ) {
 			// MW 1.34+
 			$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
 		} else {
 			$permissionManager = null;
 		}
+
+		if ( $this->mIsInvalid ) {
+			// If it's a standalone topic in the draft namespace,
+			// and the user has no special permissions, then they
+			// can't view it. Otherwise, they can.
+			return (
+				!( $this instanceof MintyDocsTopic ) ||
+				$this->mTitle->getNamespace() !== MD_NS_DRAFT ||
+				MintyDocsUtils::userIsAllowed( $user, 'mintydocs-administer', $permissionManager ) ||
+				MintyDocsUtils::userIsAllowed( $user, 'mintydocs-edit', $permissionManager ) ||
+				MintyDocsUtils::userIsAllowed( $user, 'mintydocs-preview', $permissionManager )
+			);
+		}
+
+		list( $product, $version ) = $this->getProductAndVersion();
 
 		// If this is a draft page, only people with some kind of
 		// MintyDocs permission can view it.
