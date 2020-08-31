@@ -72,6 +72,9 @@ class MintyDocsTopic extends MintyDocsPage {
 
 	static function newBorrowed( $title, $manual ) {
 		$topic = self::newStandalone( $title, $manual );
+		if ( $topic == null ) {
+			return null;
+		}
 		$topic->mIsStandalone = false;
 		$topic->mIsBorrowed = true;
 		return $topic;
