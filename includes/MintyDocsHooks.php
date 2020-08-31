@@ -301,6 +301,7 @@ class MintyDocsHooks {
 		$customVariableIDs[] = 'MAG_MINTYDOCSPRODUCT';
 		$customVariableIDs[] = 'MAG_MINTYDOCSVERSION';
 		$customVariableIDs[] = 'MAG_MINTYDOCSMANUAL';
+		$customVariableIDs[] = 'MAG_MINTYDOCSDISPLAYNAME';
 
 		return true;
 	}
@@ -315,7 +316,12 @@ class MintyDocsHooks {
 	 * @return bool
 	 */
 	public static function assignAValue( $parser, &$cache, $magicWordId, &$ret ) {
-		$handledIDs = [ 'MAG_MINTYDOCSPRODUCT', 'MAG_MINTYDOCSVERSION', 'MAG_MINTYDOCSMANUAL' ];
+		$handledIDs = [
+			'MAG_MINTYDOCSPRODUCT',
+			'MAG_MINTYDOCSVERSION',
+			'MAG_MINTYDOCSMANUAL',
+			'MAG_MINTYDOCSDISPLAYNAME'
+		];
 		if ( !in_array( $magicWordId, $handledIDs ) ) {
 			return true;
 		}
@@ -346,6 +352,9 @@ class MintyDocsHooks {
 				}
 				$manual = $mdPage->getManual();
 				$ret = $cache[$magicWordId] = $manual->getDisplayName();
+				break;
+			case 'MAG_MINTYDOCSDISPLAYNAME':
+				$ret = $cache[$magicWordId] = $mdPage->getDisplayName();
 				break;
 			default:
 				break;
