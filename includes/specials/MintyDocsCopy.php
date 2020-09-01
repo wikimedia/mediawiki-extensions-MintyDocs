@@ -109,8 +109,15 @@ class MintyDocsCopy extends MintyDocsPublish {
 	}
 
 	function generateTargetTitle( $targetPageName ) {
-		list( $product, $version, $manualAndTopic ) = explode( '/', $targetPageName, 3 );
-		$targetPageName = "$product/" . $this->targetVersion . "/$manualAndTopic";
+		$pageElements = explode( '/', $targetPageName, 3 );
+		if ( count( $pageElements ) == 3 ) {
+			list( $product, $version, $manualAndTopic ) = $pageElements;
+			$targetPageName = "$product/" . $this->targetVersion . "/$manualAndTopic";
+		} else {
+			// Probably 2 - product and version. We just need the product.
+			$product = $pageElements[0];
+			$targetPageName = "$product/" . $this->targetVersion;
+		}
 		return Title::newFromText( $targetPageName, $this->mParentTitle->getNamespace() );
 	}
 
