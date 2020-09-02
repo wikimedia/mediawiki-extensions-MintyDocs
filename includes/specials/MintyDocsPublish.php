@@ -31,6 +31,11 @@ class MintyDocsPublish extends SpecialPage {
 		return Title::newFromText( $targetPageName, NS_MAIN );
 	}
 
+	function generateParentTargetTitle( $fromParentTitle ) {
+		$fromParentPageName = $fromParentTitle->getText();
+		return $this->generateTargetTitle( $fromParentPageName );
+	}
+
 	function execute( $query ) {
 		$this->setHeaders();
 		$out = $this->getOutput();
@@ -333,9 +338,8 @@ class MintyDocsPublish extends SpecialPage {
 			$fromMDPage = MintyDocsUtils::pageFactory( $fromTitle );
 			if ( $fromMDPage && ( !$fromMDPage instanceof MintyDocsProduct ) ) {
 				$fromParentTitle = $fromMDPage->getParentPage();
-				$fromParentPageName = $fromParentTitle->getText();
-				$toParentTitle = $this->generateTargetTitle( $fromParentPageName );
-				$toParentPageName = $toParentTitle->getText();
+				$toParentTitle = $this->generateParentTargetTitle( $fromParentTitle );
+				$toParentPageName = $toParentTitle->getFullText();
 				$params['parent_page'] = $toParentPageName;
 			}
 

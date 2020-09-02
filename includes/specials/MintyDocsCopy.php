@@ -121,6 +121,11 @@ class MintyDocsCopy extends MintyDocsPublish {
 		return Title::newFromText( $targetPageName, $this->mParentTitle->getNamespace() );
 	}
 
+	function generateParentTargetTitle( $fromParentTitle ) {
+		$fromParentPageName = $fromParentTitle->getFullText();
+		return $this->generateTargetTitle( $fromParentPageName );
+	}
+
 	function overwritingIsAllowed() {
 		return true;
 	}
