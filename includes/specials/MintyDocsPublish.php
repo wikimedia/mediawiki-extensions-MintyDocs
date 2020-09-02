@@ -243,13 +243,11 @@ class MintyDocsPublish extends SpecialPage {
 		// exists in the new location - if not, we can't publish this
 		// page.
 		$cannotBePublished = false;
-		if ( get_class( $this ) == 'MintyDocsPublish' ) {
-			$parentTitle = $mdPage->getParentPage();
-			if ( $parentTitle !== null ) {
-				$toParentTitle = $this->generateTargetTitle( $parentTitle->getText() );
-				if ( !$toParentTitle->exists() ) {
-					$cannotBePublished = true;
-				}
+		$parentTitle = $mdPage->getParentPage();
+		if ( $parentTitle !== null ) {
+			$toParentTitle = $this->generateTargetTitle( $parentTitle->getText() );
+			if ( !$toParentTitle->exists() ) {
+				$cannotBePublished = true;
 			}
 		}
 
