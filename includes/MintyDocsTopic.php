@@ -225,4 +225,8 @@ class MintyDocsTopic extends MintyDocsPage {
 	function isStandalone() {
 		return $this->mIsStandalone;
 	}
+
+	function isBorrowed() {
+		return $this->mIsBorrowed;
+	}
 }

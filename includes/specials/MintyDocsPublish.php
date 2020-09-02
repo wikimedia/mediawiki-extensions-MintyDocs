@@ -221,9 +221,13 @@ class MintyDocsPublish extends SpecialPage {
 
 	function displayCheckboxesForTree( $node, $tree ) {
 		$text = '';
-		if ( is_string( $node ) ) {
+		if ( $node == null ) {
+			// Do nothing.
+		} elseif ( is_string( $node ) ) {
 			$text .= "\n<li><em>" . $node . '</em></li>';
-		} elseif ( $node != null ) {
+		} elseif ( $node instanceof MintyDocsTopic && $node->isBorrowed() ) {
+			$text .= "\n<li>" . $node->getLink() . ' (this is a borrowed page)</li>';
+		} else {
 			$text .= "\n<li>" . $this->displayLine( $node ) . '</li>';
 		}
 		if ( count( $tree ) > 0 ) {
