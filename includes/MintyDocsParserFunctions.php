@@ -414,7 +414,10 @@ class MintyDocsParserFunctions {
 			$curManual = $mdPage->getActualName();
 		} else { // MintyDocsTopic
 			list( $curProduct, $curVersion ) = $mdPage->getProductAndVersionStrings();
-			$curManual = $mdPage->getManual()->getActualName();
+			if ( $mdPage->getManual() ) {
+				// If it's standalone, there's no manual.
+				$curManual = $mdPage->getManual()->getActualName();
+			}
 		}
 
 		if ( $product != null ) {
