@@ -31,7 +31,7 @@ abstract class MintyDocsPage {
 		return null;
 	}
 
-	public function __construct( $title ) {
+	public function __construct( Title $title ) {
 		$this->mTitle = $title;
 	}
 

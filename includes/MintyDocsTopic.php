@@ -5,7 +5,7 @@ class MintyDocsTopic extends MintyDocsPage {
 	private $mIsStandalone = false;
 	private $mIsBorrowed = false;
 
-	public function __construct( $title ) {
+	public function __construct( Title $title ) {
 		global $wgRequest;
 
 		$this->mTitle = $title;

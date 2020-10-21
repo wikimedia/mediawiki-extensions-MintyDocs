@@ -6,7 +6,7 @@ class MintyDocsUtils {
 
 	public static $pageClassesInOrder = [ 'MintyDocsProduct', 'MintyDocsVersion', 'MintyDocsManual', 'MintyDocsTopic' ];
 
-	public static function getPagePropForTitle( $title, $propName ) {
+	public static function getPagePropForTitle( Title $title, $propName ) {
 		$dbr = wfGetDB( DB_REPLICA );
 		$res = $dbr->select( 'page_props',
 			[
@@ -26,7 +26,7 @@ class MintyDocsUtils {
 		return $row[0];
 	}
 
-	public static function titlePagePropIncludesValue( $title, $propName, $value ) {
+	public static function titlePagePropIncludesValue( Title $title, $propName, $value ) {
 		$fullValue = self::getPagePropForTitle( $title, $propName );
 		$individualValues = explode( ',', $fullValue );
 		foreach ( $individualValues as $individualValue ) {
@@ -37,11 +37,11 @@ class MintyDocsUtils {
 		return false;
 	}
 
-	public static function getPageType( $title ) {
+	public static function getPageType( Title $title ) {
 		return self::getPagePropForTitle( $title, 'MintyDocsPageType' );
 	}
 
-	public static function pageFactory( $title ) {
+	public static function pageFactory( Title $title ) {
 		$pageType = self::getPageType( $title );
 		if ( $pageType == 'Product' ) {
 			return new MintyDocsProduct( $title );
@@ -56,7 +56,7 @@ class MintyDocsUtils {
 		return null;
 	}
 
-	static function getPageParts( $title ) {
+	static function getPageParts( Title $title ) {
 		$pageName = $title->getPrefixedText();
 		$lastSlashPos = strrpos( $pageName, '/' );
 		if ( $lastSlashPos === false ) {
@@ -91,11 +91,7 @@ class MintyDocsUtils {
 		return true;
 	}
 
-	public static function createOrModifyPage( $title, $pageText, $editSummary, $user ) {
-		if ( $title === null ) {
-			throw new MWException( "Invalid title" );
-		}
-
+	public static function createOrModifyPage( Title $title, $pageText, $editSummary, $user ) {
 		$wikiPage = new WikiPage( $title );
 		if ( !$wikiPage ) {
 			throw new MWException( 'Wiki page not found "' . $title->getPrefixedDBkey() . '"' );
@@ -166,7 +162,7 @@ class MintyDocsUtils {
 	 * @param Title $title
 	 * @return string
 	 */
-	public static function titleURLString( $title ) {
+	public static function titleURLString( Title $title ) {
 		$namespace = $title->getNsText();
 		if ( $namespace !== '' ) {
 			$namespace .= ':';
