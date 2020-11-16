@@ -84,13 +84,14 @@ class MintyDocsParserFunctions {
 			if ( $paramName == 'display name' ) {
 				$displayTitle = $value;
 			} elseif ( $paramName == 'admins' ) {
-				$value = str_replace( '_', ' ', $value );
+				// Standardize the username.
+				$value = ucfirst( str_replace( '_', ' ', $value ) );
 				$parserOutput->setProperty( 'MintyDocsProductAdmins', $value );
 			} elseif ( $paramName == 'editors' ) {
-				$value = str_replace( '_', ' ', $value );
+				$value = ucfirst( str_replace( '_', ' ', $value ) );
 				$parserOutput->setProperty( 'MintyDocsProductEditors', $value );
 			} elseif ( $paramName == 'previewers' ) {
-				$value = str_replace( '_', ' ', $value );
+				$value = ucfirst( str_replace( '_', ' ', $value ) );
 				$parserOutput->setProperty( 'MintyDocsProductPreviewers', $value );
 			}
 		}
