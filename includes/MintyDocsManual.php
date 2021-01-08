@@ -156,6 +156,7 @@ class MintyDocsManual extends MintyDocsPage {
 		$this->mTOCArray = [];
 		$unlinkedLineTracker = [];
 		foreach ( $tocLines as $lineNum => &$line ) {
+			$line = str_replace( '_', ' ', $line );
 			$matches = [];
 			preg_match( "/(\*+)\s*(.*)\s*$/", $line, $matches );
 			$numAsterisks = strlen( $matches[1] );
