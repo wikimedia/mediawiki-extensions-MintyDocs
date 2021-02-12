@@ -103,6 +103,7 @@ class MintyDocsPublish extends SpecialPage {
 	function displayMainForm( $title ) {
 		$out = $this->getOutput();
 		$req = $this->getRequest();
+		$out->enableOOUI();
 
 		// Display checkboxes.
 		$text = '<form id="mdPublishForm" action="" method="post">';
@@ -146,7 +147,14 @@ class MintyDocsPublish extends SpecialPage {
 		$titleString = MintyDocsUtils::titleURLString( $this->getPageTitle() );
 		$text .= Html::hidden( 'title', $titleString ) . "\n";
 		$text .= Html::hidden( 'csrf', $this->getUser()->getEditToken( $this->getName() ) ) . "\n";
-		$text .= Html::input( 'mdPublish', $this->msg( self::$mButtonMsg )->parse(), 'submit' );
+		$text .= "<br />\n" . new OOUI\ButtonInputWidget(
+			[
+				'name' => 'mdPublish',
+				'type' => 'submit',
+				'flags' => [ 'progressive', 'primary' ],
+				'label' => $this->msg( self::$mButtonMsg )->parse()
+			]
+		);
 
 		$text .= '</form>';
 		$out->addHTML( $text );
@@ -279,13 +287,15 @@ class MintyDocsPublish extends SpecialPage {
 
 	function displayLineWithCheckbox( $mdPage, $fromPageName, $toPageExists, $cannotBePublished ) {
 		$checkboxAttrs = [
+			'name' => 'page_name_' . self::$mCheckboxNumber++,
 			'value' => $fromPageName,
-			'class' => 'mdCheckbox'
+			'class' => [ 'mdCheckbox' ],
+			'selected' => true
 		];
 		if ( $cannotBePublished ) {
 			$checkboxAttrs['disabled'] = true;
 		}
-		$str = Html::check( 'page_name_' . self::$mCheckboxNumber++, true, $checkboxAttrs );
+		$str = new OOUI\CheckboxInputWidget( $checkboxAttrs );
 		if ( $toPageExists ) {
 			$str .= $mdPage->getLink();
 		} else {

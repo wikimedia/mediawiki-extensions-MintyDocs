@@ -65,6 +65,7 @@ class MintyDocsCopy extends MintyDocsPublish {
 
 	function displayVersionSelector( $title ) {
 		$out = $this->getOutput();
+		$out->enableOOUI();
 
 		$mdPage = MintyDocsUtils::pageFactory( $title );
 		list( $productStr, $versionStr ) = $mdPage->getProductAndVersionStrings();
@@ -79,19 +80,33 @@ class MintyDocsCopy extends MintyDocsPublish {
 			}
 		}
 
-		$optionsHtml = '';
+		$options = [];
 		foreach ( $versionStrings as $curVersionStr ) {
-			$optionsHtml .= Html::element(
-				'option', [
-					'value' => $curVersionStr
-				], $curVersionStr
-			) . "\n";
+			$options[] = [ 'data' => $curVersionStr ];
 		}
 
 		$text = Html::hidden( 'csrf', $this->getUser()->getEditToken( $this->getName() ) ) . "\n";
-		$text .= "Select version to copy pages to: ";
-		$text .= Html::rawElement( 'select', [ 'name' => 'target_version' ], $optionsHtml ) . "\n";
-		$text .= '<p>' . Html::input( 'mdSetVersion', $this->msg( 'apisandbox-continue' )->text(), 'submit' ) . "</p>\n";
+		$dropdown = new OOUI\DropdownInputWidget(
+			[
+				'options' => $options,
+				'name' => 'target_version'
+			]
+		);
+		$text .= new OOUI\FieldLayout(
+			$dropdown,
+			[
+				'align' => 'inline',
+				'label' => 'Select version to copy pages to:'
+			]
+		);
+		$text .= "<br /><br />\n" . new OOUI\ButtonInputWidget(
+			[
+				'name' => 'mdSetVersion',
+				'type' => 'submit',
+				'flags' => 'progressive',
+				'label' => $this->msg( 'apisandbox-continue' )->parse()
+			]
+		);
 		$text = Html::rawElement( 'form', [ 'method' => 'post' ], $text );
 
 		$out->addHtml( $text );
