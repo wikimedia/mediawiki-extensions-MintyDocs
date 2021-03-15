@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Gomoko",
+			"Verdy p",
 			"Wladek92"
 		]
 	},
+	"mintydocs-extensionname": "MintyDocs",
 	"mintydocs-desc": "Un système allégé de documentation",
 	"action-mintydocs-administer": "gérer toutes les pages de produit MintyDocs",
 	"right-mintydocs-administer": "Administrer toutes les pages des produits MintyDocs",
