@@ -1,7 +1,5 @@
 <?php
 
-use MediaWiki\MediaWikiServices;
-
 /**
  * Handles the 'recreatedata' action.
  *
@@ -44,17 +42,10 @@ class MintyDocsPublishAction extends Action {
 			return true;
 		}
 
+		$mdPage = MintyDocsUtils::pageFactory( $title );
 		$user = $obj->getUser();
-		if ( method_exists( 'MediaWiki\Permissions\PermissionManager', 'userCan' ) ) {
-			// MW 1.33+
-			$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
-			if ( !$permissionManager->userCan( 'mintydocs-administer', $user, $title ) ) {
-				return true;
-			}
-		} else {
-			if ( !$title->userCan( 'mintydocs-administer', $user ) ) {
-				return true;
-			}
+		if ( !$mdPage->userCanAdminister( $user ) ) {
+			return true;
 		}
 
 		$request = $obj->getRequest();

@@ -41,8 +41,21 @@ class MintyDocsPublish extends SpecialPage {
 		$out = $this->getOutput();
 		$req = $this->getRequest();
 
+		if ( $query == '' ) {
+			$pageName = $req->getVal( 'page_name_1' );
+			$query = $this->generateSourceTitle( $pageName );
+		}
+
+		try {
+			$title = $this->getTitleFromQuery( $query );
+		} catch ( Exception $e ) {
+			$out->addHTML( $e->getMessage() );
+			return;
+		}
+
 		// Check permissions.
-		if ( !$this->getUser()->isAllowed( 'mintydocs-administer' ) ) {
+		$mdPage = MintyDocsUtils::pageFactory( $title );
+		if ( !$mdPage->userCanAdminister( $this->getUser() ) ) {
 			$this->displayRestrictionError();
 			return;
 		}
@@ -58,13 +71,6 @@ class MintyDocsPublish extends SpecialPage {
 			}
 
 			$this->publishAll();
-			return;
-		}
-
-		try {
-			$title = $this->getTitleFromQuery( $query );
-		} catch ( Exception $e ) {
-			$out->addHTML( $e->getMessage() );
 			return;
 		}
 
