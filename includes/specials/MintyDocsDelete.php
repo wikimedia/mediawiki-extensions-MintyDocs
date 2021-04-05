@@ -18,12 +18,6 @@ class MintyDocsDelete extends SpecialPage {
 		$out = $this->getOutput();
 		$req = $this->getRequest();
 
-		// Check permissions.
-		if ( !$this->getUser()->isAllowed( 'mintydocs-administer' ) ) {
-			$this->displayRestrictionError();
-			return;
-		}
-
 		if ( $query == null ) {
 			$out->addHTML( 'Page name must be set.' );
 			return;
@@ -46,6 +40,12 @@ class MintyDocsDelete extends SpecialPage {
 		// For now, this only supports deleting manuals.
 		if ( $mdPage == null || $mdPage->getPageTypeValue() !== 'Manual' ) {
 			$out->addHTML( 'Page must be a MintyDocs manual.' );
+			return;
+		}
+
+		// Check permissions.
+		if ( !$mdPage->userCanAdminister( $this->getUser() ) ) {
+			$this->displayRestrictionError();
 			return;
 		}
 

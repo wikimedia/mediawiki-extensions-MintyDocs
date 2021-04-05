@@ -15,11 +15,6 @@ class MintyDocsPublishAPI extends ApiBase {
 	 * getResult().
 	 */
 	function execute() {
-		$user = $this->getUser();
-		if ( !$user->isAllowed( 'mintydocs-administer' ) ) {
-			$this->dieWithError( [ 'apierror-permissiondenied', $this->msg( "action-mintydocs-administer" ) ] );
-		}
-
 		$params = $this->extractRequestParams();
 
 		$pageName = $params['title'];
@@ -37,6 +32,12 @@ class MintyDocsPublishAPI extends ApiBase {
 		}
 		if ( !$fromTitle->exists() ) {
 			$this->dieWithError( 'apierror-missingtitle' );
+		}
+
+		$fromMDPage = MintyDocsUtils::pageFactory( $fromTitle );
+		$user = $this->getUser();
+		if ( $fromMDPage->userCanPublish( $user ) ) {
+			$this->dieWithError( [ 'apierror-permissiondenied', $this->msg( "action-mintydocs-administer" ) ] );
 		}
 
 		$fromPage = WikiPage::factory( $fromTitle );

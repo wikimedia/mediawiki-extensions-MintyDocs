@@ -372,4 +372,31 @@ abstract class MintyDocsPage {
 		return true;
 	}
 
+	public function userCanAdminister( $user ) {
+		if ( method_exists( 'MediaWiki\Permissions\PermissionManager', 'userHasRight' ) ) {
+			// MW 1.34+
+			$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
+		} else {
+			$permissionManager = null;
+		}
+
+		if ( ( $this instanceof MintyDocsTopic ) && $this->mIsInvalid ) {
+			// If it's a standalone topic in the draft namespace,
+			// it can only be published if the user is globally
+			// an administrator.
+			return MintyDocsUtils::userIsAllowed( $user, 'mintydocs-administer', $permissionManager );
+		}
+
+		if ( MintyDocsUtils::userIsAllowed( $user, 'mintydocs-administer', $permissionManager ) ) {
+			return true;
+		}
+
+		list( $product, $version ) = $this->getProductAndVersion();
+		if ( $product->userIsAdmin( $user ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
 }
