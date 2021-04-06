@@ -356,9 +356,12 @@ class MintyDocsPublish extends SpecialPage {
 			$fromMDPage = MintyDocsUtils::pageFactory( $fromTitle );
 			if ( $fromMDPage && ( !$fromMDPage instanceof MintyDocsProduct ) ) {
 				$fromParentTitle = $fromMDPage->getParentPage();
-				$toParentTitle = $this->generateParentTargetTitle( $fromParentTitle );
-				$toParentPageName = $toParentTitle->getFullText();
-				$params['parent_page'] = $toParentPageName;
+				// Make sure it's not a standalone topic.
+				if ( $fromParentTitle !== null ) {
+					$toParentTitle = $this->generateParentTargetTitle( $fromParentTitle );
+					$toParentPageName = $toParentTitle->getFullText();
+					$params['parent_page'] = $toParentPageName;
+				}
 			}
 
 			$jobs[] = new MintyDocsCreatePageJob( $toTitle, $params );
