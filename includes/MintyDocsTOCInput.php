@@ -82,7 +82,7 @@ class MintyDocsTOCInput extends PFFormInput {
 			'data-tree-layout' => json_encode( $treeData ),
 			'style' => 'margin-top:1em; min-height:200px;'
 		] );
-		$button = Html::element( 'button', [ 'type' => 'button' ], 'Add entry' );
+		$button = Html::element( 'button', [ 'type' => 'button' ], wfMessage( 'mintydocs-tocinput-addentry' )->parse() );
 		return Html::rawElement( 'div', null, $mainDiv . "\n" . $button );
 	}
 
