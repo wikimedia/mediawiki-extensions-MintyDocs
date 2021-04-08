@@ -18,6 +18,10 @@ class MintyDocsProduct extends MintyDocsPage {
 		return $this->mTitle->getPrefixedText();
 	}
 
+	function getParentPage() {
+		return null;
+	}
+
 	function inheritsPageContents() {
 		return false;
 	}

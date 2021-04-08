@@ -181,10 +181,6 @@ class MintyDocsPublish extends SpecialPage {
 	}
 
 	function displayPageParents( $mdPage ) {
-		if ( $mdPage instanceof MintyDocsProduct ) {
-			return '';
-		}
-
 		$parentPage = $mdPage->getParentPage();
 		if ( $parentPage == null ) {
 			return '';
@@ -354,9 +350,8 @@ class MintyDocsPublish extends SpecialPage {
 			// child pages occurs right before the saving of the
 			// parent.
 			$fromMDPage = MintyDocsUtils::pageFactory( $fromTitle );
-			if ( $fromMDPage && ( !$fromMDPage instanceof MintyDocsProduct ) ) {
+			if ( $fromMDPage !== null ) {
 				$fromParentTitle = $fromMDPage->getParentPage();
-				// Make sure it's not a standalone topic.
 				if ( $fromParentTitle !== null ) {
 					$toParentTitle = $this->generateParentTargetTitle( $fromParentTitle );
 					$toParentPageName = $toParentTitle->getFullText();
