@@ -80,9 +80,13 @@ class MintyDocsTOCInput extends PFFormInput {
 			'class' => 'MintyDocsTOC',
 			'data-input-name' => $input_name,
 			'data-tree-layout' => json_encode( $treeData ),
-			'style' => 'margin-top:1em; min-height:200px;'
+			'style' => 'margin: 1em 0; min-height: 200px;'
 		] );
-		$button = Html::element( 'button', [ 'type' => 'button' ], wfMessage( 'mintydocs-tocinput-addentry' )->parse() );
+		$buttonAttrs = [
+			'label' => wfMessage( 'mintydocs-tocinput-addentry' )->parse(),
+			'icon' => 'add'
+		];
+		$button = new OOUI\ButtonWidget( $buttonAttrs );
 		return Html::rawElement( 'div', null, $mainDiv . "\n" . $button );
 	}
 
