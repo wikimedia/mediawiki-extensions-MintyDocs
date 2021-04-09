@@ -45,6 +45,7 @@
 	"mintydocs-delete-deletionreason": "The reason given when a page is deleted because it is contained in a \"Manual\" that is deleted",
 	"mintydocs-tocinput-rename": "Text of a dropdown menu choice",
 	"mintydocs-tocinput-changetype": "Text of a dropdown menu choice",
+	"mintydocs-tocinput-addentry": "Text of a button to add another row/entry to a table of contents",
 	"apihelp-mintydocspublish-description": "{{doc-apihelp-description|mintydocspublish}}",
 	"apihelp-mintydocspublish-summary": "{{doc-apihelp-summary|mintydocspublish}}",
 	"apihelp-mintydocspublish-param-title": "{{doc-apihelp-param|mintydocspublish|title}}",
