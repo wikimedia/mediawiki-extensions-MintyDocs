@@ -4,7 +4,8 @@
 			"BaRaN6161 TURK",
 			"Hedda",
 			"MuratTheTurkish",
-			"Rapsar"
+			"Rapsar",
+			"SaldırganSincap"
 		]
 	},
 	"mintydocs-desc": "Hafif bir belgelndirme sistemi",
@@ -44,6 +45,7 @@
 	"mintydocs-delete-deletionreason": "Kılavuzu sil",
 	"mintydocs-tocinput-rename": "Yeniden adlandır",
 	"mintydocs-tocinput-changetype": "Değişiklik türü",
+	"mintydocs-tocinput-addentry": "Giriş ekle",
 	"apihelp-mintydocspublish-description": "MintyDocs sayfasını yayımlar.",
 	"apihelp-mintydocspublish-summary": "Taslak ad alanından ana ad alanına kopyalayarak bir MintyDocs sayfası yayımlar.",
 	"apihelp-mintydocspublish-param-title": "Yayımlanacak sayfanın adı",
