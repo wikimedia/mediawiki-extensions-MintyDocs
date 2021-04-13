@@ -42,6 +42,7 @@
 	"mintydocs-delete-deletionreason": "Избришана рачно",
 	"mintydocs-tocinput-rename": "Преименувај",
 	"mintydocs-tocinput-changetype": "Измени тип",
+	"mintydocs-tocinput-addentry": "Додај ставка",
 	"apihelp-mintydocspublish-description": "Објавува страница во MintyDocs.",
 	"apihelp-mintydocspublish-summary": "Објавува страница во MintyDocs, прекопирајќи ја од нацртниот во главниот именски простор.",
 	"apihelp-mintydocspublish-param-title": "Назив на страницата за објавување",
