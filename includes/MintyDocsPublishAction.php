@@ -42,7 +42,12 @@ class MintyDocsPublishAction extends Action {
 			return true;
 		}
 
+		// MintyDocs pages only.
 		$mdPage = MintyDocsUtils::pageFactory( $title );
+		if ( !$mdPage ) {
+			return true;
+		}
+
 		$user = $obj->getUser();
 		if ( !$mdPage->userCanAdminister( $user ) ) {
 			return true;
