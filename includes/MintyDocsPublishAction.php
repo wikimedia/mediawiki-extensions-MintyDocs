@@ -44,7 +44,7 @@ class MintyDocsPublishAction extends Action {
 
 		$mdPage = MintyDocsUtils::pageFactory( $title );
 		$user = $obj->getUser();
-		if ( !$mdPage->userCanAdminister( $user ) ) {
+		if ( !empty($mdPage) && !$mdPage->userCanAdminister( $user ) ) {
 			return true;
 		}
 
