@@ -447,13 +447,13 @@ class MintyDocsParserFunctions {
 		if ( $contextProduct == null && $wgRequest->getCheck( 'contextProduct' ) ) {
 			$contextProduct = $wgRequest->getVal( 'contextProduct' );
 		}
-		if ( $contextProduct != null && $$linkedProduct != null && $linkedProduct != $contextProduct ) {
+		if ( $contextProduct != null && $linkedProduct != null && $linkedProduct != $contextProduct ) {
 			$query['contextProduct'] = $contextProduct;
 		}
 		if ( $contextVersion == null && $wgRequest->getCheck( 'contextVersion' ) ) {
 			$contextVersion = $wgRequest->getVal( 'contextVersion' );
 		}
-		if ( $contextVersion != null && $$linkedVersion != null && $linkedVersion != $contextVersion ) {
+		if ( $contextVersion != null && $linkedVersion != null && $linkedVersion != $contextVersion ) {
 			$query['contextVersion'] = $contextVersion;
 		}
 		if ( $contextManual == null && $wgRequest->getCheck( 'contextManual' ) ) {
