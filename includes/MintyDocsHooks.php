@@ -181,13 +181,27 @@ class MintyDocsHooks {
 	 * @return bool
 	 */
 	public static function addTextToSidebar( Skin $skin, &$sidebar ) {
+		global $wgRequest;
 		global $wgMintyDocsDisplayFooterElementsInSidebar;
 
 		if ( !$wgMintyDocsDisplayFooterElementsInSidebar ) {
 			return true;
 		}
 
-		$title = $skin->getTitle();
+		$contextProduct = $wgRequest->getVal( 'contextProduct' );
+		$contextVersion = $wgRequest->getVal( 'contextVersion' );
+		$contextManual = $wgRequest->getVal( 'contextManual' );
+
+		// If an entire context has been set via the URL query string,
+		// generate a manual page based on that, so we can get a
+		// sidebar in place.
+		if ( $contextProduct && $contextVersion && $contextManual ) {
+			$manualName = "$contextProduct/$contextVersion/$contextManual";
+			$title = Title::newFromText( $manualName );
+		} else {
+			$title = $skin->getTitle();
+		}
+
 		$mdPage = MintyDocsUtils::pageFactory( $title );
 		if ( $mdPage == null ) {
 			return true;
