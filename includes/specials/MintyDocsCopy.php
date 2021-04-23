@@ -56,7 +56,9 @@ class MintyDocsCopy extends MintyDocsPublish {
 			return;
 		}
 
-		if ( $setVersion ) {
+		$this->mTargetProduct = $req->getVal( 'target_product' );
+
+		if ( $setVersion || ( $this->mTargetVersion && $this->mTargetProduct ) ) {
 			$this->displayMainForm( $title );
 			return;
 		}
@@ -128,10 +130,16 @@ class MintyDocsCopy extends MintyDocsPublish {
 		$pageElements = explode( '/', $targetPageName, 3 );
 		if ( count( $pageElements ) == 3 ) {
 			list( $product, $version, $manualAndTopic ) = $pageElements;
+			if ( $this->mTargetProduct ) {
+				$product = $this->mTargetProduct;
+			}
 			$targetPageName = "$product/" . $this->mTargetVersion . "/$manualAndTopic";
 		} else {
 			// Probably 2 - product and version. We just need the product.
 			$product = $pageElements[0];
+			if ( $this->mTargetProduct ) {
+				$product = $this->mTargetProduct;
+			}
 			$targetPageName = "$product/" . $this->mTargetVersion;
 		}
 		return Title::newFromText( $targetPageName, $this->mParentTitle->getNamespace() );
