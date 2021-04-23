@@ -3,6 +3,7 @@
 class MintyDocsCopy extends MintyDocsPublish {
 
 	private $mParentTitle;
+	private $mTargetVersion;
 
 	/**
 	 * Constructor
@@ -48,7 +49,7 @@ class MintyDocsCopy extends MintyDocsPublish {
 		}
 		$this->mParentTitle = $title;
 
-		$this->targetVersion = $req->getVal( 'target_version' );
+		$this->mTargetVersion = $req->getVal( 'target_version' );
 
 		if ( $publish ) {
 			$this->publishAll();
@@ -115,7 +116,7 @@ class MintyDocsCopy extends MintyDocsPublish {
 	function displayPageParents( $mdPage ) {
 		$targetTitle = $this->generateTargetTitle( $mdPage->getTitle()->getText() );
 		$text = '<p>These will be copied to the location ' . Linker::link( $targetTitle ) . ".</p>\n";
-		$text .= Html::hidden( 'target_version', $this->targetVersion );
+		$text .= Html::hidden( 'target_version', $this->mTargetVersion );
 		return $text;
 	}
 
@@ -127,11 +128,11 @@ class MintyDocsCopy extends MintyDocsPublish {
 		$pageElements = explode( '/', $targetPageName, 3 );
 		if ( count( $pageElements ) == 3 ) {
 			list( $product, $version, $manualAndTopic ) = $pageElements;
-			$targetPageName = "$product/" . $this->targetVersion . "/$manualAndTopic";
+			$targetPageName = "$product/" . $this->mTargetVersion . "/$manualAndTopic";
 		} else {
 			// Probably 2 - product and version. We just need the product.
 			$product = $pageElements[0];
-			$targetPageName = "$product/" . $this->targetVersion;
+			$targetPageName = "$product/" . $this->mTargetVersion;
 		}
 		return Title::newFromText( $targetPageName, $this->mParentTitle->getNamespace() );
 	}
