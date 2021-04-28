@@ -137,9 +137,7 @@ class MintyDocsTopic extends MintyDocsPage {
 		} elseif ( $this->mIsBorrowed ) {
 			$manual = $this->getManual();
 			list( $product, $version ) = $manual->getProductAndVersion();
-			// We want to skip the "Draft:" prefix in the product
-			// name, if it's there, so we can't call getActualName().
-			$query['contextProduct'] = $product->getTitle()->getText();
+			$query['contextProduct'] = $product->getActualName();
 			$query['contextVersion'] = $version->getActualName();
 			$query['contextManual'] = $manual->getActualName();
 		}
