@@ -4,6 +4,7 @@ class MintyDocsCopy extends MintyDocsPublish {
 
 	private $mParentTitle;
 	private $mTargetVersion;
+	private $mTargetProduct;
 
 	/**
 	 * Constructor
@@ -50,13 +51,12 @@ class MintyDocsCopy extends MintyDocsPublish {
 		$this->mParentTitle = $title;
 
 		$this->mTargetVersion = $req->getVal( 'target_version' );
+		$this->mTargetProduct = $req->getVal( 'target_product' );
 
 		if ( $publish ) {
 			$this->publishAll();
 			return;
 		}
-
-		$this->mTargetProduct = $req->getVal( 'target_product' );
 
 		if ( $setVersion || ( $this->mTargetVersion && $this->mTargetProduct ) ) {
 			$this->displayMainForm( $title );
