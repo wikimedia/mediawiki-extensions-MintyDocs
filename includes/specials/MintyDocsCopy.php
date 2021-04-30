@@ -3,8 +3,9 @@
 class MintyDocsCopy extends MintyDocsPublish {
 
 	private $mParentTitle;
-	private $mTargetVersion;
 	private $mTargetProduct;
+	private $mTargetVersion;
+	private $mTargetManual;
 
 	/**
 	 * Constructor
@@ -50,8 +51,9 @@ class MintyDocsCopy extends MintyDocsPublish {
 		}
 		$this->mParentTitle = $title;
 
-		$this->mTargetVersion = $req->getVal( 'target_version' );
 		$this->mTargetProduct = $req->getVal( 'target_product' );
+		$this->mTargetVersion = $req->getVal( 'target_version' );
+		$this->mTargetManual = $req->getVal( 'target_manual' );
 
 		if ( $publish ) {
 			$this->publishAll();
@@ -127,13 +129,29 @@ class MintyDocsCopy extends MintyDocsPublish {
 	}
 
 	function generateTargetTitle( $targetPageName ) {
-		$pageElements = explode( '/', $targetPageName, 3 );
-		if ( count( $pageElements ) == 3 ) {
-			list( $product, $version, $manualAndTopic ) = $pageElements;
+		$pageElements = explode( '/', $targetPageName, 4 );
+		if ( count( $pageElements ) == 4 ) {
+			list( $product, $version, $manual, $topic ) = $pageElements;
+			// These two checks are probably not necessary - setting
+			// a target product and manual name may only ever be
+			// applicable to copying manuals, not topics. Doesn't
+			// hurt to check, though.
 			if ( $this->mTargetProduct ) {
 				$product = $this->mTargetProduct;
 			}
-			$targetPageName = "$product/" . $this->mTargetVersion . "/$manualAndTopic";
+			if ( $this->mTargetManual ) {
+				$manual = $this->mTargetManual;
+			}
+			$targetPageName = "$product/" . $this->mTargetVersion . "/$manual/$topic";
+		} elseif ( count( $pageElements ) == 3 ) {
+			list( $product, $version, $manual ) = $pageElements;
+			if ( $this->mTargetProduct ) {
+				$product = $this->mTargetProduct;
+			}
+			if ( $this->mTargetManual ) {
+				$manual = $this->mTargetManual;
+			}
+			$targetPageName = "$product/" . $this->mTargetVersion . "/$manual";
 		} else {
 			// Probably 2 - product and version. We just need the product.
 			$product = $pageElements[0];
