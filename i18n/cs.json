@@ -4,7 +4,8 @@
 			"Jaroslav Cerny",
 			"Ján Kepler",
 			"Patriccck",
-			"Patrik L."
+			"Patrik L.",
+			"Want"
 		]
 	},
 	"mintydocs-desc": "Jednoduchý dokumentační systém",
@@ -44,6 +45,7 @@
 	"mintydocs-delete-deletionreason": "Smazat manuál",
 	"mintydocs-tocinput-rename": "Přejmenovat",
 	"mintydocs-tocinput-changetype": "Změnit typ",
+	"mintydocs-tocinput-addentry": "Přidat položku",
 	"apihelp-mintydocspublish-description": "Zveřejní stránku MintyDocs.",
 	"apihelp-mintydocspublish-summary": "Zveřejní stránku MintyDocs tak, že jí zkopíruje ze jmenného prostoru konceptů do hlavního jmenného prostoru.",
 	"apihelp-mintydocspublish-param-title": "Název zveřejněné stránky",
