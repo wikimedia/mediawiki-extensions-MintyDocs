@@ -31,12 +31,12 @@ class MintyDocsPublishAction extends Action {
 	/**
 	 * Adds an "action" (i.e., a tab) to publish a page.
 	 *
-	 * @param Title $obj
+	 * @param SkinTemplate $skinTemplate
 	 * @param array &$links
 	 * @return bool
 	 */
-	static function displayTab( $obj, &$links ) {
-		$title = $obj->getTitle();
+	static function displayTab( SkinTemplate $skinTemplate, array &$links ) {
+		$title = $skinTemplate->getTitle();
 		// Draft pages only.
 		if ( !$title || !$title->exists() || $title->getNamespace() !== MD_NS_DRAFT ) {
 			return true;
@@ -48,16 +48,16 @@ class MintyDocsPublishAction extends Action {
 			return true;
 		}
 
-		$user = $obj->getUser();
-		if ( !$mdPage->userCanAdminister( $user ) ) {
+		$user = $skinTemplate->getUser();
+		if ( !$user || !$mdPage->userCanAdminister( $user ) ) {
 			return true;
 		}
 
-		$request = $obj->getRequest();
+		$request = $skinTemplate->getRequest();
 
 		$mdPublishTab = [
 			'class' => ( $request->getVal( 'action' ) == 'mdpublish' ) ? 'selected' : '',
-			'text' => wfMessage( 'mintydocs-publish-button' ),
+			'text' => wfMessage( 'mintydocs-publish-button' )->escaped(),
 			'href' => $title->getLocalURL( 'action=mdpublish' )
 		];
 
