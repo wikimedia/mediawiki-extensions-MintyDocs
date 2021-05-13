@@ -507,8 +507,7 @@ class MintyDocsParserFunctions {
 		if ( $title->getNamespace() != MD_NS_DRAFT ) {
 			return '';
 		}
-		global $wgContLang;
-		return $wgContLang->getNsText( MD_NS_DRAFT ) . ':';
+		return MintyDocsUtils::getContLang()->getNsText( MD_NS_DRAFT ) . ':';
 	}
 
 	/**
