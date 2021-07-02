@@ -359,6 +359,14 @@ class MintyDocsPublish extends SpecialPage {
 				}
 			}
 
+			$params['page_source'] = $fromTitle;
+			$params['long_page'] = false;
+			if ( strlen(serialize((array)$params)) >= 65535 ) {
+				// if size of array exceeds db blob size, job creation fails; handle differently
+				$params['long_page'] = true;
+				$params['page_text'] = "";
+			}
+
 			$jobs[] = new MintyDocsCreatePageJob( $toTitle, $params );
 		}
 
