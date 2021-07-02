@@ -33,7 +33,13 @@ class MintyDocsCreatePageJob extends Job {
 			}
 		}
 
-		$pageText = $this->params['page_text'];
+		if ( $this->params['long_page'] ) {
+			$fromPage = WikiPage::factory( $this->params['page_source'] );
+			$pageText = $fromPage->getContent()->getNativeData();
+		}
+		else {
+			$pageText = $this->params['page_text'];
+		}
 		$editSummary = '';
 		if ( array_key_exists( 'edit_summary', $this->params ) ) {
 			$editSummary = $this->params['edit_summary'];
