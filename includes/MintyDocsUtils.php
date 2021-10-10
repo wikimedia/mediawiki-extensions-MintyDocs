@@ -167,7 +167,14 @@ class MintyDocsUtils {
 		if ( $namespace !== '' ) {
 			$namespace .= ':';
 		}
-		if ( MWNamespace::isCapitalized( $title->getNamespace() ) ) {
+		if ( method_exists( "MediaWiki\\MediaWikiServices", "getNamespaceInfo" ) ) {
+			$isCapitalized = MediaWikiServices::getInstance()
+				->getNamespaceInfo()
+				->isCapitalized( $title->getNamespace() );
+		} else {
+			$isCapitalized = MWNamespace::isCapitalized( $title->getNamespace() );
+		}
+		if ( $isCapitalized ) {
 			return $namespace . self::getContLang()->ucfirst( $title->getPartialURL() );
 		} else {
 			return $namespace . $title->getPartialURL();
