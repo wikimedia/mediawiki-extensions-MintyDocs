@@ -37,7 +37,7 @@
 			var node = actualTree.get_node(event.target);
 			actualTree.edit(node);
 		});
-+               tree.parent().find('.oo-ui-buttonElement-button').click(function () {
+		tree.parent().find('.oo-ui-buttonElement-button').click(function () {
 			tree.jstree("create_node", null, null, "last", function (node) {
 				this.edit(node);
 			});
