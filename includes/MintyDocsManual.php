@@ -302,7 +302,7 @@ class MintyDocsManual extends MintyDocsPage {
 
 		// doBlockLevels() takes care of just parsing '*' into
 		// bulleted lists, which is all we need.
-		$this->mTOCHTML = $parser->doBlockLevels( $toc, true );
+		$this->mTOCHTML = BlockLevelPass::doBlockLevels( $toc, true );
 
 		if ( $showErrors && count( $topics ) > 0 ) {
 			// Display error
