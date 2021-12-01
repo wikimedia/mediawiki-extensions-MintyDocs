@@ -112,7 +112,7 @@
 	"Hooks": {
 		"ParserFirstCallInit": "MintyDocsHooks::registerParserFunctions",
 		"CanonicalNamespaces": "MintyDocsHooks::registerNamespaces",
-		"userCan": "MintyDocsHooks::checkPermissions",
+		"getUserPermissionsErrors": "MintyDocsHooks::checkPermissions",
 		"OutputPageBeforeHTML": [
 			"MintyDocsHooks::addTextToPage",
 			"MintyDocsHooks::showNoticeForDraftPage"
