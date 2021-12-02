@@ -377,13 +377,13 @@ class MintyDocsHooks {
 	}
 
 	public static function makeDraftsNonSearchable( &$searchableNamespaces ) {
-		global $wgUser;
+		$user = RequestContext::getMain()->getUser();
 
 		// Allow for searching of the Draft and Draft_talk
 		// namespaces only by MD administrators and editors.
 		if (
-			$wgUser->isAllowed( 'mintydocs-administer' ) ||
-			$wgUser->isAllowed( 'mintydocs-edit' )
+			$user->isAllowed( 'mintydocs-administer' ) ||
+			$user->isAllowed( 'mintydocs-edit' )
 		) {
 			return true;
 		}
