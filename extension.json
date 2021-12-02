@@ -23,7 +23,7 @@
 	],
 	"callback": "MintyDocsHooks::registerExtension",
 	"requires": {
-		"MediaWiki": ">= 1.29"
+		"MediaWiki": ">= 1.32"
 	},
 	"AvailableRights": [
 		"mintydocs-administer",

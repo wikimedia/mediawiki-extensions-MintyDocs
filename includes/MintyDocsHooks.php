@@ -102,12 +102,7 @@ class MintyDocsHooks {
 		$inheritedPage = $mdPage->getInheritedPage();
 		if ( $inheritedPage !== null ) {
 			$wikiPage = WikiPage::factory( $inheritedPage->getTitle() );
-			if ( class_exists( 'MediaWiki\Revision\RevisionRecord' ) ) {
-				// MW 1.32+
-				$rawAccess = MediaWiki\Revision\RevisionRecord::RAW;
-			} else {
-				$rawAccess = Revision::RAW;
-			}
+			$rawAccess = MediaWiki\Revision\RevisionRecord::RAW;
 			$inheritedPageText = $wikiPage->getContent( $rawAccess )->getNativeData();
 			$text .= MediaWikiServices::getInstance()->getParser()->parse( $inheritedPageText, $title, ParserOptions::newFromAnon() )->getText();
 		}

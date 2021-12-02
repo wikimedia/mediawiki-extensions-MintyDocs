@@ -114,14 +114,9 @@ class MintyDocsUtils {
 
 		$newContent = new WikitextContent( $pageText );
 
-		if ( class_exists( 'PageUpdater' ) ) {
-			// MW 1.32+
-			$updater = $wikiPage->newPageUpdater( $user );
-			$updater->setContent( SlotRecord::MAIN, $newContent );
-			$updater->saveRevision( CommentStoreComment::newUnsavedComment( $editSummary ), $flags );
-		} else {
-			$wikiPage->doEditContent( $newContent, $editSummary, $flags, $originalRevId = false, $user );
-		}
+		$updater = $wikiPage->newPageUpdater( $user );
+		$updater->setContent( SlotRecord::MAIN, $newContent );
+		$updater->saveRevision( CommentStoreComment::newUnsavedComment( $editSummary ), $flags );
 	}
 
 	/**
@@ -139,18 +134,12 @@ class MintyDocsUtils {
 	}
 
 	/**
-	 * Get a content language (old $wgContLang) object. For MW < 1.32,
-	 * return the global.  For all others, use MediaWikiServices.
+	 * Get a content language object.
 	 *
 	 * @return Language
 	 */
 	public static function getContLang() {
-		if ( method_exists( "MediaWiki\\MediaWikiServices", "getContentLanguage" ) ) {
-			return MediaWikiServices::getInstance()->getContentLanguage();
-		} else {
-			global $wgContLang;
-			return $wgContLang;
-		}
+		return MediaWikiServices::getInstance()->getContentLanguage();
 	}
 
 	/**

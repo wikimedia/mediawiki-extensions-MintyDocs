@@ -138,14 +138,9 @@ class MintyDocsManual extends MintyDocsPage {
 					$formEditQuery['alt_form'][] = $altForm;
 				}
 			}
-			if ( class_exists( 'MediaWiki\Special\SpecialPageFactory' ) ) {
-				// MW 1.32+
-				$formSpecialPage = MediaWikiServices::getInstance()
-					->getSpecialPageFactory()
-					->getPage( 'FormEdit' );
-			} else {
-				$formSpecialPage = SpecialPageFactory::getPage( 'FormEdit' );
-			}
+			$formSpecialPage = MediaWikiServices::getInstance()
+				->getSpecialPageFactory()
+				->getPage( 'FormEdit' );
 
 			$formSpecialPageTitle = $formSpecialPage->getPageTitle();
 		}
