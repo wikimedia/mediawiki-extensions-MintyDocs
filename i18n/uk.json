@@ -4,9 +4,11 @@
 			"Base",
 			"Piramidion",
 			"Vlad5250",
-			"Ата"
+			"Ата",
+			"DDPAT"
 		]
 	},
+	"mintydocs-extensionname": "MintyDocs",
 	"mintydocs-desc": "Полегшена система документації",
 	"action-mintydocs-administer": "адміністрування сторінок продукту MintyDocs",
 	"right-mintydocs-administer": "Адміністрування усіх сторінок продуктів MintyDocs",
@@ -44,6 +46,7 @@
 	"mintydocs-delete-deletionreason": "Вилучити посібник",
 	"mintydocs-tocinput-rename": "Перейменувати",
 	"mintydocs-tocinput-changetype": "Змінити тип",
+	"mintydocs-tocinput-addentry": "Додати запис",
 	"apihelp-mintydocspublish-description": "Публікує сторінку MintyDocs.",
 	"apihelp-mintydocspublish-summary": "Публікує сторінку MintyDocs шляхом копіювання її із простору назв чернеток до основного простору назв.",
 	"apihelp-mintydocspublish-param-title": "Назва сторінки, яку слід опублікувати",

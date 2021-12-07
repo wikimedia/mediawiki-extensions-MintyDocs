@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Elroy",
-			"Mainframe98"
+			"Mainframe98",
+			"Romaine"
 		]
 	},
 	"mintydocs-desc": "Een lichtgewicht documentatiesysteem",
@@ -19,9 +20,13 @@
 	"mintydocspublish": "MintyDocs inhoud publiceren",
 	"mintydocs-publish-button": "Plaatsen",
 	"mintydocs-publish-success": "De volgende pagina's zullen worden aangemaakt of aangepast: $1.",
+	"mintydocs-publish-editsummary": "Gepubliceerd",
 	"mintydocs-copy-button": "Kopiëren",
 	"mintydocs-copy-success": "De volgende pagina's zullen worden gekopiëerd: $1.",
+	"mintydocs-copy-editsummary": "Handmatig gekopieerd",
 	"mintydocsdelete": "MintyDocs inhoud verwijderen",
+	"mintydocs-delete-success": "De pagina's zullen worden verwijderd.",
+	"mintydocs-delete-deletionreason": "Verwijder handmatig",
 	"mintydocs-tocinput-rename": "Hernoemen",
 	"mintydocs-tocinput-changetype": "Type wijzigen",
 	"apihelp-mintydocspublish-description": "Publiceert een MintyDocs pagina.",
