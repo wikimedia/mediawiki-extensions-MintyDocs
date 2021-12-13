@@ -1,8 +1,20 @@
 {
 	"@metadata": {
 		"authors": [
-			"FarsiNevis"
+			"FarsiNevis",
+			"Jeeputer"
 		]
 	},
-	"mintydocs-delete-success": "این صفحه‌ها حذف خواهند شد."
+	"mintydocs-manual-contents": "محتویات",
+	"mintydocs-publish-button": "انتشار",
+	"mintydocs-publish-editsummary": "منتشر شده",
+	"mintydocs-createdraft-button": "ایجاد پیش‌نویس",
+	"mintydocs-createdraft-singlepage": "ایجاد یک صفحهٔ پیش‌نویس؟",
+	"mintydocs-createdraft-editsummary": "پیش‌نویس ایجاد شد",
+	"mintydocs-copy-button": "رونویسی",
+	"mintydocs-copy-singlepage": "رونویسی این صفحه؟",
+	"mintydocs-copy-success": "این صفحه‌ها رونویسی خواهند شد: $1.",
+	"mintydocs-delete-success": "این صفحه‌ها حذف خواهند شد.",
+	"mintydocs-tocinput-rename": "نام‌گذاری مجدد",
+	"mintydocs-tocinput-changetype": "تغییر نوع"
 }

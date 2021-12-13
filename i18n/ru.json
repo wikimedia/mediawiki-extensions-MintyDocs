@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Diman Russkov",
-			"Vlad5250"
+			"Vlad5250",
+			"Okras"
 		]
 	},
 	"right-mintydocs-edit": "правка всех страниц MintyDocs",
@@ -10,6 +11,8 @@
 	"mintydocs-manual-otherversions": "Прочтите это руководство для других версий:",
 	"mintydocs-manual-contents": "Содержание:",
 	"mintydocspublish": "Опубликовать содержимое от MintyDocs",
+	"mintydocs-publish-singlepage": "Опубликовать этот черновик страницы?",
 	"mintydocscreatedraft": "Создать страницу черновика в MintyDocs",
+	"mintydocs-createdraft-button": "Создать черновик",
 	"mintydocs-copy-singlepage": "Копировать эту страницу?"
 }

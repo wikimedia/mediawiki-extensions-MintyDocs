@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Eduardo Addad de Oliveira"
+			"Eduardo Addad de Oliveira",
+			"Eduardoaddad"
 		]
 	},
 	"mintydocs-desc": "Um sistema de documentação simples",
@@ -9,6 +10,8 @@
 	"right-mintydocs-administer": "Administrar todas as páginas de produto MintyDocs",
 	"action-mintydocs-edit": "editar todas as páginas MintyDocs",
 	"right-mintydocs-edit": "Editar todas as páginas MintyDocs",
+	"right-mintydocs-editlive": "Editar páginas MintyDocs que possuem uma página de rascunho correspondente",
+	"action-mintydocs-editlive": "editar páginas MintyDocs que possuem uma página de rascunho correspondente",
 	"mintydocs-noparentpage": "Erro: todas as páginas do tipo $1 têm de ser subpáginas.",
 	"mintydocs-invalidparentpage": "Erro: a página \"$1\" tem de ser do tipo $2.",
 	"mintydocs-product-versionlist": "Clique em qualquer das seguintes para ver a documentação dessa versão:",
