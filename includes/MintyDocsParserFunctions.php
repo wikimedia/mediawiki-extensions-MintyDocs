@@ -76,7 +76,7 @@ class MintyDocsParserFunctions {
 			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
 		}
 
-		$parserOutput->addModules( 'ext.mintydocs.main' );
+		$parserOutput->addModules( [ 'ext.mintydocs.main' ] );
 
 		$parserOutput->setProperty( 'MintyDocsPageType', 'Product' );
 
@@ -125,7 +125,7 @@ class MintyDocsParserFunctions {
 			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
 		}
 
-		$parserOutput->addModules( 'ext.mintydocs.main' );
+		$parserOutput->addModules( [ 'ext.mintydocs.main' ] );
 
 		$parserOutput->setProperty( 'MintyDocsPageType', 'Version' );
 		$parserOutput->setProperty( 'MintyDocsParentPage', $parentPageName );
@@ -168,7 +168,7 @@ class MintyDocsParserFunctions {
 			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
 		}
 
-		$parserOutput->addModules( 'ext.mintydocs.main' );
+		$parserOutput->addModules( [ 'ext.mintydocs.main' ] );
 
 		$parserOutput->setProperty( 'MintyDocsPageType', 'Manual' );
 		$parserOutput->setProperty( 'MintyDocsParentPage', $parentPageName );
@@ -245,7 +245,7 @@ class MintyDocsParserFunctions {
 			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
 		}
 
-		$parserOutput->addModules( 'ext.mintydocs.main' );
+		$parserOutput->addModules( [ 'ext.mintydocs.main' ] );
 
 		$parserOutput->setProperty( 'MintyDocsPageType', 'Topic' );
 		$parserOutput->setProperty( 'MintyDocsParentPage', $parentPageName );
