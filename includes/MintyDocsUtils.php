@@ -18,7 +18,7 @@ class MintyDocsUtils {
 			]
 		);
 		// First row of the result set.
-		$row = $dbr->fetchRow( $res );
+		$row = $res->fetchRow();
 		if ( $row == null ) {
 			return null;
 		}

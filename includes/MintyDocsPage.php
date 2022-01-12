@@ -58,7 +58,7 @@ abstract class MintyDocsPage {
 		);
 
 		// phpcs:ignore MediaWiki.ControlStructures.AssignmentInControlStructures.AssignmentInControlStructures
-		while ( $row = $dbr->fetchRow( $res ) ) {
+		while ( $row = $res->fetchRow() ) {
 			$childrenPages[] = Title::newFromID( $row[0] );
 		}
 
