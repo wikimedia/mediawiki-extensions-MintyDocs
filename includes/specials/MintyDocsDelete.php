@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * @author Yaron Koren
  */
@@ -116,7 +118,12 @@ class MintyDocsDelete extends SpecialPage {
 			$jobs[] = new MintyDocsDeletePageJob( $child, $params );
 		}
 
-		JobQueueGroup::singleton()->push( $jobs );
+		if ( method_exists( MediaWikiServices::class, 'getJobQueueGroup' ) ) {
+			// MW 1.37+
+			MediaWikiServices::getInstance()->getJobQueueGroup()->push( $jobs );
+		} else {
+			JobQueueGroup::singleton()->push( $jobs );
+		}
 
 		$text = $this->msg( 'mintydocs-delete-success' )->parse();
 
