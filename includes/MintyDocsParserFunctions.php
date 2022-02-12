@@ -70,7 +70,7 @@ class MintyDocsParserFunctions {
 
 		$parserOutput = $parser->getOutput();
 		// Make sure that no type has already been set for this page.
-		$previousType = $parserOutput->getProperty( 'MintyDocsPageType' );
+		$previousType = self::getParserOutputProperty( $parserOutput, 'MintyDocsPageType' );
 		if ( $previousType != null ) {
 			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
 			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
@@ -78,7 +78,7 @@ class MintyDocsParserFunctions {
 
 		$parserOutput->addModules( [ 'ext.mintydocs.main' ] );
 
-		$parserOutput->setProperty( 'MintyDocsPageType', 'Product' );
+		self::setParserOutputProperty( $parserOutput, 'MintyDocsPageType', 'Product' );
 
 		foreach ( $processedParams as $paramName => $value ) {
 			if ( $paramName == 'display name' ) {
@@ -86,13 +86,13 @@ class MintyDocsParserFunctions {
 			} elseif ( $paramName == 'admins' ) {
 				// Standardize the username.
 				$value = ucfirst( str_replace( '_', ' ', $value ) );
-				$parserOutput->setProperty( 'MintyDocsProductAdmins', $value );
+				self::setParserOutputProperty( $parserOutput, 'MintyDocsProductAdmins', $value );
 			} elseif ( $paramName == 'editors' ) {
 				$value = ucfirst( str_replace( '_', ' ', $value ) );
-				$parserOutput->setProperty( 'MintyDocsProductEditors', $value );
+				self::setParserOutputProperty( $parserOutput, 'MintyDocsProductEditors', $value );
 			} elseif ( $paramName == 'previewers' ) {
 				$value = ucfirst( str_replace( '_', ' ', $value ) );
-				$parserOutput->setProperty( 'MintyDocsProductPreviewers', $value );
+				self::setParserOutputProperty( $parserOutput, 'MintyDocsProductPreviewers', $value );
 			}
 		}
 
@@ -119,7 +119,7 @@ class MintyDocsParserFunctions {
 
 		$parserOutput = $parser->getOutput();
 		// Make sure that no type has already been set for this page.
-		$previousType = $parserOutput->getProperty( 'MintyDocsPageType' );
+		$previousType = self::getParserOutputProperty( $parserOutput,  'MintyDocsPageType' );
 		if ( $previousType != null ) {
 			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
 			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
@@ -127,17 +127,17 @@ class MintyDocsParserFunctions {
 
 		$parserOutput->addModules( [ 'ext.mintydocs.main' ] );
 
-		$parserOutput->setProperty( 'MintyDocsPageType', 'Version' );
-		$parserOutput->setProperty( 'MintyDocsParentPage', $parentPageName );
+		self::setParserOutputProperty( $parserOutput, 'MintyDocsPageType', 'Version' );
+		self::setParserOutputProperty( $parserOutput, 'MintyDocsParentPage', $parentPageName );
 
 		foreach ( $processedParams as $paramName => $value ) {
 			if ( $paramName == 'inherit' && $value == null ) {
-				$parserOutput->setProperty( 'MintyDocsInherit', true );
+				self::setParserOutputProperty( $parserOutput, 'MintyDocsInherit', true );
 			} elseif ( $paramName == 'status' ) {
 				// @TODO - put in check here for values.
-				$parserOutput->setProperty( 'MintyDocsStatus', $value );
+				self::setParserOutputProperty( $parserOutput, 'MintyDocsStatus', $value );
 			} elseif ( $paramName == 'manuals list' ) {
-				$parserOutput->setProperty( 'MintyDocsManualsList', $value );
+				self::setParserOutputProperty( $parserOutput, 'MintyDocsManualsList', $value );
 			}
 		}
 	}
@@ -162,7 +162,7 @@ class MintyDocsParserFunctions {
 
 		$parserOutput = $parser->getOutput();
 		// Make sure that no type has already been set for this page.
-		$previousType = $parserOutput->getProperty( 'MintyDocsPageType' );
+		$previousType = self::getParserOutputProperty( $parserOutput,  'MintyDocsPageType' );
 		if ( $previousType != null ) {
 			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
 			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
@@ -170,18 +170,18 @@ class MintyDocsParserFunctions {
 
 		$parserOutput->addModules( [ 'ext.mintydocs.main' ] );
 
-		$parserOutput->setProperty( 'MintyDocsPageType', 'Manual' );
-		$parserOutput->setProperty( 'MintyDocsParentPage', $parentPageName );
+		self::setParserOutputProperty( $parserOutput, 'MintyDocsPageType', 'Manual' );
+		self::setParserOutputProperty( $parserOutput, 'MintyDocsParentPage', $parentPageName );
 
 		foreach ( $processedParams as $paramName => $value ) {
 			if ( $paramName == 'display name' ) {
-				$parserOutput->setProperty( 'MintyDocsDisplayName', $value );
+				self::setParserOutputProperty( $parserOutput, 'MintyDocsDisplayName', $value );
 				$displayTitle = $value;
 			} elseif ( $paramName == 'inherit' && $value == null ) {
-				$parserOutput->setProperty( 'MintyDocsInherit', true );
+				self::setParserOutputProperty( $parserOutput, 'MintyDocsInherit', true );
 				$inherits = true;
 			} elseif ( $paramName == 'topics list' ) {
-				$parserOutput->setProperty( 'MintyDocsTopicsList', $value );
+				self::setParserOutputProperty( $parserOutput, 'MintyDocsTopicsList', $value );
 			} elseif ( $paramName == 'topics list page' ) {
 				// We use the same property name as 'topics list',
 				// 'MintyDocsTopicsList', instead of something like
@@ -191,13 +191,13 @@ class MintyDocsParserFunctions {
 				// We differentiate between the two based on
 				// whether the value starts with a '*' or not.
 				// @TODO - add validation before storage.
-				$parserOutput->setProperty( 'MintyDocsTopicsList', $value );
+				self::setParserOutputProperty( $parserOutput, 'MintyDocsTopicsList', $value );
 			} elseif ( $paramName == 'pagination' && $value == null ) {
-				$parserOutput->setProperty( 'MintyDocsPagination', true );
+				self::setParserOutputProperty( $parserOutput, 'MintyDocsPagination', true );
 			} elseif ( $paramName == 'topic default form' ) {
-				$parserOutput->setProperty( 'MintyDocsTopicDefaultForm', $value );
+				self::setParserOutputProperty( $parserOutput, 'MintyDocsTopicDefaultForm', $value );
 			} elseif ( $paramName == 'topic alternate forms' ) {
-				$parserOutput->setProperty( 'MintyDocsTopicAlternateForms', $value );
+				self::setParserOutputProperty( $parserOutput, 'MintyDocsTopicAlternateForms', $value );
 			}
 		}
 
@@ -239,7 +239,7 @@ class MintyDocsParserFunctions {
 
 		$parserOutput = $parser->getOutput();
 		// Make sure that no type has already been set for this page.
-		$previousType = $parserOutput->getProperty( 'MintyDocsPageType' );
+		$previousType = self::getParserOutputProperty( $parserOutput,  'MintyDocsPageType' );
 		if ( $previousType != null ) {
 			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
 			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
@@ -247,17 +247,17 @@ class MintyDocsParserFunctions {
 
 		$parserOutput->addModules( [ 'ext.mintydocs.main' ] );
 
-		$parserOutput->setProperty( 'MintyDocsPageType', 'Topic' );
-		$parserOutput->setProperty( 'MintyDocsParentPage', $parentPageName );
+		self::setParserOutputProperty( $parserOutput, 'MintyDocsPageType', 'Topic' );
+		self::setParserOutputProperty( $parserOutput, 'MintyDocsParentPage', $parentPageName );
 
 		foreach ( $processedParams as $paramName => $value ) {
 			if ( $paramName == 'display name' ) {
-				$parserOutput->setProperty( 'MintyDocsDisplayName', $value );
+				self::setParserOutputProperty( $parserOutput, 'MintyDocsDisplayName', $value );
 				$displayTitle = $value;
 			} elseif ( $paramName == 'toc name' ) {
 				$tocDisplayTitle = $value;
 			} elseif ( $paramName == 'inherit' && $value == null ) {
-				$parserOutput->setProperty( 'MintyDocsInherit', true );
+				self::setParserOutputProperty( $parserOutput, 'MintyDocsInherit', true );
 				$inherits = true;
 			}
 		}
@@ -285,7 +285,7 @@ class MintyDocsParserFunctions {
 		if ( $tocDisplayTitle == null ) {
 			$tocDisplayTitle = $displayTitle;
 		}
-		$parserOutput->setProperty( 'MintyDocsTOCName', $tocDisplayTitle );
+		self::setParserOutputProperty( $parserOutput, 'MintyDocsTOCName', $tocDisplayTitle );
 	}
 
 	/**
@@ -546,6 +546,34 @@ class MintyDocsParserFunctions {
 		} else {
 			$str = Linker::link( $title, $linkText, $customAttribs = [], $query );
 			return [ $str, 'noparse' => true, 'isHTML' => true ];
+		}
+	}
+
+	/**
+	 * @param ParserOutput $parserOutput
+	 * @param string $property
+	 * @return mixed
+	 */
+	private static function getParserOutputProperty( $parserOutput, $property ) {
+		if ( method_exists( $parserOutput, 'getPageProperty' ) ) {
+			// MW 1.38
+			return $parserOutput->getPageProperty( $property );
+		} else {
+			return $parserOutput->getProperty( $property );
+		}
+	}
+
+	/**
+	 * @param ParserOutput $parserOutput
+	 * @param string $property
+	 * @param mixed $value
+	 */
+	private static function setParserOutputProperty( $parserOutput, $property, $value ) {
+		if ( method_exists( $parserOutput, 'setPageProperty' ) ) {
+			// MW 1.38
+			$parserOutput->setPageProperty( $property, $value );
+		} else {
+			$parserOutput->setProperty( $property, $value );
 		}
 	}
 
