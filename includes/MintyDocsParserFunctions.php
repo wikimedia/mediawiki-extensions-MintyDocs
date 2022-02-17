@@ -71,7 +71,7 @@ class MintyDocsParserFunctions {
 		$parserOutput = $parser->getOutput();
 		// Make sure that no type has already been set for this page.
 		$previousType = self::getParserOutputProperty( $parserOutput, 'MintyDocsPageType' );
-		if ( $previousType != null ) {
+		if ( $previousType !== null ) {
 			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
 			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
 		}
@@ -120,7 +120,7 @@ class MintyDocsParserFunctions {
 		$parserOutput = $parser->getOutput();
 		// Make sure that no type has already been set for this page.
 		$previousType = self::getParserOutputProperty( $parserOutput,  'MintyDocsPageType' );
-		if ( $previousType != null ) {
+		if ( $previousType !== null ) {
 			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
 			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
 		}
@@ -163,7 +163,7 @@ class MintyDocsParserFunctions {
 		$parserOutput = $parser->getOutput();
 		// Make sure that no type has already been set for this page.
 		$previousType = self::getParserOutputProperty( $parserOutput,  'MintyDocsPageType' );
-		if ( $previousType != null ) {
+		if ( $previousType !== null ) {
 			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
 			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
 		}
@@ -240,7 +240,7 @@ class MintyDocsParserFunctions {
 		$parserOutput = $parser->getOutput();
 		// Make sure that no type has already been set for this page.
 		$previousType = self::getParserOutputProperty( $parserOutput,  'MintyDocsPageType' );
-		if ( $previousType != null ) {
+		if ( $previousType !== null ) {
 			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
 			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
 		}
@@ -552,15 +552,18 @@ class MintyDocsParserFunctions {
 	/**
 	 * @param ParserOutput $parserOutput
 	 * @param string $property
-	 * @return mixed
+	 * @return mixed The value of the property, or `null` if the property
+	 *  is missing.
 	 */
 	private static function getParserOutputProperty( $parserOutput, $property ) {
 		if ( method_exists( $parserOutput, 'getPageProperty' ) ) {
 			// MW 1.38
-			// T301915
-			return $parserOutput->getPageProperty( $property ) ?? false;
+			return $parserOutput->getPageProperty( $property );
 		} else {
-			return $parserOutput->getProperty( $property );
+			$ret = $parserOutput->getProperty( $property );
+			if ( $ret === false ) {
+				return null;
+			}
 		}
 	}
 
