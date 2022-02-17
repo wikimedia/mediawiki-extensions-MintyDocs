@@ -557,7 +557,8 @@ class MintyDocsParserFunctions {
 	private static function getParserOutputProperty( $parserOutput, $property ) {
 		if ( method_exists( $parserOutput, 'getPageProperty' ) ) {
 			// MW 1.38
-			return $parserOutput->getPageProperty( $property );
+			// T301915
+			return $parserOutput->getPageProperty( $property ) ?? false;
 		} else {
 			return $parserOutput->getProperty( $property );
 		}
