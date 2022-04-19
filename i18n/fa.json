@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"FarsiNevis",
-			"Jeeputer"
+			"Jeeputer",
+			"Beginneruser"
 		]
 	},
-	"mintydocs-manual-contents": "محتویات",
+	"mintydocs-manual-contents": "فهرست",
 	"mintydocs-publish-button": "انتشار",
 	"mintydocs-publish-editsummary": "منتشر شده",
 	"mintydocs-createdraft-button": "ایجاد پیش‌نویس",
