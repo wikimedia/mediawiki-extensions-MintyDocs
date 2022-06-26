@@ -172,9 +172,16 @@ class MintyDocsPublish extends SpecialPage {
 		if ( !$toTitle->exists() ) {
 			return null;
 		}
-		$fromPage = WikiPage::factory( $fromTitle );
+		if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
+			// MW 1.36+
+			$wikiPageFactory = MediaWikiServices::getInstance()->getWikiPageFactory();
+			$fromPage = $wikiPageFactory->newFromTitle( $fromTitle );
+			$toPage = $wikiPageFactory->newFromTitle( $toTitle );
+		} else {
+			$fromPage = WikiPage::factory( $fromTitle );
+			$toPage = WikiPage::factory( $toTitle );
+		}
 		$fromPageText = $fromPage->getContent()->getNativeData();
-		$toPage = WikiPage::factory( $toTitle );
 		$toPageText = $toPage->getContent()->getNativeData();
 		if ( $fromPageText == $toPageText ) {
 			return 'There is no need to publish this page - the published version matches the draft version.';
@@ -277,9 +284,16 @@ class MintyDocsPublish extends SpecialPage {
 			return $mdPage->getLink() . ' (already exists)';
 		}
 
-		$fromPage = WikiPage::factory( $fromTitle );
+		if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
+			// MW 1.36+
+			$wikiPageFactory = MediaWikiServices::getInstance()->getWikiPageFactory();
+			$fromPage = $wikiPageFactory->newFromTitle( $fromTitle );
+			$toPage = $wikiPageFactory->newFromTitle( $toTitle );
+		} else {
+			$fromPage = WikiPage::factory( $fromTitle );
+			$toPage = WikiPage::factory( $toTitle );
+		}
 		$fromPageText = $fromPage->getContent()->getNativeData();
-		$toPage = WikiPage::factory( $toTitle );
 		$toPageText = $toPage->getContent()->getNativeData();
 		// If the text of the two pages is the same, no point
 		// dislaying a checkbox.
@@ -325,6 +339,12 @@ class MintyDocsPublish extends SpecialPage {
 		$submittedValues = $req->getValues();
 		$toTitles = [];
 
+		if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
+			// MW 1.36+
+			$wikiPageFactory = MediaWikiServices::getInstance()->getWikiPageFactory();
+		} else {
+			$wikiPageFactory = null;
+		}
 		foreach ( $submittedValues as $key => $val ) {
 			if ( substr( $key, 0, 10 ) != 'page_name_' ) {
 				continue;
@@ -332,7 +352,12 @@ class MintyDocsPublish extends SpecialPage {
 
 			$fromPageName = $val;
 			$fromTitle = $this->generateSourceTitle( $fromPageName );
-			$fromPage = WikiPage::factory( $fromTitle );
+			if ( $wikiPageFactory !== null ) {
+				// MW 1.36+
+				$fromPage = $wikiPageFactory->newFromTitle( $fromTitle );
+			} else {
+				$fromPage = WikiPage::factory( $fromTitle );
+			}
 			$fromPageText = $fromPage->getContent()->getNativeData();
 			$toTitle = $this->generateTargetTitle( $fromPageName );
 			$toTitles[] = $toTitle;

@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * Job to delete a page, for use by Special:MintyDocsDelete.
  *
@@ -27,7 +29,12 @@ class MintyDocsDeletePageJob extends Job {
 			return false;
 		}
 
-		$wikiPage = new WikiPage( $this->title );
+		if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
+			// MW 1.36+
+			$wikiPage = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $this->title );
+		} else {
+			$wikiPage = new WikiPage( $this->title );
+		}
 		if ( !$wikiPage ) {
 			$this->error = 'MDDeletePage: Wiki page not found "' . $this->title->getPrefixedDBkey() . '"';
 			return false;

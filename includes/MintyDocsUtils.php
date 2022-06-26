@@ -92,7 +92,12 @@ class MintyDocsUtils {
 	}
 
 	public static function createOrModifyPage( Title $title, $pageText, $editSummary, $user ) {
-		$wikiPage = new WikiPage( $title );
+		if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
+			// MW 1.36+
+			$wikiPage = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $title );
+		} else {
+			$wikiPage = new WikiPage( $title );
+		}
 		if ( !$wikiPage ) {
 			throw new MWException( 'Wiki page not found "' . $title->getPrefixedDBkey() . '"' );
 		}
