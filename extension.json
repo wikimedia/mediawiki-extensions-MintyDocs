@@ -122,7 +122,7 @@
 		"MakeGlobalVariablesScript": "MintyDocsHooks::setGlobalJSVariables",
 		"MagicWordwgVariableIDs": "MintyDocsHooks::declareVarIDs",
 		"ParserGetVariableValueSwitch": "MintyDocsHooks::assignAValue",
-		"SkinTemplateNavigation": "MintyDocsPublishAction::displayTab",
+		"SkinTemplateNavigation::Universal": "MintyDocsPublishAction::displayTab",
 		"SearchableNamespaces": "MintyDocsHooks::makeDraftsNonSearchable",
 		"PageForms::FormPrinterSetup": "MintyDocsHooks::registerPageFormsInputs"
 	},
