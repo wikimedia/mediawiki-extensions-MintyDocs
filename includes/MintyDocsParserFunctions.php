@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 /**
  * Parser functions for MintyDocs.
  *
@@ -544,7 +546,8 @@ class MintyDocsParserFunctions {
 				return "[$url $linkText]";
 			}
 		} else {
-			$str = Linker::link( $title, $linkText, $customAttribs = [], $query );
+			$str = MediaWikiServices::getInstance()->getLinkRenderer()
+				->makeLink( $title, $linkText, $customAttribs = [], $query );
 			return [ $str, 'noparse' => true, 'isHTML' => true ];
 		}
 	}

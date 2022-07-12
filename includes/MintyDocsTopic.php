@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 class MintyDocsTopic extends MintyDocsPage {
 	private $mManual = null;
 	private $mIsStandalone = false;
@@ -101,8 +103,11 @@ class MintyDocsTopic extends MintyDocsPage {
 		if ( count( $equivsInOtherVersions ) > 0 ) {
 			$otherVersionsText = wfMessage( 'mintydocs-topic-otherversions' )->text() . "\n";
 			$otherVersionsText .= "<ul>\n";
+
+			$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+
 			foreach ( $equivsInOtherVersions as $versionName => $topicPage ) {
-				$otherVersionsText .= "<li>" . Linker::link( $topicPage, $versionName ) . "</li>\n";
+				$otherVersionsText .= "<li>" . $linkRenderer->makeLink( $topicPage, $versionName ) . "</li>\n";
 			}
 			$otherVersionsText .= "</ul>\n";
 			$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsOtherManualVersions' ], $otherVersionsText );
@@ -141,7 +146,8 @@ class MintyDocsTopic extends MintyDocsPage {
 			$query['contextVersion'] = $version->getActualName();
 			$query['contextManual'] = $manual->getActualName();
 		}
-		return Linker::link( $this->mTitle, $displayName, [], $query );
+		return MediaWikiServices::getInstance()->getLinkRenderer()
+			->makeLink( $this->mTitle, $displayName, [], $query );
 	}
 
 	function getFooter() {

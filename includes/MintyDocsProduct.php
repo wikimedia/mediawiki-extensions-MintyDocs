@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\MediaWikiServices;
+
 class MintyDocsProduct extends MintyDocsPage {
 
 	static function getPageTypeValue() {
@@ -72,12 +74,14 @@ class MintyDocsProduct extends MintyDocsPage {
 	}
 
 	function getHeader() {
+		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+
 		$versionListText = wfMessage( 'mintydocs-product-versionlist' )->text() . "\n";
 		$versionListText .= "<ul>\n";
 
 		$versionsAndTheirPages = $this->getVersions();
 		foreach ( $versionsAndTheirPages as $versionString => $version ) {
-			$versionListText .= '<li>' . Linker::link( $version->getTitle(), $versionString ) . "</li>\n";
+			$versionListText .= '<li>' . $linkRenderer->makeLink( $version->getTitle(), $versionString ) . "</li>\n";
 		}
 		$versionListText .= "</ul>\n";
 		$versionListText = Html::rawElement( 'div', [ 'class' => 'MintyDocsVersionList' ], $versionListText );

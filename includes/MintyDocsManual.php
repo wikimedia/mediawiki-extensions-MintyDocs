@@ -31,8 +31,10 @@ class MintyDocsManual extends MintyDocsPage {
 		if ( count( $equivsInOtherVersions ) > 0 ) {
 			$otherVersionsText = wfMessage( 'mintydocs-manual-otherversions' )->text() . "\n";
 			$otherVersionsText .= "<ul>\n";
+			$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
+
 			foreach ( $equivsInOtherVersions as $versionName => $manualPage ) {
-				$otherVersionsText .= "<li>" . Linker::link( $manualPage, $versionName ) . "</li>\n";
+				$otherVersionsText .= "<li>" . $linkRenderer->makeLink( $manualPage, $versionName ) . "</li>\n";
 			}
 			$otherVersionsText .= "</ul>\n";
 			$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsOtherManualVersions' ], $otherVersionsText );
@@ -67,7 +69,9 @@ class MintyDocsManual extends MintyDocsPage {
 
 	// phpcs:ignore MediaWiki.Commenting.FunctionComment.MissingDocumentationPrivate
 	private function generateTableOfContents( $showErrors ) {
-		$parser = MediaWikiServices::getInstance()->getParser();
+		$services = MediaWikiServices::getInstance();
+		$parser = $services->getParser();
+		$linkRenderer = $services->getLinkRenderer();
 
 		$tocOrPageName = trim( $this->getPossiblyInheritedParam( 'MintyDocsTopicsList' ) );
 		// Decide whether this is a table of contents or a page name
@@ -86,7 +90,7 @@ class MintyDocsManual extends MintyDocsPage {
 			}
 			if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
 				// MW 1.36+
-				$wikiPage = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $title );
+				$wikiPage = $services->getWikiPageFactory()->newFromTitle( $title );
 			} else {
 				$wikiPage = new WikiPage( $title );
 			}
@@ -143,7 +147,7 @@ class MintyDocsManual extends MintyDocsPage {
 					$formEditQuery['alt_form'][] = $altForm;
 				}
 			}
-			$formSpecialPage = MediaWikiServices::getInstance()
+			$formSpecialPage = $services
 				->getSpecialPageFactory()
 				->getPage( 'FormEdit' );
 
@@ -222,7 +226,11 @@ class MintyDocsManual extends MintyDocsPage {
 					$linkAttrs = [ 'href' => $url, 'class' => 'new', 'data-mdtype' => 'topic' ];
 					$link = Html::rawElement( 'a', $linkAttrs, $lineValue );
 				} else {
-					$link = Linker::link( $title, $lineValue, [ 'data-mdtype' => 'topic' ] );
+					$link = $linkRenderer->makeLink(
+						$title,
+						$lineValue,
+						[ 'data-mdtype' => 'topic' ]
+					);
 				}
 
 				$line = str_replace( $lineValue, $link, $line );
@@ -297,7 +305,7 @@ class MintyDocsManual extends MintyDocsPage {
 		// Add a link to this manual as the first item in the TOC.
 		// @TODO - the display name should be a #mintydocs_manual
 		// param or otherwise configurable.
-		$linkToManual = Linker::link( $this->mTitle, 'About' );
+		$linkToManual = $linkRenderer->makeLink( $this->mTitle, 'About' );
 		$toc = "*$linkToManual\n" . $toc;
 
 		// doBlockLevels() takes care of just parsing '*' into

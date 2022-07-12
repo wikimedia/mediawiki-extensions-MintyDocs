@@ -396,13 +396,15 @@ class MintyDocsPublish extends SpecialPage {
 			JobQueueGroup::singleton()->push( $jobs );
 		}
 
+		$linkRenderer = $this->getLinkRenderer();
+
 		if ( count( $jobs ) == 0 ) {
 			$text = 'No pages were specified.';
 		} elseif ( count( $jobs ) == 1 ) {
 			if ( $toTitle->exists() ) {
-				$text = 'The page ' . Linker::link( $toTitle ) . ' will be modified.';
+				$text = 'The page ' . $linkRenderer->makeLink( $toTitle ) . ' will be modified.';
 			} else {
-				$text = 'The page ' . Linker::link( $toTitle ) . ' will be created.';
+				$text = 'The page ' . $linkRenderer->makeLink( $toTitle ) . ' will be created.';
 			}
 		} else {
 			$titlesStr = '';
@@ -410,7 +412,7 @@ class MintyDocsPublish extends SpecialPage {
 				if ( $i > 0 ) {
 					$titlesStr .= ', ';
 				}
-				$titlesStr .= Linker::link( $title );
+				$titlesStr .= $linkRenderer->makeLink( $title );
 			}
 			$text = $this->msg( self::$mSuccessMsg, $titlesStr )->text();
 		}

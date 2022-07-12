@@ -210,7 +210,8 @@ abstract class MintyDocsPage {
 	}
 
 	public function getLink() {
-		return Linker::link( $this->mTitle, $this->getDisplayName() );
+		return MediaWikiServices::getInstance()->getLinkRenderer()
+			->makeLink( $this->mTitle, $this->getDisplayName() );
 	}
 
 	/**

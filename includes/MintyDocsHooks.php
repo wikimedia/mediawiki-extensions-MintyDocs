@@ -145,7 +145,8 @@ class MintyDocsHooks {
 					$query[$param] = $req->getVal( $param );
 				}
 			}
-			$linkToPublished = Linker::linkKnown( $liveTitle, $html = null, $attribs = [], $query );
+			$linkToPublished = MediaWikiServices::getInstance()->getLinkRenderer()
+				->makeKnownLink( $liveTitle, $html = null, $attribs = [], $query );
 			$msg = "This is a draft page; the published version of this page can be found at $linkToPublished.";
 		} else {
 			$msg = 'This is a draft page; it has not yet been published.';
@@ -168,7 +169,8 @@ class MintyDocsHooks {
 			return true;
 		}
 		$draftTitle = Title::newFromText( $title->getText(), MD_NS_DRAFT );
-		$draftLink = Linker::linkKnown( $draftTitle, 'draft page' );
+		$draftLink = MediaWikiServices::getInstance()->getLinkRenderer()
+			->makeKnownLink( $draftTitle, 'draft page' );
 		$msg = "Warning: this page has a corresponding $draftLink. It is generally better to edit the draft page, and then publish it, rather than to edit this page directly.";
 		$editPage->editFormPageTop .= Html::rawElement( 'div', [ 'class' => 'warningbox' ], $msg );
 
