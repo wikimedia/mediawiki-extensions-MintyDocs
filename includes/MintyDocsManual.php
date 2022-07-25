@@ -99,7 +99,7 @@ class MintyDocsManual extends MintyDocsPage {
 				$this->mTOCHTML = null;
 				return;
 			}
-			$pageText = $content->getNativeData();
+			$pageText = $content->getText();
 			// "Initialize" the parser, to avoid occasional errors
 			// when the parser's $mOptions field is not set.
 			$parser->startExternalParse(

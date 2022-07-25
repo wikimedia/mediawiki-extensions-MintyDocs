@@ -48,7 +48,7 @@ class MintyDocsPublishAPI extends ApiBase {
 		} else {
 			$fromPage = WikiPage::factory( $fromTitle );
 		}
-		$fromPageText = $fromPage->getContent()->getNativeData();
+		$fromPageText = $fromPage->getContent()->getText();
 
 		$toTitle = Title::newFromText( $pageName );
 

@@ -181,8 +181,8 @@ class MintyDocsPublish extends UnlistedSpecialPage {
 			$fromPage = WikiPage::factory( $fromTitle );
 			$toPage = WikiPage::factory( $toTitle );
 		}
-		$fromPageText = $fromPage->getContent()->getNativeData();
-		$toPageText = $toPage->getContent()->getNativeData();
+		$fromPageText = $fromPage->getContent()->getText();
+		$toPageText = $toPage->getContent()->getText();
 		if ( $fromPageText == $toPageText ) {
 			return 'There is no need to publish this page - the published version matches the draft version.';
 		}
@@ -293,8 +293,8 @@ class MintyDocsPublish extends UnlistedSpecialPage {
 			$fromPage = WikiPage::factory( $fromTitle );
 			$toPage = WikiPage::factory( $toTitle );
 		}
-		$fromPageText = $fromPage->getContent()->getNativeData();
-		$toPageText = $toPage->getContent()->getNativeData();
+		$fromPageText = $fromPage->getContent()->getText();
+		$toPageText = $toPage->getContent()->getText();
 		// If the text of the two pages is the same, no point
 		// dislaying a checkbox.
 		if ( $fromPageText == $toPageText ) {
@@ -358,7 +358,7 @@ class MintyDocsPublish extends UnlistedSpecialPage {
 			} else {
 				$fromPage = WikiPage::factory( $fromTitle );
 			}
-			$fromPageText = $fromPage->getContent()->getNativeData();
+			$fromPageText = $fromPage->getContent()->getText();
 			$toTitle = $this->generateTargetTitle( $fromPageName );
 			$toTitles[] = $toTitle;
 			$params = [];
