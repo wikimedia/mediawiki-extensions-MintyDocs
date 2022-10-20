@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Guycn2",
-			"YaronSh"
+			"YaronSh",
+			"Amire80"
 		]
 	},
 	"mintydocs-desc": "מערכת תיעוד קלה",
@@ -16,5 +17,8 @@
 	"mintydocs-manual-contents": "תוכן עניינים:",
 	"mintydocs-topic-desc": "נושא זה הוא חלק של המדריך \"$1\" עבור גרסה $2 של $3.",
 	"mintydocs-topic-otherversions": "יש לקרוא את הנושא הזה עבור גרסאות אחרות:",
-	"mintydocs-tocinput-changetype": "שינוי סוג"
+	"mintydocs-publish-singlepage": "לפרסם את דף הטיוטה הזה?",
+	"mintydocs-publish-editsummary": "פורסם",
+	"mintydocs-tocinput-changetype": "שינוי סוג",
+	"apihelp-mintydocspublish-param-title": "שם הדף לפרסום"
 }
