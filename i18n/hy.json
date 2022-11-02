@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kareyac"
+			"Kareyac",
+			"Սերգեյ Սաֆարյան"
 		]
 	},
+	"mintydocs-publish-button": "Հրապարակել",
 	"mintydocs-copy-singlepage": "Պատճենե՞լ այս էջը։"
 }
