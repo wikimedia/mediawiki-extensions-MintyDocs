@@ -4,5 +4,7 @@
 			"Vlad5250"
 		]
 	},
-	"mintydocs-desc": "Lagani dokumentacijski sustav"
+	"mintydocs-desc": "Lagani dokumentacijski sustav",
+	"action-mintydocs-administer": "upravljanje svim stranicama proizvoda MintyDocs",
+	"right-mintydocs-administer": "Upravljanje svim stranicama proizvoda MintyDocs"
 }
