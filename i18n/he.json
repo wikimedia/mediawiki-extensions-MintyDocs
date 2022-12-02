@@ -17,8 +17,12 @@
 	"mintydocs-manual-contents": "תוכן עניינים:",
 	"mintydocs-topic-desc": "נושא זה הוא חלק של המדריך \"$1\" עבור גרסה $2 של $3.",
 	"mintydocs-topic-otherversions": "יש לקרוא את הנושא הזה עבור גרסאות אחרות:",
+	"mintydocs-publish-button": "פרסום",
 	"mintydocs-publish-singlepage": "לפרסם את דף הטיוטה הזה?",
 	"mintydocs-publish-editsummary": "פורסם",
+	"mintydocs-copy-button": "העתקה",
+	"mintydocs-tocinput-rename": "שינוי שם",
 	"mintydocs-tocinput-changetype": "שינוי סוג",
+	"mintydocs-tocinput-addentry": "הוספת ערך",
 	"apihelp-mintydocspublish-param-title": "שם הדף לפרסום"
 }
