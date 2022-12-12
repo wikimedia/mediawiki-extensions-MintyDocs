@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Seipinne"
+			"Seipinne",
+			"Yupik"
 		]
 	},
-	"mintydocs-publish-button": "Almostit"
+	"mintydocs-publish-button": "Almostit",
+	"mintydocs-publish-editsummary": "Almostittum"
 }
