@@ -1,7 +1,8 @@
 {
 	"@metadata": {
 		"authors": [
-			"Kly"
+			"Kly",
+			"捍粵者"
 		]
 	},
 	"mintydocs-desc": "輕量級文件系統",
@@ -37,7 +38,7 @@
 	"mintydocs-copy-success": "將會複製以下頁面：$1。",
 	"mintydocs-copy-editsummary": "拷貝手冊",
 	"mintydocsdelete": "刪除 MintyDocs 內容",
-	"mintydocs-delete-success": "頁面將被刪除。",
+	"mintydocs-delete-success": "將刪除頁面。",
 	"mintydocs-delete-deletionreason": "刪除手冊",
 	"mintydocs-tocinput-rename": "重新命名",
 	"mintydocs-tocinput-changetype": "更改類型",
