@@ -151,7 +151,7 @@ class MintyDocsHooks {
 		} else {
 			$msg = 'This is a draft page; it has not yet been published.';
 		}
-		$warningText = Html::rawElement( 'div', [ 'class' => 'warningbox' ], $msg );
+		$warningText = Html::warningBox( $msg );
 		$text = $warningText . $text;
 		return true;
 	}
@@ -172,7 +172,7 @@ class MintyDocsHooks {
 		$draftLink = MediaWikiServices::getInstance()->getLinkRenderer()
 			->makeKnownLink( $draftTitle, 'draft page' );
 		$msg = "Warning: this page has a corresponding $draftLink. It is generally better to edit the draft page, and then publish it, rather than to edit this page directly.";
-		$editPage->editFormPageTop .= Html::rawElement( 'div', [ 'class' => 'warningbox' ], $msg );
+		$editPage->editFormPageTop .= Html::warningBox( $msg );
 
 		return true;
 	}

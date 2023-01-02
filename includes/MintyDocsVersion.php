@@ -67,7 +67,7 @@ class MintyDocsVersion extends MintyDocsPage {
 			$errorMsg = "The following manuals are defined for this version but are not included in the list of manuals: " .
 				implode( ', ', array_keys( $manualsAndTheirRealNames ) );
 			// $errorMsg = wfMessage( 'mintydocs-version-extramanuals', implode( ', ', array_keys( $manualsAndTheirRealNames ) ) );
-			$text .= Html::rawElement( 'div', [ 'class' => 'warningbox' ], $errorMsg );
+			$text .= Html::warningBox( $errorMsg );
 		}
 
 		$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsManualList' ], $manualsListText );

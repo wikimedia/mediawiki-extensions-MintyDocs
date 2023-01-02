@@ -324,7 +324,7 @@ class MintyDocsManual extends MintyDocsPage {
 			//$errorMsg = wfMessage( 'mintydocs-manual-extratopics', implode( ', ', $topicLinks ) )->text();
 			$errorMsg = "The following topics are defined for this manual but are not included in the list of topics: " .
 				 implode( ', ', $topicLinks );
-			$wgOut->addHTML( Html::rawElement( 'div', [ 'class' => 'warningbox' ], $errorMsg ) );
+			$wgOut->addHTML( Html::warningBox( $errorMsg ) );
 		}
 	}
 
