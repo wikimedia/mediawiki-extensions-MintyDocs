@@ -249,12 +249,7 @@ abstract class MintyDocsPage {
 	}
 
 	public function userCanView( $user ) {
-		if ( method_exists( 'MediaWiki\Permissions\PermissionManager', 'userHasRight' ) ) {
-			// MW 1.34+
-			$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
-		} else {
-			$permissionManager = null;
-		}
+		$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
 
 		if ( $this->mIsInvalid ) {
 			// If it's a standalone topic in the draft namespace,
@@ -263,9 +258,9 @@ abstract class MintyDocsPage {
 			return (
 				!( $this instanceof MintyDocsTopic ) ||
 				$this->mTitle->getNamespace() !== MD_NS_DRAFT ||
-				MintyDocsUtils::userIsAllowed( $user, 'mintydocs-administer', $permissionManager ) ||
-				MintyDocsUtils::userIsAllowed( $user, 'mintydocs-edit', $permissionManager ) ||
-				MintyDocsUtils::userIsAllowed( $user, 'mintydocs-preview', $permissionManager )
+				$permissionManager->userHasRight( $user, 'mintydocs-administer' ) ||
+				$permissionManager->userHasRight( $user, 'mintydocs-edit' ) ||
+				$permissionManager->userHasRight( $user, 'mintydocs-preview' )
 			);
 		}
 
@@ -274,9 +269,9 @@ abstract class MintyDocsPage {
 		// If this is a draft page, only people with some kind of
 		// MintyDocs permission can view it.
 		if ( $this->mTitle->getNamespace() == MD_NS_DRAFT ) {
-			if ( !MintyDocsUtils::userIsAllowed( $user, 'mintydocs-administer', $permissionManager ) &&
-			!MintyDocsUtils::userIsAllowed( $user, 'mintydocs-edit', $permissionManager ) &&
-			!MintyDocsUtils::userIsAllowed( $user, 'mintydocs-preview', $permissionManager ) &&
+			if ( !$permissionManager->userHasRight( $user, 'mintydocs-administer' ) &&
+			!$permissionManager->userHasRight( $user, 'mintydocs-edit' ) &&
+			!$permissionManager->userHasRight( $user, 'mintydocs-preview' ) &&
 			!$product->userIsAdmin( $user ) &&
 			!$product->userIsEditor( $user ) &&
 			!$product->userIsPreviewer( $user ) ) {
@@ -289,7 +284,7 @@ abstract class MintyDocsPage {
 			// Everyone can view this.
 			return true;
 		} elseif ( $versionStatus == MintyDocsVersion::CLOSED_STATUS ) {
-			if ( MintyDocsUtils::userIsAllowed( $user, 'mintydocs-administer', $permissionManager ) ) {
+			if ( $permissionManager->userHasRight( $user, 'mintydocs-administer' ) ) {
 				return true;
 			}
 			if ( $product->userIsAdmin( $user ) ) {
@@ -297,9 +292,9 @@ abstract class MintyDocsPage {
 			}
 			return false;
 		} else { // UNRELEASED_STATUS - the default
-			if ( MintyDocsUtils::userIsAllowed( $user, 'mintydocs-administer', $permissionManager ) ||
-				MintyDocsUtils::userIsAllowed( $user, 'mintydocs-edit', $permissionManager ) ||
-				MintyDocsUtils::userIsAllowed( $user, 'mintydocs-preview', $permissionManager ) ) {
+			if ( $permissionManager->userHasRight( $user, 'mintydocs-administer' ) ||
+				$permissionManager->userHasRight( $user, 'mintydocs-edit' ) ||
+				$permissionManager->userHasRight( $user, 'mintydocs-preview' ) ) {
 				return true;
 			}
 			if ( $product->userIsAdmin( $user ) ||
@@ -337,12 +332,7 @@ abstract class MintyDocsPage {
 
 		list( $product, $version ) = $this->getProductAndVersion();
 
-		if ( method_exists( 'MediaWiki\Permissions\PermissionManager', 'userHasRight' ) ) {
-			// MW 1.34+
-			$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
-		} else {
-			$permissionManager = null;
-		}
+		$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
 
 		$versionStatus = $version->getStatus();
 
@@ -350,7 +340,7 @@ abstract class MintyDocsPage {
 			// Everyone can edit this, as far as MintyDocs is concerned.
 			return true;
 		} elseif ( $versionStatus == MintyDocsVersion::CLOSED_STATUS ) {
-			if ( MintyDocsUtils::userIsAllowed( $user, 'mintydocs-administer', $permissionManager ) ) {
+			if ( $permissionManager->userHasRight( $user, 'mintydocs-administer' ) ) {
 				return true;
 			}
 			if ( $product->userIsAdmin( $user ) ) {
@@ -358,8 +348,8 @@ abstract class MintyDocsPage {
 			}
 			return false;
 		} else { // UNRELEASED_STATUS - the default
-			if ( MintyDocsUtils::userIsAllowed( $user, 'mintydocs-administer', $permissionManager ) ||
-				MintyDocsUtils::userIsAllowed( $user, 'mintydocs-edit', $permissionManager ) ) {
+			if ( $permissionManager->userHasRight( $user, 'mintydocs-administer' ) ||
+				$permissionManager->userHasRight( $user, 'mintydocs-edit' ) ) {
 				return true;
 			}
 			if ( $product->userIsAdmin( $user ) ||
@@ -374,21 +364,16 @@ abstract class MintyDocsPage {
 	}
 
 	public function userCanAdminister( $user ) {
-		if ( method_exists( 'MediaWiki\Permissions\PermissionManager', 'userHasRight' ) ) {
-			// MW 1.34+
-			$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
-		} else {
-			$permissionManager = null;
-		}
+		$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
 
 		if ( ( $this instanceof MintyDocsTopic ) && $this->mIsInvalid ) {
 			// If it's a standalone topic in the draft namespace,
 			// it can only be published if the user is globally
 			// an administrator.
-			return MintyDocsUtils::userIsAllowed( $user, 'mintydocs-administer', $permissionManager );
+			return $permissionManager->userHasRight( $user, 'mintydocs-administer' );
 		}
 
-		if ( MintyDocsUtils::userIsAllowed( $user, 'mintydocs-administer', $permissionManager ) ) {
+		if ( $permissionManager->userHasRight( $user, 'mintydocs-administer' ) ) {
 			return true;
 		}
 

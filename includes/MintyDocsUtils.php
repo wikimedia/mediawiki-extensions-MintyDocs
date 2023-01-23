@@ -105,13 +105,8 @@ class MintyDocsUtils {
 		// It's strange that doEditContent() doesn't
 		// automatically attach the 'bot' flag when the user
 		// is a bot...
-		if ( method_exists( 'MediaWiki\Permissions\PermissionManager', 'userHasRight' ) ) {
-			// MW 1.34+
-			$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
-		} else {
-			$permissionManager = null;
-		}
-		if ( self::userIsAllowed( $user, 'bot', $permissionManager ) ) {
+		$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
+		if ( $permissionManager->userHasRight( $user, 'bot' ) ) {
 			$flags = EDIT_FORCE_BOT;
 		} else {
 			$flags = 0;
@@ -122,20 +117,6 @@ class MintyDocsUtils {
 		$updater = $wikiPage->newPageUpdater( $user );
 		$updater->setContent( SlotRecord::MAIN, $newContent );
 		$updater->saveRevision( CommentStoreComment::newUnsavedComment( $editSummary ), $flags );
-	}
-
-	/**
-	 * @param User $user
-	 * @param Action $action
-	 * @param PermissionManager $permissionManager
-	 * @return bool
-	 */
-	public static function userIsAllowed( $user, $action, $permissionManager ) {
-		if ( $permissionManager != null ) {
-			return $permissionManager->userHasRight( $user, $action );
-		} else {
-			return $user->isAllowed( $action );
-		}
 	}
 
 	/**
