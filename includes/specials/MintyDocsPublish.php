@@ -6,7 +6,7 @@ use MediaWiki\MediaWikiServices;
  * @author Yaron Koren
  */
 
-class MintyDocsPublish extends SpecialPage {
+class MintyDocsPublish extends UnlistedSpecialPage {
 
 	protected static $mNoActionNeededMessage = "Nothing to publish.";
 	protected static $mEditSummaryMsg = "mintydocs-publish-editsummary";

@@ -6,7 +6,7 @@ use MediaWiki\MediaWikiServices;
  * @author Yaron Koren
  */
 
-class MintyDocsDelete extends SpecialPage {
+class MintyDocsDelete extends UnlistedSpecialPage {
 
 	/**
 	 * Constructor
