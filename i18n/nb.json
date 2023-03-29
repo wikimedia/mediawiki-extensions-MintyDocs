@@ -41,6 +41,7 @@
 	"mintydocs-delete-deletionreason": "Slett manual",
 	"mintydocs-tocinput-rename": "Gi nytt navn",
 	"mintydocs-tocinput-changetype": "Endre type",
+	"mintydocs-tocinput-addentry": "Legg til oppføring",
 	"apihelp-mintydocspublish-description": "Publiserer en MintyDocs-side.",
 	"apihelp-mintydocspublish-summary": "Publiserer en MintyDocs-side ved å kopiere den fra kladdenavnerommet til hovednavnerommet.",
 	"apihelp-mintydocspublish-param-title": "Navnet på siden som skal publiseres",
