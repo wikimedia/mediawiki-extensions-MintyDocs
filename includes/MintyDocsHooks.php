@@ -36,8 +36,6 @@ class MintyDocsHooks {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/CanonicalNamespaces
 	 *
 	 * @param array &$list
-	 *
-	 * @return true
 	 */
 	public static function registerNamespaces( array &$list ) {
 		global $wgNamespacesWithSubpages;
@@ -47,8 +45,6 @@ class MintyDocsHooks {
 
 		// Support subpages only for talk pages by default
 		$wgNamespacesWithSubpages[MD_NS_DRAFT_TALK] = true;
-
-		return true;
 	}
 
 	/**
@@ -56,23 +52,17 @@ class MintyDocsHooks {
 	 * @param User &$user
 	 * @param string $action
 	 * @param string &$result
-	 * @return string|null
 	 */
 	public static function checkPermissions( &$title, &$user, $action, &$result ) {
 		$mdPage = MintyDocsUtils::pageFactory( $title );
 		if ( $mdPage == null ) {
-			return true;
+			return;
 		}
-		// If we are setting the edit or view permission, return false to
-		// avoid our permission value getting overriden by something else.
-		if ( $action == 'edit' || $action == 'formedit' ) {
-			$result = $mdPage->userCanEdit( $user );
-			return false;
-		} elseif ( $action == 'read' ) {
-			$result = $mdPage->userCanView( $user );
-			return false;
+		if ( ( $action == 'edit' || $action == 'formedit' ) && !$mdPage->userCanEdit( $user ) ) {
+			$result = false;
+		} elseif ( $action == 'read' && !$mdPage->userCanView( $user ) ) {
+			$result = false;
 		}
-		return true;
 	}
 
 	/**
@@ -85,12 +75,12 @@ class MintyDocsHooks {
 
 		$action = Action::getActionName( $out->getContext() );
 		if ( $action != 'view' ) {
-			return true;
+			return;
 		}
 		$title = $out->getTitle();
 		$mdPage = MintyDocsUtils::pageFactory( $title );
 		if ( $mdPage == null ) {
-			return true;
+			return;
 		}
 		$inheritedPage = $mdPage->getInheritedPage();
 		if ( $inheritedPage !== null ) {
@@ -109,7 +99,6 @@ class MintyDocsHooks {
 		if ( !$wgMintyDocsDisplayFooterElementsInSidebar ) {
 			$text .= $mdPage->getFooter();
 		}
-		return true;
 	}
 
 	/**
@@ -120,11 +109,11 @@ class MintyDocsHooks {
 	public static function showNoticeForDraftPage( &$out, &$text ) {
 		$action = Action::getActionName( $out->getContext() );
 		if ( $action != 'view' ) {
-			return true;
+			return;
 		}
 		$title = $out->getTitle();
 		if ( $title->getNamespace() !== MD_NS_DRAFT ) {
-			return true;
+			return;
 		}
 
 		$liveTitle = Title::newFromText( $title->getText(), NS_MAIN );
@@ -146,7 +135,6 @@ class MintyDocsHooks {
 		}
 		$warningText = Html::warningBox( $msg );
 		$text = $warningText . $text;
-		return true;
 	}
 
 	/**
@@ -159,15 +147,13 @@ class MintyDocsHooks {
 		$title = $editPage->getTitle();
 		$mdPage = MintyDocsUtils::pageFactory( $title );
 		if ( $mdPage == null || !$mdPage->hasDraftPage() ) {
-			return true;
+			return;
 		}
 		$draftTitle = Title::newFromText( $title->getText(), MD_NS_DRAFT );
 		$draftLink = MediaWikiServices::getInstance()->getLinkRenderer()
 			->makeKnownLink( $draftTitle, 'draft page' );
 		$msg = "Warning: this page has a corresponding $draftLink. It is generally better to edit the draft page, and then publish it, rather than to edit this page directly.";
 		$editPage->editFormPageTop .= Html::warningBox( $msg );
-
-		return true;
 	}
 
 	/**
@@ -180,7 +166,7 @@ class MintyDocsHooks {
 		global $wgMintyDocsDisplayFooterElementsInSidebar;
 
 		if ( !$wgMintyDocsDisplayFooterElementsInSidebar ) {
-			return true;
+			return;
 		}
 
 		$contextProduct = $wgRequest->getVal( 'contextProduct' );
@@ -199,12 +185,12 @@ class MintyDocsHooks {
 
 		$mdPage = MintyDocsUtils::pageFactory( $title );
 		if ( $mdPage == null ) {
-			return true;
+			return;
 		}
 
 		$sidebarContents = $mdPage->getSidebarText();
 		if ( $sidebarContents == null ) {
-			return true;
+			return;
 		}
 
 		list( $header, $contents ) = $sidebarContents;
@@ -213,34 +199,30 @@ class MintyDocsHooks {
 
 	/**
 	 * Called by the PageSaveComplete hook.
-	 *
-	 * @return true
 	 */
 	public static function setSearchText( WikiPage $wikiPage, User $user,
 		string $summary, int $flags,
 		MediaWiki\Revision\RevisionStoreRecord $revisionRecord,
 		MediaWiki\Storage\EditResult $editResult ) {
 		if ( $revisionRecord === null ) {
-			return true;
+			return;
 		}
 
 		$title = $wikiPage->getTitle();
 		$mdPage = MintyDocsUtils::pageFactory( $title );
 
 		if ( $mdPage == null ) {
-			return true;
+			return;
 		}
 
 		if ( !$mdPage->inheritsPageContents() ) {
-			return true;
+			return;
 		}
 
 		// @TODO - does the template call need to be added/removed/etc.?
 		//$newSearchText = $mdPage->getPageContents();
 
 		//DeferredUpdates::addUpdate( new SearchUpdate( $title->getArticleID(), $title->getText(), $newSearchText ) );
-
-		return true;
 	}
 
 	/**
@@ -251,8 +233,6 @@ class MintyDocsHooks {
 		global $wgScriptPath;
 
 		$vars['wgMintyDocsScriptPath'] = $wgScriptPath . '/extensions/MintyDocs';
-
-		return true;
 	}
 
 	/**
@@ -266,8 +246,6 @@ class MintyDocsHooks {
 		$customVariableIDs[] = 'MAG_MINTYDOCSVERSION';
 		$customVariableIDs[] = 'MAG_MINTYDOCSMANUAL';
 		$customVariableIDs[] = 'MAG_MINTYDOCSDISPLAYNAME';
-
-		return true;
 	}
 
 	/**
@@ -287,32 +265,32 @@ class MintyDocsHooks {
 			'MAG_MINTYDOCSDISPLAYNAME'
 		];
 		if ( !in_array( $magicWordId, $handledIDs ) ) {
-			return true;
+			return;
 		}
 		$title = $parser->getTitle();
 		$mdPage = MintyDocsUtils::pageFactory( $title );
 		if ( $mdPage == null ) {
-			return true;
+			return;
 		}
 		$className = get_class( $mdPage );
 		switch ( $magicWordId ) {
 			case 'MAG_MINTYDOCSPRODUCT':
 				if ( $className == 'MintyDocsProduct' ) {
-					return true;
+					return;
 				}
 				list( $product, $version ) = $mdPage->getProductAndVersion();
 				$ret = $cache[$magicWordId] = $product->getDisplayName();
 				break;
 			case 'MAG_MINTYDOCSVERSION':
 				if ( $className == 'MintyDocsProduct' || $className == 'MintyDocsVersion' ) {
-					return true;
+					return;
 				}
 				list( $productName, $versionString ) = $mdPage->getProductAndVersionStrings();
 				$ret = $cache[$magicWordId] = $versionString;
 				break;
 			case 'MAG_MINTYDOCSMANUAL':
 				if ( $className == 'MintyDocsProduct' || $className == 'MintyDocsVersion' || $className == 'MintyDocsManual' ) {
-					return true;
+					return;
 				}
 				$manual = $mdPage->getManual();
 				$ret = $cache[$magicWordId] = $manual->getDisplayName();
@@ -323,7 +301,6 @@ class MintyDocsHooks {
 			default:
 				break;
 		}
-		return true;
 	}
 
 	public static function makeDraftsNonSearchable( &$searchableNamespaces ) {
@@ -335,13 +312,11 @@ class MintyDocsHooks {
 			$user->isAllowed( 'mintydocs-administer' ) ||
 			$user->isAllowed( 'mintydocs-edit' )
 		) {
-			return true;
+			return;
 		}
 
 		unset( $searchableNamespaces[MD_NS_DRAFT] );
 		unset( $searchableNamespaces[MD_NS_DRAFT_TALK] );
-
-		return true;
 	}
 
 	/**
