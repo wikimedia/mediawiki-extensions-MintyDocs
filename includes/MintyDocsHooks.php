@@ -5,7 +5,7 @@ use MediaWiki\MediaWikiServices;
 class MintyDocsHooks {
 
 	public static function registerExtension() {
-		global $wgNamespaceRobotPolicies, $wgHooks;
+		global $wgNamespaceRobotPolicies;
 
 		if ( !defined( 'MD_NS_DRAFT' ) ) {
 			define( 'MD_NS_DRAFT', 620 );
@@ -18,13 +18,6 @@ class MintyDocsHooks {
 		// search engines, but then again, if other talk pages get
 		// indexed, there's no reason not to index these as well.
 		$wgNamespaceRobotPolicies[MD_NS_DRAFT] = 'noindex';
-
-		if ( class_exists( 'MediaWiki\HookContainer\HookContainer' ) ) {
-			// MW 1.35+
-			$wgHooks['PageSaveComplete'][] = 'MintyDocsHooks::setSearchText';
-		} else {
-			$wgHooks['PageContentSaveComplete'][] = 'MintyDocsHooks::setSearchTextOld';
-		}
 	}
 
 	/**
@@ -219,52 +212,7 @@ class MintyDocsHooks {
 	}
 
 	/**
-	 * Called by the PageContentSaveComplete hook; used for MW < 1.35.
-	 * Based on function of the same name in ApprovedRevs.hook.php, from
-	 * the Approved Revs extension.
-	 *
-	 * @param WikiPage $article
-	 * @param User $user
-	 * @param Content $content
-	 * @param string $summary
-	 * @param bool $isMinor
-	 * @param bool $isWatch
-	 * @param string $section
-	 * @param int $flags
-	 * @param Revision $revision
-	 * @param Status $status
-	 * @param int|false $baseRevId
-	 * @param int $undidRevId
-	 * @return true
-	 */
-	public static function setSearchTextOld( $article, $user, $content,
-		$summary, $isMinor, $isWatch, $section, $flags, $revision,
-		$status, $baseRevId, $undidRevId = 0 ) {
-		if ( $revision === null ) {
-			return true;
-		}
-
-		$title = $article->getTitle();
-		$mdPage = MintyDocsUtils::pageFactory( $title );
-
-		if ( $mdPage == null ) {
-			return true;
-		}
-
-		if ( !$mdPage->inheritsPageContents() ) {
-			return true;
-		}
-
-		// @TODO - does the template call need to be added/removed/etc.?
-		//$newSearchText = $mdPage->getPageContents();
-
-		//DeferredUpdates::addUpdate( new SearchUpdate( $title->getArticleID(), $title->getText(), $newSearchText ) );
-
-		return true;
-	}
-
-	/**
-	 * Called by the PageSaveComplete hook; used for MW >= 1.35.
+	 * Called by the PageSaveComplete hook.
 	 *
 	 * @return true
 	 */

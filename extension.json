@@ -1,7 +1,7 @@
 {
 	"name": "MintyDocs",
 	"namemsg": "mintydocs-extensionname",
-	"version": "1.0",
+	"version": "1.1-alpha",
 	"author": "Yaron Koren",
 	"url": "https://www.mediawiki.org/wiki/Extension:MintyDocs",
 	"descriptionmsg": "mintydocs-desc",
@@ -23,7 +23,7 @@
 	],
 	"callback": "MintyDocsHooks::registerExtension",
 	"requires": {
-		"MediaWiki": ">= 1.34"
+		"MediaWiki": ">= 1.35"
 	},
 	"AvailableRights": [
 		"mintydocs-administer",
@@ -119,6 +119,7 @@
 		],
 		"EditPage::showEditForm:initial": "MintyDocsHooks::addLivePageEditWarning",
 		"SkinBuildSidebar": "MintyDocsHooks::addTextToSidebar",
+		"PageSaveComplete": "MintyDocsHooks::setSearchText",
 		"MakeGlobalVariablesScript": "MintyDocsHooks::setGlobalJSVariables",
 		"MagicWordwgVariableIDs": "MintyDocsHooks::declareVarIDs",
 		"ParserGetVariableValueSwitch": "MintyDocsHooks::assignAValue",
