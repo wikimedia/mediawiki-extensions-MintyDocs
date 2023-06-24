@@ -43,7 +43,6 @@
 	"mintydocs-tocinput-rename": "Rename",
 	"mintydocs-tocinput-changetype": "Change type",
 	"mintydocs-tocinput-addentry": "Add entry",
-	"apihelp-mintydocspublish-description": "Publishes a MintyDocs page.",
 	"apihelp-mintydocspublish-summary": "Publishes a MintyDocs page by copying it from the draft namespace to the main namespace.",
 	"apihelp-mintydocspublish-param-title": "The name of the page to publish",
 	"apihelp-mintydocspublish-example-title": "Copy the contents of the page Draft:ABC123 to the page ABC123"
