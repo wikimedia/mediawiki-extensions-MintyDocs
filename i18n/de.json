@@ -44,7 +44,6 @@
 	"mintydocs-tocinput-rename": "Umbenennen",
 	"mintydocs-tocinput-changetype": "Typ ändern",
 	"mintydocs-tocinput-addentry": "Eintrag hinzufügen",
-	"apihelp-mintydocspublish-description": "Publiziert eine MintyDocs-Seite.",
 	"apihelp-mintydocspublish-summary": "Publiziert eine MintyDocs-Seite, indem sie aus dem Entwurfs-Namensraum in den Haupt-Namensraum kopiert wird.",
 	"apihelp-mintydocspublish-param-title": "Der Name der zu veröffentlichenden Seite",
 	"apihelp-mintydocspublish-example-title": "Kopiert den Inhalt der Seite Draft:ABC123 auf die Seite ABC123"

@@ -43,7 +43,6 @@
 	"mintydocs-tocinput-rename": "重新命名",
 	"mintydocs-tocinput-changetype": "更改類型",
 	"mintydocs-tocinput-addentry": "添加項",
-	"apihelp-mintydocspublish-description": "發布 MintyDocs 頁面。",
 	"apihelp-mintydocspublish-summary": "透過從草稿命名空間複製至主命名空間，來發佈一個 MintyDocs 頁面。",
 	"apihelp-mintydocspublish-param-title": "要發布的頁面名稱。",
 	"apihelp-mintydocspublish-example-title": "複製頁面 Draft:ABC123 的內容至頁面 ABC123 裡"

@@ -43,7 +43,6 @@
 	"mintydocs-tocinput-rename": "Preimenuj",
 	"mintydocs-tocinput-changetype": "Spremeni vrsto",
 	"mintydocs-tocinput-addentry": "Dodaj vnos",
-	"apihelp-mintydocspublish-description": "Objavi stran MintyDocs.",
 	"apihelp-mintydocspublish-summary": "Objavi stran MintyDocs tako, da jo kopira iz imenskega prostora osnutka v glavni imenski prostor.",
 	"apihelp-mintydocspublish-param-title": "Ime strani za objavo",
 	"apihelp-mintydocspublish-example-title": "Kopira vsebino strani Draft:ABC123 na stran ABC123"

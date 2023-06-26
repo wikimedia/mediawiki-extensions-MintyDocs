@@ -45,7 +45,6 @@
 	"mintydocs-tocinput-rename": "Renommer",
 	"mintydocs-tocinput-changetype": "Changer le type",
 	"mintydocs-tocinput-addentry": "Ajouter une entrée",
-	"apihelp-mintydocspublish-description": "Publie une page de MintyDocs.",
 	"apihelp-mintydocspublish-summary": "Publie une page de MintyDocs en la copiant depuis l’espace de noms brouillon vers l’espace de noms principal.",
 	"apihelp-mintydocspublish-param-title": "Le nom de la page à publier",
 	"apihelp-mintydocspublish-example-title": "Copier le contenu de la page de brouillon « Draft:ABC123 » vers la page « ABC123 »"

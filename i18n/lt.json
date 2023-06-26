@@ -43,7 +43,6 @@
 	"mintydocs-tocinput-rename": "Pervadinti",
 	"mintydocs-tocinput-changetype": "Keisti tipą",
 	"mintydocs-tocinput-addentry": "Pridėti įrašą",
-	"apihelp-mintydocspublish-description": "Paskelbia MintyDocs puslapį.",
 	"apihelp-mintydocspublish-summary": "Paskelbia MintyDocs puslapį nukopijuojant jį iš juodraščio vardų srities į pagrindinę vardų sritį.",
 	"apihelp-mintydocspublish-param-title": "Puslapio paskelbimui pavadinimas",
 	"apihelp-mintydocspublish-example-title": "Nukopijuoti puslapio Draft:ABC123 turinį į puslapį ABC123"

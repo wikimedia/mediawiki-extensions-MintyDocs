@@ -42,7 +42,6 @@
 	"mintydocs-tocinput-rename": "Renominar",
 	"mintydocs-tocinput-changetype": "Cambiar typo",
 	"mintydocs-tocinput-addentry": "Adder entrata",
-	"apihelp-mintydocspublish-description": "Publica un pagina MintyDocs.",
 	"apihelp-mintydocspublish-summary": "Publica un pagina MintyDocs copiante lo del spatio de nomines de versiones provisori al spatio de nomines principal.",
 	"apihelp-mintydocspublish-param-title": "Le nomine del pagina a publicar",
 	"apihelp-mintydocspublish-example-title": "Copiar le contento del pagina Draft:ABC123 al pagina ABC123"

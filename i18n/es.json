@@ -42,7 +42,6 @@
 	"mintydocs-tocinput-rename": "Cambiar nombre",
 	"mintydocs-tocinput-changetype": "Cambiar el tipo",
 	"mintydocs-tocinput-addentry": "Añadir entrada",
-	"apihelp-mintydocspublish-description": "Publica una página de MintyDocs.",
 	"apihelp-mintydocspublish-param-title": "El nombre de la página a publicar",
 	"apihelp-mintydocspublish-example-title": "Copiar el contenido de la página Borrador:ABC123 a la página ABC123"
 }

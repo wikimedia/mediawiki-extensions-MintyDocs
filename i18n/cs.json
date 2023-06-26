@@ -46,7 +46,6 @@
 	"mintydocs-tocinput-rename": "Přejmenovat",
 	"mintydocs-tocinput-changetype": "Změnit typ",
 	"mintydocs-tocinput-addentry": "Přidat položku",
-	"apihelp-mintydocspublish-description": "Zveřejní stránku MintyDocs.",
 	"apihelp-mintydocspublish-summary": "Zveřejní stránku MintyDocs tak, že jí zkopíruje ze jmenného prostoru konceptů do hlavního jmenného prostoru.",
 	"apihelp-mintydocspublish-param-title": "Název zveřejněné stránky",
 	"apihelp-mintydocspublish-example-title": "Zkopírovat obsah stránky Draft:ABC123 do stránky ABC123"

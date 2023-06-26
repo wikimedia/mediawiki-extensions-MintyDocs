@@ -46,7 +46,6 @@
 	"mintydocs-tocinput-rename": "أعد التسمية",
 	"mintydocs-tocinput-changetype": "تغيير النوع",
 	"mintydocs-tocinput-addentry": "إضافة إدخال",
-	"apihelp-mintydocspublish-description": "تنشر صفحة MintyDocs.",
 	"apihelp-mintydocspublish-summary": "ينشر صفحة MintyDocs بنسخها من نطاق المسودة إلى النطاق الرئيسي.",
 	"apihelp-mintydocspublish-param-title": "اسم الصفحة للنشر",
 	"apihelp-mintydocspublish-example-title": "انسخ محتويات الصفحة مسودة:ABC123 إلى الصفحة ABC123"

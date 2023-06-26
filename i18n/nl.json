@@ -29,7 +29,6 @@
 	"mintydocs-delete-deletionreason": "Verwijder handmatig",
 	"mintydocs-tocinput-rename": "Hernoemen",
 	"mintydocs-tocinput-changetype": "Type wijzigen",
-	"apihelp-mintydocspublish-description": "Publiceert een MintyDocs pagina.",
 	"apihelp-mintydocspublish-summary": "Publiceert een MintyDocs pagina door deze van de draft naamruimte naar de hoofdnaamruimte te kopiëren.",
 	"apihelp-mintydocspublish-param-title": "De naam van de te publiceren pagina",
 	"apihelp-mintydocspublish-example-title": "Kopieer de inhoud van de pagina Draft:ABC123 naar de pagina ABC123"

@@ -42,7 +42,6 @@
 	"mintydocs-tocinput-rename": "Alterar o nome",
 	"mintydocs-tocinput-changetype": "Mudar tipo",
 	"mintydocs-tocinput-addentry": "Adicionar entrada",
-	"apihelp-mintydocspublish-description": "Publica uma página MintyDocs.",
 	"apihelp-mintydocspublish-summary": "Publica uma página MintyDocs, copiando-a do espaço nominal de rascunho para o espaço nominal principal.",
 	"apihelp-mintydocspublish-param-title": "O nome da página a publicar",
 	"apihelp-mintydocspublish-example-title": "Copiar o conteúdo da página de rascunho Draft:ABC123 para a página ABC123"
