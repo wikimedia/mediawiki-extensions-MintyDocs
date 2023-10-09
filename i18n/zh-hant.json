@@ -2,7 +2,8 @@
 	"@metadata": {
 		"authors": [
 			"Kly",
-			"捍粵者"
+			"捍粵者",
+			"Winston Sung"
 		]
 	},
 	"mintydocs-desc": "輕量級文件系統",
@@ -23,7 +24,7 @@
 	"mintydocs-topic-desc": "此主題是$3（版本：$2）的簡介$1裡一部份。",
 	"mintydocs-topic-otherversions": "讀取此主題的其它版本：",
 	"mintydocspublish": "發布 MintyDocs 內容",
-	"mintydocs-publish-button": "發佈",
+	"mintydocs-publish-button": "發布",
 	"mintydocs-publish-singlepage": "發布此草稿頁面？",
 	"mintydocs-publish-success": "將會建立或變動以下頁面：$1。",
 	"mintydocs-publish-editsummary": "已發布",
