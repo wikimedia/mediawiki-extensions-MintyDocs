@@ -4,7 +4,8 @@
 			"Fitoschido",
 			"Robby",
 			"Umherirrender",
-			"Yaron Koren"
+			"Yaron Koren",
+			"McDutchie"
 		]
 	},
 	"mintydocs-extensionname": "{{name}}",
@@ -15,7 +16,7 @@
 	"right-mintydocs-edit": "{{doc-right|mintydocs-edit}}",
 	"right-mintydocs-editlive": "{{doc-right|mintydocs-editlive}}",
 	"action-mintydocs-editlive": "{{doc-action|mintydocs-editlive}}",
-	"mintydocs-noparentpage": "An error message. Parameters:\n $1 - a page type",
+	"mintydocs-noparentpage": "An error message. Parameters:\n* $1 - a page type",
 	"mintydocs-invalidparentpage": "An error message. Parameters:\n* $1 - a page name\n* $2 - a page type",
 	"mintydocs-product-versionlist": "A header above a list of links for different versions of some product.",
 	"mintydocs-version-desc": "A header for a page about one version of a product. Parameters:\n* $1 - a version number\n* $2 - a product name",
