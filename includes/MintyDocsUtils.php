@@ -6,8 +6,18 @@ class MintyDocsUtils {
 
 	public static $pageClassesInOrder = [ 'MintyDocsProduct', 'MintyDocsVersion', 'MintyDocsManual', 'MintyDocsTopic' ];
 
+	public static function getReadDB() {
+		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
+		if ( method_exists( $lbFactory, 'getReplicaDatabase' ) ) {
+			// MW 1.40+
+			return $lbFactory->getReplicaDatabase();
+		} else {
+			return $lbFactory->getMainLB()->getMaintenanceConnectionRef( DB_REPLICA );
+		}
+	}
+
 	public static function getPagePropForTitle( Title $title, $propName ) {
-		$dbr = wfGetDB( DB_REPLICA );
+		$dbr = self::getReadDB();
 		$res = $dbr->select( 'page_props',
 			[
 				'pp_value'
