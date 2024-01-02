@@ -42,12 +42,7 @@ class MintyDocsPublishAPI extends ApiBase {
 			$this->dieWithError( [ 'apierror-permissiondenied', $this->msg( "action-mintydocs-administer" ) ] );
 		}
 
-		if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
-			// MW 1.36+
-			$fromPage = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $fromTitle );
-		} else {
-			$fromPage = WikiPage::factory( $fromTitle );
-		}
+		$fromPage = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $fromTitle );
 		$fromPageText = $fromPage->getContent()->getText();
 
 		$toTitle = Title::newFromText( $pageName );

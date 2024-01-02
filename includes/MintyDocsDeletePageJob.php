@@ -29,12 +29,7 @@ class MintyDocsDeletePageJob extends Job {
 			return false;
 		}
 
-		if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
-			// MW 1.36+
-			$wikiPage = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $this->title );
-		} else {
-			$wikiPage = new WikiPage( $this->title );
-		}
+		$wikiPage = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $this->title );
 		if ( !$wikiPage ) {
 			$this->error = 'MDDeletePage: Wiki page not found "' . $this->title->getPrefixedDBkey() . '"';
 			return false;

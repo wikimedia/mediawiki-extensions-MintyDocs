@@ -1,7 +1,7 @@
 {
 	"name": "MintyDocs",
 	"namemsg": "mintydocs-extensionname",
-	"version": "1.1",
+	"version": "1.2-alpha",
 	"author": "Yaron Koren",
 	"url": "https://www.mediawiki.org/wiki/Extension:MintyDocs",
 	"descriptionmsg": "mintydocs-desc",
@@ -23,7 +23,7 @@
 	],
 	"callback": "MintyDocsHooks::registerExtension",
 	"requires": {
-		"MediaWiki": ">= 1.35"
+		"MediaWiki": ">= 1.37"
 	},
 	"AvailableRights": [
 		"mintydocs-administer",

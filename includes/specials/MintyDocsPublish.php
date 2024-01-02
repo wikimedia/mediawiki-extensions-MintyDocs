@@ -172,15 +172,9 @@ class MintyDocsPublish extends UnlistedSpecialPage {
 		if ( !$toTitle->exists() ) {
 			return null;
 		}
-		if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
-			// MW 1.36+
-			$wikiPageFactory = MediaWikiServices::getInstance()->getWikiPageFactory();
-			$fromPage = $wikiPageFactory->newFromTitle( $fromTitle );
-			$toPage = $wikiPageFactory->newFromTitle( $toTitle );
-		} else {
-			$fromPage = WikiPage::factory( $fromTitle );
-			$toPage = WikiPage::factory( $toTitle );
-		}
+		$wikiPageFactory = MediaWikiServices::getInstance()->getWikiPageFactory();
+		$fromPage = $wikiPageFactory->newFromTitle( $fromTitle );
+		$toPage = $wikiPageFactory->newFromTitle( $toTitle );
 		$fromPageText = $fromPage->getContent()->getText();
 		$toPageText = $toPage->getContent()->getText();
 		if ( $fromPageText == $toPageText ) {
@@ -284,15 +278,9 @@ class MintyDocsPublish extends UnlistedSpecialPage {
 			return $mdPage->getLink() . ' (already exists)';
 		}
 
-		if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
-			// MW 1.36+
-			$wikiPageFactory = MediaWikiServices::getInstance()->getWikiPageFactory();
-			$fromPage = $wikiPageFactory->newFromTitle( $fromTitle );
-			$toPage = $wikiPageFactory->newFromTitle( $toTitle );
-		} else {
-			$fromPage = WikiPage::factory( $fromTitle );
-			$toPage = WikiPage::factory( $toTitle );
-		}
+		$wikiPageFactory = MediaWikiServices::getInstance()->getWikiPageFactory();
+		$fromPage = $wikiPageFactory->newFromTitle( $fromTitle );
+		$toPage = $wikiPageFactory->newFromTitle( $toTitle );
 		$fromPageText = $fromPage->getContent()->getText();
 		$toPageText = $toPage->getContent()->getText();
 		// If the text of the two pages is the same, no point
@@ -339,12 +327,7 @@ class MintyDocsPublish extends UnlistedSpecialPage {
 		$submittedValues = $req->getValues();
 		$toTitles = [];
 
-		if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
-			// MW 1.36+
-			$wikiPageFactory = MediaWikiServices::getInstance()->getWikiPageFactory();
-		} else {
-			$wikiPageFactory = null;
-		}
+		$wikiPageFactory = MediaWikiServices::getInstance()->getWikiPageFactory();
 		foreach ( $submittedValues as $key => $val ) {
 			if ( substr( $key, 0, 10 ) != 'page_name_' ) {
 				continue;
@@ -352,12 +335,7 @@ class MintyDocsPublish extends UnlistedSpecialPage {
 
 			$fromPageName = $val;
 			$fromTitle = $this->generateSourceTitle( $fromPageName );
-			if ( $wikiPageFactory !== null ) {
-				// MW 1.36+
-				$fromPage = $wikiPageFactory->newFromTitle( $fromTitle );
-			} else {
-				$fromPage = WikiPage::factory( $fromTitle );
-			}
+			$fromPage = $wikiPageFactory->newFromTitle( $fromTitle );
 			$fromPageText = $fromPage->getContent()->getText();
 			$toTitle = $this->generateTargetTitle( $fromPageName );
 			$toTitles[] = $toTitle;
@@ -389,12 +367,7 @@ class MintyDocsPublish extends UnlistedSpecialPage {
 			$jobs[] = new MintyDocsCreatePageJob( $toTitle, $params );
 		}
 
-		if ( method_exists( MediaWikiServices::class, 'getJobQueueGroup' ) ) {
-			// MW 1.37+
-			MediaWikiServices::getInstance()->getJobQueueGroup()->push( $jobs );
-		} else {
-			JobQueueGroup::singleton()->push( $jobs );
-		}
+		MediaWikiServices::getInstance()->getJobQueueGroup()->push( $jobs );
 
 		$linkRenderer = $this->getLinkRenderer();
 

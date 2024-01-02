@@ -84,15 +84,11 @@ class MintyDocsHooks {
 		}
 		$inheritedPage = $mdPage->getInheritedPage();
 		if ( $inheritedPage !== null ) {
-			if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
-				// MW 1.36+
-				$wikiPage = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $inheritedPage->getTitle() );
-			} else {
-				$wikiPage = WikiPage::factory( $inheritedPage->getTitle() );
-			}
+			$services = MediaWikiServices::getInstance();
+			$wikiPage = $services->getWikiPageFactory()->newFromTitle( $inheritedPage->getTitle() );
 			$rawAccess = MediaWiki\Revision\RevisionRecord::RAW;
 			$inheritedPageText = $wikiPage->getContent( $rawAccess )->getText();
-			$text .= MediaWikiServices::getInstance()->getParser()->parse( $inheritedPageText, $title, ParserOptions::newFromAnon() )->getText();
+			$text .= $services->getParser()->parse( $inheritedPageText, $title, ParserOptions::newFromAnon() )->getText();
 		}
 		$text = $mdPage->getHeader() . $text;
 

@@ -88,12 +88,7 @@ class MintyDocsManual extends MintyDocsPage {
 				$this->mTOCHTML = null;
 				return;
 			}
-			if ( method_exists( MediaWikiServices::class, 'getWikiPageFactory' ) ) {
-				// MW 1.36+
-				$wikiPage = $services->getWikiPageFactory()->newFromTitle( $title );
-			} else {
-				$wikiPage = new WikiPage( $title );
-			}
+			$wikiPage = $services->getWikiPageFactory()->newFromTitle( $title );
 			$content = $wikiPage->getContent();
 			if ( $content == null ) {
 				$this->mTOCHTML = null;

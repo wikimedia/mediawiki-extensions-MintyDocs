@@ -118,12 +118,7 @@ class MintyDocsDelete extends UnlistedSpecialPage {
 			$jobs[] = new MintyDocsDeletePageJob( $child, $params );
 		}
 
-		if ( method_exists( MediaWikiServices::class, 'getJobQueueGroup' ) ) {
-			// MW 1.37+
-			MediaWikiServices::getInstance()->getJobQueueGroup()->push( $jobs );
-		} else {
-			JobQueueGroup::singleton()->push( $jobs );
-		}
+		MediaWikiServices::getInstance()->getJobQueueGroup()->push( $jobs );
 
 		$text = $this->msg( 'mintydocs-delete-success' )->parse();
 
