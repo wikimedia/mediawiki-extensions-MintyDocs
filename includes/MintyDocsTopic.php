@@ -92,7 +92,7 @@ class MintyDocsTopic extends MintyDocsPage {
 		$text = '';
 
 		$manual = $this->getRealOrContextManual();
-		list( $product, $version ) = $manual->getProductAndVersion();
+		[ $product, $version ] = $manual->getProductAndVersion();
 
 		if ( $wgMintyDocsShowBreadcrumbs ) {
 			$topicDescText = wfMessage( 'mintydocs-topic-desc', $manual->getLink(), $version->getLink(), $product->getLink() )->text();
@@ -114,7 +114,7 @@ class MintyDocsTopic extends MintyDocsPage {
 		}
 
 		if ( $manual->hasPagination() ) {
-			list( $prevTopic, $nextTopic ) = $manual->getPreviousAndNextTopics( $this, false );
+			[ $prevTopic, $nextTopic ] = $manual->getPreviousAndNextTopics( $this, false );
 			if ( $prevTopic ) {
 				$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsPrevTopicLink' ], '&larr;<br />' . $prevTopic->getLink() );
 			}
@@ -135,13 +135,13 @@ class MintyDocsTopic extends MintyDocsPage {
 		$query = [];
 		if ( $this->mIsStandalone ) {
 			$manual = $this->getManual();
-			list( $product, $version ) = $manual->getProductAndVersion();
+			[ $product, $version ] = $manual->getProductAndVersion();
 			$query['product'] = $product->getActualName();
 			$query['version'] = $version->getActualName();
 			$query['manual'] = $manual->getActualName();
 		} elseif ( $this->mIsBorrowed ) {
 			$manual = $this->getManual();
-			list( $product, $version ) = $manual->getProductAndVersion();
+			[ $product, $version ] = $manual->getProductAndVersion();
 			$query['contextProduct'] = $product->getActualName();
 			$query['contextVersion'] = $version->getActualName();
 			$query['contextManual'] = $manual->getActualName();
@@ -191,7 +191,7 @@ class MintyDocsTopic extends MintyDocsPage {
 		}
 
 		$manualName = $this->getManual()->getTitle()->getPrefixedText();
-		list( $productName, $versionString, $manualName ) = explode( '/', $manualName, 3 );
+		[ $productName, $versionString, $manualName ] = explode( '/', $manualName, 3 );
 		if ( $contextProduct !== null ) {
 			$fullManualName = MintyDocsParserFunctions::possibleNamespacePrefix( $this->getTitle() ) . $contextProduct;
 		} else {

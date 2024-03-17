@@ -58,7 +58,7 @@ class MintyDocsParserFunctions {
 	 * @return string|void
 	 */
 	static function renderProduct( &$parser ) {
-		list( $parentPageName, $thisPageName ) = MintyDocsUtils::getPageParts( $parser->getTitle() );
+		[ $parentPageName, $thisPageName ] = MintyDocsUtils::getPageParts( $parser->getTitle() );
 		$returnMsg = MintyDocsProduct::checkPageEligibility( $parentPageName, $thisPageName );
 		if ( $returnMsg != null ) {
 			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
@@ -109,7 +109,7 @@ class MintyDocsParserFunctions {
 	 * @return string|void
 	 */
 	static function renderVersion( &$parser ) {
-		list( $parentPageName, $thisPageName ) = MintyDocsUtils::getPageParts( $parser->getTitle() );
+		[ $parentPageName, $thisPageName ] = MintyDocsUtils::getPageParts( $parser->getTitle() );
 		$returnMsg = MintyDocsVersion::checkPageEligibility( $parentPageName, $thisPageName );
 		if ( $returnMsg != null ) {
 			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
@@ -121,7 +121,7 @@ class MintyDocsParserFunctions {
 
 		$parserOutput = $parser->getOutput();
 		// Make sure that no type has already been set for this page.
-		$previousType = self::getParserOutputProperty( $parserOutput,  'MintyDocsPageType' );
+		$previousType = self::getParserOutputProperty( $parserOutput, 'MintyDocsPageType' );
 		if ( $previousType !== null ) {
 			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
 			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
@@ -149,7 +149,7 @@ class MintyDocsParserFunctions {
 	 * @return string|void
 	 */
 	static function renderManual( &$parser ) {
-		list( $parentPageName, $thisPageName ) = MintyDocsUtils::getPageParts( $parser->getTitle() );
+		[ $parentPageName, $thisPageName ] = MintyDocsUtils::getPageParts( $parser->getTitle() );
 		$returnMsg = MintyDocsManual::checkPageEligibility( $parentPageName, $thisPageName );
 		if ( $returnMsg != null ) {
 			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
@@ -164,7 +164,7 @@ class MintyDocsParserFunctions {
 
 		$parserOutput = $parser->getOutput();
 		// Make sure that no type has already been set for this page.
-		$previousType = self::getParserOutputProperty( $parserOutput,  'MintyDocsPageType' );
+		$previousType = self::getParserOutputProperty( $parserOutput, 'MintyDocsPageType' );
 		if ( $previousType !== null ) {
 			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
 			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
@@ -223,7 +223,7 @@ class MintyDocsParserFunctions {
 	 */
 	static function renderTopic( &$parser ) {
 		// if ($parser->getTitle() == null ) return;
-		list( $parentPageName, $thisPageName ) = MintyDocsUtils::getPageParts( $parser->getTitle() );
+		[ $parentPageName, $thisPageName ] = MintyDocsUtils::getPageParts( $parser->getTitle() );
 		$returnMsg = MintyDocsTopic::checkPageEligibility( $parentPageName, $thisPageName );
 		if ( $returnMsg != null ) {
 			// It's an "invalid" topic.
@@ -241,7 +241,7 @@ class MintyDocsParserFunctions {
 
 		$parserOutput = $parser->getOutput();
 		// Make sure that no type has already been set for this page.
-		$previousType = self::getParserOutputProperty( $parserOutput,  'MintyDocsPageType' );
+		$previousType = self::getParserOutputProperty( $parserOutput, 'MintyDocsPageType' );
 		if ( $previousType !== null ) {
 			$returnMsg = "Cannot set a new type for this page; its type has already been set to $previousType.";
 			return Html::rawElement( 'div', [ 'class' => 'error' ], $returnMsg );
@@ -408,15 +408,15 @@ class MintyDocsParserFunctions {
 		if ( get_class( $mdPage ) == 'MintyDocsProduct' ) {
 			$curProduct = $mdPage->getActualName();
 		} elseif ( get_class( $mdPage ) == 'MintyDocsVersion' ) {
-			list( $curProduct, $curVersion ) = $mdPage->getProductAndVersionStrings();
+			[ $curProduct, $curVersion ] = $mdPage->getProductAndVersionStrings();
 		} elseif ( $curProduct != null && $curVersion != null && $curManual != null ) {
 			// No need to do anything; the values have already been
 			// set.
 		} elseif ( get_class( $mdPage ) == 'MintyDocsManual' ) {
-			list( $curProduct, $curVersion ) = $mdPage->getProductAndVersionStrings();
+			[ $curProduct, $curVersion ] = $mdPage->getProductAndVersionStrings();
 			$curManual = $mdPage->getActualName();
 		} else { // MintyDocsTopic
-			list( $curProduct, $curVersion ) = $mdPage->getProductAndVersionStrings();
+			[ $curProduct, $curVersion ] = $mdPage->getProductAndVersionStrings();
 			if ( $mdPage->getManual() ) {
 				// If it's standalone, there's no manual.
 				$curManual = $mdPage->getManual()->getActualName();

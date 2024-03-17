@@ -73,13 +73,13 @@ class MintyDocsCopy extends MintyDocsPublish {
 		$out->enableOOUI();
 
 		$mdPage = MintyDocsUtils::pageFactory( $title );
-		list( $productStr, $versionStr ) = $mdPage->getProductAndVersionStrings();
+		[ $productStr, $versionStr ] = $mdPage->getProductAndVersionStrings();
 		$productPage = Title::newFromText( $productStr );
 		$product = new MintyDocsProduct( $productPage );
 		$versions = $product->getChildrenPages();
 		$versionStrings = [];
 		foreach ( $versions as $versionTitle ) {
-			list( $curProductStr, $curVersionStr ) = explode( '/', $versionTitle->getText() );
+			[ $curProductStr, $curVersionStr ] = explode( '/', $versionTitle->getText() );
 			if ( $curVersionStr !== $versionStr ) {
 				$versionStrings[] = $curVersionStr;
 			}
@@ -132,7 +132,7 @@ class MintyDocsCopy extends MintyDocsPublish {
 	function generateTargetTitle( $targetPageName ) {
 		$pageElements = explode( '/', $targetPageName, 4 );
 		if ( count( $pageElements ) == 4 ) {
-			list( $product, $version, $manual, $topic ) = $pageElements;
+			[ $product, $version, $manual, $topic ] = $pageElements;
 			// These two checks are probably not necessary - setting
 			// a target product and manual name may only ever be
 			// applicable to copying manuals, not topics. Doesn't
@@ -145,7 +145,7 @@ class MintyDocsCopy extends MintyDocsPublish {
 			}
 			$targetPageName = "$product/" . $this->mTargetVersion . "/$manual/$topic";
 		} elseif ( count( $pageElements ) == 3 ) {
-			list( $product, $version, $manual ) = $pageElements;
+			[ $product, $version, $manual ] = $pageElements;
 			if ( $this->mTargetProduct ) {
 				$product = $this->mTargetProduct;
 			}

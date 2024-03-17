@@ -21,7 +21,7 @@ class MintyDocsManual extends MintyDocsPage {
 
 		$text = '';
 
-		list( $product, $version ) = $this->getProductAndVersion();
+		[ $product, $version ] = $this->getProductAndVersion();
 		if ( $wgMintyDocsShowBreadcrumbs ) {
 			$manualDescText = wfMessage( 'mintydocs-manual-desc', $version->getLink(), $product->getLink() )->text();
 			$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsManualDesc' ], $manualDescText );
@@ -245,7 +245,7 @@ class MintyDocsManual extends MintyDocsPage {
 		$unlinkedLineTracker = array_values( $unlinkedLineTracker );
 		$unlinkedLinesToHide = [];
 		for ( $lineNum = count( $unlinkedLineTracker ) - 1; $lineNum >= 0; $lineNum-- ) {
-			list( $numAsterisks, $isUnlinked ) = $unlinkedLineTracker[$lineNum];
+			[ $numAsterisks, $isUnlinked ] = $unlinkedLineTracker[$lineNum];
 			if ( !$isUnlinked ) {
 				continue;
 			}
@@ -257,7 +257,7 @@ class MintyDocsManual extends MintyDocsPage {
 				$unlinkedLinesToHide[] = $lineNum;
 				continue;
 			}
-			list( $nextLineNumAsterisks, $nextLineIsUnlinked ) = $unlinkedLineTracker[$nextLineNum];
+			[ $nextLineNumAsterisks, $nextLineIsUnlinked ] = $unlinkedLineTracker[$nextLineNum];
 			if ( $nextLineNumAsterisks <= $numAsterisks ) {
 				$unlinkedLinesToHide[] = $lineNum;
 			}

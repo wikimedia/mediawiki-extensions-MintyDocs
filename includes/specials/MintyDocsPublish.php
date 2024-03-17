@@ -217,7 +217,7 @@ class MintyDocsPublish extends UnlistedSpecialPage {
 		} elseif ( $mdPage instanceof MintyDocsManual ) {
 			$toc = $mdPage->getTableOfContentsArray( false );
 			foreach ( $toc as $i => $element ) {
-				list( $topic, $curLevel ) = $element;
+				[ $topic, $curLevel ] = $element;
 				if ( $topic instanceof MintyDocsTopic || is_string( $topic ) ) {
 					$pagesTree['tree'][] = self::makePagesTree( $topic, $curLevel - 1 );
 				}

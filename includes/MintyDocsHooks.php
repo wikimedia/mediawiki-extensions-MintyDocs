@@ -189,7 +189,7 @@ class MintyDocsHooks {
 			return;
 		}
 
-		list( $header, $contents ) = $sidebarContents;
+		[ $header, $contents ] = $sidebarContents;
 		$sidebar[$header] = $contents;
 	}
 
@@ -274,14 +274,14 @@ class MintyDocsHooks {
 				if ( $className == 'MintyDocsProduct' ) {
 					return;
 				}
-				list( $product, $version ) = $mdPage->getProductAndVersion();
+				[ $product, $version ] = $mdPage->getProductAndVersion();
 				$ret = $cache[$magicWordId] = $product->getDisplayName();
 				break;
 			case 'MAG_MINTYDOCSVERSION':
 				if ( $className == 'MintyDocsProduct' || $className == 'MintyDocsVersion' ) {
 					return;
 				}
-				list( $productName, $versionString ) = $mdPage->getProductAndVersionStrings();
+				[ $productName, $versionString ] = $mdPage->getProductAndVersionStrings();
 				$ret = $cache[$magicWordId] = $versionString;
 				break;
 			case 'MAG_MINTYDOCSMANUAL':

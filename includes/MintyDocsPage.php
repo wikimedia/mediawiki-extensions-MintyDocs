@@ -96,7 +96,7 @@ abstract class MintyDocsPage {
 	}
 
 	public function getProductAndVersion() {
-		list( $productName, $versionString ) = $this->getProductAndVersionStrings();
+		[ $productName, $versionString ] = $this->getProductAndVersionStrings();
 		$productPage = Title::newFromText( $productName );
 		$product = new MintyDocsProduct( $productPage );
 		$versionPage = Title::newFromText( $productName . '/' . $versionString );
@@ -105,7 +105,7 @@ abstract class MintyDocsPage {
 	}
 
 	public function getEquivalentPagesForPreviousVersions() {
-		list( $productName, $versionString ) = $this->getProductAndVersionStrings();
+		[ $productName, $versionString ] = $this->getProductAndVersionStrings();
 		$productPage = Title::newFromText( $productName );
 		$product = new MintyDocsProduct( $productPage );
 
@@ -264,7 +264,7 @@ abstract class MintyDocsPage {
 			);
 		}
 
-		list( $product, $version ) = $this->getProductAndVersion();
+		[ $product, $version ] = $this->getProductAndVersion();
 
 		// If this is a draft page, only people with some kind of
 		// MintyDocs permission can view it.
@@ -330,7 +330,7 @@ abstract class MintyDocsPage {
 			return false;
 		}
 
-		list( $product, $version ) = $this->getProductAndVersion();
+		[ $product, $version ] = $this->getProductAndVersion();
 
 		$permissionManager = MediaWikiServices::getInstance()->getPermissionManager();
 
@@ -377,7 +377,7 @@ abstract class MintyDocsPage {
 			return true;
 		}
 
-		list( $product, $version ) = $this->getProductAndVersion();
+		[ $product, $version ] = $this->getProductAndVersion();
 		if ( $product->userIsAdmin( $user ) ) {
 			return true;
 		}
