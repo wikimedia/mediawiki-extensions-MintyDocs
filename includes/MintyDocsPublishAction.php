@@ -22,7 +22,7 @@ class MintyDocsPublishAction extends Action {
 	 * $this->getOutput(), etc.
 	 */
 	public function show() {
-		$title = $this->page->getTitle();
+		$title = $this->getTitle();
 
 		$mdPublishPage = new MintyDocsPublish();
 		$mdPublishPage->execute( $title );
