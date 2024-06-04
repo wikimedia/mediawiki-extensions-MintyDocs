@@ -5,7 +5,8 @@
 			"Looong",
 			"SomeyaMako",
 			"列维劳德",
-			"夢蝶葬花"
+			"夢蝶葬花",
+			"LittlePaw365"
 		]
 	},
 	"mintydocs-invalidparentpage": "出错了：“$1”页面应该是“$2”页面才对。",
@@ -13,7 +14,7 @@
 	"mintydocs-manual-contents": "内容：",
 	"mintydocs-publish-singlepage": "发布这个草稿页面？",
 	"mintydocs-publish-editsummary": "已发布",
-	"mintydocs-createdraft-singlepage": "创建一个草稿页面？",
+	"mintydocs-createdraft-singlepage": "创建草稿页面？",
 	"mintydocs-createdraft-editsummary": "草稿已创建",
 	"mintydocs-copy-singlepage": "复制这个页面？",
 	"mintydocs-delete-success": "页面将被删除。",
