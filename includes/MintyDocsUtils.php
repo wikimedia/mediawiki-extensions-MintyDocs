@@ -18,14 +18,16 @@ class MintyDocsUtils {
 
 	public static function getPagePropForTitle( Title $title, $propName ) {
 		$dbr = self::getReadDB();
-		$res = $dbr->select( 'page_props',
+		$res = $dbr->select(
+			'page_props',
 			[
 				'pp_value'
 			],
 			[
 				'pp_page' => $title->getArticleID(),
 				'pp_propname' => $propName
-			]
+			],
+			__METHOD__
 		);
 		// First row of the result set.
 		$row = $res->fetchRow();
