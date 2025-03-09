@@ -23,7 +23,7 @@
 	],
 	"callback": "MintyDocsHooks::registerExtension",
 	"requires": {
-		"MediaWiki": ">= 1.38"
+		"MediaWiki": ">= 1.40"
 	},
 	"AvailableRights": [
 		"mintydocs-administer",
@@ -128,8 +128,12 @@
 		"PageForms::FormPrinterSetup": "MintyDocsHooks::registerPageFormsInputs"
 	},
 	"config": {
-		"MintyDocsDisplayFooterElementsInSidebar": false,
-		"MintyDocsShowBreadcrumbs": true
+		"MintyDocsDisplayFooterElementsInSidebar": {
+			"value": false
+		},
+		"MintyDocsShowBreadcrumbs": {
+			"value": true
+		}
 	},
-	"manifest_version": 1
+	"manifest_version": 2
 }
