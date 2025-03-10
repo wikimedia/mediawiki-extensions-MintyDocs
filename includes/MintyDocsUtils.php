@@ -1,6 +1,9 @@
 <?php
 
+use MediaWiki\CommentStore\CommentStoreComment;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Revision\SlotRecord;
+use MediaWiki\Title\Title;
 
 class MintyDocsUtils {
 
@@ -8,12 +11,7 @@ class MintyDocsUtils {
 
 	public static function getReadDB() {
 		$lbFactory = MediaWikiServices::getInstance()->getDBLoadBalancerFactory();
-		if ( method_exists( $lbFactory, 'getReplicaDatabase' ) ) {
-			// MW 1.40+
-			return $lbFactory->getReplicaDatabase();
-		} else {
-			return $lbFactory->getMainLB()->getConnection( DB_REPLICA );
-		}
+		return $lbFactory->getReplicaDatabase();
 	}
 
 	public static function getPagePropForTitle( Title $title, $propName ) {

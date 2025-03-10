@@ -1,5 +1,7 @@
 <?php
 
+use MediaWiki\Title\Title;
+
 /**
  * Job to create or modify a page, for use by Special:MintyDocsPublish.
  *

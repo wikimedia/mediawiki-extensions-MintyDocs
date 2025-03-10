@@ -1,5 +1,8 @@
 <?php
 
+use MediaWiki\Html\Html;
+use MediaWiki\Title\Title;
+
 class MintyDocsCopy extends MintyDocsPublish {
 
 	private $mParentTitle;
