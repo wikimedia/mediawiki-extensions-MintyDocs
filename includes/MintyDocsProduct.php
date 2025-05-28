@@ -77,7 +77,7 @@ class MintyDocsProduct extends MintyDocsPage {
 	function getHeader() {
 		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 
-		$versionListText = wfMessage( 'mintydocs-product-versionlist' )->text() . "\n";
+		$versionListText = wfMessage( 'mintydocs-product-versionlist' )->parse() . "\n";
 		$versionListText .= "<ul>\n";
 
 		$versionsAndTheirPages = $this->getVersions();
