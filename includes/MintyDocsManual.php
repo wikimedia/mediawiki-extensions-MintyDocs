@@ -25,13 +25,15 @@ class MintyDocsManual extends MintyDocsPage {
 
 		[ $product, $version ] = $this->getProductAndVersion();
 		if ( $wgMintyDocsShowBreadcrumbs ) {
-			$manualDescText = wfMessage( 'mintydocs-manual-desc', $version->getLink(), $product->getLink() )->text();
+			$manualDescText = wfMessage( 'mintydocs-manual-desc' )
+				->rawParams( $version->getLink(), $product->getLink() )
+				->parse();
 			$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsManualDesc' ], $manualDescText );
 		}
 
 		$equivsInOtherVersions = $this->getEquivalentsInOtherVersions( $product, $version->getActualName() );
 		if ( count( $equivsInOtherVersions ) > 0 ) {
-			$otherVersionsText = wfMessage( 'mintydocs-manual-otherversions' )->text() . "\n";
+			$otherVersionsText = wfMessage( 'mintydocs-manual-otherversions' )->parse() . "\n";
 			$otherVersionsText .= "<ul>\n";
 			$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 

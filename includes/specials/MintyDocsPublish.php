@@ -389,7 +389,7 @@ class MintyDocsPublish extends UnlistedSpecialPage {
 				}
 				$titlesStr .= $linkRenderer->makeLink( $title );
 			}
-			$text = $this->msg( self::$mSuccessMsg, $titlesStr )->text();
+			$text = $this->msg( self::$mSuccessMsg, $titlesStr )->parse();
 		}
 
 		$out->addHTML( $text );
