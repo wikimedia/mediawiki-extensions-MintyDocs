@@ -95,13 +95,15 @@ class MintyDocsTopic extends MintyDocsPage {
 		[ $product, $version ] = $manual->getProductAndVersion();
 
 		if ( $wgMintyDocsShowBreadcrumbs ) {
-			$topicDescText = wfMessage( 'mintydocs-topic-desc', $manual->getLink(), $version->getLink(), $product->getLink() )->text();
+			$topicDescText = wfMessage( 'mintydocs-topic-desc' )
+				->rawParams( $manual->getLink(), $version->getLink(), $product->getLink() )
+				->parse();
 			$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsTopicDesc' ], $topicDescText );
 		}
 
 		$equivsInOtherVersions = $this->getEquivalentsInOtherVersions( $product, $version->getActualName() );
 		if ( count( $equivsInOtherVersions ) > 0 ) {
-			$otherVersionsText = wfMessage( 'mintydocs-topic-otherversions' )->text() . "\n";
+			$otherVersionsText = wfMessage( 'mintydocs-topic-otherversions' )->parse() . "\n";
 			$otherVersionsText .= "<ul>\n";
 
 			$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();

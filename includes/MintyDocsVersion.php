@@ -38,7 +38,9 @@ class MintyDocsVersion extends MintyDocsPage {
 
 		$product = new MintyDocsProduct( $this->getParentPage() );
 		if ( $wgMintyDocsShowBreadcrumbs ) {
-			$versionDescText = wfMessage( 'mintydocs-version-desc', $this->getDisplayName(), $product->getLink() )->text();
+			$versionDescText = wfMessage( 'mintydocs-version-desc', $this->getDisplayName() )
+				->rawParams( $product->getLink() )
+				->parse();
 			$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsVersionDesc' ], $versionDescText );
 		}
 
@@ -55,7 +57,7 @@ class MintyDocsVersion extends MintyDocsPage {
 				unset( $manualsAndTheirRealNames[$manualName] );
 			} else {
 				// Display anyway, so people know something's wrong.
-				$manualsListText .= "<li>$manualName</li>\n";
+				$manualsListText .= Html::element( 'li', [], $manualName ) . "\n";
 			}
 		}
 		$manualsListText .= "</ul>\n";
