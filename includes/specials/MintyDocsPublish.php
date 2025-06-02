@@ -1,6 +1,7 @@
 <?php
 
 use MediaWiki\Html\Html;
+use MediaWiki\Html\ListToggle;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Title\Title;
 
