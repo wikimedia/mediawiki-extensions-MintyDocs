@@ -254,8 +254,8 @@ class MintyDocsParserFunctions {
 
 		foreach ( $processedParams as $paramName => $value ) {
 			if ( $paramName == 'display name' ) {
-				$parserOutput->setPageProperty( 'MintyDocsDisplayName', $value );
-				$displayTitle = $value;
+				$displayTitle = htmlspecialchars( $value, ENT_QUOTES );
+				$parserOutput->setPageProperty( 'MintyDocsDisplayName', $displayTitle );
 			} elseif ( $paramName == 'toc name' ) {
 				$tocDisplayTitle = $value;
 			} elseif ( $paramName == 'inherit' && $value == null ) {
