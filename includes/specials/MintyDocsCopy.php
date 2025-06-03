@@ -122,9 +122,13 @@ class MintyDocsCopy extends MintyDocsPublish {
 
 	function displayPageParents( $mdPage ) {
 		$targetTitle = $this->generateTargetTitle( $mdPage->getTitle()->getText() );
-		$text = '<p>These will be copied to the location ' . $this->getLinkRenderer()
-			->makeLink( $targetTitle ) . ".</p>\n";
-		$text .= Html::hidden( 'target_version', $this->mTargetVersion );
+		$targetLink = $this->getLinkRenderer()->makeLink( $targetTitle );
+		$text = Html::rawElement(
+			'p',
+			[],
+			"These will be copied to the location $targetLink."
+		);
+		$text .= "\n" . Html::hidden( 'target_version', $this->mTargetVersion );
 		return $text;
 	}
 

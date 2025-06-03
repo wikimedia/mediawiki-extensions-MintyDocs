@@ -38,7 +38,7 @@ class MintyDocsUtils {
 
 	public static function titlePagePropIncludesValue( Title $title, $propName, $value ) {
 		$fullValue = self::getPagePropForTitle( $title, $propName );
-		$individualValues = explode( ',', $fullValue );
+		$individualValues = $fullValue ? explode( ',', $fullValue ) : [];
 		foreach ( $individualValues as $individualValue ) {
 			if ( trim( $individualValue ) == $value ) {
 				return true;

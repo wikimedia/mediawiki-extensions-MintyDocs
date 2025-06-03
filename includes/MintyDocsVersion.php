@@ -18,7 +18,8 @@ class MintyDocsVersion extends MintyDocsPage {
 	}
 
 	function getStatus() {
-		return strtolower( $this->getPageProp( 'MintyDocsStatus' ) );
+		$status = $this->getPageProp( 'MintyDocsStatus' );
+		return $status ? strtolower( $status ) : null;
 	}
 
 	/**
@@ -51,11 +52,11 @@ class MintyDocsVersion extends MintyDocsPage {
 
 		$manualsAndTheirRealNames = $this->getAllManuals();
 		$manualsListStr = $this->getPossiblyInheritedParam( 'MintyDocsManualsList' );
-		$manualsList = explode( ',', $manualsListStr );
+		$manualsList = $manualsListStr ? explode( ',', $manualsListStr ) : [];
 		foreach ( $manualsList as $manualName ) {
 			if ( array_key_exists( $manualName, $manualsAndTheirRealNames ) ) {
 				$manual = $manualsAndTheirRealNames[$manualName];
-				$manualsListText .= "<li>" . $manual->getLink() . "</li>\n";
+				$manualsListText .= Html::rawElement( 'li', [], $manual->getLink() ) . "\n";
 				unset( $manualsAndTheirRealNames[$manualName] );
 			} else {
 				// Display anyway, so people know something's wrong.
@@ -74,7 +75,10 @@ class MintyDocsVersion extends MintyDocsPage {
 			$text .= Html::warningBox( $errorMsg );
 		}
 
-		$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsManualList' ], $manualsListText );
+		// Only show list if there is at least one manual.
+		if ( $manualsList ) {
+			$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsManualList' ], $manualsListText );
+		}
 
 		return $text;
 	}

@@ -111,7 +111,8 @@ class MintyDocsTopic extends MintyDocsPage {
 			$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 
 			foreach ( $equivsInOtherVersions as $versionName => $topicPage ) {
-				$otherVersionsText .= "<li>" . $linkRenderer->makeLink( $topicPage, $versionName ) . "</li>\n";
+				$otherVersionsText .= Html::rawElement( 'li', [],
+						$linkRenderer->makeLink( $topicPage, $versionName ) ) . "\n";
 			}
 			$otherVersionsText .= "</ul>\n";
 			$text .= Html::rawElement( 'div', [ 'class' => 'MintyDocsOtherManualVersions' ], $otherVersionsText );
@@ -161,7 +162,8 @@ class MintyDocsTopic extends MintyDocsPage {
 
 		$manual = $this->getRealOrContextManual();
 
-		$header = '<p>' . $manual->getDisplayName() . '</p>';
+		// We use rawElement() since the display name is already escaped.
+		$header = Html::rawElement( 'p', [], $manual->getDisplayName() );
 		$toc = $manual->getTableOfContents( false );
 		return Html::rawElement( 'div', [ 'class' => 'MintyDocsTopicTOC' ], $header . $toc );
 	}

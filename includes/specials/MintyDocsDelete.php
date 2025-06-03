@@ -67,34 +67,44 @@ class MintyDocsDelete extends UnlistedSpecialPage {
 			return;
 		}
 
-		$text = '<form id="mdDeleteForm" action="" method="post">';
-		$out->addHTML( '<p>The following pages will be deleted:</p>' );
+		$out->addHTML( Html::element(
+			'p',
+			[],
+			'The following pages will be deleted:'
+		) );
+
+		$form = Html::openElement(
+			'form',
+			[ 'id' => 'mdDeleteForm', 'action' => '', 'method' => 'post' ],
+		);
+
 		$pagesTree = MintyDocsPublish::makePagesTree( $mdPage );
-		$text .= Html::rawElement( 'ul', null, self::displayTree( $pagesTree['node'], $pagesTree['tree'] ) );
+		$form .= Html::rawElement( 'ul', [], self::displayTree( $pagesTree['node'], $pagesTree['tree'] ) );
 
 		$titleString = MintyDocsUtils::titleURLString( $this->getPageTitle() );
-		$text .= Html::hidden( 'title', $titleString ) . "\n";
-		$text .= Html::hidden( 'csrf', $this->getUser()->getEditToken( $this->getName() ) ) . "\n";
-		$text .= Html::input( 'mdDelete', $this->msg( 'delete' )->parse(), 'submit' );
+		$form .= Html::hidden( 'title', $titleString ) . "\n";
+		$form .= Html::hidden( 'csrf', $this->getUser()->getEditToken( $this->getName() ) ) . "\n";
+		$form .= Html::input( 'mdDelete', $this->msg( 'delete' )->parse(), 'submit' );
 
-		$text .= '</form>';
-		$out->addHTML( $text );
+		$form .= Html::closeElement( 'form' );
+
+		$out->addHTML( $form );
 	}
 
 	static function displayTree( $node, $tree ) {
 		$text = '';
 		// Skip blank nodes, or nodes that are just text.
 		if ( $node instanceof MintyDocsPage ) {
-			$text .= "\n<li>" . $node->getLink() . '</li>';
+			$text .= "\n" . Html::rawElement( 'li', [], $node->getLink() );
 		}
 		if ( count( $tree ) > 0 ) {
-			$text .= '<ul>';
+			$text .= Html::openElement( 'ul' );
 			foreach ( $tree as $node ) {
 				$innerNode = $node['node'];
 				$innerTree = $node['tree'];
 				$text .= self::displayTree( $innerNode, $innerTree );
 			}
-			$text .= '</ul>';
+			$text .= Html::closeElement( 'ul' );
 		}
 		return $text;
 	}

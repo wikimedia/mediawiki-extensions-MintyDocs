@@ -77,7 +77,8 @@ class MintyDocsManual extends MintyDocsPage {
 		$parser = $services->getParser();
 		$linkRenderer = $services->getLinkRenderer();
 
-		$tocOrPageName = trim( $this->getPossiblyInheritedParam( 'MintyDocsTopicsList' ) );
+		$topicsList = $this->getPossiblyInheritedParam( 'MintyDocsTopicsList' );
+		$tocOrPageName = $topicsList ? trim( $topicsList ) : null;
 		// Decide whether this is a table of contents or a page name
 		// based on whether or not the string starts with a '*' -
 		// hopefully that's a good enough check.

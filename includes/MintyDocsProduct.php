@@ -78,16 +78,16 @@ class MintyDocsProduct extends MintyDocsPage {
 		$linkRenderer = MediaWikiServices::getInstance()->getLinkRenderer();
 
 		$versionListText = wfMessage( 'mintydocs-product-versionlist' )->parse() . "\n";
-		$versionListText .= "<ul>\n";
+		$versionListText .= Html::openElement( 'ul' ) . "\n";
 
 		$versionsAndTheirPages = $this->getVersions();
 		foreach ( $versionsAndTheirPages as $versionString => $version ) {
-			$versionListText .= '<li>' . $linkRenderer->makeLink( $version->getTitle(), $versionString ) . "</li>\n";
+			$versionListText .= Html::rawElement( 'li', [],
+					$linkRenderer->makeLink( $version->getTitle(), $versionString ) ) . "\n";
 		}
-		$versionListText .= "</ul>\n";
-		$versionListText = Html::rawElement( 'div', [ 'class' => 'MintyDocsVersionList' ], $versionListText );
+		$versionListText .= Html::closeElement( 'ul' ) . "\n";
 
-		return $versionListText;
+		return Html::rawElement( 'div', [ 'class' => 'MintyDocsVersionList' ], $versionListText );
 	}
 
 	/**

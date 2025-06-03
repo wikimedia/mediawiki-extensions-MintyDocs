@@ -315,7 +315,11 @@ class MintyDocsParserFunctions {
 		}
 		$mdPage = MintyDocsUtils::pageFactory( $curTitle );
 		if ( $mdPage == null ) {
-			return "<div class=\"error\">#mintydocs_link must be called from a MintyDocs-enabled page.</div>";
+			return Html::element(
+				'div',
+				[ 'class' => 'error' ],
+				'#mintydocs_link must be called from a MintyDocs-enabled page.'
+			);
 		}
 
 		$params = func_get_args();
@@ -383,18 +387,30 @@ class MintyDocsParserFunctions {
 		} elseif ( $product != null ) {
 			$linkedPageType = 'product';
 		} else {
-			return "<div class=\"error\">At least one of product, version, manual and topic must be specified.</div>";
+			return Html::element(
+				'div',
+				[ 'class' => 'error' ],
+				'At least one of product, version, manual and topic must be specified.'
+			);
 		}
 
 		if ( $linkedPageType == 'product' || $linkedPageType == 'version' ) {
 			if ( $topic != null && $manual == null ) {
-				return "<div class=\"error\">A 'manual' value must be specified in this case.</div>";
+				return Html::element(
+					'div',
+					[ 'class' => 'error' ],
+					"A 'manual' value must be specified in this case."
+				);
 			}
 		}
 
 		if ( $linkedPageType == 'product' ) {
 			if ( $manual != null && $version == null ) {
-				return "<div class=\"error\">A 'version' value must be specified in this case.</div>";
+				return Html::element(
+					'div',
+					[ 'class' => 'error' ],
+					"A 'version' value must be specified in this case."
+				);
 			}
 		}
 
