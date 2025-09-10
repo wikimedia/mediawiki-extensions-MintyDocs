@@ -90,9 +90,6 @@ class MintyDocsProduct extends MintyDocsPage {
 		return Html::rawElement( 'div', [ 'class' => 'MintyDocsVersionList' ], $versionListText );
 	}
 
-	/**
-	 *
-	 */
 	function getVersions() {
 		$versionPages = $this->getChildrenPages();
 		$versionsAndTheirPages = [];
