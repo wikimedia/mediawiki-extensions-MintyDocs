@@ -55,16 +55,22 @@ class MintyDocsHooks {
 	 * @param User &$user
 	 * @param string $action
 	 * @param string &$result
+	 * @return bool|null
 	 */
 	public static function checkPermissions( &$title, &$user, $action, &$result ) {
 		$mdPage = MintyDocsUtils::pageFactory( $title );
 		if ( $mdPage == null ) {
 			return;
 		}
+
+		// Unlike most hooks, getUserPermissionsErrors requires returning false
+		// if there's an error.
 		if ( ( $action == 'edit' || $action == 'formedit' ) && !$mdPage->userCanEdit( $user ) ) {
 			$result = false;
+			return false;
 		} elseif ( $action == 'read' && !$mdPage->userCanView( $user ) ) {
 			$result = false;
+			return false;
 		}
 	}
 
