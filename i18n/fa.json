@@ -3,7 +3,8 @@
 		"authors": [
 			"Beginneruser",
 			"FarsiNevis",
-			"Jeeputer"
+			"Jeeputer",
+			"LordProfo"
 		]
 	},
 	"mintydocs-manual-contents": "فهرست",
@@ -16,7 +17,7 @@
 	"mintydocs-copy-singlepage": "رونویسی این صفحه؟",
 	"mintydocs-copy-success": "این صفحه‌ها رونویسی خواهند شد: $1.",
 	"mintydocs-delete-success": "این صفحه‌ها حذف خواهند شد.",
-	"mintydocs-tocinput-rename": "نام‌گذاری مجدد",
+	"mintydocs-tocinput-rename": "تغییر نام",
 	"mintydocs-tocinput-changetype": "تغییر نوع",
 	"mintydocs-tocinput-addentry": "افزودن مدخل"
 }
