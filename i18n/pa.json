@@ -4,6 +4,16 @@
 			"Cabal"
 		]
 	},
+	"mintydocs-product-versionlist": "ਉਸ ਰੂਪ ਲਈ ਲਿਖਤਾਂ ਵੇਖਣ ਲਈ ਹੇਠਾਂ ਦਿੱਤਿਆਂ ਵਿੱਚੋਂ ਕਿਸੇ 'ਤੇ ਨੱਪੋ:",
+	"mintydocs-version-desc": "ਇਹ $2 ਦੇ $1 ਰੂਪ ਲਈ ਲਿਖਤਾਂ ਨੇ।",
+	"mintydocs-version-manuallist": "ਇਸ ਰੂਪ ਦੀਆਂ ਦਸਤੀਆਂ ਇੱਥੇ ਨੇ:",
+	"mintydocs-manual-desc": "ਇਹ  ਦਸਤੀ $2 ਦੇ $1 ਰੂਪ ਲਈ ਨੇ।",
+	"mintydocs-manual-otherversions": "ਬਾਕੀ ਰੂਪਾਂ ਦੀ ਜਾਣਕਾਰੀ ਲਈ ਇਹ ਪੜ੍ਹੋ:",
+	"mintydocs-manual-contents": "ਵਸਤ-ਵਲ਼ੇਵਾਂ:",
+	"mintydocs-publish-button": "ਛਾਪੋ",
+	"mintydocs-publish-editsummary": "ਛਾਪਿਆ",
 	"mintydocs-createdraft-button": "ਖਰੜਾ ਬਣਾਓ",
-	"mintydocs-createdraft-editsummary": "ਖਰੜਾ ਸਿਰਜਿਆ ਗਿਆ"
+	"mintydocs-createdraft-editsummary": "ਖਰੜਾ ਸਿਰਜਿਆ ਗਿਆ",
+	"mintydocs-copy-button": "ਨਕਲ ਕਰੋ",
+	"mintydocs-copy-singlepage": "ਕੀ ਇਸ ਵਰਕੇ ਦੀ ਨਕਲ ਕਰਨੀ ਏ?"
 }
