@@ -2,6 +2,7 @@
 	"@metadata": {
 		"authors": [
 			"Codenstory",
+			"Tensama0415",
 			"Ykhwong"
 		]
 	},
@@ -41,6 +42,9 @@
 	"mintydocs-delete-success": "페이지가 삭제됩니다.",
 	"mintydocs-delete-deletionreason": "매뉴얼 삭제",
 	"mintydocs-tocinput-rename": "이름 바꾸기",
+	"mintydocs-tocinput-changetype": "유형 변경",
+	"mintydocs-tocinput-addentry": "항목 추가",
+	"apihelp-mintydocspublish-summary": "MintyDocs 문서를 초안 이름공간에서 일반 이름공간으로 복사하여 게시합니다.",
 	"apihelp-mintydocspublish-param-title": "게시할 문서의 이름",
 	"apihelp-mintydocspublish-example-title": "초안:ABC123 문서의 내용을 ABC123 문서로 복사"
 }
