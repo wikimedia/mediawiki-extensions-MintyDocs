@@ -252,7 +252,9 @@ class MintyDocsParserFunctions {
 		$parserOutput->addModules( [ 'ext.mintydocs.main' ] );
 
 		$parserOutput->setPageProperty( 'MintyDocsPageType', 'Topic' );
-		$parserOutput->setPageProperty( 'MintyDocsParentPage', $parentPageName );
+		if ( $parentPageName !== null ) {
+			$parserOutput->setPageProperty( 'MintyDocsParentPage', $parentPageName );
+		}
 
 		foreach ( $processedParams as $paramName => $value ) {
 			if ( $paramName == 'display name' ) {
