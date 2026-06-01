@@ -97,7 +97,9 @@ class MintyDocsHooks {
 			$wikiPage = $services->getWikiPageFactory()->newFromTitle( $inheritedPage->getTitle() );
 			$rawAccess = MediaWiki\Revision\RevisionRecord::RAW;
 			$inheritedPageText = $wikiPage->getContent( $rawAccess )->getText();
-			$text .= $services->getParser()->parse( $inheritedPageText, $title, ParserOptions::newFromAnon() )->getText();
+			$parser = $services->getParser();
+			$parserOutput = $parser->parse( $inheritedPageText, $title, ParserOptions::newFromAnon() );
+			$text .= $parserOutput->runOutputPipeline( $parser->getOptions() )->getContentHolderText();
 		}
 		$text = $mdPage->getHeader() . $text;
 
