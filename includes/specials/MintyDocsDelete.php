@@ -50,7 +50,6 @@ class MintyDocsDelete extends UnlistedSpecialPage {
 		// Check permissions.
 		if ( !$mdPage->userCanAdminister( $this->getUser() ) ) {
 			$this->displayRestrictionError();
-			return;
 		}
 
 		$delete = $req->getCheck( 'mdDelete' );
@@ -84,7 +83,7 @@ class MintyDocsDelete extends UnlistedSpecialPage {
 		$titleString = MintyDocsUtils::titleURLString( $this->getPageTitle() );
 		$form .= Html::hidden( 'title', $titleString ) . "\n";
 		$form .= Html::hidden( 'csrf', $this->getUser()->getEditToken( $this->getName() ) ) . "\n";
-		$form .= Html::input( 'mdDelete', $this->msg( 'delete' )->parse(), 'submit' );
+		$form .= Html::input( 'mdDelete', $this->msg( 'delete' )->text(), 'submit' );
 
 		$form .= Html::closeElement( 'form' );
 

@@ -42,17 +42,17 @@ class MintyDocsTopic extends MintyDocsPage {
 		$parentPage = $this->getParentPage();
 		if ( $parentPage == null ) {
 			$this->mIsInvalid = true;
-			return null;
+			return;
 		}
 		$manualFromPageName = new MintyDocsManual( $parentPage );
 		if ( $manualFromPageName->getPageProp( 'MintyDocsPageType' ) != 'Manual' ) {
 			$this->mIsInvalid = true;
-			return null;
+			return;
 		}
 
 		if ( $manualFromQueryString != null ) {
 			$this->mManual = $manualFromQueryString;
-		} elseif ( $manualFromPageName != null ) {
+		} else {
 			$this->mManual = $manualFromPageName;
 		}
 	}

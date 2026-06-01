@@ -6,28 +6,13 @@ $cfg['suppress_issue_types'] = array_merge(
 	$cfg['suppress_issue_types'],
 	[
 		// Suppress issue types that currently exist in the codebase.
-		'MediaWikiNoEmptyIfDefined',
-		'PhanImpossibleTypeComparison',
-		'PhanParamTooFewInPHPDoc',
-		'PhanPluginUnreachableCode',
 		'PhanPossiblyUndeclaredVariable',
-		'PhanRedundantCondition',
-		'PhanSuspiciousWeakTypeComparison',
-		'PhanTypeMagicVoidWithReturn',
-		'PhanTypeMismatchArgument',
-		'PhanTypeMismatchArgumentProbablyReal',
-		'PhanTypeMismatchDefault',
-		'PhanTypeMissingReturn',
-		'PhanTypeMismatchReturnProbablyReal',
+		'PhanTypeMismatchArgumentNullable',
 		'PhanUndeclaredClassMethod',
 		'PhanUndeclaredExtendedClass',
 		'PhanUndeclaredMethod',
 		'PhanUndeclaredProperty',
-		'PhanUndeclaredTypeParameter',
-		'PhanUndeclaredVariable',
-		'PhanUndeclaredVariableDim',
-		'PhanTypeArraySuspiciousNull',
-		'SecurityCheck-DoubleEscaped',
+		'PhanUndeclaredTypeParameter'
 	]
 );
 

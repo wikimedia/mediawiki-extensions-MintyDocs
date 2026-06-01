@@ -31,7 +31,6 @@ class MintyDocsCopy extends MintyDocsPublish {
 		// Check permissions.
 		if ( !$this->getUser()->isAllowed( 'mintydocs-administer' ) ) {
 			$this->displayRestrictionError();
-			return;
 		}
 
 		$setVersion = $req->getCheck( 'mdSetVersion' );
@@ -112,7 +111,7 @@ class MintyDocsCopy extends MintyDocsPublish {
 				'name' => 'mdSetVersion',
 				'type' => 'submit',
 				'flags' => 'progressive',
-				'label' => $this->msg( 'apisandbox-continue' )->parse()
+				'label' => $this->msg( 'apisandbox-continue' )->text()
 			]
 		);
 		$text = Html::rawElement( 'form', [ 'method' => 'post' ], $text );

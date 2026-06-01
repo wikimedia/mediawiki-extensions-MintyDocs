@@ -55,7 +55,8 @@ abstract class MintyDocsPage {
 			[
 				'pp_value' => $this->mTitle->getPrefixedText(),
 				'pp_propname' => 'MintyDocsParentPage'
-			]
+			],
+			__METHOD__
 		);
 
 		// phpcs:ignore MediaWiki.ControlStructures.AssignmentInControlStructures.AssignmentInControlStructures
@@ -305,9 +306,6 @@ abstract class MintyDocsPage {
 			}
 			return false;
 		}
-
-		// If it's some other text, or blank, let everyone view it.
-		return true;
 	}
 
 	public function hasDraftPage() {
@@ -359,9 +357,6 @@ abstract class MintyDocsPage {
 			}
 			return false;
 		}
-
-		// If the status is some other value, or blank, let everyone view it.
-		return true;
 	}
 
 	public function userCanAdminister( $user ) {

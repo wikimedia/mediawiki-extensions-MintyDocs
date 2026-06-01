@@ -134,6 +134,10 @@ class MintyDocsManual extends MintyDocsPage {
 			if ( $topicDefaultForm != null || $topicAlternateFormsStr != null ) {
 				$useFormForRedLinkedTopics = true;
 			}
+		} else {
+			$topicDefaultForm = null;
+			$topicAlternateFormsStr = null;
+			$formSpecialPageTitle = null;
 		}
 		if ( $useFormForRedLinkedTopics ) {
 			$formEditQuery = [];

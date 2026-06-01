@@ -77,7 +77,7 @@ class MintyDocsHooks {
 	/**
 	 * @param OutputPage &$out
 	 * @param string &$text
-	 * @return bool
+	 * @return void
 	 */
 	public static function addTextToPage( &$out, &$text ) {
 		global $wgMintyDocsDisplayFooterElementsInSidebar;
@@ -111,7 +111,7 @@ class MintyDocsHooks {
 	/**
 	 * @param OutputPage &$out
 	 * @param string &$text
-	 * @return bool
+	 * @return void
 	 */
 	public static function showNoticeForDraftPage( &$out, &$text ) {
 		$action = Action::getActionName( $out->getContext() );
@@ -166,7 +166,7 @@ class MintyDocsHooks {
 	/**
 	 * @param Skin $skin
 	 * @param array[] &$sidebar
-	 * @return bool
+	 * @return void
 	 */
 	public static function addTextToSidebar( Skin $skin, &$sidebar ) {
 		global $wgRequest;
@@ -211,10 +211,6 @@ class MintyDocsHooks {
 		string $summary, int $flags,
 		MediaWiki\Revision\RevisionStoreRecord $revisionRecord,
 		MediaWiki\Storage\EditResult $editResult ) {
-		if ( $revisionRecord === null ) {
-			return;
-		}
-
 		$title = $wikiPage->getTitle();
 		$mdPage = MintyDocsUtils::pageFactory( $title );
 
@@ -234,7 +230,7 @@ class MintyDocsHooks {
 
 	/**
 	 * @param array &$vars
-	 * @return bool
+	 * @return void
 	 */
 	static function setGlobalJSVariables( &$vars ) {
 		global $wgScriptPath;
@@ -246,7 +242,7 @@ class MintyDocsHooks {
 	 * Register wiki markup words associated with MAG_NIFTYVAR as a variable
 	 *
 	 * @param array &$customVariableIDs
-	 * @return bool
+	 * @return void
 	 */
 	public static function declareVarIDs( &$customVariableIDs ) {
 		$customVariableIDs[] = 'MAG_MINTYDOCSPRODUCT';
@@ -262,7 +258,7 @@ class MintyDocsHooks {
 	 * @param array &$cache
 	 * @param string $magicWordId
 	 * @param string &$ret
-	 * @return bool
+	 * @return void
 	 */
 	public static function assignAValue( $parser, &$cache, $magicWordId, &$ret ) {
 		$handledIDs = [

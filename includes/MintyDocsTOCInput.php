@@ -48,6 +48,7 @@ class MintyDocsTOCInput extends PFFormInput {
 	public static function getHTML( $cur_value, $input_name, $is_mandatory, $is_disabled, array $other_args ) {
 		$nodeNum = 1;
 		$treeData = [];
+		$lastIDForLevel = [];
 		$lines = explode( "\n", $cur_value );
 		foreach ( $lines as $line ) {
 			preg_match( "/^(\*+)/", $line, $matches );
@@ -72,6 +73,7 @@ class MintyDocsTOCInput extends PFFormInput {
 			if ( $levelNum == 1 ) {
 				$parentID = '#';
 			} else {
+				// @phan-suppress-next-line PhanTypeInvalidDimOffset
 				$parentID = $lastIDForLevel[$levelNum - 1];
 			}
 			$curID = 'node' . $nodeNum++;
@@ -90,7 +92,7 @@ class MintyDocsTOCInput extends PFFormInput {
 			'icon' => 'add'
 		];
 		$button = new OOUI\ButtonWidget( $buttonAttrs );
-		return Html::rawElement( 'div', null, $mainDiv . "\n" . $button );
+		return Html::rawElement( 'div', [], $mainDiv . "\n" . $button );
 	}
 
 	/**

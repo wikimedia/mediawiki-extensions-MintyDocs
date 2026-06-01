@@ -1,6 +1,7 @@
 <?php
 
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Title\Title;
 
 /**
  * Job to delete a page, for use by Special:MintyDocsDelete.
@@ -14,7 +15,7 @@ class MintyDocsDeletePageJob extends Job {
 	 * @param array $params
 	 * @param int $id
 	 */
-	function __construct( $title, $params = '', $id = 0 ) {
+	function __construct( Title $title, array $params, $id = 0 ) {
 		parent::__construct( 'MDDeletePage', $title, $params, $id );
 	}
 
@@ -30,11 +31,6 @@ class MintyDocsDeletePageJob extends Job {
 		}
 
 		$wikiPage = MediaWikiServices::getInstance()->getWikiPageFactory()->newFromTitle( $this->title );
-		if ( !$wikiPage ) {
-			$this->error = 'MDDeletePage: Wiki page not found "' . $this->title->getPrefixedDBkey() . '"';
-			return false;
-		}
-
 		$user = User::newFromId( $this->params['user_id'] );
 		$deletionReason = '';
 		if ( array_key_exists( 'deletion_reason', $this->params ) ) {

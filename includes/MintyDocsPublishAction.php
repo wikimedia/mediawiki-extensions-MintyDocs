@@ -25,7 +25,7 @@ class MintyDocsPublishAction extends Action {
 		$title = $this->getTitle();
 
 		$mdPublishPage = new MintyDocsPublish();
-		$mdPublishPage->execute( $title );
+		$mdPublishPage->execute( $title->getText() );
 	}
 
 	/**

@@ -62,7 +62,6 @@ class MintyDocsPublish extends UnlistedSpecialPage {
 		$mdPage = MintyDocsUtils::pageFactory( $title );
 		if ( !$mdPage->userCanAdminister( $this->getUser() ) ) {
 			$this->displayRestrictionError();
-			return;
 		}
 
 		$publish = $req->getCheck( 'mdPublish' );
@@ -131,7 +130,7 @@ class MintyDocsPublish extends UnlistedSpecialPage {
 				$out->addHTML( $error );
 				return;
 			}
-			$text .= Html::element( 'p', null, $this->msg( self::$mSinglePageMsg )->text() );
+			$text .= Html::element( 'p', [], $this->msg( self::$mSinglePageMsg )->text() );
 			$text .= Html::hidden( 'page_name_1', $title->getText() );
 		} else {
 			$text .= Html::rawElement( 'h3', [], 'Pages for ' . $mdPage->getLink() . ':' );
@@ -144,7 +143,7 @@ class MintyDocsPublish extends UnlistedSpecialPage {
 			$pagesTree = $this->makePagesTree( $mdPage );
 			$text .= Html::rawElement(
 				'ul',
-				null,
+				[],
 				$this->displayCheckboxesForTree( $pagesTree['node'], $pagesTree['tree'] )
 			);
 		}
@@ -163,7 +162,7 @@ class MintyDocsPublish extends UnlistedSpecialPage {
 				'name' => 'mdPublish',
 				'type' => 'submit',
 				'flags' => [ 'progressive', 'primary' ],
-				'label' => $this->msg( self::$mButtonMsg )->parse()
+				'label' => $this->msg( self::$mButtonMsg )->text()
 			]
 		);
 
@@ -186,7 +185,7 @@ class MintyDocsPublish extends UnlistedSpecialPage {
 		return null;
 	}
 
-	function displayPageParents( $mdPage ) {
+	function displayPageParents( MintyDocsPage $mdPage ) {
 		$parentPage = $mdPage->getParentPage();
 		if ( $parentPage == null ) {
 			return '';
@@ -384,6 +383,7 @@ class MintyDocsPublish extends UnlistedSpecialPage {
 		if ( count( $jobs ) == 0 ) {
 			$text = 'No pages were specified.';
 		} elseif ( count( $jobs ) == 1 ) {
+			$toTitle = $toTitles[0];
 			if ( $toTitle->exists() ) {
 				$text = 'The page ' . $linkRenderer->makeLink( $toTitle ) . ' will be modified.';
 			} else {
