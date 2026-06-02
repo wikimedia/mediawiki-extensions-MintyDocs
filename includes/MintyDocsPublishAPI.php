@@ -39,7 +39,7 @@ class MintyDocsPublishAPI extends ApiBase {
 
 		$fromMDPage = MintyDocsUtils::pageFactory( $fromTitle );
 		$user = $this->getUser();
-		if ( $fromMDPage->userCanPublish( $user ) ) {
+		if ( !$fromMDPage->userCanAdminister( $user ) ) {
 			$this->dieWithError( [ 'apierror-permissiondenied', $this->msg( "action-mintydocs-administer" ) ] );
 		}
 
