@@ -1,12 +1,14 @@
 {
 	"@metadata": {
 		"authors": [
-			"Robby"
+			"Robby",
+			"Volvox"
 		]
 	},
-	"right-mintydocs-edit": "All MintyDos Säiten änneren",
-	"mintydocs-noparentpage": "Feeler: All $1 Säit muss eng Ënnersäit sinn.",
-	"mintydocs-invalidparentpage": "Feeler: D'Säit \"$1\" muss eng $2-Säit sinn.",
+	"action-mintydocs-edit": "all MintyDocs-Säiten z'änneren",
+	"right-mintydocs-edit": "All MintyDocs-Säiten änneren",
+	"mintydocs-noparentpage": "Feeler: All $1-Säit muss eng Ënnersäit sinn.",
+	"mintydocs-invalidparentpage": "Feeler: D'Säit „$1“ muss eng $2-Säit sinn.",
 	"mintydocs-product-versionlist": "Klickt op eng vun dëse fir d'Dokumentatioun vun där Versioun ze gesinn:",
 	"mintydocs-version-desc": "Dëst ass d'Dokumentatioun fir d'Versioun $1 vu(n) $2.",
 	"mintydocs-version-manuallist": "Hei sinn d'Handbicher fir dës Versioun:",
@@ -15,13 +17,18 @@
 	"mintydocs-manual-contents": "Inhalter:",
 	"mintydocs-topic-desc": "Dëse Sujet ass en Deel vum Handbuch $1 fir d'Versioun $2 vu(n) $3",
 	"mintydocs-topic-otherversions": "Liest dëse Sujet fir aner Versiounen:",
+	"mintydocspublish": "MintyDocs-Inhalter verëffentlechen",
 	"mintydocs-publish-button": "Verëffentlechen",
+	"mintydocs-publish-success": "Déi follgend Säite ginn ugeluecht oder verännert: $1.",
 	"mintydocs-publish-editsummary": "Verëffentlecht",
 	"mintydocs-createdraft-button": "Brouillon uleeën",
 	"mintydocs-copy-button": "Kopéieren",
 	"mintydocs-copy-singlepage": "Dës Säit kopéieren?",
+	"mintydocs-copy-success": "Déi follgend Säite gi kopéiert: $1.",
 	"mintydocs-delete-success": "D'Säite gi geläscht.",
 	"mintydocs-delete-deletionreason": "Manuell läschen",
 	"mintydocs-tocinput-rename": "Ëmbenennen",
-	"mintydocs-tocinput-changetype": "Typ änneren"
+	"mintydocs-tocinput-changetype": "Typ änneren",
+	"mintydocs-tocinput-addentry": "Antrag derbäisetzen",
+	"apihelp-mintydocspublish-param-title": "Den Numm vun der Säit fir ze verëffentlechen"
 }
