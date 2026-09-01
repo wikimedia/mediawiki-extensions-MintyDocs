@@ -4,7 +4,8 @@
 			"Elroy",
 			"Mainframe98",
 			"McDutchie",
-			"Romaine"
+			"Romaine",
+			"Siebrand"
 		]
 	},
 	"mintydocs-desc": "Een lichtgewicht documentatiesysteem",
@@ -37,7 +38,7 @@
 	"mintydocscopy": "MintyDocs-inhoud kopiëren",
 	"mintydocs-copy-button": "Kopiëren",
 	"mintydocs-copy-singlepage": "Deze pagina kopiëren?",
-	"mintydocs-copy-success": "De volgende pagina's zullen worden gekopiëerd: $1.",
+	"mintydocs-copy-success": "De volgende pagina's worden gekopieerd: $1.",
 	"mintydocs-copy-editsummary": "Handmatig gekopieerd",
 	"mintydocsdelete": "MintyDocs inhoud verwijderen",
 	"mintydocs-delete-success": "De pagina's zullen worden verwijderd.",
